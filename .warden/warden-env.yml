@@ -1,0 +1,44 @@
+# .warden/warden-env.yml
+services:
+  postgres:
+    hostname: "${WARDEN_ENV_NAME}-postgres"
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: laravel
+      POSTGRES_USER: laravel
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+  php-fpm:
+    depends_on:
+      - postgres
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ~/.ssh:/home/www-data/.ssh
+    labels:
+      # Expose the Vite dev server (port 5173) via Traefik on a dedicated
+      # subdomain. Higher priority than nginx's wildcard HostRegexp router.
+      - traefik.enable=true
+      - traefik.http.routers.${WARDEN_ENV_NAME}-vite.tls=true
+      - traefik.http.routers.${WARDEN_ENV_NAME}-vite.priority=5
+      - traefik.http.routers.${WARDEN_ENV_NAME}-vite.rule=Host(`vite.${TRAEFIK_DOMAIN}`)
+      - traefik.http.services.${WARDEN_ENV_NAME}-vite.loadbalancer.server.port=5173
+      - traefik.docker.network=${WARDEN_ENV_NAME}_default
+  php-debug:
+    depends_on:
+      - postgres
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  nginx:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./.warden/nginx/upload.conf:/etc/nginx/default.d/upload.conf:ro
+volumes:
+  postgresdata: { }
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.53.90.0/24

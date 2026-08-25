@@ -1,0 +1,154 @@
+schema: spec-driven
+
+context: |
+  Hisar Hastanesi Kurumsal Web Sitesi — bir hastane grubunun (Hisar
+  Intercontinental, Hisar Çamlıca, +Avrupa "yakında") halka açık tanıtım/kurumsal
+  sitesi. Amaç: Lovable ile üretilmiş mevcut TanStack Start UI'ını GÖRSEL OLARAK
+  BİREBİR koruyarak, temiz ve planlı bir Inertia yapısına taşımak. Bu bir pazarlama
+  sitesidir (bölümler, doktorlar, hastalıklar, tedaviler, teknolojiler, onkoloji
+  merkezi, sağlıklı hayat rehberi, etkinlikler, check-up paketleri + randevu/lead/
+  iletişim/İK formları). Çok kiracılı (multi-tenant) DEĞİLDİR, Octane hedefi YOKTUR.
+
+  Stack (hedef uygulama): PHP 8.4 · Laravel 12 · Inertia 2 · React 19 + TypeScript ·
+  Vite 6 · Tailwind 4 (CSS-first @theme, tailwind.config yok) · shadcn/ui ·
+  PostgreSQL 15 · Lokal ortam Warden (Docker). Komutlar container içinde çalışır:
+  `warden env exec php-fpm php artisan ...` / `... composer ...`, Vite:
+  `warden env exec php-fpm npm run dev` (https://vite.hisarweb.test). Uygulama:
+  https://app.hisarweb.test.
+
+  KAYNAK UI (referans, teslim edilecek ürün DEĞİL): kök dizindeki `Hisar Hastanesi/`
+  klasörü — Lovable ile üretilmiş TanStack Start + TanStack Router + React 19 + TS +
+  Tailwind 4 + shadcn/ui sitesi. `.gitignore`'da (`/Hisar Hastanesi`) — commit
+  edilmez; içinden PORT EDİLİR. Tasarım kaynağı: `src/styles.css` (marka renkleri),
+  `src/components/site/*` (36 özel bileşen), `src/components/ui/*` (46 shadcn
+  primitive). İçerik kaynağı: `src/lib/site-data.ts` (890 satır) + `relations.ts`,
+  `doctor-relations.ts`, `video-data.ts`, rota-içi koleksiyonlar.
+
+  Domain kavramları ve hacim (kaynak UI'dan): Bölüm/Department (28, slug kanonik),
+  Doktor (111, `department` şu an serbest metin), Hastane (3), Hastalık (155 isim,
+  2 uzun içerik), Tedavi (58), Teknoloji (28, deptSlugs ile many-to-many), Blog/
+  Sağlıklı Hayat (56), Video (33), Paket/Check-Up (4), Etkinlik (3), Onkoloji ünitesi
+  (12), Moral Takımı (9), Basın (6), SSS (11 kategori). Formlar: randevu-al (çok
+  adımlı sihirbaz), sizi-arayalim, doktora-sorun, sizi-dinliyoruz, anketimize-katilin,
+  iletişim, insan-kaynaklari (CV + dosya upload), gebe-okulu + inline lead form'ları.
+
+  Rotalar (kaynak): ~37 sabit sayfa + 11 dinamik şablon (bolum.$slug, doktor.$id,
+  hastalik.$slug, tedavi.$slug, teknoloji.$slug, etkinlikler.$slug, paketler.$slug,
+  saglikli-hayat-rehberi.$slug, basinda-hastanemiz.$slug, hastane.$slug). Kaynakta
+  layout `<SiteLayout>` bileşeniyle, nav mega-menü `SiteHeader.tsx`'te hardcode.
+
+  Konvansiyonlar: Türkçe UI + domain terminolojisi, kod/şema/slug İngilizce.
+  Inertia idiomatik yapı (aşağıdaki kurallar). Detaylı doktrin ileride CLAUDE.md'ye
+  taşınabilir; şu an kaynak-of-truth bu config'tir.
+
+  # 1) TASARIM SADAKATİ — DEĞİŞTİRİLEMEZ (projenin birincil hedefi)
+  Taşınan her sayfa/bileşen, `Hisar Hastanesi/` kaynağıyla GÖRSEL OLARAK BİREBİR
+  aynı olmalıdır: aynı marka token'ları — primary lacivert oklch(0.28 0.16 268),
+  CTA turuncu (--brand-orange), accent cyan (--brand-cyan), tek font Inter — aynı
+  düzen, boşluk, tipografi hiyerarşisi, gradient/gölge/animasyonlar (reduced-motion
+  fallback'leri dahil). Kaynak `styles.css` token seti hedefe SADIK taşınır; yeni
+  bir görsel dil UYDURULMAZ. shadcn primitive'leri (ui/*) ve site bileşenleri
+  (site/*) port edilir; "benzeri" değil "aynısı" hedeflenir. Görsel farklılık
+  gerekiyorsa önce proje sahibine sorulur.
+
+  # 2) TEMİZ INERTIA YAPISI — ZORUNLU (ham taşıma değil, idiomatik yeniden kurulum)
+  UI birebir korunur AMA kod temiz Inertia yapısına oturur; Lovable/TanStack'e özgü
+  yapılar TAŞINMAZ:
+  - Sayfalar `resources/js/pages/` altında (kaynak rota ağacını yansıtan düzen);
+    her Laravel route'u `Inertia::render('...')` döner (routes/web.php).
+  - Paylaşılan layout `resources/js/layouts/` (kaynaktaki SiteLayout → Inertia
+    persistent layout); ortak bileşenler `resources/js/components/` (site + ui).
+  - TanStack Router/Start'a özgü şeyler port EDİLMEZ: file-based routing,
+    routeTree.gen, createServerFn/server.ts/start.ts, TanStack Query veri katmanı,
+    Lovable hata/telemetri (lovable-error-reporting, __root scroll-sync).
+  - Navigasyon (mega-menü/footer/mobil) tek kaynaktan beslenir (hardcode dağınıklığı
+    tek bir yapı/paylaşılan prop'a toplanır).
+  - Yönlendirme Laravel/Ziggy ile; `<a href>` yerine Inertia `<Link>`; TanStack
+    `<Link to>` → Inertia'ya çevrilir. Slug/id'ler backend route paramlarıyla eşleşir.
+
+  # 3) DB'YE HAZIR DUMMY VERİ — ZORUNLU (şimdi statik, ileri DB + admin panel)
+  İçerik ŞU AN dummy/statik veridir (kaynak site-data.ts'ten taşınır) AMA ileride
+  Postgres + admin paneline geçiş MEKANİK olacak şekilde modellenir:
+  - Her varlık için TEK KAYNAK (single source of truth), TİPLENMİŞ şekil (TS type +
+    ileride eşleşecek Eloquent modeli/DTO). Kaynaktaki tekrarları (teknoloji 3 ayrı
+    şekilde, symptom map iki kez, doktor→bölüm iki yolla) tek şemaya konsolide et.
+  - İlişkiler SLUG/ID ile açık kurulur (foreign-key benzeri); kaynaktaki serbest-metin
+    FUZZY string eşleştirme (normalizeTr + substring) YENİDEN ÜRETİLMEZ. Örn:
+    doctor.department_slug, join yapıları department↔technology, treatment↔department,
+    doctor↔(treatment|disease|video|article).
+  - Dummy veri, ileride bir `artisan migrate`/seeder + admin CRUD ile değiştirilecek
+    biçimde izole tutulur (rastgele UI bileşenlerine gömülü değil).
+  - DB'ye ve admin paneline geçişin kendisi ayrı bir OpenSpec change'idir; bu aşamada
+    veri yalnızca dummy'dir, "geçici" diye modelsiz/tipsiz yazılmaz.
+
+  # 4) ÇİFT DİL (TR + EN) — ZORUNLU (baştan iki dilli)
+  Site baştan tam TR + EN'dir (kaynakta içerik TR-only + tek /en sayfası; hedefte
+  iki dil de birinci sınıf).
+  - Her içerik varlığı çevrilebilir alanlar taşır (ör. name/title/summary için TR+EN);
+    TR-only hardcode ile EN'i bloke eden yapı YAZILMAZ.
+  - Arayüz metinleri lokalize edilir (tek dile gömülü string bırakılmaz); rota yapısı
+    her iki dili destekler (locale segment/prefix ör. /en/...), aktif dil + dil
+    değiştirici korunur.
+  - Eksik EN içeriği için net bir fallback stratejisi tanımlanır (TR'ye düşme veya
+    "yakında"), sessizce kırılmaz.
+
+  # 5) KVKK & FORM GÜVENLİĞİ — ZORUNLU
+  Formlar kişisel (+ hastalık/tedavi ilgisi = hassas) veri toplar. Kaynakta hepsi
+  mock; hedefte gerçek çalışacaksa:
+  - KVKK açık rıza onayı (checkbox) ZORUNLU ve kaydı tutulur; onaysız gönderim reddedilir.
+  - Sunucu tarafı doğrulama ZORUNLU (Laravel Form Request/validation); yalnızca
+    istemci doğrulamasına güvenilmez. Dosya upload (İK/CV) tip+boyut+güvenlik denetimi.
+  - Spam/kötüye kullanım koruması (rate limit ve/veya honeypot/captcha).
+  - Minimum veri ilkesi: dış servise (mail/bildirim) yalnızca gerekli alan gider;
+    kişisel veri log'a/URL'ye maskesiz yazılmaz.
+  - Formlar prototip olarak bırakılacaksa (backend yok) bu AÇIKÇA belirtilir
+    ("gönderim aktif değildir") — sahte başarı ile kullanıcı yanıltılmaz.
+
+  # 6) ERİŞİLEBİLİRLİK & SEO — ZORUNLU (halka açık sağlık sitesi)
+  - Semantik HTML, klavye erişimi, yeterli kontrast, görsellerde anlamlı alt metni,
+    prefers-reduced-motion (kaynakta var — korunur). WCAG AA hedeflenir.
+  - SEO: kaynak `noindex,nofollow`; PRODÜKSİYON indekslenebilir olmalı — sayfa bazlı
+    title/meta/OG, kanonik URL, TR/EN için hreflang, sitemap, anlamlı slug'lar. Inertia
+    head yönetimi (`<Head>`) ile per-page meta. Prototip/staging'de noindex kalabilir.
+
+  # 7) GÖRSEL/ASSET STRATEJİSİ — ZORUNLU
+  Kaynaktaki görseller gerçek değildir: `.asset.json` stub'ları Lovable R2/CDN'e,
+  birçok kapak Unsplash placeholder'a işaret eder; bölüm ikonları inline SVG React
+  bileşenidir. Prodüksiyonda: gerçek/optimize görseller uygulamadan servis edilir
+  (public/ veya storage + optimize pipeline), Unsplash/Lovable CDN'e prodüksiyon
+  bağımlılığı bırakılmaz; SVG ikonlar bileşen olarak taşınabilir. Görsel optimizasyonu
+  (boyut, lazy-load, responsive) gözetilir.
+
+  # 8) PERFORMANS — ZORUNLU
+  Vite kod bölme (sayfa bazlı), görsel lazy-load, gereksiz JS'den kaçınma. Ağır
+  animasyon/efektler reduced-motion'a saygılı ve performanslı kalır.
+
+  # 9) OPENSPEC NE ZAMAN — riskliyse/büyükse önce spec
+  Büyük/karmaşık/çok yeri etkileyen işler ÖNCE OpenSpec ile (proposal → design →
+  tasks → apply): tasarım sistemi/token'ların taşınması, layout & navigasyon
+  altyapısı, yeni sayfa tipi + veri modeli, çift dil (i18n) mimarisi, rota/SEO
+  yapısı, form backend'i, ve ileride DB + admin paneli geçişi. Küçük metin/stil
+  düzeltmeleri, tek bileşen ince ayarı ve izole-düşük riskli işler spec gerektirmez.
+  Şüphedeysen spec aç.
+
+rules:
+  proposal:
+    - 'UI/sayfa/bileşen taşıyan her proposal, sonucun kaynak `Hisar Hastanesi/` ile GÖRSEL OLARAK BİREBİR aynı olacağını ve aynı marka token''larını (lacivert primary, turuncu CTA, cyan accent, Inter) kullandığını AÇIKÇA belirtmelidir; kasıtlı bir görsel farklılık varsa gerekçelendirir ve proje sahibi onayına bağlar.'
+    - 'Her taşıma proposal''ı, çıktının TEMİZ INERTIA yapısına oturduğunu belirtir: sayfa resources/js/pages, layout resources/js/layouts, bileşen resources/js/components; Laravel route → Inertia::render; TanStack Router/Start/Lovable''e özgü yapıların (file-based routing, createServerFn, TanStack Query, Lovable telemetri) TAŞINMADIĞINI söyler.'
+    - 'İçeriğe/veriye dokunan proposal, verinin şimdilik DUMMY olduğunu AMA ileride DB + admin''e MEKANİK geçecek şekilde tek-kaynak + tipli + slug/id ilişkili modellendiğini belirtir; kaynaktaki fuzzy string eşleştirmenin FK-benzeri ilişkilere dönüştüğünü ve tekrarlı şekillerin (teknoloji/symptom/doktor-bölüm) konsolide edildiğini açıklar.'
+    - 'İçerik varlığı ekleyen/taşıyan proposal, ÇİFT DİL''i (TR+EN) nasıl desteklediğini belirtir: hangi alanlar çevrilebilir, TR-only hardcode ile EN''in bloke edilmediği, eksik EN için fallback.'
+    - 'Rota/navigasyon ekleyen proposal, her iki dili (TR/EN) destekleyen rota yapısını (locale segment/prefix) ve Inertia `<Link>` + Ziggy/Laravel route kullanımını belirtir.'
+    - 'Form ekleyen/gerçekleştiren proposal, KVKK açık rıza + kaydı, sunucu tarafı doğrulama (Form Request), spam koruması ve minimum-veri ilkesini nasıl uyguladığını belirtir; backend bağlanmayacaksa formun prototip olduğunu (sahte başarı YOK) açıkça yazar.'
+    - 'Halka açık sayfa ekleyen proposal, erişilebilirlik (semantik HTML, alt metni, kontrast, reduced-motion) ve SEO (per-page title/meta/OG, kanonik, TR/EN hreflang, slug) yaklaşımını belirtir.'
+    - 'Görsel kullanan proposal, kaynaktaki placeholder''ların (Unsplash/Lovable CDN/.asset.json) prodüksiyonda gerçek/optimize, uygulamadan servis edilen asset''lerle değiştirileceğini (veya bilinçli olarak placeholder kaldığını) belirtir.'
+  design:
+    - 'design.md, kaynak → Inertia eşlemesini içerir: hangi kaynak dosyaları (site/*, ui/*, site-data.ts) hangi Inertia sayfa/bileşen/veri modülüne karşılık gelir; taşınmayan TanStack/Lovable parçaları listelenir.'
+    - 'design.md, dummy veri şemasını (tipler + ileride eşleşecek Eloquent/DTO taslağı) ve varlıklar arası slug/id ilişkilerini gösterir; ileriki DB geçişinin nasıl mekanik kalacağını açıklar.'
+    - 'design.md, çift dil (i18n) yaklaşımını içerir: çevrilebilir alanların şekli, rota/locale stratejisi, dil değiştirme ve fallback.'
+  tasks:
+    - 'UI taşıyan her tasks.md, sonucun kaynakla görsel karşılaştırmasını (aynı token/düzen/animasyon) doğrulayan açık bir görev İÇERİR (gerekirse tarayıcıda app.hisarweb.test üzerinde kontrol).'
+    - 'Veri/tipe dokunan her tasks.md, dummy verinin tek-kaynak + tipli + slug/id ilişkili olduğunu ve fuzzy eşleştirme kullanılmadığını doğrulayan bir görev İÇERİR.'
+    - 'İçerik varlığına dokunan her tasks.md, TR ve EN''in ikisinin de render olduğunu (veya tanımlı fallback''in çalıştığını) doğrulayan bir görev İÇERİR.'
+    - 'Form içeren tasks.md, KVKK onayı zorunluluğunu, sunucu doğrulamasını ve (varsa) spam korumasını doğrulayan bir görev İÇERİR; prototip formda "gönderim aktif değil" durumunun test edildiğini belirtir.'
+    - 'Halka açık sayfa ekleyen tasks.md, temel erişilebilirlik (klavye/kontrast/alt) ve per-page SEO meta''nın (title/OG/hreflang) mevcut olduğunu doğrulayan bir görev İÇERİR.'
+    - 'Her tasks.md, değişikliğin dokümanını güncelleyen bir görev İÇERİR (ilgili openspec/specs capability ve/veya ileride CLAUDE.md).'
