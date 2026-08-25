@@ -3,14 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use AuroraWebSoftware\AAuth\Contracts\AAuthUserContract;
+use AuroraWebSoftware\AAuth\Traits\AAuthUser;
+use AuroraWebSoftware\FiLogin\Contracts\FiLoginAuthenticatable;
+use AuroraWebSoftware\FiLogin\Traits\HasFiLoginAuthentication;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements AAuthUserContract, FiLoginAuthenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    /** @use HasFactory<UserFactory> */
+    use AAuthUser, HasFactory, HasFiLoginAuthentication, Notifiable;
 
     /**
      * The attributes that are mass assignable.

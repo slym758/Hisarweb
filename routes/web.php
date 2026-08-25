@@ -1,5 +1,6 @@
 <?php
 
+use App\Support\LocaleService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -74,14 +75,20 @@ $sitePages = function () {
     Route::inertia('/mesafeli-satis-sozlesmesi', 'site/mesafeli-satis-sozlesmesi');
 };
 
-// Home (named for the starter auth layouts) + the rest, both locales.
+// Default locale (Turkish) at the root, no prefix. `home` is named for the starter
+// auth layouts.
 Route::get('/', fn () => Inertia::render('site/home'))->name('home');
 Route::group([], $sitePages);
 
-Route::prefix('en')->group(function () use ($sitePages) {
-    Route::get('/', fn () => Inertia::render('site/home'))->name('home.en');
-    $sitePages();
-});
+// One prefixed group per additional active locale (/en, /de, /ar…), resolved from the
+// admin-managed `languages` table. NOTE: if you run `route:cache`, this list is frozen
+// at cache time — run `php artisan route:clear` after adding/removing a language.
+foreach (LocaleService::prefixed() as $locale) {
+    Route::prefix($locale)->group(function () use ($sitePages, $locale) {
+        Route::get('/', fn () => Inertia::render('site/home'))->name("home.$locale");
+        $sitePages();
+    });
+}
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');

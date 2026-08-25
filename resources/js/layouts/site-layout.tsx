@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
-import { useTranslations } from '@/lib/i18n';
+import { useActiveLocale, useDir, useTranslations } from '@/lib/i18n';
 import { SiteHeader } from '@/components/site/SiteHeader';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { DesktopRail } from '@/components/site/DesktopRail';
@@ -16,8 +16,18 @@ import { LangSwitcher } from '@/components/site/LangSwitcher';
  */
 export function SiteLayout({ children }: { children: ReactNode }) {
     const { t } = useTranslations();
+    const dir = useDir();
+    const locale = useActiveLocale();
+
+    // Reflect the active locale + text direction on <html> so RTL languages (e.g. ar)
+    // mirror the whole layout and assistive tech reads the right language.
+    useEffect(() => {
+        document.documentElement.lang = locale;
+        document.documentElement.dir = dir;
+    }, [locale, dir]);
+
     return (
-        <div className="min-h-screen flex w-full max-w-full min-w-0 flex-col">
+        <div dir={dir} className="min-h-screen flex w-full max-w-full min-w-0 flex-col">
             <a
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-elevated focus:outline-none focus:ring-2 focus:ring-brand-orange"

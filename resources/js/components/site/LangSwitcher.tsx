@@ -2,139 +2,89 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, router } from "@inertiajs/react";
 import { Check, ChevronDown, Globe, X } from "lucide-react";
-import { useCurrentPath, useLocale } from "@/lib/i18n";
+import { useActiveLocale, useCurrentPath, useDefaultLocale, useLocales, localizedPath, type LanguageOption } from "@/lib/i18n";
 
-type LangCode = "TR" | "EN";
+/** Flag emoji per known locale; falls back to the uppercased code. */
+const FLAGS: Record<string, string> = {
+  tr: "🇹🇷", en: "🇬🇧", fr: "🇫🇷", ru: "🇷🇺", kk: "🇰🇿", ar: "🇸🇦",
+  ro: "🇷🇴", ka: "🇬🇪", de: "🇩🇪", sq: "🇦🇱", mk: "🇲🇰", bg: "🇧🇬",
+};
 
-/** Active languages — actually routed. */
-const LANGS: { code: LangCode; label: string; flag: string; to: string }[] = [
-  { code: "TR", label: "Türkçe", flag: "🇹🇷", to: "/" },
-  { code: "EN", label: "English", flag: "EN", to: "/en" },
-];
-
-/** Display-only languages (not yet available). */
-const SOON: { code: string; label: string; flag: string }[] = [
-  { code: "FR", label: "Français", flag: "🇫🇷" },
-  { code: "DE", label: "Deutsch", flag: "🇩🇪" },
-  { code: "RU", label: "Русский", flag: "🇷🇺" },
-  { code: "AR", label: "العربية", flag: "🇸🇦" },
-  { code: "KK", label: "Қазақша", flag: "🇰🇿" },
-  { code: "RO", label: "Română", flag: "🇷🇴" },
-  { code: "KA", label: "ქართული", flag: "🇬🇪" },
-  { code: "SQ", label: "Shqip", flag: "🇦🇱" },
-  { code: "MK", label: "Македонски", flag: "🇲🇰" },
-  { code: "BG", label: "Български", flag: "🇧🇬" },
-];
+function flagFor(code: string): string {
+  return FLAGS[code] ?? code.toUpperCase();
+}
 
 /** Emoji flags need a larger optical size; text codes match the label font. */
-function Flag({ flag, size, dim = false }: { flag: string; size: "base" | "lg"; dim?: boolean }) {
+function Flag({ flag, size }: { flag: string; size: "base" | "lg" }) {
   const isEmoji = /\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}]/u.test(flag);
   return (
     <span
       aria-hidden
-      className={`leading-none ${isEmoji ? (size === "lg" ? "text-lg" : "text-base") : "w-[22px] text-center text-[11px] font-bold tracking-wider"} ${
-        dim ? "opacity-55 grayscale" : ""
-      }`}
+      className={`leading-none ${isEmoji ? (size === "lg" ? "text-lg" : "text-base") : "w-[22px] text-center text-[11px] font-bold tracking-wider"}`}
     >
       {flag}
     </span>
   );
 }
 
-const A11Y: Record<LangCode, string> = {
-  TR: "Dil: Türkçe — dil seçeneklerini aç",
-  EN: "Language: English — open language options",
-};
-
 /** Routes that are outside the public website shell. */
 const EXCLUDED_PREFIXES = ["/admin", "/auth", "/api"];
 
-/**
- * Navigate to the current page in the requested language. Turkish is served at
- * the root; English uses a `/en` prefix. `currentPathTr` is the locale-agnostic
- * path (see {@link useCurrentPath}) so the language switch preserves the page.
- */
-function switchLang(code: LangCode, currentPathTr: string) {
-  router.visit(code === "EN" ? "/en" + currentPathTr : currentPathTr);
-}
-
-/** The routed href for a language option (used for anchor semantics). */
-function langHref(code: LangCode, currentPathTr: string) {
-  return code === "EN" ? "/en" + currentPathTr : currentPathTr;
+function a11yLabel(active: LanguageOption | undefined): string {
+  return active ? `Dil / Language: ${active.native_name} — open language options` : "Dil / Language";
 }
 
 /** Shared dropdown list of languages. */
 function LangMenu({
   current,
+  locales,
+  defaultLocale,
   onClose,
   align = "left",
 }: {
-  current: LangCode;
+  current: string;
+  locales: LanguageOption[];
+  defaultLocale: string;
   onClose: () => void;
   /** "left" opens toward the left of the trigger, "below" drops under it. */
   align?: "left" | "below";
 }) {
-  const currentPathTr = useCurrentPath();
+  const currentPath = useCurrentPath();
+  const active = locales.find((l) => l.code === current);
   return (
     <div
       className={`absolute z-10 w-[216px] overflow-hidden rounded-xl bg-background/95 shadow-elevated ring-1 ring-border/70 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 ${
         align === "left" ? "right-full top-0 mr-2" : "left-0 top-full mt-2"
       }`}
     >
-      <ul role="listbox" aria-label={A11Y[current]} className="max-h-[62vh] overflow-y-auto overscroll-contain py-1">
-        {LANGS.map((l) => {
-          const active = l.code === current;
+      <ul role="listbox" aria-label={a11yLabel(active)} className="max-h-[62vh] overflow-y-auto overscroll-contain py-1">
+        {locales.map((l) => {
+          const isActive = l.code === current;
+          const href = localizedPath(currentPath, l.code, defaultLocale);
           return (
             <li key={l.code}>
               <Link
-                href={langHref(l.code, currentPathTr)}
+                href={href}
                 role="option"
-                aria-selected={active}
+                aria-selected={isActive}
                 onClick={(e) => {
                   e.preventDefault();
-                  switchLang(l.code, currentPathTr);
+                  router.visit(href);
                   onClose();
                 }}
                 className={`flex w-full items-center justify-between gap-3 px-3 py-2.5 text-sm transition focus-visible:outline-none focus-visible:bg-primary-soft/60 ${
-                  active ? "bg-primary-soft/50 font-semibold text-primary" : "text-foreground hover:bg-primary-soft/40"
+                  isActive ? "bg-primary-soft/50 font-semibold text-primary" : "text-foreground hover:bg-primary-soft/40"
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <Flag flag={l.flag} size="base" />
-                  {l.label}
+                  <Flag flag={flagFor(l.code)} size="base" />
+                  {l.native_name}
                 </span>
-                {active && <Check className="h-3.5 w-3.5 text-brand-orange" aria-hidden />}
+                {isActive && <Check className="h-3.5 w-3.5 text-brand-orange" aria-hidden />}
               </Link>
             </li>
           );
         })}
-
-        <li
-          role="presentation"
-          className="mt-1 border-t border-border/70 px-3 pb-1 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
-        >
-          {current === "EN" ? "Coming soon" : "Yakında"}
-        </li>
-
-        {SOON.map((l) => (
-          <li key={l.code}>
-            <span
-              role="option"
-              aria-selected={false}
-              aria-disabled="true"
-              title={current === "EN" ? "Coming soon" : "Yakında"}
-              className="flex w-full cursor-not-allowed items-center justify-between gap-3 px-3 py-2.5 text-sm text-muted-foreground/80"
-            >
-              <span className="flex items-center gap-2.5">
-                <Flag flag={l.flag} size="base" dim />
-                {l.label}
-              </span>
-              <span className="rounded-full bg-muted px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
-                {current === "EN" ? "soon" : "yakında"}
-              </span>
-            </span>
-          </li>
-        ))}
       </ul>
     </div>
   );
@@ -164,9 +114,11 @@ function useDismiss(setOpen: (v: boolean) => void, pathname: string) {
  * sticky mobile header so the menu never overflows the viewport.
  */
 export function LangSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const currentPathTr = useCurrentPath();
-  const locale = useLocale();
-  const current: LangCode = locale === "en" ? "EN" : "TR";
+  const currentPath = useCurrentPath();
+  const current = useActiveLocale();
+  const locales = useLocales();
+  const defaultLocale = useDefaultLocale();
+  const active = locales.find((l) => l.code === current);
 
   useEffect(() => {
     if (!open) return;
@@ -184,10 +136,10 @@ export function LangSheet({ open, onClose }: { open: boolean; onClose: () => voi
   if (typeof document === "undefined") return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-[1200] md:hidden" role="dialog" aria-modal="true" aria-label={A11Y[current]}>
+    <div className="fixed inset-0 z-[1200] md:hidden" role="dialog" aria-modal="true" aria-label={a11yLabel(active)}>
       <button
         type="button"
-        aria-label={current === "EN" ? "Close" : "Kapat"}
+        aria-label="Kapat / Close"
         onClick={onClose}
         className="absolute inset-0 bg-primary/40 backdrop-blur-sm animate-in fade-in-0"
       />
@@ -195,12 +147,12 @@ export function LangSheet({ open, onClose }: { open: boolean; onClose: () => voi
         <div className="flex items-center justify-between border-b border-border/70 px-5 py-3.5">
           <span className="inline-flex items-center gap-2 text-sm font-bold text-primary">
             <Globe className="h-4 w-4 text-brand-cyan" aria-hidden />
-            {current === "EN" ? "Select language" : "Dil seçin"}
+            Dil / Language
           </span>
           <button
             type="button"
             onClick={onClose}
-            aria-label={current === "EN" ? "Close" : "Kapat"}
+            aria-label="Kapat / Close"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full text-primary transition hover:bg-primary-soft/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
             <X className="h-5 w-5" aria-hidden />
@@ -208,61 +160,36 @@ export function LangSheet({ open, onClose }: { open: boolean; onClose: () => voi
         </div>
         <ul
           role="listbox"
-          aria-label={A11Y[current]}
+          aria-label={a11yLabel(active)}
           className="max-h-[58vh] overflow-y-auto overscroll-contain px-2 py-2 pb-[calc(env(safe-area-inset-bottom)+12px)]"
         >
-          {LANGS.map((l) => {
-            const active = l.code === current;
+          {locales.map((l) => {
+            const isActive = l.code === current;
+            const href = localizedPath(currentPath, l.code, defaultLocale);
             return (
               <li key={l.code}>
                 <Link
-                  href={langHref(l.code, currentPathTr)}
+                  href={href}
                   role="option"
-                  aria-selected={active}
+                  aria-selected={isActive}
                   onClick={(e) => {
                     e.preventDefault();
-                    switchLang(l.code, currentPathTr);
+                    router.visit(href);
                     onClose();
                   }}
                   className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3.5 text-[15px] transition ${
-                    active ? "bg-primary-soft/60 font-semibold text-primary" : "text-foreground hover:bg-primary-soft/40"
+                    isActive ? "bg-primary-soft/60 font-semibold text-primary" : "text-foreground hover:bg-primary-soft/40"
                   }`}
                 >
                   <span className="flex items-center gap-3">
-                    <Flag flag={l.flag} size="lg" />
-                    {l.label}
+                    <Flag flag={flagFor(l.code)} size="lg" />
+                    {l.native_name}
                   </span>
-                  {active && <Check className="h-4 w-4 text-brand-orange" aria-hidden />}
+                  {isActive && <Check className="h-4 w-4 text-brand-orange" aria-hidden />}
                 </Link>
               </li>
             );
           })}
-
-          <li
-            role="presentation"
-            className="mt-2 px-3 pb-1 pt-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
-          >
-            {current === "EN" ? "Coming soon" : "Yakında"}
-          </li>
-
-          {SOON.map((l) => (
-            <li key={l.code}>
-              <span
-                role="option"
-                aria-selected={false}
-                aria-disabled="true"
-                className="flex w-full cursor-not-allowed items-center justify-between gap-3 rounded-xl px-3 py-3 text-[15px] text-muted-foreground/80"
-              >
-                <span className="flex items-center gap-3">
-                  <Flag flag={l.flag} size="lg" dim />
-                  {l.label}
-                </span>
-                <span className="rounded-full bg-muted px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  {current === "EN" ? "soon" : "yakında"}
-                </span>
-              </span>
-            </li>
-          ))}
         </ul>
       </div>
     </div>,
@@ -271,17 +198,15 @@ export function LangSheet({ open, onClose }: { open: boolean; onClose: () => voi
 }
 
 /**
- * Compact inline "TR / EN" control. Used by the compact sticky mobile header —
+ * Compact inline language control. Used by the compact sticky mobile header —
  * opens the accessible {@link LangSheet} bottom sheet.
  */
 export function LangPill({ className = "" }: { className?: string }) {
-  const currentPathTr = useCurrentPath();
-  const locale = useLocale();
+  const currentPath = useCurrentPath();
+  const locale = useActiveLocale();
   const [open, setOpen] = useState(false);
 
-  if (EXCLUDED_PREFIXES.some((p) => currentPathTr === p || currentPathTr.startsWith(`${p}/`))) return null;
-
-  const current: LangCode = locale === "en" ? "EN" : "TR";
+  if (EXCLUDED_PREFIXES.some((p) => currentPath === p || currentPath.startsWith(`${p}/`))) return null;
 
   return (
     <>
@@ -290,10 +215,10 @@ export function LangPill({ className = "" }: { className?: string }) {
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        aria-label={A11Y[current]}
+        aria-label="Dil / Language"
         className={`inline-flex h-11 min-w-[44px] items-center justify-center gap-1 rounded-full px-2 text-[13px] font-bold tracking-wide text-primary transition hover:bg-primary-soft/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange ${className}`}
       >
-        {current}
+        {locale.toUpperCase()}
         <ChevronDown className="h-3 w-3 opacity-70" aria-hidden />
       </button>
       <LangSheet open={open} onClose={() => setOpen(false)} />
@@ -301,17 +226,18 @@ export function LangPill({ className = "" }: { className?: string }) {
   );
 }
 
-
 /**
- * Global TR/EN switcher docked to the right edge of the viewport. On desktop it
- * floats over the banner and then tucks into the header band on scroll. On
- * mobile it hides once scrolled — the inline {@link LangPill} takes over.
+ * Global language switcher docked to the right edge of the viewport. On desktop it
+ * floats over the banner and then tucks into the header band on scroll. On mobile
+ * it hides once scrolled — the inline {@link LangPill} takes over.
  */
 export function LangSwitcher() {
-  const currentPathTr = useCurrentPath();
-  const locale = useLocale();
+  const currentPath = useCurrentPath();
+  const locale = useActiveLocale();
+  const locales = useLocales();
+  const defaultLocale = useDefaultLocale();
   const [open, setOpen] = useState(false);
-  const ref = useDismiss(setOpen, currentPathTr);
+  const ref = useDismiss(setOpen, currentPath);
 
   /** Docked = user scrolled past the banner. */
   const [docked, setDocked] = useState(false);
@@ -341,16 +267,12 @@ export function LangSwitcher() {
     };
   }, []);
 
-  if (EXCLUDED_PREFIXES.some((p) => currentPathTr === p || currentPathTr.startsWith(`${p}/`))) {
+  if (EXCLUDED_PREFIXES.some((p) => currentPath === p || currentPath.startsWith(`${p}/`))) {
     return null;
   }
 
-  const current: LangCode = locale === "en" ? "EN" : "TR";
-
   /** Once scrolled on mobile the compact header pill owns the switcher. */
   const hiddenOnMobile = handedOver || (docked && !isWide);
-
-
 
   const top = docked
     ? "calc(env(safe-area-inset-top) + 21px)"
@@ -371,7 +293,7 @@ export function LangSwitcher() {
           onClick={() => setOpen((v) => !v)}
           aria-haspopup="listbox"
           aria-expanded={open}
-          aria-label={A11Y[current]}
+          aria-label="Dil / Language"
           tabIndex={hiddenOnMobile ? -1 : undefined}
           className={`inline-flex min-w-0 items-center justify-center rounded-l-full rounded-r-none font-bold tracking-wider text-white shadow-elevated ring-1 ring-white/25 backdrop-blur-md transition-all duration-300 hover:ring-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange ${
             docked
@@ -380,15 +302,14 @@ export function LangSwitcher() {
           }`}
         >
           <Globe className="h-4 w-4 shrink-0 text-brand-cyan sm:h-3.5 sm:w-3.5" aria-hidden />
-          <span className={docked ? "hidden sm:inline" : "inline"}>{current}</span>
+          <span className={docked ? "hidden sm:inline" : "inline"}>{locale.toUpperCase()}</span>
           <ChevronDown
             className={`h-3 w-3 shrink-0 opacity-80 transition-transform ${open ? "rotate-180" : ""} ${docked ? "hidden sm:block sm:hidden" : "block"}`}
             aria-hidden
           />
         </button>
 
-
-        {open && <LangMenu current={current} onClose={() => setOpen(false)} />}
+        {open && <LangMenu current={locale} locales={locales} defaultLocale={defaultLocale} onClose={() => setOpen(false)} />}
       </div>
     </div>
   );

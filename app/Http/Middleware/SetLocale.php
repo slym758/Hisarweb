@@ -2,26 +2,26 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\LocaleService;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
-    /** Supported locales. The first is the default and has no URL prefix. */
-    public const SUPPORTED = ['tr', 'en'];
-
-    /** Locales that appear as a URL prefix (TR is served at the root). */
-    public const PREFIXED = ['en'];
-
     /**
-     * Resolve the active locale from the first URL segment (e.g. /en/...).
-     * Runs before HandleInertiaRequests so shared translations use the right locale.
+     * Resolve the active locale from the first URL segment (e.g. /en/…, /ar/…).
+     * The default locale is served at the root (no prefix). Supported locales are
+     * managed in the DB via {@see LocaleService}. Runs before HandleInertiaRequests
+     * so shared data uses the right locale.
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $segment = $request->segment(1);
-        $locale = in_array($segment, self::PREFIXED, true) ? $segment : 'tr';
+        $segment = (string) $request->segment(1);
+
+        $locale = in_array($segment, LocaleService::prefixed(), true)
+            ? $segment
+            : LocaleService::default();
 
         app()->setLocale($locale);
 
