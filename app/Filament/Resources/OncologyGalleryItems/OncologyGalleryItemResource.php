@@ -21,7 +21,7 @@ class OncologyGalleryItemResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Bütünleşik Onkoloji';
 
     protected static ?string $navigationLabel = 'Onkoloji Merkez Turu';
 

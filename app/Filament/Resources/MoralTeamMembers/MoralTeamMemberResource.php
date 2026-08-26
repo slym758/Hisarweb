@@ -21,7 +21,7 @@ class MoralTeamMemberResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFaceSmile;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Bütünleşik Onkoloji';
 
     protected static ?string $navigationLabel = 'Moral Takımı';
 
