@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Filament\Support\AutoPageCopyFields;
 use App\Filament\Support\HomeCopyFields;
 use App\Filament\Support\LocaleTabs;
 use App\Filament\Support\OncologyCopyFields;
@@ -115,6 +116,10 @@ class PageForm
 
             // Homepage text sections (visible only on the home page).
             ...HomeCopyFields::sections(),
+
+            // Generic, record-driven text editor for every other static page (auto-generated
+            // from the page's own copy tree). Hidden for pages that have a bespoke editor above.
+            AutoPageCopyFields::section(),
         ]);
     }
 
