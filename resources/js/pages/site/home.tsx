@@ -122,6 +122,7 @@ const COPY = {
             imgAlt: 'Hisar Hospital Bütünleşik Onkoloji Merkezi',
             iframeTitle: 'Hisar Hospital Bütünleşik Onkoloji Merkezi',
             videoBadge: 'Tanıtım Videosu',
+            youtubeId: 'EMGGDcEurkg',
             playAria: 'Bütünleşik Onkoloji Merkezi tanıtım videosunu oynat',
             closeAria: 'Videoyu kapat',
             cardComprehensive: 'Comprehensive',
@@ -267,6 +268,7 @@ const COPY = {
             imgAlt: 'Hisar Hospital Integrated Oncology Center',
             iframeTitle: 'Hisar Hospital Integrated Oncology Center',
             videoBadge: 'Intro Video',
+            youtubeId: 'EMGGDcEurkg',
             playAria: 'Play the Integrated Oncology Center intro video',
             closeAria: 'Close video',
             cardComprehensive: 'Comprehensive',
@@ -912,7 +914,7 @@ function OnkolojiSpotlight() {
     const settings = useSettings();
     const [videoPlaying, setVideoPlaying] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
-    const youtubeId = 'EMGGDcEurkg';
+    const youtubeId = c.onko.youtubeId || 'EMGGDcEurkg';
 
     useEffect(() => {
         const mq = window.matchMedia('(min-width: 1024px)');

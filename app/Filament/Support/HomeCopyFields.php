@@ -57,6 +57,10 @@ class HomeCopyFields
                 TextInput::make("copy.$locale.onko.titleAccent")->label('Başlık (vurgu)'),
                 TextInput::make("copy.$locale.onko.titleTail")->label('Başlık (son)'),
                 Textarea::make("copy.$locale.onko.desc")->label('Açıklama')->rows(3),
+                TextInput::make("copy.$locale.onko.youtubeId")
+                    ->label('Tanıtım videosu (YouTube ID)')
+                    ->placeholder('Örn. EMGGDcEurkg')
+                    ->helperText('YouTube linkindeki v= sonrası kod.'),
                 Repeater::make("copy.$locale.onko.features")
                     ->label('Özellikler')
                     ->schema([
