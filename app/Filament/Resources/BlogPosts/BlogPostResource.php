@@ -21,7 +21,7 @@ class BlogPostResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedNewspaper;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Yayınlar & Medya';
 
     protected static ?string $navigationLabel = 'Sağlık Rehberi';
 

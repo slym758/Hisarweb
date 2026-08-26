@@ -21,7 +21,7 @@ class CampaignResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedMegaphone;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Pazarlama';
 
     protected static ?string $navigationLabel = 'Kampanyalar';
 

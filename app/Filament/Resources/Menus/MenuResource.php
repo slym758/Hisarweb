@@ -20,7 +20,7 @@ class MenuResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Menüler';
+    protected static string|UnitEnum|null $navigationGroup = 'Site Yapısı';
 
     protected static ?string $navigationLabel = 'Menüler';
 

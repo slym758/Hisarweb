@@ -21,7 +21,7 @@ class HospitalResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice2;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Kurumsal';
 
     protected static ?string $navigationLabel = 'Hastaneler';
 

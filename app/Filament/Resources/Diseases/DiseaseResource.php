@@ -21,7 +21,7 @@ class DiseaseResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Sağlık Hizmetleri';
 
     protected static ?string $navigationLabel = 'Hastalıklar';
 

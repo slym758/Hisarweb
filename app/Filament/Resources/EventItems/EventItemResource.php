@@ -21,7 +21,7 @@ class EventItemResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Yayınlar & Medya';
 
     protected static ?string $navigationLabel = 'Etkinlikler';
 

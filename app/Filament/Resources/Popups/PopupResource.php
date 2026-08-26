@@ -21,7 +21,7 @@ class PopupResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSparkles;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Pazarlama';
 
     protected static ?string $navigationLabel = 'Pop-up\'lar';
 

@@ -21,7 +21,7 @@ class PressItemResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|UnitEnum|null $navigationGroup = 'İçerik';
+    protected static string|UnitEnum|null $navigationGroup = 'Yayınlar & Medya';
 
     protected static ?string $navigationLabel = 'Basın';
 
