@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Hospitals\Schemas;
 
 use App\Filament\Support\LocaleTabs;
+use App\Filament\Support\RelatedContent;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -106,6 +107,10 @@ class HospitalForm
                         ->collapsed()
                         ->collapsible(),
                 ]),
+
+                // "Tedavi Yöntemleri" bölümü: boş bırakılırsa hastanenin bölümlerinden
+                // otomatik gelir; seçim yapılırsa manuel sıralama geçerli olur.
+                RelatedContent::section(['treatments']),
             ]);
     }
 }

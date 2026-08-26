@@ -3,6 +3,7 @@
 namespace App\Support;
 
 use App\Models\Department;
+use App\Models\Hospital;
 use App\Models\Technology;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -70,6 +71,15 @@ class AutoRelatedResolver
             }
 
             return array_map('intval', $ids);
+        }
+
+        // A hospital has no single department; its departments are those represented by its doctors.
+        if ($model instanceof Hospital) {
+            return array_map('intval', $model->doctors()
+                ->whereNotNull('department_id')
+                ->distinct()
+                ->pluck('department_id')
+                ->all());
         }
 
         return $model->department_id ? [(int) $model->department_id] : [];

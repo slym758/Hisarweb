@@ -1458,6 +1458,18 @@ export function getTreatmentsForDept(deptSlug: string, l: Locale): Treatment[] {
     if (rel && Array.isArray(rel.treatments)) return rel.treatments as unknown as Treatment[];
     return TREATMENTS_SRC.filter((t) => t.deptSlug === deptSlug).map((t) => resolveTreatment(t, l));
 }
+/**
+ * Treatments shown on a hospital detail page. Prefers the editor's manual picks / auto-by-
+ * department slice passed as the `related.treatments` prop (Faz 2 AUTO/MANUAL); falls back to
+ * the treatments whose department is represented at the hospital — with NO irrelevant padding
+ * (the section hides itself when there are none).
+ */
+export function getTreatmentsForHospital(hospitalSlug: string, l: Locale): Treatment[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.treatments)) return rel.treatments as unknown as Treatment[];
+    const deptSlugs = new Set(getDepartmentsForHospital(hospitalSlug, l).map((d) => d.slug));
+    return getTreatments(l).filter((t) => deptSlugs.has(t.deptSlug));
+}
 
 /* ── Diseases — representative sample with detail, related by slug ── */
 type DiseaseSrc = {

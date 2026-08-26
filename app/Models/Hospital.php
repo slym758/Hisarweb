@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasRelatedContent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hospital extends ContentModel
 {
+    use HasRelatedContent;
+
     public array $translatable = [
         'name', 'area', 'address', 'about', 'features', 'technologies', 'gallery',
         'transport', 'emergency', 'working_hours',

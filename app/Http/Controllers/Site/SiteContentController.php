@@ -88,7 +88,18 @@ class SiteContentController extends Controller
     {
         $h = Hospital::where('slug', $slug)->with('rooms')->firstOrFail();
 
-        return Inertia::render('site/hastane-detay', ['slug' => $slug, 'record' => SiteSerializer::hospital($h)]);
+        // "Tedavi Yöntemleri": manual editorial picks (related_items) override, otherwise
+        // auto by the hospital's departments (via its doctors). No irrelevant padding.
+        $related = [
+            'treatments' => $h->relatedItems(Treatment::class, 'related', 6)
+                ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
+        ];
+
+        return Inertia::render('site/hastane-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::hospital($h),
+            'related' => $related,
+        ]);
     }
 
     public function event(string $slug): Response

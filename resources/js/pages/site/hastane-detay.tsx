@@ -9,7 +9,8 @@ import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
 import { useSettings } from '@/lib/settings';
 import {
-    getDepartmentsForHospital, getDoctorsForHospital, getHospitalBySlug, getHospitalDetail, getTreatments,
+    getDepartmentsForHospital, getDoctorsForHospital, getHospitalBySlug, getHospitalDetail,
+    getTreatmentsForHospital,
 } from '@/lib/site-data';
 
 /* Temporary Unsplash imagery for the technologies grid (no per-technology asset in content-data yet). */
@@ -136,15 +137,9 @@ export default function HastaneDetay() {
     const hospitalDepartments = allHospitalDepartments.slice(0, 8);
     const hospitalDoctors = getDoctorsForHospital(hospital.slug, locale).slice(0, 4);
 
-    // "Tedavi Yöntemleri" — treatments relevant to the hospital's departments (padded to 3).
-    const deptSlugSet = new Set(allHospitalDepartments.map((d) => d.slug));
-    const allTreatments = getTreatments(locale);
-    const relatedTreatments = allTreatments.filter((t) => deptSlugSet.has(t.deptSlug));
-    const treatments = (
-        relatedTreatments.length >= 3
-            ? relatedTreatments
-            : [...relatedTreatments, ...allTreatments.filter((t) => !deptSlugSet.has(t.deptSlug))]
-    ).slice(0, 3);
+    // "Tedavi Yöntemleri" — editor's manual picks / auto by the hospital's departments
+    // (from the `related` prop); only genuinely relevant treatments, no padding.
+    const treatments = getTreatmentsForHospital(hospital.slug, locale).slice(0, 6);
 
     const telHref = `tel:${hospital.phone.replace(/\s/g, '')}`;
     const mapsQuery = encodeURIComponent(detail?.mapQuery ?? hospital.name);
