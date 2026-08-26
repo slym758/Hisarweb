@@ -57,4 +57,10 @@ class Department extends ContentModel
             ->withPivot('position')
             ->orderByPivot('position');
     }
+
+    /** Hospitals that offer this department (inverse of {@see Hospital::departments()}). */
+    public function hospitals(): BelongsToMany
+    {
+        return $this->belongsToMany(Hospital::class)->orderBy('hospitals.order_column');
+    }
 }

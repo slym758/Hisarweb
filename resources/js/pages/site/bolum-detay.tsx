@@ -491,7 +491,9 @@ export default function BolumDetay() {
                                                         <MapPin className="inline h-3 w-3 -mt-0.5 mr-0.5" />
                                                         {hospital.area}
                                                     </p>
-                                                    <p className="mt-0.5 text-[11px] text-brand-cyan italic">{c.locationsCount(count)}</p>
+                                                    {count > 0 ? (
+                                                        <p className="mt-0.5 text-[11px] text-brand-cyan italic">{c.locationsCount(count)}</p>
+                                                    ) : null}
                                                 </div>
                                             </Link>
                                         ))}

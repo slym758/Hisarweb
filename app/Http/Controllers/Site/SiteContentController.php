@@ -53,7 +53,22 @@ class SiteContentController extends Controller
     {
         $d = Department::where('slug', $slug)->firstOrFail();
 
-        return Inertia::render('site/bolum-detay', ['slug' => $slug, 'record' => SiteSerializer::departmentDetail($d)]);
+        // "Hangi Hastanelerimizde?": hospitals that explicitly offer this department (the
+        // department_hospital pivot, backfilled from doctor assignments). count = doctors of
+        // this department at each hospital (the card hides the count line when it is 0).
+        $hospitals = $d->hospitals()
+            ->where('hospitals.coming_soon', false)
+            ->get()
+            ->map(fn (Hospital $h) => [
+                'hospital' => SiteSerializer::hospitalLight($h),
+                'count' => $h->doctors()->where('department_id', $d->id)->count(),
+            ])->values()->all();
+
+        return Inertia::render('site/bolum-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::departmentDetail($d),
+            'related' => ['hospitals' => $hospitals],
+        ]);
     }
 
     public function disease(string $slug): Response

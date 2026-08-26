@@ -978,6 +978,10 @@ export function getDoctorsForDept(deptSlug: string, l: Locale): Doctor[] {
 }
 /** Published hospitals where a department has doctors, with the doctor count (relation helper). */
 export function getHospitalsForDept(deptSlug: string, l: Locale): { hospital: Hospital; count: number }[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.hospitals)) {
+        return rel.hospitals as unknown as { hospital: Hospital; count: number }[];
+    }
     const counts = new Map<string, number>();
     for (const d of DOCTORS_SRC) {
         if (d.departmentSlug === deptSlug) counts.set(d.hospitalSlug, (counts.get(d.hospitalSlug) ?? 0) + 1);

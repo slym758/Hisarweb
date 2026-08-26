@@ -57,6 +57,19 @@ class SiteSerializer
         ];
     }
 
+    public static function hospitalLight(Hospital $h): array
+    {
+        return [
+            'slug' => $h->slug,
+            'name' => $h->loc('name'),
+            'area' => $h->loc('area') ?? '',
+            'phone' => $h->phone ?? '',
+            'address' => $h->loc('address') ?? '',
+            'cover' => Media::url($h->cover_path, $h->cover_url) ?? '',
+            'comingSoon' => (bool) $h->coming_soon,
+        ];
+    }
+
     public static function departmentLight(Department $d): array
     {
         return [
