@@ -79,10 +79,10 @@ const COPY = {
             prev: 'Önceki',
             next: 'Sonraki',
             items: [
-                { title: 'Mobil Uygulamamız Çıktı', sub: "Randevu, sonuç ve doktor; App Store & Google Play'de.", cta: 'İndir' },
-                { title: 'Gebelik Eğitim Semineri', sub: "12 Ekim'de Hisar Hospital'de.", cta: 'Detaylar' },
-                { title: 'Yenilenen Göz Sağlığı Merkezi', sub: 'Hizmetinizde — randevu alın.', cta: 'Detaylar' },
-                { title: 'Çocuk Sağlığı Check-up', sub: 'Okul dönemi özel paketler.', cta: 'Detaylar' },
+                { title: 'Mobil Uygulamamız Çıktı', sub: "Randevu, sonuç ve doktor; App Store & Google Play'de.", cta: 'İndir', href: '/mobil-uygulama' },
+                { title: 'Gebelik Eğitim Semineri', sub: "12 Ekim'de Hisar Hospital'de.", cta: 'Detaylar', href: '#' },
+                { title: 'Yenilenen Göz Sağlığı Merkezi', sub: 'Hizmetinizde — randevu alın.', cta: 'Detaylar', href: '#' },
+                { title: 'Çocuk Sağlığı Check-up', sub: 'Okul dönemi özel paketler.', cta: 'Detaylar', href: '#' },
             ],
         },
         quick: {
@@ -90,10 +90,10 @@ const COPY = {
             title: 'Size nasıl yardımcı olabiliriz?',
             subtitle: 'Randevu, doktor ve e-sonuç işlemlerine hızlıca ulaşın.',
             items: [
-                { label: 'E-Sonuç', desc: 'Laboratuvar ve görüntüleme sonuçlarınıza güvenli şekilde ulaşın.', mobileDesc: 'Sonuçlara ulaş', cta: 'Sonuçlara Git' },
-                { label: 'Anlaşmalı Kurumlar', desc: 'Anlaşmalı kurum ve sigorta bilgilerine ulaşın.', mobileDesc: 'Kurumları gör', cta: 'Kurumları İncele' },
-                { label: 'Doktor Ara', desc: 'Uzman hekimleri branş, isim veya ilgi alanına göre inceleyin.', mobileDesc: 'Hekimleri incele', cta: 'Doktorları Gör' },
-                { label: 'Hisar Online', desc: 'Tüm online işlemlerinizi güvenli şekilde gerçekleştirin.', mobileDesc: 'Online işlemler', cta: 'Giriş Yap' },
+                { label: 'E-Sonuç', desc: 'Laboratuvar ve görüntüleme sonuçlarınıza güvenli şekilde ulaşın.', mobileDesc: 'Sonuçlara ulaş', cta: 'Sonuçlara Git', to: 'https://online.hisarhospital.com/#/' },
+                { label: 'Anlaşmalı Kurumlar', desc: 'Anlaşmalı kurum ve sigorta bilgilerine ulaşın.', mobileDesc: 'Kurumları gör', cta: 'Kurumları İncele', to: '/anlasmali-kurumlar' },
+                { label: 'Doktor Ara', desc: 'Uzman hekimleri branş, isim veya ilgi alanına göre inceleyin.', mobileDesc: 'Hekimleri incele', cta: 'Doktorları Gör', to: '/doktorlarimiz' },
+                { label: 'Hisar Online', desc: 'Tüm online işlemlerinizi güvenli şekilde gerçekleştirin.', mobileDesc: 'Online işlemler', cta: 'Giriş Yap', to: 'https://online.hisarhospital.com' },
             ],
         },
         departments: {
@@ -225,10 +225,10 @@ const COPY = {
             prev: 'Previous',
             next: 'Next',
             items: [
-                { title: 'Our Mobile App Is Here', sub: 'Appointments, results and doctors — on the App Store & Google Play.', cta: 'Download' },
-                { title: 'Pregnancy Education Seminar', sub: 'On October 12 at Hisar Hospital.', cta: 'Details' },
-                { title: 'Renewed Eye Health Center', sub: 'Now open — book your appointment.', cta: 'Details' },
-                { title: 'Pediatric Check-up', sub: 'Special back-to-school packages.', cta: 'Details' },
+                { title: 'Our Mobile App Is Here', sub: 'Appointments, results and doctors — on the App Store & Google Play.', cta: 'Download', href: '/mobil-uygulama' },
+                { title: 'Pregnancy Education Seminar', sub: 'On October 12 at Hisar Hospital.', cta: 'Details', href: '#' },
+                { title: 'Renewed Eye Health Center', sub: 'Now open — book your appointment.', cta: 'Details', href: '#' },
+                { title: 'Pediatric Check-up', sub: 'Special back-to-school packages.', cta: 'Details', href: '#' },
             ],
         },
         quick: {
@@ -236,10 +236,10 @@ const COPY = {
             title: 'How can we help you?',
             subtitle: 'Quickly reach appointments, doctors and e-results.',
             items: [
-                { label: 'E-Results', desc: 'Securely access your laboratory and imaging results.', mobileDesc: 'View results', cta: 'Go to Results' },
-                { label: 'Contracted Institutions', desc: 'Access contracted institution and insurance information.', mobileDesc: 'View institutions', cta: 'View Institutions' },
-                { label: 'Find a Doctor', desc: 'Browse expert physicians by specialty, name or area of interest.', mobileDesc: 'Browse doctors', cta: 'View Doctors' },
-                { label: 'Hisar Online', desc: 'Carry out all your online transactions securely.', mobileDesc: 'Online services', cta: 'Sign In' },
+                { label: 'E-Results', desc: 'Securely access your laboratory and imaging results.', mobileDesc: 'View results', cta: 'Go to Results', to: 'https://online.hisarhospital.com/#/' },
+                { label: 'Contracted Institutions', desc: 'Access contracted institution and insurance information.', mobileDesc: 'View institutions', cta: 'View Institutions', to: '/anlasmali-kurumlar' },
+                { label: 'Find a Doctor', desc: 'Browse expert physicians by specialty, name or area of interest.', mobileDesc: 'Browse doctors', cta: 'View Doctors', to: '/doktorlarimiz' },
+                { label: 'Hisar Online', desc: 'Carry out all your online transactions securely.', mobileDesc: 'Online services', cta: 'Sign In', to: 'https://online.hisarhospital.com' },
             ],
         },
         departments: {
@@ -580,13 +580,12 @@ function Hero() {
     );
 }
 
-const ANNOUNCEMENT_HREFS = ['/mobil-uygulama', '#', '#', '#'] as const;
 
 function AnnouncementStrip() {
     const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const [i, setI] = useState(0);
-    const announcements = c.announce.items.map((a, idx) => ({ ...a, href: ANNOUNCEMENT_HREFS[idx] }));
+    const announcements = c.announce.items.map((a) => ({ ...a, href: a.href || '#' }));
     useEffect(() => {
         const t = setInterval(() => setI((p) => (p + 1) % announcements.length), 5000);
         return () => clearInterval(t);
@@ -629,13 +628,14 @@ function AnnouncementStrip() {
 function QuickShortcuts() {
     const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
-    const meta = [
-        { to: 'https://online.hisarhospital.com/#/', external: true, icon: ClipboardList },
-        { to: '/anlasmali-kurumlar', external: false, icon: ShieldCheck },
-        { to: '/doktorlarimiz', external: false, icon: UserSearch },
-        { to: 'https://online.hisarhospital.com', external: true, icon: Globe },
-    ];
-    const items = meta.map((m, i) => ({ ...m, ...c.quick.items[i] }));
+    // Icons stay positional; label/desc/cta and the link (`to`) come from editable copy.
+    const quickIcons = [ClipboardList, ShieldCheck, UserSearch, Globe];
+    const items = c.quick.items.map((it, i) => ({
+        ...it,
+        icon: quickIcons[i] ?? Globe,
+        to: it.to || '#',
+        external: /^https?:\/\//.test(it.to || ''),
+    }));
     return (
         <section className="bg-surface py-10 lg:py-14">
             <div className="container-x">

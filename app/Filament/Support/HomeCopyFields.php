@@ -32,6 +32,7 @@ class HomeCopyFields
                         Textarea::make('desc')->label('Açıklama')->rows(2),
                         TextInput::make('mobileDesc')->label('Mobil açıklama'),
                         TextInput::make('cta')->label('Buton yazısı'),
+                        TextInput::make('to')->label('Bağlantı (URL)')->placeholder('/doktorlarimiz veya https://...'),
                     ])
                     ->collapsed()->collapsible(),
             ]),
@@ -103,6 +104,7 @@ class HomeCopyFields
                         TextInput::make('title')->label('Başlık'),
                         Textarea::make('sub')->label('Alt metin')->rows(2),
                         TextInput::make('cta')->label('Buton yazısı'),
+                        TextInput::make('href')->label('Bağlantı (URL)')->placeholder('/mobil-uygulama veya https://...'),
                     ])
                     ->collapsed()->collapsible(),
             ]),

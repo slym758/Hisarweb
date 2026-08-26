@@ -2009,22 +2009,26 @@
           {
             "title": "Mobil Uygulamamız Çıktı",
             "sub": "Randevu, sonuç ve doktor; App Store & Google Play'de.",
-            "cta": "İndir"
+            "cta": "İndir",
+            "href": "/mobil-uygulama"
           },
           {
             "title": "Gebelik Eğitim Semineri",
             "sub": "12 Ekim'de Hisar Hospital'de.",
-            "cta": "Detaylar"
+            "cta": "Detaylar",
+            "href": "#"
           },
           {
             "title": "Yenilenen Göz Sağlığı Merkezi",
             "sub": "Hizmetinizde — randevu alın.",
-            "cta": "Detaylar"
+            "cta": "Detaylar",
+            "href": "#"
           },
           {
             "title": "Çocuk Sağlığı Check-up",
             "sub": "Okul dönemi özel paketler.",
-            "cta": "Detaylar"
+            "cta": "Detaylar",
+            "href": "#"
           }
         ]
       },
@@ -2037,25 +2041,29 @@
             "label": "E-Sonuç",
             "desc": "Laboratuvar ve görüntüleme sonuçlarınıza güvenli şekilde ulaşın.",
             "mobileDesc": "Sonuçlara ulaş",
-            "cta": "Sonuçlara Git"
+            "cta": "Sonuçlara Git",
+            "to": "https://online.hisarhospital.com/#/"
           },
           {
             "label": "Anlaşmalı Kurumlar",
             "desc": "Anlaşmalı kurum ve sigorta bilgilerine ulaşın.",
             "mobileDesc": "Kurumları gör",
-            "cta": "Kurumları İncele"
+            "cta": "Kurumları İncele",
+            "to": "/anlasmali-kurumlar"
           },
           {
             "label": "Doktor Ara",
             "desc": "Uzman hekimleri branş, isim veya ilgi alanına göre inceleyin.",
             "mobileDesc": "Hekimleri incele",
-            "cta": "Doktorları Gör"
+            "cta": "Doktorları Gör",
+            "to": "/doktorlarimiz"
           },
           {
             "label": "Hisar Online",
             "desc": "Tüm online işlemlerinizi güvenli şekilde gerçekleştirin.",
             "mobileDesc": "Online işlemler",
-            "cta": "Giriş Yap"
+            "cta": "Giriş Yap",
+            "to": "https://online.hisarhospital.com"
           }
         ]
       },
@@ -2255,22 +2263,26 @@
           {
             "title": "Our Mobile App Is Here",
             "sub": "Appointments, results and doctors — on the App Store & Google Play.",
-            "cta": "Download"
+            "cta": "Download",
+            "href": "/mobil-uygulama"
           },
           {
             "title": "Pregnancy Education Seminar",
             "sub": "On October 12 at Hisar Hospital.",
-            "cta": "Details"
+            "cta": "Details",
+            "href": "#"
           },
           {
             "title": "Renewed Eye Health Center",
             "sub": "Now open — book your appointment.",
-            "cta": "Details"
+            "cta": "Details",
+            "href": "#"
           },
           {
             "title": "Pediatric Check-up",
             "sub": "Special back-to-school packages.",
-            "cta": "Details"
+            "cta": "Details",
+            "href": "#"
           }
         ]
       },
@@ -2283,25 +2295,29 @@
             "label": "E-Results",
             "desc": "Securely access your laboratory and imaging results.",
             "mobileDesc": "View results",
-            "cta": "Go to Results"
+            "cta": "Go to Results",
+            "to": "https://online.hisarhospital.com/#/"
           },
           {
             "label": "Contracted Institutions",
             "desc": "Access contracted institution and insurance information.",
             "mobileDesc": "View institutions",
-            "cta": "View Institutions"
+            "cta": "View Institutions",
+            "to": "/anlasmali-kurumlar"
           },
           {
             "label": "Find a Doctor",
             "desc": "Browse expert physicians by specialty, name or area of interest.",
             "mobileDesc": "Browse doctors",
-            "cta": "View Doctors"
+            "cta": "View Doctors",
+            "to": "/doktorlarimiz"
           },
           {
             "label": "Hisar Online",
             "desc": "Carry out all your online transactions securely.",
             "mobileDesc": "Online services",
-            "cta": "Sign In"
+            "cta": "Sign In",
+            "to": "https://online.hisarhospital.com"
           }
         ]
       },
