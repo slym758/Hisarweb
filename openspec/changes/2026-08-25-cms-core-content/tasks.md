@@ -42,10 +42,20 @@ kırılmasız.
 - [ ] 4.6 (kalan, düşük öncelik) `errors/404` markalı Inertia sayfası (durum kodu zaten 404) +
   `searchIndex` global paylaşımı (HeaderShared şimdilik in-memory; Faz 8 aramada DB'ye taşınacak).
 
-## 5. İlk Filament içerik resource'ları (checkpoint 5)
+## 5. Filament içerik resource'ları (checkpoint 5)
 
-- [ ] 5.1 DepartmentResource + DoctorResource (filament-astart yetki deseni; locale sekmeleri/`FileUpload` native), CRUD doğrula.
-- [ ] 5.2 Kalan içerik resource'ları aynı desenle.
+Çeviri düzenleme deseni (spatie translatable plugin'i yok): `LocaleTabs` (aktif dil başına
+Tab, alanlar `attr.$locale` dot-path) + `TranslatesRecord` trait (Edit fill → getTranslations;
+kaydetme tam {tr,en,…} dizisini yazar → dil kaybı yok). Native `Tabs/Repeater/Select/Textarea`.
+
+- [x] 5.1 Altyapı: `App\Filament\Support\LocaleTabs`, `App\Filament\Concerns\TranslatesRecord`.
+- [x] 5.2 DepartmentResource (tam desen kanıtı: metin/textarea/paragraf-dizisi/nesne-dizisi
+  translatable + slug/durum/öne-çıkar + reorderable). Panele kayıtlı ("İçerik" grubu), API
+  doğrulandı. **Tarayıcı testi bekliyor** (Livewire — headless doğrulanamıyor).
+- [ ] 5.3 Desen tarayıcıda onaylanınca kalan 14 resource: Doctor(+ilişki+cv), Hospital(+rooms),
+  Disease, Treatment, Technology, BlogPost, Video, EventItem, HealthPackage, PressItem,
+  FaqCategory, SymptomMap, QualityCertificate.
+- [ ] 5.4 Görsel yükleme (medya) Faz 3'te; şimdilik `*_url` alanları.
 
 ## 6. Doğrulama + dokümantasyon
 

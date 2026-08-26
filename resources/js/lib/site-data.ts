@@ -58,7 +58,7 @@ const S = (s: string): Loc => ({ tr: s, en: s });
 /* ── Resolved (public) shapes — string fields ── */
 export type Department = { slug: string; name: string; blurb: string; icon: LucideIcon; pinned?: boolean };
 /** Long-form department detail: "Hakkında" paragraphs + featured medical technologies. */
-export type DepartmentDetail = { about: string[]; technologies: { name: string; desc: string }[] };
+export type DepartmentDetail = { about: string[]; technologies: { name: string; desc: string; image?: string }[] };
 export type Hospital = { slug: string; name: string; area: string; phone: string; address: string; cover: string; comingSoon?: boolean };
 /** Long-form hospital detail: about paragraphs, features, technologies, gallery, rooms, transport + quick tiles. */
 export type HospitalDetail = {

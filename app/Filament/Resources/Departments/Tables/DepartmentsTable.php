@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Filament\Resources\Departments\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+
+class DepartmentsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->reorderable('order_column')
+            ->defaultSort('order_column')
+            ->columns([
+                TextColumn::make('name')
+                    ->label('Ad')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable()
+                    ->toggleable(),
+                IconColumn::make('pinned')
+                    ->label('Öne çıkan')
+                    ->boolean(),
+                TextColumn::make('status')
+                    ->label('Durum')
+                    ->badge()
+                    ->color(fn (string $state) => $state === 'published' ? 'success' : 'gray'),
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

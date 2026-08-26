@@ -64,7 +64,7 @@ class CatalogService
                 'area' => $L($h, 'area') ?? '',
                 'phone' => $h->phone ?? '',
                 'address' => $L($h, 'address') ?? '',
-                'cover' => $h->cover_url ?? '',
+                'cover' => Media::url($h->cover_path, $h->cover_url) ?? '',
                 'comingSoon' => (bool) $h->coming_soon,
             ])->all(),
 
@@ -77,7 +77,7 @@ class CatalogService
                     'department' => $deptNames[$d->department?->slug] ?? '',
                     'departmentSlug' => $d->department?->slug ?? '',
                     'hospitalSlug' => $d->hospital?->slug ?? '',
-                    'photo' => $d->photo_url,
+                    'photo' => Media::url($d->photo_path, $d->photo_url),
                     'subspecialties' => $L($d, 'subspecialties') ?? [],
                     'email' => $d->email,
                     'languages' => $L($d, 'languages') ?? [],
@@ -89,7 +89,7 @@ class CatalogService
                     'name' => $L($x, 'name'),
                     'summary' => $L($x, 'summary') ?? '',
                     'deptSlug' => $x->department?->slug ?? '',
-                    'cover' => $x->cover_url ?? '',
+                    'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
             'treatments' => Treatment::published()->ordered()->with('department:id,slug')->get()
@@ -99,7 +99,7 @@ class CatalogService
                     'summary' => $L($x, 'summary') ?? '',
                     'department' => $deptNames[$x->department?->slug] ?? '',
                     'deptSlug' => $x->department?->slug ?? '',
-                    'cover' => $x->cover_url ?? '',
+                    'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
             'technologies' => Technology::published()->ordered()->get()
@@ -108,7 +108,7 @@ class CatalogService
                     'name' => $L($x, 'name'),
                     'desc' => $L($x, 'description') ?? '',
                     'deptSlugs' => $x->dept_slugs ?? [],
-                    'cover' => $x->cover_url ?? '',
+                    'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
             'videos' => Video::published()->ordered()->with('department:id,slug')->get()
@@ -127,7 +127,7 @@ class CatalogService
                     'title' => $L($b, 'title'),
                     'excerpt' => $L($b, 'excerpt') ?? '',
                     'category' => $b->department?->slug ?? '',
-                    'cover' => $b->cover_url ?? '',
+                    'cover' => Media::url($b->cover_path, $b->cover_url) ?? '',
                     'date' => $b->published_at?->toDateString() ?? '',
                     'body' => $L($b, 'body') ?: null,
                 ])->all(),
@@ -140,7 +140,7 @@ class CatalogService
                     'body' => $L($e, 'body') ?? '',
                     'date' => $e->starts_at?->toDateString() ?? '',
                     'place' => $L($e, 'place') ?? '',
-                    'cover' => $e->cover_url ?? '',
+                    'cover' => Media::url($e->cover_path, $e->cover_url) ?? '',
                 ])->all(),
 
             'packages' => HealthPackage::published()->ordered()->get()
@@ -149,7 +149,7 @@ class CatalogService
                     'name' => $L($p, 'name'),
                     'summary' => $L($p, 'summary') ?? '',
                     'scope' => $L($p, 'scope') ?? [],
-                    'cover' => $p->cover_url ?? '',
+                    'cover' => Media::url($p->cover_path, $p->cover_url) ?? '',
                 ])->all(),
 
             'press' => PressItem::published()->ordered()->get()
@@ -159,7 +159,7 @@ class CatalogService
                     'excerpt' => $L($p, 'excerpt') ?? '',
                     'source' => $p->source ?? '',
                     'date' => $p->published_at?->toDateString() ?? '',
-                    'cover' => $p->cover_url ?? '',
+                    'cover' => Media::url($p->cover_path, $p->cover_url) ?? '',
                 ])->all(),
 
             'faq' => FaqCategory::published()->ordered()->get()

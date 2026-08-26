@@ -256,9 +256,9 @@ export default function BolumDetay() {
                         {/* Bölüm Hakkında */}
                         {hasAbout ? (
                             <Block id="hakkinda" title={c.aboutTitle} desc={c.aboutDesc}>
-                                <div className="space-y-3 max-w-3xl">
+                                <div className="space-y-3 max-w-3xl min-w-0">
                                     {detail!.about.map((p, i) => (
-                                        <p key={i} className="text-[14.5px] lg:text-base leading-[1.85] text-foreground/85">
+                                        <p key={i} className="text-[14.5px] lg:text-base leading-[1.85] text-foreground/85 break-words">
                                             {p}
                                         </p>
                                     ))}
@@ -276,9 +276,9 @@ export default function BolumDetay() {
                                             className="group overflow-hidden rounded-xl bg-card border border-border/60 transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-14px_oklch(0.28_0.16_268/0.22)]"
                                         >
                                             <div className="aspect-[4/3] overflow-hidden bg-primary-soft/40">
-                                                {/* TODO: real asset — department technology imagery */}
+                                                {/* Admin-uploaded image; falls back to a placeholder by index. */}
                                                 <img
-                                                    src={techImage(i)}
+                                                    src={t.image || techImage(i)}
                                                     alt={t.name}
                                                     loading="lazy"
                                                     className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"

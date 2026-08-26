@@ -29,7 +29,7 @@ class SiteSerializer
             'department' => $d->department?->loc('name') ?? '',
             'departmentSlug' => $d->department?->slug ?? '',
             'hospitalSlug' => $d->hospital?->slug ?? '',
-            'photo' => $d->photo_url,
+            'photo' => Media::url($d->photo_path, $d->photo_url),
             'subspecialties' => $d->loc('subspecialties') ?? [],
             'email' => $d->email,
             'languages' => $d->loc('languages') ?? [],
@@ -44,7 +44,7 @@ class SiteSerializer
             'name' => $x->loc('name'),
             'summary' => $x->loc('summary') ?? '',
             'deptSlug' => $x->department?->slug ?? '',
-            'cover' => $x->cover_url ?? '',
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
     }
@@ -57,7 +57,7 @@ class SiteSerializer
             'summary' => $x->loc('summary') ?? '',
             'department' => $x->department?->loc('name') ?? '',
             'deptSlug' => $x->department?->slug ?? '',
-            'cover' => $x->cover_url ?? '',
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
     }
@@ -69,7 +69,7 @@ class SiteSerializer
             'name' => $x->loc('name'),
             'desc' => $x->loc('description') ?? '',
             'deptSlugs' => $x->dept_slugs ?? [],
-            'cover' => $x->cover_url ?? '',
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
     }
@@ -82,7 +82,7 @@ class SiteSerializer
             'area' => $h->loc('area') ?? '',
             'phone' => $h->phone ?? '',
             'address' => $h->loc('address') ?? '',
-            'cover' => $h->cover_url ?? '',
+            'cover' => Media::url($h->cover_path, $h->cover_url) ?? '',
             'comingSoon' => (bool) $h->coming_soon,
             'detail' => [
                 'about' => $h->loc('about') ?? [],
@@ -92,7 +92,7 @@ class SiteSerializer
                 'rooms' => $h->rooms->map(fn ($r) => [
                     'name' => $r->loc('name'),
                     'desc' => $r->loc('description') ?? '',
-                    'image' => $r->image_url ?? '',
+                    'image' => Media::url($r->image_path, $r->image_url) ?? '',
                 ])->all(),
                 'transport' => $h->loc('transport') ?? [],
                 'emergency' => $h->loc('emergency') ?? '',
@@ -105,15 +105,26 @@ class SiteSerializer
     public static function departmentDetail(Department $d): ?array
     {
         $about = $d->loc('about');
-        $technologies = $d->loc('technologies');
+        $techActive = $d->loc('technologies') ?? [];
+        $techDefault = $d->getTranslation('technologies', LocaleService::default(), false) ?? [];
 
-        if (empty($about) && empty($technologies)) {
+        if (empty($about) && empty($techActive)) {
             return null;
+        }
+
+        $technologies = [];
+        foreach ($techActive as $i => $item) {
+            $technologies[] = [
+                'name' => $item['name'] ?? '',
+                'desc' => $item['desc'] ?? '',
+                // Image is authored once in the default-locale tab; fall back to it.
+                'image' => Media::url($item['image'] ?? ($techDefault[$i]['image'] ?? null)),
+            ];
         }
 
         return [
             'about' => $about ?? [],
-            'technologies' => $technologies ?? [],
+            'technologies' => $technologies,
         ];
     }
 
@@ -126,7 +137,7 @@ class SiteSerializer
             'body' => $e->loc('body') ?? '',
             'date' => $e->starts_at?->toDateString() ?? '',
             'place' => $e->loc('place') ?? '',
-            'cover' => $e->cover_url ?? '',
+            'cover' => Media::url($e->cover_path, $e->cover_url) ?? '',
         ];
     }
 
@@ -137,7 +148,7 @@ class SiteSerializer
             'name' => $p->loc('name'),
             'summary' => $p->loc('summary') ?? '',
             'scope' => $p->loc('scope') ?? [],
-            'cover' => $p->cover_url ?? '',
+            'cover' => Media::url($p->cover_path, $p->cover_url) ?? '',
         ];
     }
 
@@ -149,7 +160,7 @@ class SiteSerializer
             'excerpt' => $p->loc('excerpt') ?? '',
             'source' => $p->source ?? '',
             'date' => $p->published_at?->toDateString() ?? '',
-            'cover' => $p->cover_url ?? '',
+            'cover' => Media::url($p->cover_path, $p->cover_url) ?? '',
         ];
     }
 }
