@@ -89,10 +89,20 @@ class HospitalForm
                         ->rows(2),
                     Repeater::make("gallery.$locale")
                         ->label('Galeri')
-                        ->schema([
-                            TextInput::make('image')->label('Görsel URL'),
+                        ->schema(array_values(array_filter([
+                            // Görsel yalnız varsayılan dilde yüklenir/girilir (tüm dillerde ortak).
+                            $isDefault
+                                ? FileUpload::make('image_path')
+                                    ->label('Görsel yükle')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('hospital-gallery')
+                                : null,
+                            $isDefault
+                                ? TextInput::make('image')->label('veya Görsel URL')
+                                : null,
                             TextInput::make('caption')->label('Açıklama'),
-                        ])
+                        ])))
                         ->collapsed()
                         ->collapsible(),
                 ]),

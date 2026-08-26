@@ -126,6 +126,19 @@ class SiteSerializer
 
     public static function hospital(Hospital $h): array
     {
+        // Gallery: caption from the active locale, image from the default locale (authored once):
+        // an uploaded image_path wins over a plain image URL.
+        $galActive = $h->loc('gallery') ?? [];
+        $galDefault = $h->getTranslation('gallery', LocaleService::default(), false) ?? [];
+        $gallery = [];
+        foreach ($galActive as $i => $g) {
+            $d = $galDefault[$i] ?? [];
+            $gallery[] = [
+                'image' => Media::url($d['image_path'] ?? null, $g['image'] ?? ($d['image'] ?? null)) ?? '',
+                'caption' => $g['caption'] ?? '',
+            ];
+        }
+
         return [
             'slug' => $h->slug,
             'name' => $h->loc('name'),
@@ -138,7 +151,7 @@ class SiteSerializer
                 'about' => $h->loc('about') ?? [],
                 'features' => $h->loc('features') ?? [],
                 'technologies' => $h->loc('technologies') ?? [],
-                'gallery' => $h->loc('gallery') ?? [],
+                'gallery' => $gallery,
                 'rooms' => $h->rooms->map(fn ($r) => [
                     'name' => $r->loc('name'),
                     'desc' => $r->loc('description') ?? '',
