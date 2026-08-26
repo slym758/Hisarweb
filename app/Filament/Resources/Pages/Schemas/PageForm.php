@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Pages\Schemas;
 
 use App\Filament\Support\LocaleTabs;
+use App\Filament\Support\OncologyCopyFields;
 use App\Models\Page;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -106,6 +107,10 @@ class PageForm
                             ]),
                         ]),
                 ]),
+
+            // Bespoke, editor-friendly text sections for the Integrated Oncology pages
+            // (visible only on their own page; write to the page's `copy` tree).
+            ...OncologyCopyFields::sections(),
         ]);
     }
 
