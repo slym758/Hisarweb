@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FormSubmissionController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Site\SiteContentController;
 use App\Support\LocaleService;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +100,10 @@ foreach (LocaleService::prefixed() as $locale) {
 Route::post('/form/{key}', [FormSubmissionController::class, 'store'])
     ->middleware('throttle:6,1')
     ->name('form.submit');
+
+// DB-backed site search for the header overlay. Locale-agnostic (locale is a query param);
+// returns JSON groups the frontend renders + localizes. Lives outside the localized groups.
+Route::get('/api/search', [SearchController::class, 'index'])->name('search');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');

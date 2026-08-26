@@ -1,4 +1,4 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 import {
     ArrowRight, ArrowUpRight, Award, CalendarDays, CheckCircle2, ChevronLeft, ChevronRight,
     ClipboardList, Dna, Globe, MapPin, Microscope, Navigation, Phone, Play,
@@ -23,6 +23,15 @@ const jciImg = ph('1554774853-b415df9eeb92', 400);
 
 /* Static (locale-independent) hero media — text lives in COPY.hero.slides. */
 type HeroMedia = { image: string; mobileImage: string; position: string; mobilePosition: string; href: string };
+
+/* DB-managed hero (shared as `homeHero` by SliderService). When present it drives the Hero;
+   otherwise the in-memory HERO_SLIDE_MEDIA + COPY.hero.slides below are used as a fallback. */
+type HeroSlideDb = {
+    image: string | null; mobileImage: string | null; position: string | null; mobilePosition: string | null; href: string | null;
+    eyebrow: string | null; title: string | null; mobileTitle: string | null; desc: string | null; mobileDesc: string | null;
+};
+type HomeHero = { autoplay: boolean; interval_ms: number; slides: HeroSlideDb[] };
+
 const HERO_SLIDE_MEDIA: HeroMedia[] = [
     { image: ph('1538108149393-fbbd81895907'), mobileImage: ph('1516841273335-e39b37888115', 800), position: '50% 78%', mobilePosition: '50% 35%', href: '/kurumsal' },
     { image: ph('1579154204601-01588f351e67'), mobileImage: ph('1516574200030-89bf6d9f7f66', 800), position: '70% 50%', mobilePosition: '72% 40%', href: '/tedavi-yontemleri' },
@@ -354,13 +363,33 @@ function Hero() {
     const lp = useLocalizedPath();
     const settings = useSettings();
     const [active, setActive] = useState(0);
-    const total = HERO_SLIDE_MEDIA.length;
-    const slides = HERO_SLIDE_MEDIA.map((m, i) => ({ ...m, ...c.hero.slides[i] }));
+
+    // DB-managed hero wins; fall back to the in-memory media + COPY when absent/empty.
+    const homeHero = (usePage().props as { homeHero?: HomeHero | null }).homeHero ?? null;
+    const dbSlides = homeHero?.slides ?? [];
+    const slides = dbSlides.length > 0
+        ? dbSlides.map((s) => ({
+            image: s.image ?? '',
+            mobileImage: s.mobileImage ?? '',
+            position: s.position ?? '50% 50%',
+            mobilePosition: s.mobilePosition ?? s.position ?? '50% 50%',
+            href: s.href ?? '#',
+            eyebrow: s.eyebrow ?? '',
+            title: s.title ?? '',
+            mobileTitle: s.mobileTitle ?? '',
+            desc: s.desc ?? '',
+            mobileDesc: s.mobileDesc ?? '',
+        }))
+        : HERO_SLIDE_MEDIA.map((m, i) => ({ ...m, ...c.hero.slides[i] }));
+    const total = slides.length;
+    const intervalMs = homeHero?.interval_ms ?? 3000;
+    const autoplay = homeHero?.autoplay ?? true;
 
     useEffect(() => {
-        const t = setInterval(() => setActive((p) => (p + 1) % total), 3000);
+        if (!autoplay || total <= 1) return;
+        const t = setInterval(() => setActive((p) => (p + 1) % total), intervalMs);
         return () => clearInterval(t);
-    }, [total]);
+    }, [total, intervalMs, autoplay]);
 
     return (
         <section className="relative overflow-hidden">
@@ -520,7 +549,7 @@ function Hero() {
                                             className="absolute inset-y-0 left-0 bg-white rounded-full shadow-[0_0_10px_rgba(255,255,255,0.85)]"
                                             style={{
                                                 width: idx === active ? '100%' : '0%',
-                                                transition: idx === active ? 'width 3000ms linear' : 'width 400ms ease',
+                                                transition: idx === active ? `width ${intervalMs}ms linear` : 'width 400ms ease',
                                             }}
                                         />
                                     </button>

@@ -2,9 +2,8 @@ import { Link, router } from "@inertiajs/react";
 import {
   Search, X, ChevronRight, ChevronDown, Stethoscope, UserRound, Activity, ArrowRight,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
-import { departments, doctors, treatments } from "@/lib/site-data";
 import { useLocalizedPath } from "@/lib/i18n";
 
 /* ─────────────────────────  SHARED NAV MODEL  ───────────────────────── */
@@ -103,10 +102,10 @@ export const EN_COPY: HeaderCopy = {
   searchPlaceholder: "Search doctors, departments, diseases or treatments…",
   quickAccess: "Quick access",
   quickItems: [
-    { label: "Find a Doctor" },
-    { label: "Choose a Department" },
-    { label: "Treatment Methods" },
-    { label: "Online Services" },
+    { label: "Find a Doctor", to: "/doktorlarimiz" },
+    { label: "Choose a Department", to: "/bolumlerimiz" },
+    { label: "Treatment Methods", to: "/tedavi-yontemleri" },
+    { label: "Online Services", to: "/online-hizmetler" },
   ],
   searchTip:
     'Tip: you can also search by symptom or condition, such as "headache", "palpitations", "gallbladder" or "cataract".',
@@ -122,62 +121,69 @@ export const EN_COPY: HeaderCopy = {
   phone: { label: "+90 212 444 0 888", href: "tel:+902124440888" },
 };
 
-/* ─────────────────────────  SEARCH DATA  ───────────────────────── */
-
-export const SYMPTOM_MAP: { keywords: string[]; deptSlug: string; label: string; labelEn: string }[] = [
-  { keywords: ["baş ağrısı", "bas agrisi", "migren", "baş dönmesi", "bas donmesi", "unutkanlık", "epilepsi", "inme", "felç", "uyuşma", "headache", "migraine", "dizziness", "stroke"], deptSlug: "noroloji", label: "Nöroloji", labelEn: "Neurology" },
-  { keywords: ["çarpıntı", "carpinti", "göğüs ağrısı", "gogus agrisi", "tansiyon", "hipertansiyon", "kalp", "ritim", "palpitations", "chest pain", "heart", "blood pressure"], deptSlug: "kardiyoloji", label: "Kardiyoloji", labelEn: "Cardiology" },
-  { keywords: ["bypass", "kalp damar", "kalp ameliyatı", "açık kalp", "cardiac surgery"], deptSlug: "kalp-damar-cerrahisi", label: "Kalp ve Damar Cerrahisi", labelEn: "Cardiovascular Surgery" },
-  { keywords: ["safra", "safra kesesi", "hemoroid", "tiroid", "fıtık", "obezite", "meme", "kolon", "gallbladder", "hernia", "obesity", "breast", "colon"], deptSlug: "genel-cerrahi", label: "Genel Cerrahi", labelEn: "General Surgery" },
-  { keywords: ["diz", "kalça", "omurga", "bel ağrısı", "menisküs", "kırık", "spor yaralanması", "protez", "knee", "hip", "spine", "back pain", "fracture"], deptSlug: "ortopedi", label: "Ortopedi", labelEn: "Orthopedics" },
-  { keywords: ["geniz eti", "bademcik", "kulak", "burun", "rinoplasti", "işitme", "horlama", "uyku apnesi", "ear", "nose", "throat", "snoring", "sleep apnea"], deptSlug: "kbb", label: "Kulak Burun Boğaz", labelEn: "ENT" },
-  { keywords: ["katarakt", "retina", "görme", "miyop", "göz", "lasik", "cataract", "eye", "vision"], deptSlug: "goz-hastaliklari", label: "Göz Hastalıkları", labelEn: "Ophthalmology" },
-  { keywords: ["çocuk", "cocuk ateşi", "yenidoğan", "bebek", "aşı", "pediatri", "child", "baby", "pediatrics", "vaccine"], deptSlug: "cocuk-sagligi", label: "Çocuk Sağlığı", labelEn: "Pediatrics" },
-  { keywords: ["diyabet", "şeker", "tiroid hastalığı", "kolesterol", "check-up", "check up", "diabetes", "cholesterol"], deptSlug: "dahiliye", label: "İç Hastalıkları", labelEn: "Internal Medicine" },
-  { keywords: ["kanser", "tümör", "kemoterapi", "radyoterapi", "onkoloji", "cancer", "tumor", "chemotherapy", "oncology"], deptSlug: "onkoloji", label: "Onkoloji", labelEn: "Oncology" },
-  { keywords: ["gebelik", "doğum", "kadın", "jinekoloji", "infertilite", "tüp bebek", "smear", "pregnancy", "birth", "gynecology", "ivf"], deptSlug: "kadin-dogum", label: "Kadın Hastalıkları ve Doğum", labelEn: "Obstetrics & Gynecology" },
-];
-
-export function normalize(s: string) {
-  return s
-    .toLocaleLowerCase("tr")
-    .replace(/ı/g, "i").replace(/ş/g, "s").replace(/ç/g, "c")
-    .replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ö/g, "o")
-    .trim();
-}
-
 /* ─────────────────────────  SEARCH OVERLAY  ───────────────────────── */
 
 const QUICK_ICONS = [UserRound, Stethoscope, Activity, ArrowRight];
+
+/** Shape of the DB-backed `/api/search` response (see App\Http\Controllers\SearchController). */
+type SearchItem = { label: string; to: string; meta?: string | null };
+type SearchGroup = { type: string; label: string; items: SearchItem[] };
+type SearchResponse = { query: string; empty: boolean; emptyMessage: string; groups: SearchGroup[] };
 
 export function SearchOverlay({
   copy, lang, onClose,
 }: { copy: HeaderCopy; lang: "tr" | "en"; onClose: () => void }) {
   const [query, setQuery] = useState("");
+  const [results, setResults] = useState<SearchResponse | null>(null);
+  const [loading, setLoading] = useState(false);
   const lp = useLocalizedPath();
 
-  const results = useMemo(() => {
-    const q = normalize(query);
-    if (!q || q.length < 2) return null;
-    const deptMatches = departments.filter((d) => normalize(d.name).includes(q) || normalize(d.blurb).includes(q)).slice(0, 5);
-    const doctorMatches = doctors.filter((doc) => normalize(doc.name).includes(q) || normalize(doc.department).includes(q)).slice(0, 5);
-    const treatmentMatches = treatments.filter((t) => normalize(t.name).includes(q) || normalize(t.department).includes(q)).slice(0, 5);
-    const symptomMatches = SYMPTOM_MAP.filter((s) => s.keywords.some((k) => normalize(k).includes(q) || q.includes(normalize(k)))).slice(0, 5);
-    return { deptMatches, doctorMatches, treatmentMatches, symptomMatches };
-  }, [query]);
-
-  const closeSearch = () => { setQuery(""); onClose(); };
-
-  /** TR navigates to the real route; EN has no translated pages yet, so the
-   *  same interaction lands on the on-page second-opinion section. */
-  const go = (to?: string) => {
-    closeSearch();
-    if (lang === "en" || !to) {
-      if (typeof window !== "undefined") window.location.hash = "second-opinion";
+  // Debounced (250ms) DB-backed search. The endpoint is locale-agnostic; the active
+  // locale rides as a query param and the returned `to` paths are localized here via lp().
+  useEffect(() => {
+    const q = query.trim();
+    if (q.length < 2) {
+      setResults(null);
+      setLoading(false);
       return;
     }
+
+    const controller = new AbortController();
+    setLoading(true);
+    const timer = setTimeout(() => {
+      fetch(`/api/search?q=${encodeURIComponent(q)}&locale=${encodeURIComponent(lang)}`, {
+        signal: controller.signal,
+        headers: { Accept: "application/json" },
+      })
+        .then((res) => (res.ok ? (res.json() as Promise<SearchResponse>) : Promise.reject(new Error(String(res.status)))))
+        .then((data) => setResults(data))
+        .catch((err) => {
+          if (err?.name === "AbortError") return;
+          // Graceful failure: show the no-results state instead of crashing.
+          setResults({ query: q, empty: true, emptyMessage: copy.noResults, groups: [] });
+        })
+        .finally(() => {
+          if (!controller.signal.aborted) setLoading(false);
+        });
+    }, 250);
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [query, lang, copy.noResults]);
+
+  const closeSearch = () => { setQuery(""); setResults(null); onClose(); };
+
+  /** Locale-agnostic `to` from the API, localized here (EN → /en/…) so every locale lands
+   *  on its real page. */
+  const go = (to?: string) => {
+    closeSearch();
+    if (!to) return;
     router.visit(lp(to));
   };
+
+  const showQuick = query.trim().length < 2;
 
   return (
     <div className="fixed inset-0 z-50 bg-primary/50 backdrop-blur-sm flex items-start justify-center pt-20 px-4" role="dialog" aria-modal="true" aria-label={copy.searchDialog}>
@@ -202,7 +208,7 @@ export function SearchOverlay({
         </div>
 
         <div className="max-h-[60vh] overflow-y-auto p-3">
-          {!results && (
+          {showQuick && (
             <div className="p-2">
               <p className="px-2 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">{copy.quickAccess}</p>
               <div className="mt-2 grid grid-cols-2 gap-2">
@@ -224,96 +230,39 @@ export function SearchOverlay({
             </div>
           )}
 
-          {results && (
+          {!showQuick && (
             <div className="space-y-4 p-1">
-              {results.symptomMatches.length > 0 && (
-                <ResultGroup title={copy.groupSymptom}>
-                  {results.symptomMatches.map((s) => (
+              {loading && !results && (
+                <p className="p-6 text-center text-sm text-muted-foreground" aria-live="polite">…</p>
+              )}
+
+              {results?.groups.map((group) => (
+                <ResultGroup key={group.type} title={group.label}>
+                  {group.items.map((item, i) => (
                     <button
-                      key={s.deptSlug}
-                      onClick={() => go("/bolumlerimiz")}
+                      key={`${item.to}-${i}`}
+                      onClick={() => go(item.to)}
                       className="w-full flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 hover:bg-primary-soft/60 transition text-left"
                     >
-                      <span className="text-sm text-foreground">
-                        <span className="font-semibold text-primary">{lang === "en" ? s.labelEn : s.label}</span>
-                        <span className="text-muted-foreground">{copy.groupSymptomSuffix}</span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-primary truncate">{item.label}</span>
+                        {item.meta && <span className="block text-xs text-muted-foreground line-clamp-1">{item.meta}</span>}
                       </span>
                       <ArrowRight className="h-4 w-4 text-brand-orange shrink-0" aria-hidden />
                     </button>
                   ))}
                 </ResultGroup>
+              ))}
+
+              {results && results.groups.length === 0 && !loading && (
+                <div className="p-6 text-center text-sm text-muted-foreground">
+                  {results.emptyMessage}{" "}
+                  <button onClick={() => go("/iletisim")} className="text-brand-orange font-semibold hover:underline">
+                    {copy.noResultsCta}
+                  </button>
+                  {copy.noResultsAfter}
+                </div>
               )}
-              {results.deptMatches.length > 0 && (
-                <ResultGroup title={copy.groupDepartments}>
-                  {results.deptMatches.map((d) => (
-                    <button
-                      key={d.slug}
-                      onClick={() => go("/bolumlerimiz")}
-                      className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-primary-soft/60 transition text-left"
-                    >
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-soft text-primary">
-                        <d.icon className="h-4 w-4" aria-hidden />
-                      </span>
-                      <span className="flex-1">
-                        <span className="block text-sm font-semibold text-primary">{d.name}</span>
-                        <span className="block text-xs text-muted-foreground line-clamp-1">{d.blurb}</span>
-                      </span>
-                    </button>
-                  ))}
-                </ResultGroup>
-              )}
-              {results.doctorMatches.length > 0 && (
-                <ResultGroup title={copy.groupDoctors}>
-                  {results.doctorMatches.map((doc) => (
-                    <button
-                      key={doc.id}
-                      onClick={() => go("/doktorlarimiz")}
-                      className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-primary-soft/60 transition text-left"
-                    >
-                      {doc.photo ? (
-                        <img src={doc.photo} alt="" className="h-9 w-9 rounded-full object-cover" />
-                      ) : (
-                        <span className="h-9 w-9 rounded-full bg-primary-soft text-primary text-xs font-bold flex items-center justify-center">
-                          {doc.name.split(" ").filter((p) => !/\.$/.test(p)).slice(-2).map((p) => p[0]).join("")}
-                        </span>
-                      )}
-                      <span className="flex-1">
-                        <span className="block text-sm font-semibold text-primary">{doc.name}</span>
-                        <span className="block text-xs text-muted-foreground">{doc.department}</span>
-                      </span>
-                    </button>
-                  ))}
-                </ResultGroup>
-              )}
-              {results.treatmentMatches.length > 0 && (
-                <ResultGroup title={copy.groupTreatments}>
-                  {results.treatmentMatches.map((t) => (
-                    <button
-                      key={t.slug}
-                      onClick={() => go("/tedavi-yontemleri")}
-                      className="w-full flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 hover:bg-primary-soft/60 transition text-left"
-                    >
-                      <span className="text-sm">
-                        <span className="block font-semibold text-primary">{t.name}</span>
-                        <span className="block text-xs text-muted-foreground">{t.department}</span>
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-brand-orange shrink-0" aria-hidden />
-                    </button>
-                  ))}
-                </ResultGroup>
-              )}
-              {results.deptMatches.length === 0 &&
-                results.doctorMatches.length === 0 &&
-                results.treatmentMatches.length === 0 &&
-                results.symptomMatches.length === 0 && (
-                  <div className="p-6 text-center text-sm text-muted-foreground">
-                    {copy.noResults}{" "}
-                    <button onClick={() => go("/iletisim")} className="text-brand-orange font-semibold hover:underline">
-                      {copy.noResultsCta}
-                    </button>
-                    {copy.noResultsAfter}
-                  </div>
-                )}
             </div>
           )}
         </div>

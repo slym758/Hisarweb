@@ -6,6 +6,7 @@ use App\Support\CatalogService;
 use App\Support\LocaleService;
 use App\Support\MenuService;
 use App\Support\SettingsService;
+use App\Support\SliderService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
@@ -68,6 +69,9 @@ class HandleInertiaRequests extends Middleware
                 'rail' => MenuService::tree('rail', app()->getLocale()),
                 'bottom_nav' => MenuService::tree('bottom_nav', app()->getLocale()),
             ],
+            // Admin-managed home hero slider, resolved to the active locale. Null when no
+            // active slides exist, so the frontend falls back to its in-memory hero. Lazy.
+            'homeHero' => fn () => SliderService::forPlacement('home_hero', app()->getLocale()),
         ]);
     }
 

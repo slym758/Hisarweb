@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SiteSettingsSeeder::class);
         $this->call(MenuSeeder::class);
+        $this->call(SliderSeeder::class);
         $this->call(FormDefinitionSeeder::class);
     }
 }
