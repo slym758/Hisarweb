@@ -8,6 +8,7 @@ import { DetailLeadConversion } from '@/components/site/DetailLeadConversion';
 import { PageSectionNavigation, type PageSection } from '@/components/site/PageSectionNavigation';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import {
     getBlogPostsForDept, getDepartmentDetail, getDiseasesForDept, getDoctorsForDept, getHospitalsForDept,
     getTreatmentsForDept, getVideosForDept, useDepartments,
@@ -125,6 +126,7 @@ export default function BolumDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { slug } = usePage().props as unknown as { slug: string };
 
@@ -225,7 +227,7 @@ export default function BolumDetay() {
                         </div>
 
                         <div className="mt-5 flex flex-wrap gap-2">
-                            <AppointmentCTA href={lp('/randevu-al')}>
+                            <AppointmentCTA href={settings.appointment_url}>
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <a

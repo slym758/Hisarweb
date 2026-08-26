@@ -22,3 +22,34 @@ export function useContent(pageSlug: string) {
         return v === undefined || v === null || v === '' ? fallback : (v as T);
     };
 }
+
+/** Deep-merge `source` over `base` (plain objects recurse; arrays/scalars from source win). */
+function deepMerge<T>(base: T, source: unknown): T {
+    if (source === undefined || source === null) return base;
+    if (
+        typeof base !== 'object' || base === null || Array.isArray(base) ||
+        typeof source !== 'object' || source === null || Array.isArray(source)
+    ) {
+        // Non-mergeable: source overrides, but skip empty strings so blanks fall back.
+        return (source === '' ? base : (source as T));
+    }
+    const out: Record<string, unknown> = { ...(base as Record<string, unknown>) };
+    for (const [k, v] of Object.entries(source as Record<string, unknown>)) {
+        out[k] = deepMerge((base as Record<string, unknown>)[k], v);
+    }
+    return out as T;
+}
+
+/**
+ * Whole-page copy override, fallback-safe. Deep-merges the page's DB copy (the `pageCopy`
+ * prop passed by the route, locale-resolved) over the page's inline `COPY`, so ANY text
+ * becomes editable while missing keys keep the code value. Wire a page with a single line:
+ *
+ *   const c = usePageCopy('kurumsal', COPY[useLocale()]);
+ *
+ * With no DB copy, returns the inline COPY unchanged (page renders identically).
+ */
+export function usePageCopy<T>(_pageSlug: string, inlineCopy: T): T {
+    const dbCopy = (usePage().props as { pageCopy?: unknown }).pageCopy;
+    return deepMerge(inlineCopy, dbCopy);
+}

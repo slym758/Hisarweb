@@ -284,7 +284,6 @@ class MenuSeeder extends Seeder
                 'column_group' => true,
                 'link_type' => 'none',
                 'children' => [
-                    ['label' => $this->l('Randevu Al', 'Book Appointment'), 'route' => '/randevu-al'],
                     ['label' => $this->l('Doktor Ara', 'Find a Doctor'), 'route' => '/doktorlarimiz'],
                     ['label' => $this->l('E-Sonuç', 'E-Results'), 'link_type' => 'external', 'url' => 'https://online.hisarhospital.com/#/'],
                     ['label' => $this->l('Hisar Online', 'Hisar Online'), 'link_type' => 'external', 'url' => 'https://online.hisarhospital.com/#/'],
@@ -298,7 +297,6 @@ class MenuSeeder extends Seeder
     private function rail(): array
     {
         return [
-            ['label' => $this->l('Randevu Al', 'Get an Appointment'), 'route' => '/randevu-al', 'icon' => 'CalendarDays'],
             ['label' => $this->l('E-Sonuç', 'E-Results'), 'route' => '/online-hizmetler', 'icon' => 'ClipboardList'],
             ['label' => $this->l('İletişim', 'Contact'), 'route' => '/iletisim', 'icon' => 'Phone'],
         ];

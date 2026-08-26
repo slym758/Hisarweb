@@ -69,7 +69,6 @@ $sitePages = function () {
 
     // Service / forms (prototype)
     Route::inertia('/online-hizmetler', 'site/online-hizmetler');
-    Route::inertia('/randevu-al', 'site/randevu-al');
     Route::inertia('/doktora-sorun', 'site/doktora-sorun');
     Route::inertia('/sizi-arayalim', 'site/sizi-arayalim');
     Route::inertia('/sizi-dinliyoruz', 'site/sizi-dinliyoruz');

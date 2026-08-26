@@ -7,6 +7,7 @@ import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { BizeUlasin } from '@/components/site/BizeUlasin';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import {
     getDepartmentsForHospital, getDoctorsForHospital, getHospitalBySlug, getHospitalDetail, getTreatments,
 } from '@/lib/site-data';
@@ -110,6 +111,7 @@ export default function HastaneDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { slug } = usePage().props as unknown as { slug: string };
 
@@ -208,7 +210,7 @@ export default function HastaneDetay() {
 
                         {/* Primary CTA row (mobile) */}
                         <div className="mt-4 grid grid-cols-2 gap-2 lg:hidden">
-                            <AppointmentCTA href={lp('/randevu-al')} className="h-12">
+                            <AppointmentCTA href={settings.appointment_url} className="h-12">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <a
@@ -246,15 +248,17 @@ export default function HastaneDetay() {
                                 <p className="mt-1 text-[13px] font-bold text-primary">{c.qMaps}</p>
                             </a>
                             {/* Desktop-only appointment tile */}
-                            <Link
-                                href={lp('/randevu-al')}
+                            <a
+                                href={settings.appointment_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="hidden lg:block rounded-xl bg-brand-orange text-brand-orange-foreground p-3 text-left hover:opacity-95 shadow-orange"
                             >
                                 <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold">
                                     <CalendarDays className="h-4 w-4" /> {c.qAppointment}
                                 </span>
                                 <p className="mt-1 text-[13px] font-bold">{c.qBookNow}</p>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -460,7 +464,7 @@ export default function HastaneDetay() {
                             </div>
                             <h3 className="mt-2 text-lg font-black text-primary leading-tight">{c.sideTitle}</h3>
                             <p className="mt-1.5 text-[13px] text-muted-foreground">{c.sideDesc}</p>
-                            <AppointmentCTA href={lp('/randevu-al')} className="mt-4 h-11">
+                            <AppointmentCTA href={settings.appointment_url} className="mt-4 h-11">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <a

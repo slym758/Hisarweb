@@ -10,6 +10,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 
 /* Locale-independent category ids + icons (text lives in COPY.cats). */
 const CAT_IDS = [
@@ -158,6 +159,7 @@ export default function BilgiRehberi() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const CATS = useMemo(
         () => c.cats.map((cat, i) => ({ id: CAT_IDS[i], icon: CAT_ICONS[i], title: cat.title, items: cat.items })),
         [c],
@@ -329,7 +331,7 @@ export default function BilgiRehberi() {
                                         <a href="tel:4445888" className="inline-flex items-center gap-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur px-5 py-2.5 text-sm font-bold text-primary-foreground transition">
                                             <Phone className="h-4 w-4" /> 444 5 888
                                         </a>
-                                        <AppointmentCTA href={lp('/randevu-al')}>
+                                        <AppointmentCTA href={settings.appointment_url}>
                                             <CalendarDays className="h-4 w-4" /> {c.appointment} <ArrowRight className="h-4 w-4" />
                                         </AppointmentCTA>
 

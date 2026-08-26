@@ -11,6 +11,7 @@ import { OncologyJourney } from '@/components/site/OncologyJourney';
 import { OncologyUnitsMatrix } from '@/components/site/OncologyUnitsMatrix';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 
 /* ──────────────────── TEMPORARY IMAGERY (Unsplash placeholders) ──────────────────── */
 /* TODO: real asset — swap every Unsplash URL below for optimized production assets. */
@@ -204,6 +205,7 @@ export default function ButunlesikOnkoloji() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
 
     const units = c.units;
     const highlights = c.highlights.map((h, i) => ({ ...h, icon: HIGHLIGHT_ICONS[i] }));
@@ -238,7 +240,7 @@ export default function ButunlesikOnkoloji() {
                             {c.heroDesc}
                         </p>
                         <div className="mt-6 flex flex-wrap gap-3">
-                            <AppointmentCTA href={lp('/randevu-al')}>{c.randevuAl}</AppointmentCTA>
+                            <AppointmentCTA href={settings.appointment_url}>{c.randevuAl}</AppointmentCTA>
                             <a href="tel:4445888" className="inline-flex items-center rounded-full bg-white/10 px-5 py-2.5 text-sm font-bold border border-white/20">444 5 888</a>
                         </div>
                     </div>
@@ -347,7 +349,7 @@ export default function ButunlesikOnkoloji() {
                             </ul>
 
                             <div className="mt-6">
-                                <AppointmentCTA href={lp('/randevu-al')}>
+                                <AppointmentCTA href={settings.appointment_url}>
                                     {c.randevuAl} <ArrowRight className="h-4 w-4" aria-hidden />
                                 </AppointmentCTA>
                             </div>

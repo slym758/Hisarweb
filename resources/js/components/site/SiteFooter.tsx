@@ -4,7 +4,7 @@ import {
   ArrowRight, Navigation, Smartphone,
 } from "lucide-react";
 import { useLocalizedPath, useTranslations } from "@/lib/i18n";
-import { useSettings } from "@/lib/settings";
+import { isExternal, useSettings } from "@/lib/settings";
 
 /** A resolved footer link column shared from the backend (`menus.footer`). */
 type FooterMenuLink = { label: string; to?: string; href?: string; badge?: string };
@@ -97,7 +97,7 @@ export function SiteFooter() {
               </FooterCol>
 
               <FooterCol title={t('footer.col_online')}>
-                <FooterLink to="/randevu-al">{t('footer.links.appointment')}</FooterLink>
+                <FooterLink to={settings.appointment_url} external={isExternal(settings.appointment_url)}>{t('footer.links.appointment')}</FooterLink>
                 <FooterLink to="/doktorlarimiz">{t('footer.links.find_doctor')}</FooterLink>
                 <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.eresults')}</FooterLink>
                 <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.hisar_online')}</FooterLink>

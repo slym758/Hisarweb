@@ -87,7 +87,6 @@ export function MobileAppPromo({ lang }: { lang?: "tr" | "en" }) {
   // Hardcoded suppression — used only by the fallback (no server popups shared).
   const suppressedRoute =
     pathname === "/mobil-uygulama" ||
-    pathname === "/randevu-al" ||
     pathname === "/butunlesik-onkoloji" ||
     pathname.startsWith("/butunlesik-onkoloji/");
 

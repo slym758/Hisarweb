@@ -37,7 +37,6 @@ class FormDefinitionSeeder extends Seeder
 
         $titles = [
             'iletisim' => ['tr' => 'İletişim', 'en' => 'Contact'],
-            'randevu-al' => ['tr' => 'Randevu Talebi', 'en' => 'Appointment Request'],
             'doktora-sorun' => ['tr' => 'Doktora Sorun', 'en' => 'Ask the Doctor'],
             'sizi-arayalim' => ['tr' => 'Sizi Arayalım', 'en' => 'Call Me Back'],
             'sizi-dinliyoruz' => ['tr' => 'Sizi Dinliyoruz', 'en' => "We're Listening"],

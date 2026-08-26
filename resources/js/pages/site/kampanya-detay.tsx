@@ -4,6 +4,7 @@ import { CalendarDays, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 import { appointmentCtaClass } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
 const COPY = {
@@ -53,6 +54,7 @@ export default function KampanyaDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
 
     /* Missing record → bilingual not-found state. */
     if (!record) {
@@ -75,17 +77,23 @@ export default function KampanyaDetay() {
     const title = record.seo_title || `${record.title} — Hisar Hospital`;
     const desc = record.seo_description || record.subtitle || c.headFallbackDesc;
     const ctaLabel = record.cta_label || c.defaultCta;
-    const ctaLink = record.cta_link || '/randevu-al';
+    const ctaLink = record.cta_link || settings.appointment_url;
     const ctaInternal = ctaLink.startsWith('/');
 
-    /* Internal links go through the localized Inertia router; external links stay plain anchors. */
+    /* Internal links go through the localized Inertia router; external links (e.g. the
+     * settings-driven external booking site) open as real new-tab anchors. */
     const PrimaryCta = ({ className }: { className?: string }) =>
         ctaInternal ? (
             <Link href={lp(ctaLink)} className={`${appointmentCtaClass} ${className ?? ''}`}>
                 <CalendarDays className="h-4 w-4" /> {ctaLabel}
             </Link>
         ) : (
-            <a href={ctaLink} className={`${appointmentCtaClass} ${className ?? ''}`}>
+            <a
+                href={ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${appointmentCtaClass} ${className ?? ''}`}
+            >
                 <CalendarDays className="h-4 w-4" /> {ctaLabel}
             </a>
         );

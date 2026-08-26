@@ -1,6 +1,7 @@
 import type { ComponentProps, JSX, ReactNode } from "react";
 import { Link } from "@inertiajs/react";
 import { cn } from "@/lib/utils";
+import { isExternal } from "@/lib/settings";
 
 /**
  * Single source of truth for the orange appointment CTA (with the subtle
@@ -14,15 +15,32 @@ type BaseProps = {
   children: ReactNode;
 };
 
-/** Router-linked appointment CTA. */
+/**
+ * Appointment CTA. External http(s) URLs (e.g. the settings-driven external booking
+ * site) render as a real new-tab anchor; internal paths keep the Inertia router link.
+ */
 export function AppointmentCTA({
   className,
   children,
+  href,
   ...rest
 }: BaseProps & Record<string, unknown>) {
+  if (typeof href === "string" && isExternal(href)) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...(rest as ComponentProps<"a">)}
+        className={cn(appointmentCtaClass, className)}
+      >
+        {children}
+      </a>
+    );
+  }
   const LinkAny = Link as unknown as (props: Record<string, unknown>) => JSX.Element;
   return (
-    <LinkAny {...rest} className={cn(appointmentCtaClass, className)}>
+    <LinkAny href={href} {...rest} className={cn(appointmentCtaClass, className)}>
       {children}
     </LinkAny>
   );

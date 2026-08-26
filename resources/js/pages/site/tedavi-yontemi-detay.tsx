@@ -5,6 +5,7 @@ import {
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { getDoctorsForDept, getTreatmentBySlug, useDepartments } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -66,6 +67,7 @@ export default function TedaviYontemiDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { slug } = usePage().props as unknown as { slug: string };
 
@@ -124,7 +126,7 @@ export default function TedaviYontemiDetay() {
                         <h1 className="mt-2 text-2xl lg:text-4xl font-black text-primary tracking-tight">{treatment.name}</h1>
                         <p className="mt-3 text-sm lg:text-base text-muted-foreground leading-relaxed">{treatment.summary}</p>
                         <div className="mt-5 flex flex-wrap gap-2">
-                            <AppointmentCTA href={lp('/randevu-al')}>
+                            <AppointmentCTA href={settings.appointment_url}>
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <a
@@ -255,7 +257,7 @@ export default function TedaviYontemiDetay() {
                             <h3 className="mt-1 text-lg font-black text-primary leading-tight">
                                 {treatment.name}{c.sideTitleTail}
                             </h3>
-                            <AppointmentCTA href={lp('/randevu-al')} className="mt-3 h-11">
+                            <AppointmentCTA href={settings.appointment_url} className="mt-3 h-11">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <a

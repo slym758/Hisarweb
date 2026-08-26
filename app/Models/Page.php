@@ -22,7 +22,7 @@ class Page extends Model
 
     protected $guarded = [];
 
-    public array $translatable = ['title', 'seo_title', 'seo_description'];
+    public array $translatable = ['title', 'seo_title', 'seo_description', 'copy'];
 
     protected function casts(): array
     {

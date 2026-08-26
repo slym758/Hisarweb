@@ -5,6 +5,7 @@ import {
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import {
     getDiseaseBySlug, getHospitalsForDept, getTechnologyBySlug, getTreatmentBySlug,
     useDepartments, useDoctors,
@@ -62,6 +63,7 @@ export default function TeknolojiDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { slug } = usePage().props as unknown as { slug: string };
 
@@ -143,7 +145,7 @@ export default function TeknolojiDetay() {
                             >
                                 <Phone className="h-4 w-4" /> {c.getInfo}
                             </a>
-                            <AppointmentCTA href={lp('/randevu-al')}>
+                            <AppointmentCTA href={settings.appointment_url}>
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                         </div>
@@ -257,7 +259,7 @@ export default function TeknolojiDetay() {
                             <div className="mt-3">
                                 <CompactPhoneCTA label={c.phoneLabel} />
                             </div>
-                            <AppointmentCTA href={lp('/randevu-al')} className="mt-2 h-11 w-full">
+                            <AppointmentCTA href={settings.appointment_url} className="mt-2 h-11 w-full">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                         </div>

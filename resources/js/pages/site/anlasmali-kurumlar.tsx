@@ -16,6 +16,7 @@ import {
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath, type Locale } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { normalizeTr } from '@/lib/site-data';
 
 /* ──────────────── Data (bilingual) ──────────────── */
@@ -225,6 +226,7 @@ export default function ContractedInstitutions() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const [q, setQ] = useState('');
     const [activeCat, setActiveCat] = useState<string>('all');
     const [openMap, setOpenMap] = useState<Record<string, boolean>>(() =>
@@ -500,7 +502,7 @@ export default function ContractedInstitutions() {
                             </p>
 
                             <div className="mt-4 space-y-2">
-                                <AppointmentCTA href={lp('/randevu-al')}>
+                                <AppointmentCTA href={settings.appointment_url}>
                                     <CalendarHeart className="h-4 w-4" /> {c.sidebar.appointment}
                                 </AppointmentCTA>
                                 <a

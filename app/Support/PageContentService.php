@@ -60,6 +60,41 @@ class PageContentService
     }
 
     /**
+     * The whole-page copy tree for one page, resolved to the locale (or [] when none).
+     * Passed per-page as the `pageCopy` Inertia prop; the frontend deep-merges it over the
+     * page's inline COPY (usePageCopy). Kept per-page (not globally shared) to stay light.
+     *
+     * @return array<string, mixed>
+     */
+    public static function copyFor(string $slug, string $locale): array
+    {
+        if (! Schema::hasTable('pages')) {
+            return [];
+        }
+
+        $all = Cache::rememberForever("page_copy.{$locale}", fn () => self::buildCopy($locale));
+
+        return $all[$slug] ?? [];
+    }
+
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    private static function buildCopy(string $locale): array
+    {
+        $bag = [];
+
+        foreach (Page::query()->where('is_active', true)->get() as $page) {
+            $copy = $page->loc('copy', $locale);
+            if (! empty($copy) && is_array($copy)) {
+                $bag[$page->slug] = $copy;
+            }
+        }
+
+        return $bag;
+    }
+
+    /**
      * @return array<string, array<string, array<string, mixed>>>
      */
     private static function build(string $locale): array
@@ -99,6 +134,7 @@ class PageContentService
         foreach ($codes as $code) {
             Cache::forget("page_content.{$code}");
             Cache::forget("page_meta.{$code}");
+            Cache::forget("page_copy.{$code}");
         }
     }
 }

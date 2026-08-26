@@ -5,7 +5,7 @@ import {
 import type { ComponentType } from "react";
 import { openDetailLead, useDetailLead } from "@/lib/detail-lead-store";
 import { useCurrentPath, useLocale, useLocalizedPath } from "@/lib/i18n";
-import { useSettings, waHref } from "@/lib/settings";
+import { isExternal, useSettings, waHref } from "@/lib/settings";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -58,8 +58,8 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const leftTo = leftItem?.to ?? "/online-hizmetler";
   const rightTo = rightItem?.to ?? "/iletisim";
 
-  // Wizard ve doktor profil sayfaları kendi alt CTA yapılarını kullansın
-  if (path.startsWith("/randevu-al") || path.startsWith("/doktor/")) return null;
+  // Doktor profil sayfası kendi sabit alt CTA çubuğunu kullanır
+  if (path.startsWith("/doktor/")) return null;
 
   return (
     <nav aria-label="Mobile quick navigation" className="xl:hidden fixed bottom-0 inset-x-0 z-30 h-[var(--bottom-nav-h)] bg-background border-t border-border/70">
@@ -83,15 +83,29 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
 
         {/* Center: primary action (TR: appointment — EN: free second opinion) */}
         <div className="relative flex flex-col items-center justify-center">
-          <Link
-            href={isEn ? "/en#second-opinion" : lp(settings.appointment_url)}
-            aria-label={t.centerAria}
-            className="absolute -top-7 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-card border border-border shadow-elevated"
-          >
-            <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-orange text-brand-orange-foreground">
-              {isEn ? <ShieldCheck className="h-5 w-5" /> : <CalendarDays className="h-5 w-5" />}
-            </span>
-          </Link>
+          {!isEn && isExternal(settings.appointment_url) ? (
+            <a
+              href={settings.appointment_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t.centerAria}
+              className="absolute -top-7 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-card border border-border shadow-elevated"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-orange text-brand-orange-foreground">
+                <CalendarDays className="h-5 w-5" />
+              </span>
+            </a>
+          ) : (
+            <Link
+              href={isEn ? "/en#second-opinion" : lp(settings.appointment_url)}
+              aria-label={t.centerAria}
+              className="absolute -top-7 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-card border border-border shadow-elevated"
+            >
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-orange text-brand-orange-foreground">
+                {isEn ? <ShieldCheck className="h-5 w-5" /> : <CalendarDays className="h-5 w-5" />}
+              </span>
+            </Link>
+          )}
           <span
             lang={currentLang}
             className={

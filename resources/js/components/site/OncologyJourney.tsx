@@ -8,6 +8,7 @@ import type { LucideIcon } from 'lucide-react';
 
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 
 type StageKey = 'TANI' | 'TEDAVI' | 'TAKIP';
 
@@ -149,6 +150,7 @@ const COPY = {
 export function OncologyJourney() {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const [active, setActive] = useState<number>(0);
     const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -342,7 +344,7 @@ export function OncologyJourney() {
                     </div>
 
                     <div className="mt-5 flex flex-wrap items-center gap-2">
-                        <AppointmentCTA href={lp('/randevu-al')}>
+                        <AppointmentCTA href={settings.appointment_url}>
                             {c.randevuAl} <ArrowRight className="h-3.5 w-3.5" />
                         </AppointmentCTA>
                         <Link

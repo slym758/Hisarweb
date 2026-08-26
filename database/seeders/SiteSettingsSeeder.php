@@ -22,7 +22,7 @@ class SiteSettingsSeeder extends Seeder
                 'tr' => 'Merhaba, bilgi almak istiyorum.',
                 'en' => "Hello, I'd like some information.",
             ],
-            'appointment_url' => '/randevu-al',
+            'appointment_url' => 'https://online.hisarhospital.com',
             'appointment_label' => [
                 'tr' => 'Randevu Al',
                 'en' => 'Get an Appointment',

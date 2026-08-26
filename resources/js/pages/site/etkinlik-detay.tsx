@@ -4,6 +4,7 @@ import { CalendarDays, MapPin, Phone } from 'lucide-react';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { getEventBySlug, useEvents } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -56,6 +57,7 @@ export default function EventDetailPage() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const { slug } = usePage().props as unknown as { slug: string };
     const data = getEventBySlug(slug, locale);
     const events = useEvents();
@@ -141,12 +143,14 @@ export default function EventDetailPage() {
                             >
                                 <Phone className="h-4 w-4" /> {PHONE_DISPLAY}
                             </a>
-                            <Link
-                                href={lp('/randevu-al')}
+                            <a
+                                href={settings.appointment_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="border-border text-primary hover:border-primary/40 mt-2 flex h-11 items-center justify-center gap-1.5 rounded-full border text-sm font-semibold"
                             >
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
-                            </Link>
+                            </a>
                         </div>
 
                         <div className="border-border bg-card rounded-2xl border p-5">

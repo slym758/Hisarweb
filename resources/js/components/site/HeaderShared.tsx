@@ -5,6 +5,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "./Logo";
 import { useLocalizedPath } from "@/lib/i18n";
+import { isExternal } from "@/lib/settings";
 
 /* ─────────────────────────  SHARED NAV MODEL  ───────────────────────── */
 
@@ -85,7 +86,9 @@ export const TR_COPY: HeaderCopy = {
   noResults: "Sonuç bulunamadı.",
   noResultsCta: "İletişime geçin",
   noResultsAfter: ", doğru bölüme yönlendirelim.",
-  cta: { label: "Randevu Al", to: "/randevu-al" },
+  // Runtime value comes from admin settings (SiteHeader overrides this for TR); the
+  // default points at the external booking site rather than a local page.
+  cta: { label: "Randevu Al", href: "https://online.hisarhospital.com" },
   phone: { label: "444 5 888", href: "tel:4445888" },
   langLabel: "Dil:",
 };
@@ -295,6 +298,15 @@ export function MobileDrawer({
   const [openKey, setOpenKey] = useState<string | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
+  // CTA target: internal path → localized Inertia link; external http(s) URL → new-tab
+  // anchor; in-page hash (e.g. EN "#second-opinion") → plain same-tab anchor.
+  const ctaTo = copy.cta.to;
+  const ctaInternal = !!ctaTo && !isExternal(ctaTo);
+  const ctaHref = ctaTo ?? copy.cta.href ?? "#";
+  const ctaExternal = isExternal(ctaHref);
+  const ctaClass =
+    "cta-orbit flex items-center justify-center rounded-full bg-gradient-orange py-3 text-sm font-semibold text-brand-orange-foreground shadow-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2";
+
   useEffect(() => {
     closeBtnRef.current?.focus();
   }, []);
@@ -416,19 +428,16 @@ export function MobileDrawer({
           </ul>
 
           <div className="mt-4 space-y-2 px-2">
-            {copy.cta.to ? (
-              <Link
-                href={lp(copy.cta.to)}
-                onClick={onClose}
-                className="cta-orbit flex items-center justify-center rounded-full bg-gradient-orange py-3 text-sm font-semibold text-brand-orange-foreground shadow-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2"
-              >
+            {ctaInternal ? (
+              <Link href={lp(ctaTo!)} onClick={onClose} className={ctaClass}>
                 {copy.cta.label}
               </Link>
             ) : (
               <a
-                href={copy.cta.href ?? "#"}
+                href={ctaHref}
                 onClick={onClose}
-                className="cta-orbit flex items-center justify-center rounded-full bg-gradient-orange py-3 text-sm font-semibold text-brand-orange-foreground shadow-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2"
+                {...(ctaExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className={ctaClass}
               >
                 {copy.cta.label}
               </a>

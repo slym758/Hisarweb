@@ -20,7 +20,7 @@ const DEFAULTS: SiteSettings = {
   phone_href: 'tel:4445888',
   whatsapp_number: '904445888',
   whatsapp_message: '',
-  appointment_url: '/randevu-al',
+  appointment_url: 'https://online.hisarhospital.com',
   appointment_label: 'Randevu Al',
   instagram_url: '',
   facebook_url: '',
@@ -33,6 +33,11 @@ const DEFAULTS: SiteSettings = {
 export function useSettings(): SiteSettings {
   const s = (usePage().props as { settings?: Partial<SiteSettings> }).settings ?? {};
   return { ...DEFAULTS, ...s };
+}
+
+/** True for absolute http(s) URLs — these must open as real (new-tab) anchors, never Inertia links. */
+export function isExternal(url: string): boolean {
+  return /^https?:\/\//i.test(url);
 }
 
 export function waHref(number: string, message: string): string {

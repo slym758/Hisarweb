@@ -8,6 +8,7 @@ import {
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath, type Locale } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { getPackageBySlug } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -77,6 +78,7 @@ export default function PackageDetail() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const pkg = getPackageBySlug(slug, locale);
 
     /* Missing package → bilingual not-found state. */
@@ -141,7 +143,7 @@ export default function PackageDetail() {
                             {pkg.summary}
                         </p>
                         <div className="mt-5 flex flex-wrap gap-2">
-                            <AppointmentCTA href={lp('/randevu-al')}>
+                            <AppointmentCTA href={settings.appointment_url}>
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                         </div>
@@ -184,7 +186,7 @@ export default function PackageDetail() {
                             <h3 className="mt-1 text-lg font-black text-primary leading-tight">
                                 {locale === 'tr' ? `${heading} için görüşün` : `Talk to us about ${heading}`}
                             </h3>
-                            <AppointmentCTA href={lp('/randevu-al')} className="mt-3 h-11 w-full">
+                            <AppointmentCTA href={settings.appointment_url} className="mt-3 h-11 w-full">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                         </div>

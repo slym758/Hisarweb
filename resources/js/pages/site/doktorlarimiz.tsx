@@ -4,6 +4,7 @@ import { CalendarDays, Search, Stethoscope, X, MapPin } from 'lucide-react';
 
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { useDoctors, type Doctor } from '@/lib/site-data';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
 
@@ -200,6 +201,7 @@ function PlaceholderPortrait({ size = 'md' }: { size?: 'sm' | 'md' }) {
 function DoctorCardMobile({ doc }: { doc: Doctor }) {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const { prefix, name } = splitName(doc.name);
     return (
         <article className="relative overflow-hidden rounded-2xl bg-card border border-border/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
@@ -227,13 +229,15 @@ function DoctorCardMobile({ doc }: { doc: Doctor }) {
                         <span className="truncate">{hospitalLabel[doc.hospitalSlug]}</span>
                     </p>
                 </div>
-                <Link
-                    href={lp('/randevu-al')}
+                <a
+                    href={settings.appointment_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={c.appointmentAria}
                     className="relative z-20 self-center inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-orange text-brand-orange-foreground shadow-sm"
                 >
                     <CalendarDays className="h-4 w-4" />
-                </Link>
+                </a>
             </div>
         </article>
     );
@@ -243,6 +247,7 @@ function DoctorCardMobile({ doc }: { doc: Doctor }) {
 function DoctorCard({ doc }: { doc: Doctor }) {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const { prefix, name } = splitName(doc.name);
     return (
         <article className="group relative flex flex-col overflow-hidden rounded-2xl bg-card border border-border/60 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-[0_18px_40px_-20px_rgba(30,58,138,0.25)] hover:border-primary/20 hover:-translate-y-0.5 transition-all duration-300">
@@ -284,13 +289,15 @@ function DoctorCard({ doc }: { doc: Doctor }) {
                     >
                         {c.profileCta}
                     </Link>
-                    <Link
-                        href={lp('/randevu-al')}
+                    <a
+                        href={settings.appointment_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label={c.appointmentAria}
                         className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-orange text-brand-orange-foreground shadow-sm hover:shadow-md transition"
                     >
                         <CalendarDays className="h-4 w-4" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </article>

@@ -4,6 +4,7 @@ import { ArrowRight, MapPin, Navigation, CalendarDays, Building2, Phone } from '
 import { siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { useHospitals } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -83,6 +84,7 @@ export default function HastanelerimizPage() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const items = useHospitals();
 
     return (
@@ -183,8 +185,10 @@ export default function HastanelerimizPage() {
                                             >
                                                 <Navigation className="h-3.5 w-3.5" /> {c.directions}
                                             </a>
-                                            <Link
-                                                href={lp('/randevu-al')}
+                                            <a
+                                                href={settings.appointment_url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 className={`inline-flex items-center justify-center gap-1 rounded-full text-[12.5px] font-semibold h-10 transition ${
                                                     h.comingSoon
                                                         ? 'border border-border bg-surface text-muted-foreground'
@@ -192,7 +196,7 @@ export default function HastanelerimizPage() {
                                                 }`}
                                             >
                                                 <CalendarDays className="h-3.5 w-3.5" /> {c.appointment}
-                                            </Link>
+                                            </a>
                                         </div>
 
                                         <a

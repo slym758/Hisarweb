@@ -9,6 +9,7 @@ import { LeadFormDialog } from '@/components/site/LeadFormDialog';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { getDiseaseBySlug, getDoctorsForDept, getTreatmentsForDept, useDepartments } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -98,6 +99,7 @@ export default function HastalikDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { slug } = usePage().props as unknown as { slug: string };
 
@@ -323,7 +325,7 @@ export default function HastalikDetay() {
                                 {disease.name}{c.sideTitleTail}
                             </h3>
                             <p className="mt-1.5 text-[13px] text-muted-foreground">{c.sideDesc}</p>
-                            <AppointmentCTA href={lp('/randevu-al')} className="mt-4 h-11 w-full">
+                            <AppointmentCTA href={settings.appointment_url} className="mt-4 h-11 w-full">
                                 <CalendarDays className="h-4 w-4" /> {c.appointment}
                             </AppointmentCTA>
                             <div className="mt-2">
@@ -424,6 +426,7 @@ function InlineLeadCTA({
 }) {
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const [open, setOpen] = useState(false);
     const band = variant === 'band';
 
@@ -446,7 +449,7 @@ function InlineLeadCTA({
                 {text}
             </p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-                <AppointmentCTA href={lp('/randevu-al')} className="h-11 w-full sm:w-auto">
+                <AppointmentCTA href={settings.appointment_url} className="h-11 w-full sm:w-auto">
                     <CalendarDays className="h-4 w-4" /> {c.ctaAppointment}
                 </AppointmentCTA>
                 <button

@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocalizedPath } from "@/lib/i18n";
-import { useSettings } from "@/lib/settings";
+import { isExternal, useSettings } from "@/lib/settings";
 
 /** Lucide icons the admin-managed rail can reference by name (falls back to Phone). */
 const RAIL_ICONS: Record<string, typeof Phone> = { CalendarDays, ClipboardList, Phone };
@@ -75,13 +75,9 @@ function RailItem({
   primary?: boolean;
 }) {
   const lp = useLocalizedPath();
-  return (
-    <Link
-      href={lp(to)}
-      title={label}
-      aria-label={label}
-      className="group relative flex items-center justify-center rounded-xl"
-    >
+  const cls = "group relative flex items-center justify-center rounded-xl";
+  const inner = (
+    <>
       <span
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-200 group-hover:scale-105 ${
           primary
@@ -98,6 +94,20 @@ function RailItem({
       >
         {label}
       </span>
+    </>
+  );
+  // External booking URL (settings-driven) opens as a real new-tab anchor; internal
+  // paths keep the localized Inertia link.
+  if (isExternal(to)) {
+    return (
+      <a href={to} target="_blank" rel="noopener noreferrer" title={label} aria-label={label} className={cls}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={lp(to)} title={label} aria-label={label} className={cls}>
+      {inner}
     </Link>
   );
 }

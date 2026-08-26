@@ -468,7 +468,7 @@ function Hero() {
 
                             {/* CTAs — completely static, never affected by slide changes */}
                             <div className="mt-3 space-y-1.5">
-                                <AppointmentCTA href={lp(settings.appointment_url)} className="w-full">
+                                <AppointmentCTA href={settings.appointment_url} className="w-full">
                                     {c.hero.appointment} <CalendarDays className="h-4 w-4" />
                                 </AppointmentCTA>
                                 <button
@@ -519,7 +519,7 @@ function Hero() {
 
                             {/* CTA paneli — slide değişiminden tamamen bağımsız, hep aynı yerde */}
                             <div className="mt-6 inline-flex items-center gap-3 p-2 rounded-2xl bg-primary/35 backdrop-blur-md ring-1 ring-white/15 shadow-[0_18px_45px_-22px_rgba(8,18,46,0.7)]">
-                                <AppointmentCTA href={lp(settings.appointment_url)}>
+                                <AppointmentCTA href={settings.appointment_url}>
                                     {c.hero.appointment}
                                     <CalendarDays className="h-4 w-4" />
                                 </AppointmentCTA>
@@ -1022,7 +1022,7 @@ function OnkolojiSpotlight() {
                         </ul>
 
                         <div className="mt-8 flex items-center gap-3">
-                            <AppointmentCTA href={lp(settings.appointment_url)}>
+                            <AppointmentCTA href={settings.appointment_url}>
                                 {c.onko.appointment} <CalendarDays className="h-4 w-4" />
                             </AppointmentCTA>
                             <Link

@@ -8,8 +8,8 @@ import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { DetailLeadConversion } from '@/components/site/DetailLeadConversion';
 import { RelatedDoctorContent } from '@/components/site/RelatedDoctorContent';
 import { siteLayout } from '@/layouts/site-layout';
-import { getFeaturedAppointmentSlots, setAppointmentPrefill, type AppointmentSlot } from '@/lib/appointment-prefill';
-import { useCurrentPath, useLocale, useLocalizedPath, type Locale } from '@/lib/i18n';
+import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { getDoctorById, useHospitals, type Hospital } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -25,11 +25,6 @@ const COPY = {
         interests: 'Uzmanlık Alanları',
         hospitalTitle: 'Çalıştığı Hastane',
         directions: 'Yol Tarifi',
-        slotsTitle: 'İlk Uygun Randevular',
-        allSlots: 'Tüm uygun saatleri gör',
-        bookAria: 'randevusu al',
-        stickyLabel: 'İlk uygun',
-        stickyFallback: 'Uygun saat için tıklayın',
         stickyCta: 'Randevu al',
         trustBadges: ['Uzman hekim', 'Hisar Hospital'],
         cvAbout: 'Hakkında',
@@ -50,11 +45,6 @@ const COPY = {
         interests: 'Areas of Expertise',
         hospitalTitle: 'Hospital',
         directions: 'Directions',
-        slotsTitle: 'First Available Appointments',
-        allSlots: 'See all available times',
-        bookAria: 'book appointment',
-        stickyLabel: 'First available',
-        stickyFallback: 'Tap for available times',
         stickyCta: 'Book',
         trustBadges: ['Specialist physician', 'Hisar Hospital'],
         cvAbout: 'About',
@@ -77,31 +67,12 @@ function splitName(full: string): { prefix: string; name: string } {
     return { prefix: '', name: full };
 }
 
-/* ── Locale-aware slot date formatting (no Turkish-only literals) ── */
-function intlLoc(locale: Locale): string {
-    return locale === 'en' ? 'en-US' : 'tr-TR';
-}
-function parseSlotDate(iso: string): Date {
-    const [y, m, d] = iso.split('-').map(Number);
-    return new Date(y, (m ?? 1) - 1, d ?? 1);
-}
-function slotShortDate(s: AppointmentSlot, locale: Locale): string {
-    const date = parseSlotDate(s.date);
-    const dow = date.toLocaleDateString(intlLoc(locale), { weekday: 'short' });
-    const month = date.toLocaleDateString(intlLoc(locale), { month: 'short' });
-    return `${dow} · ${date.getDate()} ${month}`;
-}
-function slotAria(s: AppointmentSlot, locale: Locale, book: string): string {
-    const date = parseSlotDate(s.date);
-    const long = date.toLocaleDateString(intlLoc(locale), { day: 'numeric', month: 'long', weekday: 'long' });
-    return `${long} ${s.time} ${book}`;
-}
-
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function DoktorDetay() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const path = useCurrentPath();
     const { id } = usePage().props as unknown as { id: string };
 
@@ -137,21 +108,9 @@ export default function DoktorDetay() {
     }
 
     const hospital = hospitals.find((h) => h.slug === doc.hospitalSlug);
-    const hospitalShort = hospital ? `${hospital.name} · ${hospital.area}` : '';
     const { prefix, name } = splitName(doc.name);
     const interests = doc.subspecialties;
     const deptSlug = doc.departmentSlug;
-
-    const slots = getFeaturedAppointmentSlots(doc.id, new Date(), locale);
-    const firstSlot = slots[0];
-
-    const appointmentHref = lp('/randevu-al?doktor=' + doc.id);
-    const slotHref = (s: AppointmentSlot) => lp('/randevu-al?doktor=' + doc.id + '&tarih=' + s.date + '&saat=' + s.time);
-
-    const handleSlotClick = (s: AppointmentSlot) =>
-        setAppointmentPrefill({ doctorId: doc.id, date: s.date, slotId: s.id, time: s.time });
-    const handleAppointmentClick = () =>
-        setAppointmentPrefill({ doctorId: doc.id, date: null, slotId: null, time: null });
 
     const title = `${doc.name} — ${doc.department}${c.titleTail}`;
     const description = `${doc.name}, ${doc.department}.${c.descTail}`;
@@ -282,7 +241,7 @@ export default function DoktorDetay() {
                                     )}
 
                                     <div className="mt-5 flex flex-wrap gap-2">
-                                        <AppointmentCTA href={appointmentHref} onClick={handleAppointmentClick} className="min-h-11">
+                                        <AppointmentCTA href={settings.appointment_url} className="min-h-11">
                                             <CalendarDays className="h-4 w-4" /> {c.appointment}
                                         </AppointmentCTA>
                                     </div>
@@ -292,8 +251,7 @@ export default function DoktorDetay() {
                             {/* Mobile CTA */}
                             <div className="md:hidden mt-4 flex items-stretch gap-2">
                                 <AppointmentCTA
-                                    href={appointmentHref}
-                                    onClick={handleAppointmentClick}
+                                    href={settings.appointment_url}
                                     className="flex-1 h-[46px] active:brightness-95"
                                 >
                                     <CalendarDays className="h-4 w-4" /> {c.appointment}
@@ -302,22 +260,6 @@ export default function DoktorDetay() {
 
                             {/* ============ Content below hero ============ */}
                             <div className="mt-6 lg:mt-12 space-y-3 lg:space-y-4">
-                                {/* First available slots — mobile only (desktop version lives in sidebar) */}
-                                <div className="lg:hidden">
-                                    <SlotsPanel
-                                        hospitalShort={hospitalShort}
-                                        slots={slots}
-                                        slotHref={slotHref}
-                                        allHref={appointmentHref}
-                                        onSlotClick={handleSlotClick}
-                                        onAllClick={handleAppointmentClick}
-                                        locale={locale}
-                                        title={c.slotsTitle}
-                                        allLabel={c.allSlots}
-                                        bookAria={c.bookAria}
-                                    />
-                                </div>
-
                                 {/* Interests */}
                                 <Card>
                                     <CardHeader icon={Stethoscope} title={c.interests} />
@@ -418,20 +360,6 @@ export default function DoktorDetay() {
 
                         {/* RIGHT COLUMN — sticky sidebar (desktop only) */}
                         <aside className="hidden lg:block space-y-4 lg:sticky lg:top-36 self-start">
-                            <SlotsPanel
-                                hospitalShort={hospitalShort}
-                                slots={slots}
-                                slotHref={slotHref}
-                                allHref={appointmentHref}
-                                onSlotClick={handleSlotClick}
-                                onAllClick={handleAppointmentClick}
-                                locale={locale}
-                                title={c.slotsTitle}
-                                allLabel={c.allSlots}
-                                bookAria={c.bookAria}
-                                compact
-                            />
-
                             {hospital && (
                                 <Card>
                                     <CardHeader icon={MapPin} title={c.hospitalTitle} />
@@ -469,19 +397,20 @@ export default function DoktorDetay() {
                 <div className="flex h-[64px] items-center justify-between gap-3 px-4">
                     <div className="min-w-0 flex-1">
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                            {c.stickyLabel}
+                            {prefix || c.prefixFallback}
                         </p>
                         <p className="text-sm font-bold text-primary leading-tight truncate">
-                            {firstSlot ? `${firstSlot.label} ${firstSlot.time}` : c.stickyFallback}
+                            {name}
                         </p>
                     </div>
-                    <Link
-                        href={appointmentHref}
-                        onClick={handleAppointmentClick}
+                    <a
+                        href={settings.appointment_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-brand-orange px-4 h-11 text-sm font-bold text-brand-orange-foreground active:brightness-95 transition"
                     >
                         <CalendarDays className="h-4 w-4" /> {c.stickyCta}
-                    </Link>
+                    </a>
                 </div>
             </div>
 
@@ -542,65 +471,6 @@ function HospitalCard({
                     )}
                 </dl>
             )}
-        </Card>
-    );
-}
-
-/* ---------- Slots panel (single responsive component) ---------- */
-function SlotsPanel({
-    hospitalShort,
-    slots,
-    slotHref,
-    allHref,
-    onSlotClick,
-    onAllClick,
-    locale,
-    title,
-    allLabel,
-    bookAria,
-    compact = false,
-}: {
-    hospitalShort: string;
-    slots: AppointmentSlot[];
-    slotHref: (s: AppointmentSlot) => string;
-    allHref: string;
-    onSlotClick: (s: AppointmentSlot) => void;
-    onAllClick: () => void;
-    locale: Locale;
-    title: string;
-    allLabel: string;
-    bookAria: string;
-    compact?: boolean;
-}) {
-    return (
-        <Card>
-            <CardHeader icon={Clock} title={title} />
-            <p className="mt-1 text-[11px] font-medium text-muted-foreground">{hospitalShort}</p>
-            <div className={`mt-3 grid ${compact ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-4'} gap-2`}>
-                {slots.map((s) => (
-                    <Link
-                        key={s.id}
-                        href={slotHref(s)}
-                        onClick={() => onSlotClick(s)}
-                        aria-label={slotAria(s, locale, bookAria)}
-                        className="group relative rounded-xl border border-primary/50 bg-card px-2 py-2 text-center transition min-h-11 flex flex-col items-center justify-center hover:bg-primary hover:border-primary active:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
-                    >
-                        <span className="text-[10px] font-semibold text-primary/70 group-hover:text-primary-foreground/85 group-active:text-primary-foreground/85 leading-none">
-                            {slotShortDate(s, locale)}
-                        </span>
-                        <span className="mt-1 text-sm font-bold text-primary group-hover:text-primary-foreground group-active:text-primary-foreground leading-none">
-                            {s.time}
-                        </span>
-                    </Link>
-                ))}
-            </div>
-            <Link
-                href={allHref}
-                onClick={onAllClick}
-                className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-md text-sm font-semibold text-primary hover:text-primary/80 min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            >
-                {allLabel} <ArrowRight className="h-4 w-4" />
-            </Link>
         </Card>
     );
 }

@@ -9,6 +9,7 @@ import { OnkolojiSubNav } from '@/components/site/OnkolojiSubNav';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { useDoctors } from '@/lib/site-data';
 
 /**
@@ -61,6 +62,7 @@ export default function ButunlesikOnkolojiMedikalKadro() {
     const locale = useLocale();
     const c = COPY[locale];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const allDoctors = useDoctors();
 
     const roster = useMemo(
@@ -158,7 +160,7 @@ export default function ButunlesikOnkolojiMedikalKadro() {
                                 >
                                     {c.profile} <ArrowRight className="h-3.5 w-3.5" />
                                 </Link>
-                                <AppointmentCTA href={lp('/randevu-al')}>
+                                <AppointmentCTA href={settings.appointment_url}>
                                     {c.appointment}
                                 </AppointmentCTA>
                             </div>
