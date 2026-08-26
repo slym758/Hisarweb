@@ -5,8 +5,26 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Site\CampaignController;
 use App\Http\Controllers\Site\SiteContentController;
 use App\Support\LocaleService;
+use App\Support\PageContentService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+// Renders a static Inertia page WITH its admin-editable copy: the page's DB copy tree
+// (locale-resolved) is passed as the `pageCopy` prop, which the frontend deep-merges over
+// the page's inline COPY (usePageCopy). With no DB rows the prop is [] and the page renders
+// from its inline COPY unchanged. Used in place of Route::inertia for the static pages.
+if (! function_exists('site_page')) {
+    function site_page(string $uri, string $component): void
+    {
+        $slug = str_replace('site/', '', $component);
+        // Cast to object so an ABSENT page yields JSON `{}` (not `[]`): the frontend
+        // deep-merge treats `{}` as "no override" and keeps the inline COPY, whereas an
+        // empty JS array would replace it. Non-empty copy is unaffected (same JSON shape).
+        Route::get($uri, fn () => Inertia::render($component, [
+            'pageCopy' => (object) PageContentService::copyFor($slug, app()->getLocale()),
+        ]));
+    }
+}
 
 /*
 | Public marketing site — bilingual. Turkish is served at the root; English under a
@@ -22,64 +40,64 @@ use Inertia\Inertia;
 */
 $sitePages = function () {
     // Corporate
-    Route::inertia('/kurumsal', 'site/kurumsal');
-    Route::inertia('/vizyon-misyon', 'site/vizyon-misyon');
-    Route::inertia('/kalite-calismalari', 'site/kalite-calismalari');
-    Route::inertia('/web-ve-tibbi-yayin-kurulu', 'site/web-ve-tibbi-yayin-kurulu');
-    Route::inertia('/insan-kaynaklari', 'site/insan-kaynaklari');
-    Route::inertia('/gebe-okulu', 'site/gebe-okulu');
-    Route::inertia('/moral-takimi', 'site/moral-takimi');
-    Route::inertia('/basinda-hastanemiz', 'site/basinda-hastanemiz');
+    site_page('/kurumsal', 'site/kurumsal');
+    site_page('/vizyon-misyon', 'site/vizyon-misyon');
+    site_page('/kalite-calismalari', 'site/kalite-calismalari');
+    site_page('/web-ve-tibbi-yayin-kurulu', 'site/web-ve-tibbi-yayin-kurulu');
+    site_page('/insan-kaynaklari', 'site/insan-kaynaklari');
+    site_page('/gebe-okulu', 'site/gebe-okulu');
+    site_page('/moral-takimi', 'site/moral-takimi');
+    site_page('/basinda-hastanemiz', 'site/basinda-hastanemiz');
     Route::get('/basinda-hastanemiz/{slug}', [SiteContentController::class, 'press']);
-    Route::inertia('/etkinlikler', 'site/etkinlikler');
+    site_page('/etkinlikler', 'site/etkinlikler');
     Route::get('/etkinlikler/{slug}', [SiteContentController::class, 'event']);
 
     // Medical index + detail
-    Route::inertia('/bolumlerimiz', 'site/bolumlerimiz');
+    site_page('/bolumlerimiz', 'site/bolumlerimiz');
     Route::get('/bolum/{slug}', [SiteContentController::class, 'department']);
-    Route::inertia('/doktorlarimiz', 'site/doktorlarimiz');
+    site_page('/doktorlarimiz', 'site/doktorlarimiz');
     Route::get('/doktor/{id}', [SiteContentController::class, 'doctor']);
-    Route::inertia('/hastaliklar', 'site/hastaliklar');
+    site_page('/hastaliklar', 'site/hastaliklar');
     Route::get('/hastalik/{slug}', [SiteContentController::class, 'disease']);
-    Route::inertia('/tedavi-yontemleri', 'site/tedavi-yontemleri');
+    site_page('/tedavi-yontemleri', 'site/tedavi-yontemleri');
     Route::get('/tedavi-yontemleri/{slug}', [SiteContentController::class, 'treatmentMethod']);
     Route::get('/tedavi/{slug}', [SiteContentController::class, 'treatment']);
-    Route::inertia('/teknolojilerimiz', 'site/teknolojilerimiz');
+    site_page('/teknolojilerimiz', 'site/teknolojilerimiz');
     Route::get('/teknoloji/{slug}', [SiteContentController::class, 'technology']);
 
     // Hospitals + oncology
-    Route::inertia('/hastanelerimiz', 'site/hastanelerimiz');
+    site_page('/hastanelerimiz', 'site/hastanelerimiz');
     Route::get('/hastane/{slug}', [SiteContentController::class, 'hospital']);
-    Route::inertia('/butunlesik-onkoloji', 'site/butunlesik-onkoloji');
-    Route::inertia('/butunlesik-onkoloji/medikal-kadro', 'site/butunlesik-onkoloji-medikal-kadro');
+    site_page('/butunlesik-onkoloji', 'site/butunlesik-onkoloji');
+    site_page('/butunlesik-onkoloji/medikal-kadro', 'site/butunlesik-onkoloji-medikal-kadro');
 
     // Guide / content
-    Route::inertia('/saglikli-hayat-rehberi', 'site/saglikli-hayat-rehberi');
+    site_page('/saglikli-hayat-rehberi', 'site/saglikli-hayat-rehberi');
     Route::get('/saglikli-hayat-rehberi/{slug}', fn () => Inertia::render('site/rehber-detay', ['slug' => request()->route('slug')]));
-    Route::inertia('/videolar', 'site/videolar');
-    Route::inertia('/bilgi-rehberi', 'site/bilgi-rehberi');
-    Route::inertia('/guvenli-cerrahi', 'site/guvenli-cerrahi');
-    Route::inertia('/paketler', 'site/paketler');
+    site_page('/videolar', 'site/videolar');
+    site_page('/bilgi-rehberi', 'site/bilgi-rehberi');
+    site_page('/guvenli-cerrahi', 'site/guvenli-cerrahi');
+    site_page('/paketler', 'site/paketler');
     Route::get('/paketler/{slug}', [SiteContentController::class, 'package']);
-    Route::inertia('/anlasmali-kurumlar', 'site/anlasmali-kurumlar');
-    Route::inertia('/mobil-uygulama', 'site/mobil-uygulama');
+    site_page('/anlasmali-kurumlar', 'site/anlasmali-kurumlar');
+    site_page('/mobil-uygulama', 'site/mobil-uygulama');
 
     // Campaigns — editor-created, time-boxed landing pages (medical-tourism / ad traffic)
     Route::get('/kampanya/{slug}', [CampaignController::class, 'show']);
 
     // Service / forms (prototype)
-    Route::inertia('/online-hizmetler', 'site/online-hizmetler');
-    Route::inertia('/doktora-sorun', 'site/doktora-sorun');
-    Route::inertia('/sizi-arayalim', 'site/sizi-arayalim');
-    Route::inertia('/sizi-dinliyoruz', 'site/sizi-dinliyoruz');
-    Route::inertia('/anketimize-katilin', 'site/anketimize-katilin');
-    Route::inertia('/iletisim', 'site/iletisim');
+    site_page('/online-hizmetler', 'site/online-hizmetler');
+    site_page('/doktora-sorun', 'site/doktora-sorun');
+    site_page('/sizi-arayalim', 'site/sizi-arayalim');
+    site_page('/sizi-dinliyoruz', 'site/sizi-dinliyoruz');
+    site_page('/anketimize-katilin', 'site/anketimize-katilin');
+    site_page('/iletisim', 'site/iletisim');
 
     // Legal
-    Route::inertia('/kvkk-politikamiz', 'site/kvkk-politikamiz');
-    Route::inertia('/bilgi-guvenligi-politikamiz', 'site/bilgi-guvenligi-politikamiz');
-    Route::inertia('/cerez-politikasi', 'site/cerez-politikasi');
-    Route::inertia('/mesafeli-satis-sozlesmesi', 'site/mesafeli-satis-sozlesmesi');
+    site_page('/kvkk-politikamiz', 'site/kvkk-politikamiz');
+    site_page('/bilgi-guvenligi-politikamiz', 'site/bilgi-guvenligi-politikamiz');
+    site_page('/cerez-politikasi', 'site/cerez-politikasi');
+    site_page('/mesafeli-satis-sozlesmesi', 'site/mesafeli-satis-sozlesmesi');
 };
 
 // Default locale (Turkish) at the root, no prefix. `home` is named for the starter

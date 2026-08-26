@@ -10,6 +10,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 
 /* Locale-independent category ids + icons (text lives in COPY.cats). */
@@ -157,7 +158,7 @@ const COPY = {
 
 export default function BilgiRehberi() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('bilgi-rehberi', COPY[locale]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const CATS = useMemo(

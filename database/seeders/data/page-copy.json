@@ -1,0 +1,3810 @@
+{
+  "anketimize-katilin": {
+    "tr": {
+      "head": {
+        "title": "Anketimize Katılın — Hisar Hospital",
+        "description": "Hisar Hospital hasta deneyimi anketine katılın; hizmet kalitemizi birlikte geliştirelim.",
+        "ogTitle": "Anketimize Katılın — Hisar Hospital",
+        "ogDescription": "Kısa anketimizi doldurarak Hisar Hospital deneyiminizi değerlendirin."
+      },
+      "header": "Anketimize Katılın",
+      "questions": [
+        "Randevu ve karşılama süreci",
+        "Hekim iletişimi ve bilgilendirme",
+        "Hemşire ve yardımcı sağlık personeli",
+        "Hastane temizliği ve fiziksel ortam",
+        "Bekleme süreleri",
+        "Genel memnuniyet"
+      ],
+      "visitTypes": [
+        "Poliklinik",
+        "Yatış / Servis",
+        "Acil Servis",
+        "Tetkik / Görüntüleme",
+        "Diğer"
+      ],
+      "labels": {
+        "progress": "İlerleme",
+        "visitType": "Ziyaret türü",
+        "nps": "Hisar Hospital’ı bir yakınınıza tavsiye eder misiniz? (0–10)",
+        "comment": "Eklemek istedikleriniz (opsiyonel)",
+        "commentPlaceholder": "Görüş, öneri veya teşekkürlerinizi yazabilirsiniz…",
+        "name": "Ad Soyad (opsiyonel)",
+        "email": "E-posta (opsiyonel)",
+        "submit": "Anketi Gönder",
+        "starWord": "yıldız"
+      },
+      "kvkk": {
+        "pre": "",
+        "link": "KVKK Aydınlatma Metni",
+        "post": "’ni okudum ve kişisel verilerimin işlenmesini onaylıyorum."
+      },
+      "errors": {
+        "ratings": "Lütfen tüm soruları puanlayın.",
+        "visitType": "Lütfen ziyaret türünü seçin.",
+        "recommend": "Lütfen tavsiye puanınızı verin (0–10).",
+        "kvkk": "KVKK onayı zorunludur."
+      },
+      "success": {
+        "title": "Anketiniz alındı",
+        "body": "Talebiniz alındı, değerlendirmeniz için teşekkür ederiz; görüşleriniz hizmet kalitemizi geliştirmemize yardımcı olacak.",
+        "backLabel": "Ana sayfaya dön"
+      },
+      "aside": {
+        "badge": "1–2 dakika",
+        "title": "Görüşünüz bizim için değerli",
+        "body": "Yanıtlarınız anonim olarak değerlendirilebilir; iletişim bilgisi paylaşmanız zorunlu değildir.",
+        "improveTitle": "Neyi geliştiriyoruz?",
+        "improve": [
+          "Randevu ve bekleme süreçleri",
+          "Hekim ve hemşire iletişimi",
+          "Fiziksel ortam ve konfor",
+          "Dijital hizmet deneyimi"
+        ]
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Take Our Survey — Hisar Hospital",
+        "description": "Take the Hisar Hospital patient experience survey; let's improve our service quality together.",
+        "ogTitle": "Take Our Survey — Hisar Hospital",
+        "ogDescription": "Rate your Hisar Hospital experience by completing our short survey."
+      },
+      "header": "Take Our Survey",
+      "questions": [
+        "Appointment and reception process",
+        "Physician communication and information",
+        "Nurses and auxiliary healthcare staff",
+        "Hospital cleanliness and physical environment",
+        "Waiting times",
+        "Overall satisfaction"
+      ],
+      "visitTypes": [
+        "Outpatient Clinic",
+        "Inpatient / Ward",
+        "Emergency",
+        "Test / Imaging",
+        "Other"
+      ],
+      "labels": {
+        "progress": "Progress",
+        "visitType": "Visit type",
+        "nps": "Would you recommend Hisar Hospital to a friend or relative? (0–10)",
+        "comment": "Anything you'd like to add (optional)",
+        "commentPlaceholder": "You can write your opinions, suggestions or thanks…",
+        "name": "Full Name (optional)",
+        "email": "Email (optional)",
+        "submit": "Submit Survey",
+        "starWord": "star"
+      },
+      "kvkk": {
+        "pre": "I have read the ",
+        "link": "KVKK Disclosure Statement",
+        "post": " and consent to the processing of my personal data."
+      },
+      "errors": {
+        "ratings": "Please rate all questions.",
+        "visitType": "Please select the visit type.",
+        "recommend": "Please provide your recommendation score (0–10).",
+        "kvkk": "KVKK consent is required."
+      },
+      "success": {
+        "title": "Your survey has been received",
+        "body": "Your submission has been received; thank you for your evaluation — your feedback helps us improve our quality of service.",
+        "backLabel": "Back to home"
+      },
+      "aside": {
+        "badge": "1–2 minutes",
+        "title": "Your opinion is valuable to us",
+        "body": "Your responses may be evaluated anonymously; sharing your contact details is not mandatory.",
+        "improveTitle": "What are we improving?",
+        "improve": [
+          "Appointment and waiting processes",
+          "Physician and nurse communication",
+          "Physical environment and comfort",
+          "Digital service experience"
+        ]
+      }
+    }
+  },
+  "anlasmali-kurumlar": {
+    "tr": {
+      "head": {
+        "title": "Anlaşmalı Kurumlar — Hisar Hospital",
+        "description": "Hisar Hospital Intercontinental ile anlaşmalı sigorta şirketleri, bankalar, asistans firmaları ve kurumlar. Arama ve kategori filtreleriyle hızlıca sorgulayın.",
+        "ogDescription": "Anlaşmalı sigorta, banka ve asistans firmalarını arayın, kategoriye göre filtreleyin."
+      },
+      "h1": "Anlaşmalı Kurumlar",
+      "heroDesc": "Hisar Hospital Intercontinental ile anlaşmalı sigorta şirketleri, bankalar, asistans firmaları ve kurumları arayın veya kategoriye göre filtreleyin.",
+      "searchPrefix": "Örn: ",
+      "clear": "Temizle",
+      "all": "Tümü",
+      "listedSuffix": "kurum listeleniyor",
+      "resultPre": "",
+      "infoNote": "Anlaşmalı kurum kapsamları poliçe türüne, plan detayına ve hizmet alınacak bölüme göre değişiklik gösterebilir. Güncel kapsam bilgisi için randevu öncesinde sigorta şirketiniz veya hastanemizle iletişime geçmenizi öneririz.",
+      "countSuffix": "kurum",
+      "empty": {
+        "title": "Aramanıza uygun kurum bulunamadı",
+        "body": "Kurum adını farklı şekilde yazarak tekrar deneyebilir veya detaylı bilgi için bizimle iletişime geçebilirsiniz.",
+        "reset": "Filtreleri Temizle",
+        "contact": "İletişime Geç"
+      },
+      "sidebar": {
+        "badge": "Bilgi alın",
+        "title": "Kurumunuzun kapsamını öğrenmek ister misiniz?",
+        "body": "Anlaşmalı kurum ve sigorta kapsamınız hakkında detaylı bilgi almak için bizimle iletişime geçebilirsiniz.",
+        "appointment": "Randevu Al",
+        "contact": "İletişime Geçin",
+        "note": "Kapsam bilgisi güncellenebilir. Listede göremediğiniz kurumlar için lütfen bizimle iletişime geçin."
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Contracted Institutions — Hisar Hospital",
+        "description": "Insurance companies, banks, assistance firms and institutions contracted with Hisar Hospital Intercontinental. Search quickly with category filters.",
+        "ogDescription": "Search contracted insurance, bank and assistance firms and filter them by category."
+      },
+      "h1": "Contracted Institutions",
+      "heroDesc": "Search or filter by category the insurance companies, banks, assistance firms and institutions contracted with Hisar Hospital Intercontinental.",
+      "searchPrefix": "e.g. ",
+      "clear": "Clear",
+      "all": "All",
+      "listedSuffix": "institutions listed",
+      "resultPre": "",
+      "infoNote": "Contracted institution coverage may vary by policy type, plan details and the department where service is received. For up-to-date coverage information, we recommend contacting your insurance company or our hospital before your appointment.",
+      "countSuffix": "institutions",
+      "empty": {
+        "title": "No institutions match your search",
+        "body": "Try typing the institution name differently, or contact us for detailed information.",
+        "reset": "Clear Filters",
+        "contact": "Get in Touch"
+      },
+      "sidebar": {
+        "badge": "Get information",
+        "title": "Would you like to learn your institution’s coverage?",
+        "body": "You can contact us to get detailed information about your contracted institution and insurance coverage.",
+        "appointment": "Book Appointment",
+        "contact": "Contact Us",
+        "note": "Coverage information may be updated. For institutions you can’t find in the list, please contact us."
+      }
+    }
+  },
+  "basinda-hastanemiz": {
+    "tr": {
+      "head": {
+        "title": "Basında Hastanemiz — Hisar Hospital",
+        "description": "Hisar Hospital hakkında ulusal ve uluslararası basında yer alan haberler, röportajlar ve yayınlar."
+      },
+      "headerTitle": "Basında Hastanemiz",
+      "headerSubtitle": "Hisar Hospital'ın ulusal ve uluslararası basındaki yansımaları.",
+      "crumbKurumsal": "Kurumsal",
+      "crumbPress": "Basında Hastanemiz",
+      "searchPrefix": "Haber, yayın veya başlık ara — ",
+      "searchAria": "Basın haberi ara",
+      "allYears": "Tüm yıllar",
+      "yearAria": "Yıl filtresi",
+      "allPublications": "Tüm yayınlar",
+      "publicationAria": "Kaynak / yayın filtresi",
+      "readArticle": "Haberi Oku",
+      "noResults": "Filtreye uygun haber bulunamadı.",
+      "corpTitle": "Kurumsal İletişim",
+      "corpDesc": "Basın talepleriniz, röportaj ve içerik iş birlikleri için bize ulaşın.",
+      "corpCta": "İletişime Geç",
+      "suggestions": [
+        "Da Vinci",
+        "JCI",
+        "Onkoloji",
+        "Kalp",
+        "Göz"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Our Hospital in the Press — Hisar Hospital",
+        "description": "News, interviews and publications about Hisar Hospital in the national and international press."
+      },
+      "headerTitle": "Our Hospital in the Press",
+      "headerSubtitle": "Hisar Hospital's presence in the national and international press.",
+      "crumbKurumsal": "Corporate",
+      "crumbPress": "In the Press",
+      "searchPrefix": "Search news, publications or titles — ",
+      "searchAria": "Search press news",
+      "allYears": "All years",
+      "yearAria": "Year filter",
+      "allPublications": "All publications",
+      "publicationAria": "Source / publication filter",
+      "readArticle": "Read Article",
+      "noResults": "No news matches your filters.",
+      "corpTitle": "Corporate Communications",
+      "corpDesc": "Reach out for press requests, interviews and content collaborations.",
+      "corpCta": "Get in Touch",
+      "suggestions": [
+        "Da Vinci",
+        "JCI",
+        "Oncology",
+        "Heart",
+        "Eye"
+      ]
+    }
+  },
+  "bilgi-guvenligi-politikamiz": {
+    "tr": {
+      "head": {
+        "title": "Bilgi Güvenliği Politikamız — Hisar Hospital",
+        "description": "Hisar Hospital bilgi güvenliği politikası, sorumluluklar ve ana ilkeler."
+      },
+      "header": "Bilgi Güvenliği Politikamız",
+      "crumbCorporate": "Kurumsal",
+      "crumbSelf": "Bilgi Güvenliği Politikamız",
+      "docInfoTitle": "Doküman Bilgisi",
+      "docRows": [
+        [
+          "Doküman",
+          "Bilgi Güvenliği Politikası"
+        ],
+        [
+          "Doküman Kodu",
+          "BGP-01 (örnek)"
+        ],
+        [
+          "Yayın Tarihi",
+          "01.01.2024 (örnek)"
+        ],
+        [
+          "Revizyon Tarihi",
+          "01.06.2024 (örnek)"
+        ],
+        [
+          "Revizyon No",
+          "01 (örnek)"
+        ]
+      ],
+      "docNote": "Doküman bilgileri örnek olarak gösterilmektedir; nihai kurumsal doküman kütüphanesindeki değerlerle güncellenecektir.",
+      "intro": {
+        "purpose": {
+          "kicker": "Politikanın Amacı",
+          "title": "Bilgi varlıklarımızı korumak",
+          "body": "Hisar Hospital olarak; hasta, çalışan ve kurumsal bilgi varlıklarının gizliliğini, bütünlüğünü ve erişilebilirliğini korumak; ilgili yasal düzenlemelere ve uluslararası kabul görmüş bilgi güvenliği standartlarına uygun süreçler yürütmek temel taahhüdümüzdür."
+        },
+        "principles": {
+          "kicker": "Ana Maddeler",
+          "title": "Temel ilkelerimiz",
+          "items": [
+            "Bilgi varlıklarının tanımlanması, sınıflandırılması ve risk değerlendirmesi yapılır.",
+            "Erişim yetkileri yalnızca görevin gerektirdiği ölçüde tanımlanır (en az ayrıcalık ilkesi).",
+            "Bilgi güvenliği farkındalık eğitimleri düzenli olarak tekrarlanır.",
+            "Olay yönetim süreci ile güvenlik ihlalleri kayıt altına alınır ve müdahale edilir.",
+            "Yasal, düzenleyici ve sözleşmesel yükümlülüklere tam uyum sağlanır."
+          ]
+        },
+        "responsibilities": {
+          "kicker": "Sorumluluklar",
+          "title": "Rol ve sorumluluklar",
+          "body": "Politikanın uygulanması, tüm çalışanların ortak sorumluluğudur. Üst yönetim bilgi güvenliği yönetim sistemine liderlik eder; Bilgi Güvenliği Komitesi politikayı gözden geçirir ve iyileştirme aksiyonlarını takip eder. Bilgi işlem birimi teknik güvenlik kontrollerinden sorumludur; tüm çalışanlar, alt yükleniciler ve iş ortakları bu politikaya uymakla yükümlüdür."
+        },
+        "review": {
+          "kicker": "Gözden Geçirme",
+          "title": "Sürekli iyileştirme",
+          "body": "Politika en az yılda bir kez gözden geçirilir. Süreç, teknoloji veya mevzuat değişikliklerinde ara revizyon yapılabilir. Güncel doküman, çalışanların erişebileceği kurumsal kanallardan yayımlanır."
+        }
+      },
+      "terms": [
+        {
+          "kicker": "Amaç ve Kapsam",
+          "title": "Gizlilik ve kullanım esasları",
+          "body": [
+            "Bu metin; Hisar Hospital web sitesinin ve dijital hizmetlerinin kullanımına ilişkin genel şart ve gizlilik esaslarını düzenler.",
+            "Siteyi kullanan her ziyaretçi bu şartları kabul etmiş sayılır."
+          ]
+        },
+        {
+          "kicker": "Kullanım Şartları",
+          "title": "Site kullanımına dair kurallar",
+          "body": [
+            "Site içeriği yalnızca bilgilendirme amaçlıdır; tıbbi tanı veya tedavi yerine geçmez.",
+            "Kullanıcı; site içeriğini kopyalama, çoğaltma, ticari amaçla kullanma haklarına sahip değildir.",
+            "Kullanıcı; formlar aracılığıyla gerçek ve güncel bilgi paylaşmayı taahhüt eder."
+          ]
+        },
+        {
+          "kicker": "Gizlilik",
+          "title": "Kişisel verilerin korunması",
+          "body": [
+            "Kişisel veriler yalnızca hizmetin sunulması amacıyla, KVKK ve ilgili mevzuata uygun olarak işlenir.",
+            "Ziyaretçilere ait teknik veriler; site performansı, güvenlik ve deneyim iyileştirme amacıyla anonimleştirilerek analiz edilebilir."
+          ]
+        },
+        {
+          "kicker": "Çerez Kullanımı",
+          "title": "Çerezler",
+          "body": [
+            "Sitemiz temel işlevsellik, ölçümleme ve pazarlama amacıyla çerezler kullanır.",
+            "Ayrıntılı bilgi için Çerez Politikamızı inceleyebilirsiniz."
+          ]
+        },
+        {
+          "kicker": "Fikri Mülkiyet",
+          "title": "Marka ve içerik hakları",
+          "body": [
+            "Sitede yer alan logo, marka, görsel ve metinler Hisar Hospital'a aittir.",
+            "İzinsiz kullanım hukuki takibe tabidir."
+          ]
+        },
+        {
+          "kicker": "Sorumluluğun Sınırlandırılması",
+          "title": "Sorumluluk sınırları",
+          "body": [
+            "Sitedeki bilgilerin doğruluğu için özen gösterilmekle birlikte; içerikten kaynaklanan doğrudan/dolaylı zararlardan Hisar Hospital sorumlu tutulamaz.",
+            "Dış bağlantılara verilen linklerin içeriği ilgili üçüncü tarafların sorumluluğundadır."
+          ]
+        },
+        {
+          "kicker": "Değişiklikler",
+          "title": "Metnin güncellenmesi",
+          "body": [
+            "Bu metin gerektiğinde güncellenebilir; yayınlandığı anda geçerlilik kazanır.",
+            "Kullanıcıların dönem dönem içeriği takip etmesi önerilir."
+          ]
+        }
+      ],
+      "relatedTitle": "İlgili Politikalar",
+      "relatedLabels": [
+        "KVKK Politikamız",
+        "Kalite Çalışmaları"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Information Security Policy — Hisar Hospital",
+        "description": "Hisar Hospital information security policy, responsibilities and core principles."
+      },
+      "header": "Information Security Policy",
+      "crumbCorporate": "Corporate",
+      "crumbSelf": "Information Security Policy",
+      "docInfoTitle": "Document Details",
+      "docRows": [
+        [
+          "Document",
+          "Information Security Policy"
+        ],
+        [
+          "Document Code",
+          "BGP-01 (example)"
+        ],
+        [
+          "Publication Date",
+          "01.01.2024 (example)"
+        ],
+        [
+          "Revision Date",
+          "01.06.2024 (example)"
+        ],
+        [
+          "Revision No.",
+          "01 (example)"
+        ]
+      ],
+      "docNote": "The document details are shown as examples; they will be updated with the values from the final corporate document library.",
+      "intro": {
+        "purpose": {
+          "kicker": "Purpose of the Policy",
+          "title": "Protecting our information assets",
+          "body": "As Hisar Hospital, our fundamental commitment is to protect the confidentiality, integrity and availability of our patient, employee and corporate information assets, and to run processes that comply with the relevant legal regulations and internationally accepted information security standards."
+        },
+        "principles": {
+          "kicker": "Core Provisions",
+          "title": "Our fundamental principles",
+          "items": [
+            "Information assets are identified, classified and assessed for risk.",
+            "Access rights are granted only to the extent required by the task (the principle of least privilege).",
+            "Information security awareness training is repeated regularly.",
+            "Security breaches are recorded and responded to through the incident management process.",
+            "Full compliance with legal, regulatory and contractual obligations is ensured."
+          ]
+        },
+        "responsibilities": {
+          "kicker": "Responsibilities",
+          "title": "Roles and responsibilities",
+          "body": "Implementing the policy is the shared responsibility of all employees. Senior management leads the information security management system; the Information Security Committee reviews the policy and follows up on improvement actions. The IT department is responsible for technical security controls; all employees, subcontractors and business partners are obliged to comply with this policy."
+        },
+        "review": {
+          "kicker": "Review",
+          "title": "Continuous improvement",
+          "body": "The policy is reviewed at least once a year. Interim revisions may be made in the event of changes in process, technology or legislation. The current document is published through corporate channels accessible to employees."
+        }
+      },
+      "terms": [
+        {
+          "kicker": "Purpose and Scope",
+          "title": "Privacy and usage principles",
+          "body": [
+            "This text sets out the general terms and privacy principles for the use of the Hisar Hospital website and digital services.",
+            "Every visitor who uses the site is deemed to have accepted these terms."
+          ]
+        },
+        {
+          "kicker": "Terms of Use",
+          "title": "Rules on the use of the site",
+          "body": [
+            "The site content is for information purposes only; it is not a substitute for medical diagnosis or treatment.",
+            "The user does not have the right to copy, reproduce or use the site content for commercial purposes.",
+            "The user undertakes to share accurate and current information through the forms."
+          ]
+        },
+        {
+          "kicker": "Privacy",
+          "title": "Protection of personal data",
+          "body": [
+            "Personal data is processed solely for the purpose of providing the service, in accordance with the KVKK and the relevant legislation.",
+            "Visitors' technical data may be anonymized and analyzed for the purposes of site performance, security and experience improvement."
+          ]
+        },
+        {
+          "kicker": "Cookie Usage",
+          "title": "Cookies",
+          "body": [
+            "Our site uses cookies for core functionality, measurement and marketing purposes.",
+            "For detailed information, please review our Cookie Policy."
+          ]
+        },
+        {
+          "kicker": "Intellectual Property",
+          "title": "Trademark and content rights",
+          "body": [
+            "The logos, trademarks, visuals and texts on the site belong to Hisar Hospital.",
+            "Unauthorized use is subject to legal action."
+          ]
+        },
+        {
+          "kicker": "Limitation of Liability",
+          "title": "Limits of liability",
+          "body": [
+            "While care is taken to ensure the accuracy of the information on the site, Hisar Hospital cannot be held liable for any direct or indirect damages arising from the content.",
+            "The content of links to external sites is the responsibility of the relevant third parties."
+          ]
+        },
+        {
+          "kicker": "Changes",
+          "title": "Updating the text",
+          "body": [
+            "This text may be updated when necessary; it takes effect at the moment it is published.",
+            "Users are advised to check the content periodically."
+          ]
+        }
+      ],
+      "relatedTitle": "Related Policies",
+      "relatedLabels": [
+        "Personal Data Protection Policy",
+        "Quality Initiatives"
+      ]
+    }
+  },
+  "bilgi-rehberi": {
+    "tr": {
+      "head": {
+        "title": "Bilgi Rehberi — Hisar Hospital",
+        "description": "Hastane deneyiminizi kolaylaştıran operasyonel bilgiler: randevu, muayene, yatış, taburculuk ve daha fazlası."
+      },
+      "pageTitle": "Bilgi Rehberi",
+      "pageSubtitle": "Randevudan taburculuğa, hastane deneyiminizin her adımı için pratik cevaplar.",
+      "crumbHasta": "Hasta Rehberi",
+      "crumbSelf": "Bilgi Rehberi",
+      "suggestions": [
+        "Randevu",
+        "Oda tipi",
+        "Ziyaret saati",
+        "Yol tarifi",
+        "Sonuç"
+      ],
+      "searchAria": "Bilgi rehberinde ara",
+      "clear": "Temizle",
+      "topics": "Konular",
+      "emptyTitle": "Aramanızla eşleşen içerik bulunamadı",
+      "emptyBody": "Farklı bir kelimeyle tekrar deneyin ya da bize ulaşın.",
+      "helpEyebrow": "Yardım",
+      "helpTitle": "Aradığınızı bulamadınız mı?",
+      "helpBody": "İletişim Merkezimiz 7/24 size yardımcı olsun.",
+      "appointment": "Randevu Al",
+      "cats": [
+        {
+          "title": "Hastaneye Gelmeden Önce",
+          "items": [
+            {
+              "q": "Randevu nasıl alabilirim?",
+              "a": "Web sitemizden Randevu Al bölümü, iletişim merkezimiz (444 5 888) veya Hisar Online üzerinden hekim ve tarih seçerek randevu oluşturabilirsiniz."
+            },
+            {
+              "q": "Yanımda hangi belgeleri getirmeliyim?",
+              "a": "Kimlik belgeniz, geçerli sigorta / özel sağlık sigortası kartınız ve varsa daha önceki tıbbi kayıtlarınızı getirmeniz süreci hızlandırır."
+            }
+          ]
+        },
+        {
+          "title": "Muayene Süreci",
+          "items": [
+            {
+              "q": "Muayene öncesi ne yapmalıyım?",
+              "a": "Randevu saatinizden 15–20 dakika önce hastanede olmanızı öneririz. Kayıt işlemleriniz karşılama bankosunda tamamlanır."
+            },
+            {
+              "q": "Refakatçi kabul ediliyor mu?",
+              "a": "Genel poliklinik muayenelerinde bir refakatçi kabul edilir; ilgili klinik uygulamalarına göre değişebilir."
+            }
+          ]
+        },
+        {
+          "title": "Yatış İşlemleri",
+          "items": [
+            {
+              "q": "Yatış için hangi süreç izlenir?",
+              "a": "Hekiminizin yatış onayı ardından hasta kabul birimimiz oda ve sigorta işlemlerinizi tamamlar."
+            },
+            {
+              "q": "Oda tipleri nelerdir?",
+              "a": "Standart tek kişilik ve süit oda seçeneklerimiz bulunur; müsaitlik durumuna göre bilgi verilir."
+            }
+          ]
+        },
+        {
+          "title": "Taburculuk Süreci",
+          "items": [
+            {
+              "q": "Taburculuk günü ne olacak?",
+              "a": "Hekiminizin onayı sonrası taburcu özeti, reçete ve kontrol tarihiniz size iletilir; hasta kabul birimimizde işlemleriniz tamamlanır."
+            }
+          ]
+        },
+        {
+          "title": "Ziyaretçi Kuralları",
+          "items": [
+            {
+              "q": "Ziyaret saatleri nelerdir?",
+              "a": "Servis katlarında ziyaret saatleri 11:00–20:00 arasındadır. Yoğun bakım üniteleri için özel saatler uygulanır."
+            },
+            {
+              "q": "Çocuk ziyaretçi kabul ediliyor mu?",
+              "a": "Enfeksiyon kontrol politikamız kapsamında belirli yaş ve dönemlerde sınırlama olabilir."
+            }
+          ]
+        },
+        {
+          "title": "Refakatçi Bilgileri",
+          "items": [
+            {
+              "q": "Refakatçi bilgileri nelerdir?",
+              "a": "Refakatçi kartı ve kimliğinin yanınızda olması gerekir. Refakatçi değişiklikleri hasta kabulüne bildirilmelidir."
+            }
+          ]
+        },
+        {
+          "title": "Hasta Hakları ve Sorumlulukları",
+          "items": [
+            {
+              "q": "Hasta haklarım nelerdir?",
+              "a": "Bilgilendirme, mahremiyet, güvenli bakım ve saygılı hizmet almak temel haklarınız arasındadır. Detaylar Hasta Hakları Birimimizce iletilir."
+            },
+            {
+              "q": "Sorumluluklarım nelerdir?",
+              "a": "Sağlığınızla ilgili doğru bilgi vermek, tedavi planına uyum sağlamak ve hastane kurallarına saygı göstermek beklenir."
+            }
+          ]
+        },
+        {
+          "title": "Tıbbi Kayıt Talepleri",
+          "items": [
+            {
+              "q": "Tıbbi kayıt talebimi nasıl iletirim?",
+              "a": "Hasta hakları birimimize kimlik ile başvurarak veya yasal temsilci aracılığıyla talepte bulunabilirsiniz."
+            }
+          ]
+        },
+        {
+          "title": "Laboratuvar ve Görüntüleme Sonuçları",
+          "items": [
+            {
+              "q": "Sonuçlarımı nereden görüntüleyebilirim?",
+              "a": "E-Sonuç servisi veya Hisar Online üzerinden güvenli girişle görüntüleyebilirsiniz."
+            }
+          ]
+        },
+        {
+          "title": "Otopark ve Ulaşım",
+          "items": [
+            {
+              "q": "Otopark hizmetiniz var mı?",
+              "a": "Hastanelerimizde vale ve kapalı otopark hizmeti sunulmaktadır."
+            },
+            {
+              "q": "Toplu taşıma ile nasıl ulaşırım?",
+              "a": "İletişim sayfamızda kampüs bazlı ulaşım seçenekleri ve yol tarifleri yer alır."
+            }
+          ]
+        },
+        {
+          "title": "Sık Sorulan Sorular",
+          "items": [
+            {
+              "q": "Yabancı hastalar için hizmetiniz var mı?",
+              "a": "Uluslararası Hasta Merkezimiz süreç boyunca tercüme ve koordinasyon desteği sağlar."
+            }
+          ]
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Information Guide — Hisar Hospital",
+        "description": "Operational information that makes your hospital experience easier: appointments, examination, admission, discharge and more."
+      },
+      "pageTitle": "Information Guide",
+      "pageSubtitle": "Practical answers for every step of your hospital experience, from appointment to discharge.",
+      "crumbHasta": "Patient Guide",
+      "crumbSelf": "Information Guide",
+      "suggestions": [
+        "Appointment",
+        "Room type",
+        "Visiting hours",
+        "Directions",
+        "Results"
+      ],
+      "searchAria": "Search the information guide",
+      "clear": "Clear",
+      "topics": "Topics",
+      "emptyTitle": "No content matches your search",
+      "emptyBody": "Try again with a different word or get in touch with us.",
+      "helpEyebrow": "Help",
+      "helpTitle": "Couldn't find what you were looking for?",
+      "helpBody": "Let our Contact Center help you 24/7.",
+      "appointment": "Book Appointment",
+      "cats": [
+        {
+          "title": "Before Coming to the Hospital",
+          "items": [
+            {
+              "q": "How can I book an appointment?",
+              "a": "You can book by selecting a doctor and date through the Book Appointment section of our website, our contact center (444 5 888) or Hisar Online."
+            },
+            {
+              "q": "Which documents should I bring with me?",
+              "a": "Bringing your ID document, valid insurance / private health insurance card and any previous medical records speeds up the process."
+            }
+          ]
+        },
+        {
+          "title": "The Examination Process",
+          "items": [
+            {
+              "q": "What should I do before the examination?",
+              "a": "We recommend arriving at the hospital 15–20 minutes before your appointment time. Your registration is completed at the reception desk."
+            },
+            {
+              "q": "Is a companion accepted?",
+              "a": "One companion is accepted for general outpatient examinations; this may vary according to the relevant clinic practices."
+            }
+          ]
+        },
+        {
+          "title": "Admission Procedures",
+          "items": [
+            {
+              "q": "What process is followed for admission?",
+              "a": "After your doctor approves admission, our patient admission unit completes your room and insurance procedures."
+            },
+            {
+              "q": "What are the room types?",
+              "a": "We offer standard single rooms and suite room options; information is provided based on availability."
+            }
+          ]
+        },
+        {
+          "title": "The Discharge Process",
+          "items": [
+            {
+              "q": "What happens on discharge day?",
+              "a": "After your doctor’s approval, your discharge summary, prescription and follow-up date are provided; your procedures are completed at our patient admission unit."
+            }
+          ]
+        },
+        {
+          "title": "Visitor Rules",
+          "items": [
+            {
+              "q": "What are the visiting hours?",
+              "a": "On the ward floors, visiting hours are between 11:00–20:00. Special hours apply for intensive care units."
+            },
+            {
+              "q": "Are child visitors accepted?",
+              "a": "Under our infection control policy, restrictions may apply for certain ages and periods."
+            }
+          ]
+        },
+        {
+          "title": "Companion Information",
+          "items": [
+            {
+              "q": "What is the companion information?",
+              "a": "You must have the companion card and ID with you. Companion changes must be reported to patient admission."
+            }
+          ]
+        },
+        {
+          "title": "Patient Rights and Responsibilities",
+          "items": [
+            {
+              "q": "What are my patient rights?",
+              "a": "Being informed, privacy, safe care and receiving respectful service are among your fundamental rights. Details are provided by our Patient Rights Unit."
+            },
+            {
+              "q": "What are my responsibilities?",
+              "a": "You are expected to provide accurate information about your health, comply with the treatment plan and respect hospital rules."
+            }
+          ]
+        },
+        {
+          "title": "Medical Record Requests",
+          "items": [
+            {
+              "q": "How do I submit my medical record request?",
+              "a": "You can make a request by applying to our patient rights unit with your ID or through a legal representative."
+            }
+          ]
+        },
+        {
+          "title": "Laboratory and Imaging Results",
+          "items": [
+            {
+              "q": "Where can I view my results?",
+              "a": "You can view them via the E-Results service or through a secure login on Hisar Online."
+            }
+          ]
+        },
+        {
+          "title": "Parking and Transportation",
+          "items": [
+            {
+              "q": "Do you have parking service?",
+              "a": "Valet and indoor parking service is provided at our hospitals."
+            },
+            {
+              "q": "How do I get there by public transport?",
+              "a": "Campus-based transportation options and directions are available on our contact page."
+            }
+          ]
+        },
+        {
+          "title": "Frequently Asked Questions",
+          "items": [
+            {
+              "q": "Do you have a service for international patients?",
+              "a": "Our International Patient Center provides translation and coordination support throughout the process."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "bolumlerimiz": {
+    "tr": {
+      "head": {
+        "title": "Bölümlerimiz — Hisar Hospital",
+        "description": "Hisar Hospital'da 50'den fazla branşta uzman kadromuzla bütüncül sağlık hizmeti."
+      },
+      "title": "Bölümlerimiz",
+      "subtitle": "Hayatın her döneminde, ihtiyacınız olan tüm branşlarda yanınızdayız.",
+      "searchPlaceholder": "Bölüm veya hizmet ara",
+      "clear": "Temizle",
+      "sortAz": "A → Z Sırala",
+      "sortZa": "Z → A Sırala",
+      "countLabel": "bölüm listeleniyor",
+      "empty": "Aramanıza uygun bölüm bulunamadı.",
+      "cardCta": "Bölümü İncele",
+      "suggestions": [
+        "Kardiyoloji",
+        "Ortopedi",
+        "Göz",
+        "KBB",
+        "Onkoloji",
+        "Nöroloji"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Our Departments — Hisar Hospital",
+        "description": "Holistic healthcare at Hisar Hospital with expert staff across more than 50 specialties."
+      },
+      "title": "Our Departments",
+      "subtitle": "In every stage of life, we're by your side across all the specialties you need.",
+      "searchPlaceholder": "Search a department or service",
+      "clear": "Clear",
+      "sortAz": "Sort A → Z",
+      "sortZa": "Sort Z → A",
+      "countLabel": "departments listed",
+      "empty": "No department matched your search.",
+      "cardCta": "Explore Department",
+      "suggestions": [
+        "Cardiology",
+        "Orthopaedics",
+        "Eye",
+        "ENT",
+        "Oncology",
+        "Neurology"
+      ]
+    }
+  },
+  "butunlesik-onkoloji": {
+    "tr": {
+      "head": {
+        "title": "Bütünleşik Onkoloji — Hisar Hospital",
+        "description": "Cerrahi, medikal ve radyasyon onkolojisi ekiplerinin ortak yaklaşımı ile bütünleşik kanser tedavisi."
+      },
+      "badge": "Bütünleşik Onkoloji",
+      "heroTitle": "Kanserde çok yönlü yaklaşım, tek çatı altında.",
+      "heroDesc": "Hisar Hospital Bütünleşik Onkoloji'de tecrübeli ekibimiz ve multidisipliner yaklaşımımızla, dünyadaki en güncel cihaz ve tedavi metotlarını kaliteli, etkin bir hizmet anlayışıyla birleştiriyoruz. Hastalarımızın ve yakınlarının kendilerini evlerinde hissetmelerini ve yaşam kalitelerini korumayı öncelik olarak benimsiyoruz.",
+      "heroImgAlt": "Hisar Hospital Bütünleşik Onkoloji Merkezi binası",
+      "randevuAl": "Randevu Al",
+      "breadcrumb": {
+        "hospitals": "Hastanelerimiz",
+        "current": "Bütünleşik Onkoloji"
+      },
+      "approachTitle": "Yaklaşımımız",
+      "approachDesc": "Her hasta için tümör konseyimizde bir araya gelen çok disiplinli ekip; tıbbi, cerrahi ve radyoterapi seçeneklerini bir arada değerlendirir. Tanıdan tedaviye ve rehabilitasyona kadar tüm süreç, hasta koordinatörümüz aracılığıyla planlanır ve takip edilir.",
+      "units": [
+        "Onkolojik Tanı",
+        "Tıbbi Genetik",
+        "Medikal Onkoloji",
+        "Girişimsel Onkoloji",
+        "Onkolojik Cerrahi",
+        "Radyasyon Onkolojisi",
+        "Hematolojik Onkoloji",
+        "Nükleer Tıp & Radyoaktif İyot",
+        "Hiperbarik Oksijen Tedavisi",
+        "Çocuk Hematolojisi ve Onkolojisi",
+        "Destekleyici Bakım",
+        "Palyatif Bakım"
+      ],
+      "council": {
+        "badge": "Multidisipliner Yaklaşım",
+        "title": "Tümör Konseyi ile doğru karar, doğru tedavi",
+        "weekly": "Her hafta düzenli toplanır",
+        "desc": "Her vaka; cerrahi, medikal ve radyasyon onkolojisi başta olmak üzere farklı branşlardan uzmanların bir arada değerlendirdiği tümör konseyinde ele alınır. Hastalarımız her hekime ayrı ayrı başvurmak zorunda kalmaz; tedavi kararı ortak alınır, süreç güvenle ilerler.",
+        "membersLabel": "Konseyde yer alan uzmanlar",
+        "members": [
+          "Onkoloji Diyetisyeni",
+          "Cerrahi Onkoloji",
+          "Medikal Onkoloji",
+          "Radyasyon Onkolojisi",
+          "Radyoloji",
+          "Nükleer Tıp",
+          "Girişimsel Onkoloji",
+          "Tıbbi Genetik",
+          "Patoloji",
+          "Hematoloji",
+          "Psikoonkolog"
+        ],
+        "membersNote": "Onkoloji diyetisyeni ve psikoonkolog dahil; tıbbi tedavinin yanında beslenme ve psikososyal destek de aynı ekipte planlanır.",
+        "benefits": [
+          {
+            "n": "01",
+            "t": "Tek başvuru, ortak karar",
+            "d": "Farklı branşlar aynı masada buluşur."
+          },
+          {
+            "n": "02",
+            "t": "Kişiye özel plan",
+            "d": "Tanı, evre ve moleküler profile göre."
+          },
+          {
+            "n": "03",
+            "t": "Güncel literatür",
+            "d": "Uluslararası kılavuzlar ve son yayınlar."
+          },
+          {
+            "n": "04",
+            "t": "Bütüncül destek",
+            "d": "Beslenme ve psikoonkoloji dahildir."
+          }
+        ]
+      },
+      "gallery": {
+        "eyebrow": "Merkezimizden",
+        "title": "Bütünleşik Onkoloji Merkezi Turu",
+        "items": [
+          {
+            "title": "Merkez Girişi",
+            "desc": "Comprehensive Cancer Center — özel giriş."
+          },
+          {
+            "title": "Karşılama & Danışma",
+            "desc": "Ferah lobi ve hasta yönlendirme birimi."
+          },
+          {
+            "title": "Bekleme Lounge",
+            "desc": "Hastalarımız ve refakatçileri için sakin bekleme alanı."
+          },
+          {
+            "title": "Poliklinik Bekleme",
+            "desc": "Poliklinik katlarında sessiz, konforlu bölümler."
+          },
+          {
+            "title": "Kemoterapi Üniteleri",
+            "desc": "Bireysel kabinlerde güvenli ve mahremiyet odaklı uygulama."
+          },
+          {
+            "title": "MR-LINAC Radyoterapi",
+            "desc": "Görüntü kılavuzluğunda milimetrik doğrulukta ışın tedavisi."
+          },
+          {
+            "title": "Robotik İlaç Hazırlama",
+            "desc": "Sitotoksik ilaçların steril, robotik hazırlanması."
+          },
+          {
+            "title": "Yatış Odaları",
+            "desc": "Doğal ışık alan konforlu tek kişilik hasta odaları."
+          }
+        ]
+      },
+      "highlights": [
+        {
+          "title": "Multidisipliner Tümör Konseyi",
+          "desc": "Cerrahi, medikal ve radyasyon onkolojisi ekiplerinin haftalık ortak vaka değerlendirmesi."
+        },
+        {
+          "title": "Kanıta Dayalı Tedavi",
+          "desc": "Güncel klinik kılavuzlar ve moleküler tanı ile kişiye özel tedavi planı."
+        },
+        {
+          "title": "Bütüncül Bakım",
+          "desc": "Tıbbi tedavinin yanında beslenme, psikoonkoloji ve palyatif bakım desteği."
+        },
+        {
+          "title": "Hasta Koordinatörü",
+          "desc": "Tanıdan takibe kadar tek bir yetkili ile kesintisiz süreç yönetimi."
+        }
+      ],
+      "numbersTitle": "Rakamlarla Merkezimiz",
+      "numbers": {
+        "years": "Yıl deneyim",
+        "experts": "Onkoloji uzmanı",
+        "subUnits": "Alt birim",
+        "support": "Hasta desteği"
+      },
+      "quickTitle": "Alt Birimlerimize Hızlı Erişim"
+    },
+    "en": {
+      "head": {
+        "title": "Integrated Oncology — Hisar Hospital",
+        "description": "Integrated cancer treatment through the joint approach of surgical, medical and radiation oncology teams."
+      },
+      "badge": "Integrated Oncology",
+      "heroTitle": "A multifaceted approach to cancer, under one roof.",
+      "heroDesc": "At Hisar Hospital Integrated Oncology, with our experienced team and multidisciplinary approach, we combine the world’s most up-to-date devices and treatment methods with a high-quality, effective service philosophy. We adopt as a priority helping our patients and their relatives feel at home and preserving their quality of life.",
+      "heroImgAlt": "Hisar Hospital Integrated Oncology Center building",
+      "randevuAl": "Book Appointment",
+      "breadcrumb": {
+        "hospitals": "Our Hospitals",
+        "current": "Integrated Oncology"
+      },
+      "approachTitle": "Our Approach",
+      "approachDesc": "For each patient, a multidisciplinary team convening at our tumor board evaluates the medical, surgical and radiotherapy options together. From diagnosis to treatment and rehabilitation, the entire process is planned and followed up through our patient coordinator.",
+      "units": [
+        "Oncologic Diagnosis",
+        "Medical Genetics",
+        "Medical Oncology",
+        "Interventional Oncology",
+        "Oncologic Surgery",
+        "Radiation Oncology",
+        "Hematologic Oncology",
+        "Nuclear Medicine & Radioactive Iodine",
+        "Hyperbaric Oxygen Therapy",
+        "Pediatric Hematology and Oncology",
+        "Supportive Care",
+        "Palliative Care"
+      ],
+      "council": {
+        "badge": "Multidisciplinary Approach",
+        "title": "The right decision, the right treatment with the Tumor Board",
+        "weekly": "Meets regularly every week",
+        "desc": "Every case is handled at the tumor board, where specialists from different branches — chiefly surgical, medical and radiation oncology — evaluate it together. Our patients do not have to consult each physician separately; the treatment decision is made jointly and the process proceeds safely.",
+        "membersLabel": "Specialists on the board",
+        "members": [
+          "Oncology Dietitian",
+          "Surgical Oncology",
+          "Medical Oncology",
+          "Radiation Oncology",
+          "Radiology",
+          "Nuclear Medicine",
+          "Interventional Oncology",
+          "Medical Genetics",
+          "Pathology",
+          "Hematology",
+          "Psycho-oncologist"
+        ],
+        "membersNote": "Including the oncology dietitian and psycho-oncologist; alongside medical treatment, nutrition and psychosocial support are planned within the same team.",
+        "benefits": [
+          {
+            "n": "01",
+            "t": "One application, joint decision",
+            "d": "Different branches meet at the same table."
+          },
+          {
+            "n": "02",
+            "t": "Personalized plan",
+            "d": "According to diagnosis, stage and molecular profile."
+          },
+          {
+            "n": "03",
+            "t": "Current literature",
+            "d": "International guidelines and the latest publications."
+          },
+          {
+            "n": "04",
+            "t": "Holistic support",
+            "d": "Nutrition and psycho-oncology are included."
+          }
+        ]
+      },
+      "gallery": {
+        "eyebrow": "From Our Center",
+        "title": "Integrated Oncology Center Tour",
+        "items": [
+          {
+            "title": "Center Entrance",
+            "desc": "Comprehensive Cancer Center — private entrance."
+          },
+          {
+            "title": "Reception & Information",
+            "desc": "A spacious lobby and patient guidance unit."
+          },
+          {
+            "title": "Waiting Lounge",
+            "desc": "A calm waiting area for our patients and their companions."
+          },
+          {
+            "title": "Outpatient Waiting",
+            "desc": "Quiet, comfortable sections on the outpatient floors."
+          },
+          {
+            "title": "Chemotherapy Units",
+            "desc": "Safe, privacy-focused administration in individual cabins."
+          },
+          {
+            "title": "MR-LINAC Radiotherapy",
+            "desc": "Image-guided radiation therapy with millimetric accuracy."
+          },
+          {
+            "title": "Robotic Drug Preparation",
+            "desc": "Sterile, robotic preparation of cytotoxic drugs."
+          },
+          {
+            "title": "Inpatient Rooms",
+            "desc": "Comfortable single patient rooms with natural light."
+          }
+        ]
+      },
+      "highlights": [
+        {
+          "title": "Multidisciplinary Tumor Board",
+          "desc": "Weekly joint case evaluation by surgical, medical and radiation oncology teams."
+        },
+        {
+          "title": "Evidence-Based Treatment",
+          "desc": "A personalized treatment plan with current clinical guidelines and molecular diagnostics."
+        },
+        {
+          "title": "Holistic Care",
+          "desc": "Alongside medical treatment, support in nutrition, psycho-oncology and palliative care."
+        },
+        {
+          "title": "Patient Coordinator",
+          "desc": "Uninterrupted process management from diagnosis to follow-up with a single point of contact."
+        }
+      ],
+      "numbersTitle": "Our Center in Numbers",
+      "numbers": {
+        "years": "Years of experience",
+        "experts": "Oncology specialists",
+        "subUnits": "Sub-units",
+        "support": "Patient support"
+      },
+      "quickTitle": "Quick Access to Our Sub-units"
+    }
+  },
+  "butunlesik-onkoloji-medikal-kadro": {
+    "tr": {
+      "head": {
+        "title": "Medikal Kadro — Bütünleşik Onkoloji",
+        "description": "Hisar Hospital Bütünleşik Onkoloji'de görev yapan medikal onkoloji, radyasyon onkolojisi, cerrahi ve destek branşlarından hekim kadrosu."
+      },
+      "suggestions": [
+        "Medikal onkoloji",
+        "Radyasyon onkolojisi",
+        "Cerrahi",
+        "Hematoloji",
+        "Üroloji"
+      ],
+      "crumbOnko": "Bütünleşik Onkoloji",
+      "crumbSelf": "Medikal Kadro",
+      "title": "Medikal Kadro",
+      "intro": "Bütünleşik Onkoloji Merkezimizde onkoloji, cerrahi, radyasyon, hematoloji ve destek branşlarından deneyimli hekimlerimiz multidisipliner tümör konseyinde bir araya gelir.",
+      "all": "Tümü",
+      "searchAria": "Hekim ara",
+      "profile": "Profil",
+      "appointment": "Randevu Al",
+      "empty": "Aramanızla eşleşen hekim bulunamadı."
+    },
+    "en": {
+      "head": {
+        "title": "Medical Staff — Integrated Oncology",
+        "description": "The physician staff from medical oncology, radiation oncology, surgery and support specialties working at Hisar Hospital Integrated Oncology."
+      },
+      "suggestions": [
+        "Medical oncology",
+        "Radiation oncology",
+        "Surgery",
+        "Hematology",
+        "Urology"
+      ],
+      "crumbOnko": "Integrated Oncology",
+      "crumbSelf": "Medical Staff",
+      "title": "Medical Staff",
+      "intro": "At our Integrated Oncology Center, our experienced physicians from oncology, surgery, radiation, hematology and support specialties come together in the multidisciplinary tumor board.",
+      "all": "All",
+      "searchAria": "Search physician",
+      "profile": "Profile",
+      "appointment": "Book Appointment",
+      "empty": "No physicians match your search."
+    }
+  },
+  "cerez-politikasi": {
+    "tr": {
+      "head": {
+        "title": "Çerez Politikası — Hisar Hospital",
+        "description": "Hisar Hospital web sitesinde kullanılan çerez türleri, süreleri ve tercih yönetimine ilişkin politika."
+      },
+      "header": "Çerez Politikası",
+      "crumbCorporate": "Kurumsal",
+      "crumbSelf": "Çerez Politikası",
+      "sections": [
+        {
+          "title": "Çerez Nedir?",
+          "body": [
+            "Çerezler; ziyaret ettiğiniz siteler tarafından cihazınıza yerleştirilen küçük metin dosyalarıdır.",
+            "Site deneyimini iyileştirmek, kullanıcı tercihlerini hatırlamak ve site kullanımına ilişkin analiz üretmek amacıyla kullanılır."
+          ]
+        },
+        {
+          "title": "Kullanılan Çerez Türleri",
+          "body": [
+            "Zorunlu çerezler: Sitenin temel işlevselliği için gereklidir; devre dışı bırakılamaz.",
+            "Performans çerezleri: Ziyaretçi davranışlarını anonim olarak analiz etmek için kullanılır.",
+            "İşlevsellik çerezleri: Dil, tema ve tercih ayarlarınızı hatırlar.",
+            "Pazarlama çerezleri: İlgi alanlarınıza uygun içerik ve reklam sunumu için kullanılır."
+          ]
+        },
+        {
+          "title": "Saklama Süreleri",
+          "body": [
+            "Oturum çerezleri tarayıcı kapatıldığında silinir.",
+            "Kalıcı çerezler belirli bir süre veya kullanıcı tarafından silinene kadar cihazda kalır."
+          ]
+        },
+        {
+          "title": "Üçüncü Taraf Çerezleri",
+          "body": [
+            "Analiz, harita ve video gibi hizmetler için ilgili sağlayıcıların çerezleri kullanılabilir.",
+            "Bu sağlayıcıların kendi gizlilik politikaları geçerlidir."
+          ]
+        },
+        {
+          "title": "Çerez Tercihlerinizi Yönetme",
+          "body": [
+            "Tarayıcı ayarlarınızdan çerezleri silebilir, engelleyebilir veya bildirim almayı seçebilirsiniz.",
+            "Zorunlu çerezlerin engellenmesi sitenin bazı işlevlerini etkileyebilir."
+          ]
+        },
+        {
+          "title": "Politikadaki Değişiklikler",
+          "body": [
+            "Çerez Politikamız gerektiğinde güncellenebilir; güncel metin bu sayfada yayınlanır."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Cookie Policy — Hisar Hospital",
+        "description": "Policy on the cookie types, retention periods and preference management used on the Hisar Hospital website."
+      },
+      "header": "Cookie Policy",
+      "crumbCorporate": "Corporate",
+      "crumbSelf": "Cookie Policy",
+      "sections": [
+        {
+          "title": "What Is a Cookie?",
+          "body": [
+            "Cookies are small text files placed on your device by the sites you visit.",
+            "They are used to improve the site experience, remember user preferences and generate analytics about how the site is used."
+          ]
+        },
+        {
+          "title": "Types of Cookies Used",
+          "body": [
+            "Essential cookies: Required for the core functionality of the site; they cannot be disabled.",
+            "Performance cookies: Used to analyze visitor behavior anonymously.",
+            "Functionality cookies: Remember your language, theme and preference settings.",
+            "Marketing cookies: Used to deliver content and advertising relevant to your interests."
+          ]
+        },
+        {
+          "title": "Retention Periods",
+          "body": [
+            "Session cookies are deleted when the browser is closed.",
+            "Persistent cookies remain on the device for a set period or until the user deletes them."
+          ]
+        },
+        {
+          "title": "Third-Party Cookies",
+          "body": [
+            "Cookies from the relevant providers may be used for services such as analytics, maps and video.",
+            "These providers' own privacy policies apply."
+          ]
+        },
+        {
+          "title": "Managing Your Cookie Preferences",
+          "body": [
+            "From your browser settings you can delete or block cookies, or choose to be notified about them.",
+            "Blocking essential cookies may affect some functions of the site."
+          ]
+        },
+        {
+          "title": "Changes to the Policy",
+          "body": [
+            "Our Cookie Policy may be updated when necessary; the current text is published on this page."
+          ]
+        }
+      ]
+    }
+  },
+  "doktora-sorun": {
+    "tr": {
+      "head": {
+        "title": "Doktora Sorun — Hisar Hospital",
+        "description": "Sağlığınızla ilgili sorularınızı Hisar Hospital uzman hekimlerine iletin; en kısa sürede e-posta ile dönüş alın.",
+        "ogTitle": "Doktora Sorun — Hisar Hospital",
+        "ogDescription": "Hisar Hospital uzman hekimlerine sağlık sorularınızı kolayca iletin."
+      },
+      "header": "Doktora Sorun",
+      "departments": [
+        "Kardiyoloji",
+        "Kalp ve Damar Cerrahisi",
+        "Genel Cerrahi",
+        "Ortopedi ve Travmatoloji",
+        "Üroloji",
+        "Kadın Hastalıkları ve Doğum",
+        "Çocuk Sağlığı ve Hastalıkları",
+        "Göz Hastalıkları",
+        "Kulak Burun Boğaz",
+        "Nöroloji",
+        "Beyin ve Sinir Cerrahisi",
+        "Dahiliye",
+        "Diğer / Emin değilim"
+      ],
+      "labels": {
+        "fullName": "Ad Soyad",
+        "email": "E-posta",
+        "phone": "Telefon (opsiyonel)",
+        "department": "Bölüm",
+        "question": "Sorunuz",
+        "questionPlaceholder": "Sağlık durumunuzu ve sorunuzu olabildiğince açık şekilde yazın…",
+        "selectPlaceholder": "Seçiniz…",
+        "submit": "Soruyu Gönder"
+      },
+      "kvkk": {
+        "pre": "",
+        "link": "KVKK Aydınlatma Metni",
+        "post": "’ni okudum ve kişisel verilerimin işlenmesini onaylıyorum."
+      },
+      "errors": {
+        "fullName": "Ad Soyad en az 2 karakter olmalı",
+        "email": "Geçerli bir e-posta giriniz",
+        "phone": "Telefon numaranızı kontrol edin",
+        "department": "Lütfen bir bölüm seçin",
+        "question": "Sorunuz en az 20 karakter olmalı",
+        "kvkk": "KVKK onayı zorunludur"
+      },
+      "success": {
+        "title": "Sorunuz alındı",
+        "body": "Talebiniz alındı, en kısa sürede uzman hekimimiz e-posta ile dönüş yapacaktır.",
+        "backLabel": "Online Hizmetler’e dön"
+      },
+      "tiles": [
+        {
+          "title": "Bilgi amaçlıdır",
+          "body": "Verilen yanıtlar bilgilendirme amaçlıdır ve fiziksel muayene yerine geçmez. Tanı ve tedavi için randevu önerilebilir."
+        },
+        {
+          "title": "Doğru bölüm yönlendirmesi",
+          "body": "Bölüm seçiminden emin değilseniz “Diğer / Emin değilim” seçeneğini işaretleyin; ekibimiz uygun uzmana yönlendirir."
+        },
+        {
+          "title": "Gizlilik",
+          "body": "Sağlık bilgileriniz yalnızca sorunuzu yanıtlamak amacıyla ilgili uzmanla paylaşılır."
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Ask a Doctor — Hisar Hospital",
+        "description": "Send your health questions to Hisar Hospital's expert physicians and receive a reply by email as soon as possible.",
+        "ogTitle": "Ask a Doctor — Hisar Hospital",
+        "ogDescription": "Easily send your health questions to Hisar Hospital's expert physicians."
+      },
+      "header": "Ask a Doctor",
+      "departments": [
+        "Cardiology",
+        "Cardiovascular Surgery",
+        "General Surgery",
+        "Orthopedics and Traumatology",
+        "Urology",
+        "Obstetrics and Gynecology",
+        "Pediatric Health and Diseases",
+        "Ophthalmology",
+        "Ear, Nose and Throat",
+        "Neurology",
+        "Neurosurgery",
+        "Internal Medicine",
+        "Other / I'm not sure"
+      ],
+      "labels": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone (optional)",
+        "department": "Department",
+        "question": "Your Question",
+        "questionPlaceholder": "Describe your health situation and question as clearly as possible…",
+        "selectPlaceholder": "Select…",
+        "submit": "Send Question"
+      },
+      "kvkk": {
+        "pre": "I have read the ",
+        "link": "KVKK Disclosure Statement",
+        "post": " and consent to the processing of my personal data."
+      },
+      "errors": {
+        "fullName": "Full name must be at least 2 characters",
+        "email": "Please enter a valid email",
+        "phone": "Please check your phone number",
+        "department": "Please select a department",
+        "question": "Your question must be at least 20 characters",
+        "kvkk": "KVKK consent is required"
+      },
+      "success": {
+        "title": "Your question has been received",
+        "body": "Your request has been received; one of our specialists will get back to you by email shortly.",
+        "backLabel": "Back to Online Services"
+      },
+      "tiles": [
+        {
+          "title": "For information only",
+          "body": "The answers provided are for information only and do not replace a physical examination. An appointment may be recommended for diagnosis and treatment."
+        },
+        {
+          "title": "Routing to the right department",
+          "body": "If you are not sure which department to choose, select “Other / I’m not sure”; our team will direct you to the appropriate specialist."
+        },
+        {
+          "title": "Privacy",
+          "body": "Your health information is shared with the relevant specialist only in order to answer your question."
+        }
+      ]
+    }
+  },
+  "doktorlarimiz": {
+    "tr": {
+      "head": {
+        "title": "Doktorlarımız — Hisar Hospital",
+        "description": "Alanında uzman akademik hekim kadromuzla tanışın. Bölüme göre filtreleyin, hızlıca randevu talebi oluşturun."
+      },
+      "title": "Doktorlarımız",
+      "subtitle": "Uzman hekim kadromuzu bölüm, isim veya hastaneye göre filtreleyin.",
+      "searchPlaceholder": "Ara",
+      "clear": "Temizle",
+      "allDepartments": "Tüm Bölümler",
+      "allHospitals": "Tüm Hastaneler",
+      "countLabel": "doktor listeleniyor",
+      "empty": "Aramanıza uygun sonuç bulunamadı.",
+      "appointmentAria": "Randevu al",
+      "profileCta": "Profili İncele",
+      "suggestions": [
+        "Basri Çakıroğlu",
+        "Gürsel Saka",
+        "Kardiyoloji",
+        "Ortopedi",
+        "Yalçın İşcan"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Our Doctors — Hisar Hospital",
+        "description": "Meet our expert academic physicians. Filter by department and quickly request an appointment."
+      },
+      "title": "Our Doctors",
+      "subtitle": "Filter our expert physicians by department, name or hospital.",
+      "searchPlaceholder": "Search",
+      "clear": "Clear",
+      "allDepartments": "All Departments",
+      "allHospitals": "All Hospitals",
+      "countLabel": "doctors listed",
+      "empty": "No result matched your search.",
+      "appointmentAria": "Book appointment",
+      "profileCta": "View Profile",
+      "suggestions": [
+        "Basri Çakıroğlu",
+        "Gürsel Saka",
+        "Cardiology",
+        "Orthopaedics",
+        "Yalçın İşcan"
+      ]
+    }
+  },
+  "etkinlikler": {
+    "tr": {
+      "head": {
+        "title": "Etkinlikler — Hisar Hospital",
+        "description": "Hisar Hospital tarafından düzenlenen sağlık farkındalık etkinlikleri, eğitimler ve toplantılar."
+      },
+      "headerTitle": "Etkinlikler",
+      "headerSubtitle": "Sağlık farkındalık günleri, eğitimler ve topluluk etkinliklerimiz.",
+      "crumbKurumsal": "Kurumsal",
+      "crumbEvents": "Etkinlikler",
+      "viewDetails": "Detayları gör"
+    },
+    "en": {
+      "head": {
+        "title": "Events — Hisar Hospital",
+        "description": "Health awareness events, trainings and meetings organized by Hisar Hospital."
+      },
+      "headerTitle": "Events",
+      "headerSubtitle": "Our health awareness days, trainings and community events.",
+      "crumbKurumsal": "Corporate",
+      "crumbEvents": "Events",
+      "viewDetails": "View details"
+    }
+  },
+  "gebe-okulu": {
+    "tr": {
+      "head": {
+        "title": "Gebe Okulu — Hisar Hospital",
+        "description": "Gebelik, doğuma hazırlık, emzirme ve yenidoğan bakımı üzerine uzman eğitmenlerle Gebe Okulu programı."
+      },
+      "heroBadge": "Gebe Okulu",
+      "heroTitle": "Anneliğe güvenli, bilinçli ve destekli bir başlangıç.",
+      "heroDesc": "Uzman kadın doğum hekimleri, hemşireler ve psikologlar eşliğinde gebelik, doğum ve doğum sonrası dönemi kapsayan çok başlıklı bir eğitim programı.",
+      "register": "Kayıt Ol",
+      "crumbCorporate": "Kurumsal",
+      "crumbCurrent": "Gebe Okulu",
+      "whatTitle": "Gebe Okulu Nedir?",
+      "whatBody": "Gebelikten doğum sonrası döneme kadar anne adaylarının ve eşlerinin bilgi, farkındalık ve öz-güven kazandığı yapılandırılmış bir eğitim programıdır. Programımız; tıbbi bilgi, uygulamalı egzersizler ve grup deneyimini bir araya getirir.",
+      "whoTitle": "Kimler Katılabilir?",
+      "who": [
+        "16. gebelik haftasından itibaren tüm anne adayları",
+        "Eşler ve doğuma refakat edecek yakınlar",
+        "Doğum sonrası dönemde destek ihtiyacı olan aileler"
+      ],
+      "topicsTitle": "Eğitim İçerikleri",
+      "topics": [
+        {
+          "title": "Gebelik Süreci",
+          "desc": "Trimester bazlı fiziksel ve duygusal değişiklikler, beslenme ve rutin takip."
+        },
+        {
+          "title": "Doğuma Hazırlık",
+          "desc": "Normal doğum ve sezaryen süreci, nefes ve rahatlama teknikleri, doğum çantası."
+        },
+        {
+          "title": "Emzirme Eğitimi",
+          "desc": "İlk emzirme, laktasyon, doğru pozisyonlar ve sık karşılaşılan güçlükler."
+        },
+        {
+          "title": "Yenidoğan Bakımı",
+          "desc": "Beslenme, uyku, banyo, göbek ve cilt bakımı, aşı takvimi."
+        },
+        {
+          "title": "Anne Psikolojisi",
+          "desc": "Doğum sonrası duygusal değişimler, aile içi destek, postpartum farkındalık."
+        }
+      ],
+      "programTitle": "Eğitim Programı",
+      "program": [
+        {
+          "week": "Hafta 1",
+          "title": "Tanışma & Gebelikte Sağlıklı Yaşam",
+          "date": "Cumartesi 10:00 – 12:00"
+        },
+        {
+          "week": "Hafta 2",
+          "title": "Doğuma Fiziksel Hazırlık",
+          "date": "Cumartesi 10:00 – 12:00"
+        },
+        {
+          "week": "Hafta 3",
+          "title": "Nefes, Rahatlama ve Doğum Süreci",
+          "date": "Cumartesi 10:00 – 12:00"
+        },
+        {
+          "week": "Hafta 4",
+          "title": "Emzirme ve Yenidoğan Bakımı",
+          "date": "Cumartesi 10:00 – 12:00"
+        }
+      ],
+      "instructorsTitle": "Eğitimciler",
+      "instructors": [
+        {
+          "role": "Kadın Hastalıkları ve Doğum Uzmanı",
+          "who": "Program içeriğinin tıbbi çerçevesini yürütür."
+        },
+        {
+          "role": "Doğum ve Emzirme Danışmanı",
+          "who": "Uygulamalı doğum ve emzirme oturumlarını yönetir."
+        },
+        {
+          "role": "Psikolog",
+          "who": "Duygusal hazırlık ve postpartum destek oturumlarını yürütür."
+        }
+      ],
+      "faqEyebrow": "— SSS",
+      "faqTitle": "Sık Sorulan Sorular",
+      "faq": [
+        [
+          "Program ücretli mi?",
+          "Program çerçevesi ve ücretlendirme detayları için İletişim Merkezimizle görüşebilirsiniz."
+        ],
+        [
+          "Eşim de katılabilir mi?",
+          "Evet, belirli oturumlar özellikle eşlerin katılımı için tasarlanmıştır."
+        ],
+        [
+          "Kaç kişilik gruplar oluşturuluyor?",
+          "Verimli bir deneyim için gruplar sınırlı sayıda anne adayıyla oluşturulur."
+        ]
+      ],
+      "formBadge": "Kayıt Formu",
+      "formTitle": "Yaklaşan programa kayıt olun",
+      "formDesc": "Bilgilerinizi bırakın; program takvimi netleştiğinde sizi bilgilendirelim.",
+      "formNote": "Form yalnızca tasarım prototipidir; kayıt gönderimi aktif değildir.",
+      "fName": "Ad Soyad",
+      "fWeek": "Gebelik haftası",
+      "fPhone": "Telefon",
+      "fEmail": "E-posta",
+      "fNoteAria": "Not",
+      "fNotePlaceholder": "Notunuz (opsiyonel)"
+    },
+    "en": {
+      "head": {
+        "title": "Pregnancy School — Hisar Hospital",
+        "description": "The Pregnancy School program with expert instructors on pregnancy, birth preparation, breastfeeding and newborn care."
+      },
+      "heroBadge": "Pregnancy School",
+      "heroTitle": "A safe, informed and supported start to motherhood.",
+      "heroDesc": "A multi-topic training program covering pregnancy, birth and the postpartum period, accompanied by expert obstetricians, nurses and psychologists.",
+      "register": "Register",
+      "crumbCorporate": "Corporate",
+      "crumbCurrent": "Pregnancy School",
+      "whatTitle": "What Is the Pregnancy School?",
+      "whatBody": "It is a structured training program in which expectant mothers and their partners gain knowledge, awareness and self-confidence from pregnancy through the postpartum period. Our program brings together medical knowledge, practical exercises and group experience.",
+      "whoTitle": "Who Can Participate?",
+      "who": [
+        "All expectant mothers from the 16th week of pregnancy",
+        "Partners and relatives who will accompany the birth",
+        "Families in need of support during the postpartum period"
+      ],
+      "topicsTitle": "Training Content",
+      "topics": [
+        {
+          "title": "Pregnancy Process",
+          "desc": "Trimester-based physical and emotional changes, nutrition and routine follow-up."
+        },
+        {
+          "title": "Birth Preparation",
+          "desc": "Vaginal birth and cesarean process, breathing and relaxation techniques, hospital bag."
+        },
+        {
+          "title": "Breastfeeding Education",
+          "desc": "First breastfeeding, lactation, correct positions and commonly encountered difficulties."
+        },
+        {
+          "title": "Newborn Care",
+          "desc": "Feeding, sleep, bathing, umbilical and skin care, vaccination schedule."
+        },
+        {
+          "title": "Maternal Psychology",
+          "desc": "Postpartum emotional changes, family support, postpartum awareness."
+        }
+      ],
+      "programTitle": "Training Program",
+      "program": [
+        {
+          "week": "Week 1",
+          "title": "Introduction & Healthy Living During Pregnancy",
+          "date": "Saturday 10:00 – 12:00"
+        },
+        {
+          "week": "Week 2",
+          "title": "Physical Preparation for Birth",
+          "date": "Saturday 10:00 – 12:00"
+        },
+        {
+          "week": "Week 3",
+          "title": "Breathing, Relaxation and the Birth Process",
+          "date": "Saturday 10:00 – 12:00"
+        },
+        {
+          "week": "Week 4",
+          "title": "Breastfeeding and Newborn Care",
+          "date": "Saturday 10:00 – 12:00"
+        }
+      ],
+      "instructorsTitle": "Instructors",
+      "instructors": [
+        {
+          "role": "Obstetrics and Gynecology Specialist",
+          "who": "Leads the medical framework of the program content."
+        },
+        {
+          "role": "Birth and Breastfeeding Consultant",
+          "who": "Manages the practical birth and breastfeeding sessions."
+        },
+        {
+          "role": "Psychologist",
+          "who": "Leads the emotional preparation and postpartum support sessions."
+        }
+      ],
+      "faqEyebrow": "— FAQ",
+      "faqTitle": "Frequently Asked Questions",
+      "faq": [
+        [
+          "Is the program paid?",
+          "You can contact our Communication Center for details about the program framework and pricing."
+        ],
+        [
+          "Can my partner also attend?",
+          "Yes, certain sessions are specially designed for the participation of partners."
+        ],
+        [
+          "How many people are in each group?",
+          "For an effective experience, groups are formed with a limited number of expectant mothers."
+        ]
+      ],
+      "formBadge": "Registration Form",
+      "formTitle": "Register for the upcoming program",
+      "formDesc": "Leave your details; we'll inform you once the program schedule is confirmed.",
+      "formNote": "This form is only a design prototype; submission is not active.",
+      "fName": "Full Name",
+      "fWeek": "Week of pregnancy",
+      "fPhone": "Phone",
+      "fEmail": "Email",
+      "fNoteAria": "Note",
+      "fNotePlaceholder": "Your note (optional)"
+    }
+  },
+  "guvenli-cerrahi": {
+    "tr": {
+      "head": {
+        "title": "Güvenli Cerrahi — Hisar Hospital",
+        "description": "WHO güvenli cerrahi kontrol listesi ve ekip iletişim protokolleriyle ameliyat güvenliği yaklaşımımız."
+      },
+      "pageTitle": "Güvenli Cerrahi",
+      "pageSubtitle": "Ameliyat güvenliğini uluslararası standartlarda güvence altına alan protokollerimiz.",
+      "crumbs": {
+        "kurumsal": "Kurumsal",
+        "kalite": "Kalite Çalışmaları",
+        "self": "Güvenli Cerrahi"
+      },
+      "heroEyebrow": "Güvenli Cerrahi Yaklaşımımız",
+      "heroTitle": "Doğru hasta, doğru taraf, doğru işlem.",
+      "heroBody": "Cerrahi güvenlik; kontrol listesi, ekip iletişimi ve teknoloji altyapısının birlikte çalıştığı çok katmanlı bir sistemdir. Hisar Hospital'da tüm ameliyathanelerde bu sistem standart olarak uygulanır.",
+      "pillarsTitle": "Temel Uygulamalarımız",
+      "pillars": [
+        {
+          "title": "WHO Kontrol Listesi",
+          "desc": "Ameliyat öncesi, sırası ve sonrasında Dünya Sağlık Örgütü güvenli cerrahi kontrol listesinin sistematik uygulanması."
+        },
+        {
+          "title": "Ekip İçi İletişim",
+          "desc": "Cerrah, anestezi, hemşire ve teknisyen ekiplerinin standart brifing ve debrifing toplantıları."
+        },
+        {
+          "title": "Hasta Doğrulama",
+          "desc": "Kimlik, taraf/işlem ve alerji doğrulaması dahil çift kontrol süreçleri."
+        },
+        {
+          "title": "Vital Takip",
+          "desc": "Ameliyat sırası ve sonrasında ileri monitörizasyon ile hasta güvenliğinin kesintisiz izlenmesi."
+        }
+      ],
+      "steps": [
+        {
+          "step": "1",
+          "title": "Sign In",
+          "desc": "Anestezi başlamadan; kimlik, taraf, işlem, alerji ve zor havayolu değerlendirmesi."
+        },
+        {
+          "step": "2",
+          "title": "Time Out",
+          "desc": "Cilt kesisinden hemen önce tüm ekiple işlem, kritik adımlar ve antibiyotik profilaksisi gözden geçirilir."
+        },
+        {
+          "step": "3",
+          "title": "Sign Out",
+          "desc": "Kapanış öncesi işlem adı, alet-spanç sayımı ve numuneler doğrulanır; taburculuk planı konuşulur."
+        }
+      ],
+      "resultLabel": "Sonuç",
+      "resultBody": "Güvenli cerrahi protokolleri; komplikasyon oranlarını, ameliyathane içi hataları ve istenmeyen olayları azaltmakta; hasta güvenini artırmaktadır. Süreç göstergeleri düzenli olarak izlenir ve iyileştirme projelerine dönüştürülür."
+    },
+    "en": {
+      "head": {
+        "title": "Safe Surgery — Hisar Hospital",
+        "description": "Our surgical safety approach with the WHO safe surgery checklist and team communication protocols."
+      },
+      "pageTitle": "Safe Surgery",
+      "pageSubtitle": "Our protocols that safeguard surgical safety to international standards.",
+      "crumbs": {
+        "kurumsal": "Corporate",
+        "kalite": "Quality Work",
+        "self": "Safe Surgery"
+      },
+      "heroEyebrow": "Our Safe Surgery Approach",
+      "heroTitle": "Right patient, right side, right procedure.",
+      "heroBody": "Surgical safety is a multi-layered system in which the checklist, team communication and technology infrastructure work together. At Hisar Hospital, this system is applied as standard in all operating rooms.",
+      "pillarsTitle": "Our Core Practices",
+      "pillars": [
+        {
+          "title": "WHO Checklist",
+          "desc": "Systematic application of the World Health Organization safe surgery checklist before, during and after the operation."
+        },
+        {
+          "title": "Team Communication",
+          "desc": "Standard briefing and debriefing meetings of the surgeon, anaesthesia, nurse and technician teams."
+        },
+        {
+          "title": "Patient Verification",
+          "desc": "Double-check processes including identity, side/procedure and allergy verification."
+        },
+        {
+          "title": "Vital Monitoring",
+          "desc": "Continuous monitoring of patient safety with advanced monitorization during and after the operation."
+        }
+      ],
+      "steps": [
+        {
+          "step": "1",
+          "title": "Sign In",
+          "desc": "Before anaesthesia begins; assessment of identity, side, procedure, allergy and difficult airway."
+        },
+        {
+          "step": "2",
+          "title": "Time Out",
+          "desc": "Immediately before the skin incision, the procedure, critical steps and antibiotic prophylaxis are reviewed with the whole team."
+        },
+        {
+          "step": "3",
+          "title": "Sign Out",
+          "desc": "Before closure, the procedure name, instrument-swab count and specimens are verified; the discharge plan is discussed."
+        }
+      ],
+      "resultLabel": "Outcome",
+      "resultBody": "Safe surgery protocols reduce complication rates, intraoperative errors and adverse events, and increase patient trust. Process indicators are monitored regularly and turned into improvement projects."
+    }
+  },
+  "hastaliklar": {
+    "tr": {
+      "head": {
+        "title": "Hastalıklar — Hisar Hospital",
+        "description": "Sık karşılaşılan hastalıklar, belirtileri ve tedavi yaklaşımları için Hisar Hospital hastalık rehberi.",
+        "ogTitle": "Hastalıklar — Hisar Hospital",
+        "ogDescription": "Hastalık rehberi: belirtiler, tanı ve tedavi yöntemleri."
+      },
+      "breadcrumb": "Hastalıklar",
+      "title": "Hastalıklar",
+      "subtitle": "Belirtileri, nedenleri ve tedavi seçenekleriyle hastalıklar hakkında güvenilir bilgi.",
+      "searchPlaceholder": "Hastalık ara",
+      "searchAria": "Hastalık ara",
+      "clear": "Temizle",
+      "allDepartments": "Tüm Bölümler",
+      "filter": "Filtre",
+      "alphabetAll": "Tümü",
+      "countLabel": "hastalık",
+      "empty": "Aramanıza uygun hastalık bulunamadı.",
+      "clearFilters": "Filtreleri Temizle",
+      "loadMore": "Daha Fazla Göster",
+      "suggestions": [
+        "Retina Dekolmanı",
+        "Kolesistit",
+        "Migren",
+        "Bel Fıtığı",
+        "Hipertansiyon"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Diseases — Hisar Hospital",
+        "description": "Hisar Hospital's disease guide for common conditions, their symptoms and treatment approaches.",
+        "ogTitle": "Diseases — Hisar Hospital",
+        "ogDescription": "Disease guide: symptoms, diagnosis and treatment methods."
+      },
+      "breadcrumb": "Diseases",
+      "title": "Diseases",
+      "subtitle": "Reliable information about conditions, with their symptoms, causes and treatment options.",
+      "searchPlaceholder": "Search a disease",
+      "searchAria": "Search a disease",
+      "clear": "Clear",
+      "allDepartments": "All Departments",
+      "filter": "Filter",
+      "alphabetAll": "All",
+      "countLabel": "diseases",
+      "empty": "No disease matched your search.",
+      "clearFilters": "Clear Filters",
+      "loadMore": "Show More",
+      "suggestions": [
+        "Retinal Detachment",
+        "Cholecystitis",
+        "Migraine",
+        "Herniated Disc",
+        "Hypertension"
+      ]
+    }
+  },
+  "hastanelerimiz": {
+    "tr": {
+      "head": {
+        "title": "Hastanelerimiz — Hisar Hospital",
+        "description": "Hisar Hospital hastane şubeleri: Intercontinental, Çamlıca ve yakında Avrupa. Konum, iletişim ve randevu bilgileri.",
+        "ogTitle": "Hastanelerimiz — Hisar Hospital",
+        "ogDescription": "Hisar Hospital'ın hastane şubeleri ve hizmet noktaları."
+      },
+      "breadcrumb": "Hastanelerimiz",
+      "title": "Hastanelerimiz",
+      "subtitle": "İstanbul'un iki yakasında; deneyimli hekim kadromuz ve ileri teknoloji altyapımızla yanınızdayız.",
+      "countLabel": "hastane",
+      "comingSoonBadge": "Çok Yakında",
+      "inspect": "İncele",
+      "soon": "Yakında",
+      "directions": "Yol",
+      "appointment": "Randevu",
+      "extras": {
+        "intercontinental": {
+          "blurb": "JCI onaylı, çok disiplinli genel hastane. Onkoloji, robotik cerrahi ve ileri kardiyoloji merkezleri.",
+          "highlights": [
+            "Onkoloji Merkezi",
+            "Da Vinci Robotik Cerrahi",
+            "24 Saat Acil Servis",
+            "İleri Görüntüleme"
+          ]
+        },
+        "camlica": {
+          "blurb": "Poliklinik ağırlıklı, aile odaklı sağlık hizmeti. Kadın-doğum, çocuk sağlığı ve check-up birimleri.",
+          "highlights": [
+            "Kadın Doğum",
+            "Çocuk Sağlığı",
+            "Check-Up",
+            "Fizik Tedavi"
+          ]
+        },
+        "avrupa": {
+          "blurb": "Avrupa Yakası'ndaki yeni hastanemiz; modern altyapı, geniş uzman kadro ve dijital hasta deneyimiyle yakında açılıyor.",
+          "highlights": [
+            "Modern Altyapı",
+            "Geniş Kadro",
+            "Dijital Deneyim"
+          ]
+        }
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Our Hospitals — Hisar Hospital",
+        "description": "Hisar Hospital branches: Intercontinental, Çamlıca and soon Avrupa. Location, contact and appointment information.",
+        "ogTitle": "Our Hospitals — Hisar Hospital",
+        "ogDescription": "Hisar Hospital's branches and service points."
+      },
+      "breadcrumb": "Our Hospitals",
+      "title": "Our Hospitals",
+      "subtitle": "On both sides of Istanbul; by your side with our experienced physicians and advanced technology.",
+      "countLabel": "hospitals",
+      "comingSoonBadge": "Coming Soon",
+      "inspect": "Explore",
+      "soon": "Soon",
+      "directions": "Route",
+      "appointment": "Appointment",
+      "extras": {
+        "intercontinental": {
+          "blurb": "A JCI-accredited, multidisciplinary general hospital. Oncology, robotic surgery and advanced cardiology centers.",
+          "highlights": [
+            "Oncology Center",
+            "Da Vinci Robotic Surgery",
+            "24-Hour Emergency",
+            "Advanced Imaging"
+          ]
+        },
+        "camlica": {
+          "blurb": "Outpatient-focused, family-oriented healthcare. Obstetrics, paediatrics and check-up units.",
+          "highlights": [
+            "Obstetrics & Gynaecology",
+            "Paediatrics",
+            "Check-Up",
+            "Physiotherapy"
+          ]
+        },
+        "avrupa": {
+          "blurb": "Our new hospital on the European side; opening soon with modern infrastructure, a broad expert team and a digital patient experience.",
+          "highlights": [
+            "Modern Infrastructure",
+            "Broad Team",
+            "Digital Experience"
+          ]
+        }
+      }
+    }
+  },
+  "iletisim": {
+    "tr": {
+      "head": {
+        "title": "İletişim — Hisar Hospital",
+        "description": "Randevu, bilgi ve yol tarifi talepleriniz için Hisar Hospital iletişim kanallarına kolayca ulaşın.",
+        "ogTitle": "İletişim — Hisar Hospital",
+        "ogDescription": "Hisar Hospital kampüsleri, harita ve mesaj formu."
+      },
+      "breadcrumb": "İletişim",
+      "hero": {
+        "eyebrow": "İletişim",
+        "title": "Size en yakın kanaldan ulaşın",
+        "desc": "Randevu, ikinci görüş, uluslararası hasta ve genel bilgi talepleriniz için 7/24 İletişim Merkezi, hastane telefonları veya mesaj formumuz üzerinden bize ulaşabilirsiniz."
+      },
+      "channels": [
+        {
+          "label": "İletişim Merkezi",
+          "sub": "7/24 kesintisiz"
+        },
+        {
+          "label": "Santral",
+          "sub": "Hastane bağlantısı"
+        },
+        {
+          "label": "E-Posta",
+          "sub": "İş günü içinde yanıt"
+        },
+        {
+          "label": "WhatsApp",
+          "sub": "Hızlı mesaj"
+        }
+      ],
+      "rail": {
+        "selectHospital": "Hastane seçin",
+        "soonBadge": "Yakında",
+        "getDirections": "Yol Tarifi Al",
+        "mapSoonTitle": "Avrupa hastanemiz yakında hizmete girecek.",
+        "mapSoonBody": "Açılış duyuruları için bültenimize kayıt olabilirsiniz.",
+        "mapTitleSuffix": "harita"
+      },
+      "grid": {
+        "eyebrow": "Hastanelerimiz",
+        "title": "Tüm Hisar Hospital adresleri",
+        "soonBadge": "Yakında",
+        "viewOnMap": "Haritada Gör",
+        "openingSoon": "Yakında Açılıyor"
+      },
+      "form": {
+        "subjects": [
+          "Randevu Talebi",
+          "Uluslararası Hasta",
+          "Kurumsal",
+          "Basın",
+          "Öneri / Şikayet",
+          "Kariyer",
+          "Diğer"
+        ],
+        "eyebrow": "Mesaj Formu",
+        "title": "Bize mesaj bırakın",
+        "desc": "Formu doldurun, ekibimiz iş günü içinde size dönüş yapsın. Acil durumlar için lütfen İletişim Merkezini arayın.",
+        "sentTitle": "Mesajınız alındı",
+        "sentBodyPre": "Talebiniz alındı, en kısa sürede iş günü içinde size dönüş yapacağız. Acil durumlar için İletişim Merkezi (",
+        "sentBodyPost": ") 7/24 hizmetinizdedir.",
+        "labels": {
+          "name": "Ad Soyad",
+          "phone": "Telefon",
+          "phonePlaceholder": "0 5xx xxx xx xx",
+          "email": "E-Posta",
+          "subject": "Konu",
+          "message": "Mesajınız",
+          "selectPlaceholder": "Seçiniz…",
+          "kvkk": "KVKK aydınlatma metnini okudum, kişisel verilerimin işlenmesine onay veriyorum.",
+          "info": "Ortalama yanıt süresi: iş günü içinde 4 saat.",
+          "submit": "Gönder"
+        },
+        "prototypeNote": "Bu form bir prototiptir; gönderim aktif değildir.",
+        "errors": {
+          "name": "Ad soyad gerekli",
+          "phone": "Geçerli bir telefon girin",
+          "email": "Geçerli bir e-posta girin",
+          "subject": "Konu seçin",
+          "message": "Lütfen en az 10 karakter yazın",
+          "kvkk": "KVKK onayı gerekli"
+        }
+      },
+      "campuses": {
+        "intercontinental": {
+          "name": "Hisar Hospital Intercontinental",
+          "area": "Ümraniye, İstanbul",
+          "address": "Yanyanevler Mah. Site Yolu Cd. No:7, Ümraniye / İstanbul",
+          "hours": "7/24 Acil • Poliklinik 08:00–20:00"
+        },
+        "camlica": {
+          "name": "Hisar Hospital Çamlıca",
+          "area": "Üsküdar, İstanbul",
+          "address": "Çamlıca Mah, Üsküdar / İstanbul",
+          "hours": "7/24 Acil • Poliklinik 08:00–20:00"
+        },
+        "avrupa": {
+          "name": "Hisar Hospital Avrupa",
+          "area": "İstanbul Avrupa Yakası"
+        }
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Contact — Hisar Hospital",
+        "description": "Easily reach Hisar Hospital's communication channels for your appointment, information and directions requests.",
+        "ogTitle": "Contact — Hisar Hospital",
+        "ogDescription": "Hisar Hospital campuses, map and message form."
+      },
+      "breadcrumb": "Contact",
+      "hero": {
+        "eyebrow": "Contact",
+        "title": "Reach us through the channel nearest you",
+        "desc": "For appointments, second opinions, international patient and general information requests, you can reach us via our 24/7 Contact Center, hospital phone lines or our message form."
+      },
+      "channels": [
+        {
+          "label": "Contact Center",
+          "sub": "24/7, uninterrupted"
+        },
+        {
+          "label": "Switchboard",
+          "sub": "Hospital connection"
+        },
+        {
+          "label": "Email",
+          "sub": "Reply within a business day"
+        },
+        {
+          "label": "WhatsApp",
+          "sub": "Quick message"
+        }
+      ],
+      "rail": {
+        "selectHospital": "Select a hospital",
+        "soonBadge": "Soon",
+        "getDirections": "Get Directions",
+        "mapSoonTitle": "Our European-side hospital will open soon.",
+        "mapSoonBody": "You can subscribe to our newsletter for opening announcements.",
+        "mapTitleSuffix": "map"
+      },
+      "grid": {
+        "eyebrow": "Our Hospitals",
+        "title": "All Hisar Hospital addresses",
+        "soonBadge": "Soon",
+        "viewOnMap": "View on Map",
+        "openingSoon": "Opening Soon"
+      },
+      "form": {
+        "subjects": [
+          "Appointment Request",
+          "International Patient",
+          "Corporate",
+          "Press",
+          "Suggestion / Complaint",
+          "Career",
+          "Other"
+        ],
+        "eyebrow": "Message Form",
+        "title": "Leave us a message",
+        "desc": "Fill out the form and our team will get back to you within a business day. For emergencies, please call the Contact Center.",
+        "sentTitle": "Your message has been received",
+        "sentBodyPre": "Your request has been received; we will get back to you within a business day. For emergencies, the Contact Center (",
+        "sentBodyPost": ") is available 24/7.",
+        "labels": {
+          "name": "Full Name",
+          "phone": "Phone",
+          "phonePlaceholder": "0 5xx xxx xx xx",
+          "email": "Email",
+          "subject": "Subject",
+          "message": "Your Message",
+          "selectPlaceholder": "Select…",
+          "kvkk": "I have read the KVKK disclosure statement and consent to the processing of my personal data.",
+          "info": "Average response time: 4 hours within a business day.",
+          "submit": "Send"
+        },
+        "prototypeNote": "This form is a prototype; submission is not active.",
+        "errors": {
+          "name": "Full name is required",
+          "phone": "Please enter a valid phone number",
+          "email": "Please enter a valid email",
+          "subject": "Please select a subject",
+          "message": "Please write at least 10 characters",
+          "kvkk": "KVKK consent is required"
+        }
+      },
+      "campuses": {
+        "intercontinental": {
+          "name": "Hisar Hospital Intercontinental",
+          "area": "Ümraniye, Istanbul",
+          "address": "Yanyanevler Mah. Site Yolu Cd. No:7, Ümraniye / Istanbul",
+          "hours": "24/7 Emergency • Outpatient Clinic 08:00–20:00"
+        },
+        "camlica": {
+          "name": "Hisar Hospital Çamlıca",
+          "area": "Üsküdar, Istanbul",
+          "address": "Çamlıca Mah, Üsküdar / Istanbul",
+          "hours": "24/7 Emergency • Outpatient Clinic 08:00–20:00"
+        },
+        "avrupa": {
+          "name": "Hisar Hospital Avrupa",
+          "area": "European Side of Istanbul"
+        }
+      }
+    }
+  },
+  "insan-kaynaklari": {
+    "tr": {
+      "head": {
+        "title": "İnsan Kaynakları — Hisar Hospital",
+        "description": "Hisar Hospital'da kariyer fırsatları, açık pozisyonlar ve başvuru süreci."
+      },
+      "pageTitle": "İnsan Kaynakları",
+      "crumbCorporate": "Kurumsal",
+      "crumbCurrent": "İnsan Kaynakları",
+      "cards": [
+        {
+          "title": "Kültürümüz",
+          "desc": "İnsan odaklı, çok disiplinli ve öğrenmeye açık bir çalışma kültürü."
+        },
+        {
+          "title": "Gelişim İmkânları",
+          "desc": "Sürekli eğitim, mentorluk ve uluslararası kongre destekleri."
+        },
+        {
+          "title": "Değerlerimiz",
+          "desc": "Hasta güvenliği, ekip çalışması, dürüstlük ve şeffaflık."
+        }
+      ],
+      "openTitle": "Açık Pozisyonlar",
+      "openDesc": "Size uygun rolü bulun ve başvurun.",
+      "groupLabels": {
+        "Tümü": "Tümü",
+        "Sağlık": "Sağlık",
+        "İdari": "İdari",
+        "Teknik": "Teknik",
+        "Staj": "Staj"
+      },
+      "details": "Detayları Gör",
+      "empty": "Bu kategoride şu an açık pozisyon bulunmuyor.",
+      "faqEyebrow": "— SSS",
+      "faqTitle": "Sık Sorulan Sorular",
+      "faq": [
+        [
+          "Başvuru nasıl değerlendiriliyor?",
+          "Başvurular İK ekibimizce incelenir; uygun profillerle görüşme ve teknik değerlendirme aşamalarına geçilir."
+        ],
+        [
+          "Staj başvurusu yapabilir miyim?",
+          "Sağlık ve idari birimlerimizde stajyer kabul edilmektedir. Genel başvuru formundan 'Staj' seçeneğiyle iletebilirsiniz."
+        ],
+        [
+          "Bilgilerim ne kadar süre saklanır?",
+          "Başvuru bilgileriniz KVKK Politikamız çerçevesinde işlenir ve azami saklama süresi sonunda imha edilir."
+        ]
+      ],
+      "app": {
+        "badge": "Başvuru",
+        "title": "Aramıza katılın",
+        "desc": "Aradığınız pozisyonu bulamadıysanız aşağıdaki formdan başvuru yapabilirsiniz. Hekim adayları için ayrı bir sekme sunuyoruz.",
+        "note": "Form yalnızca tasarım prototipidir; kayıt gönderimi aktif değildir.",
+        "tablistAria": "Başvuru türü",
+        "tabGeneral": "Genel Başvuru",
+        "tabPhysician": "Hekim Başvurusu",
+        "name": "Ad Soyad",
+        "email": "E-posta",
+        "phone": "Telefon",
+        "positionAria": "Pozisyon",
+        "positionPlaceholder": "İlgilendiğiniz pozisyon",
+        "cvAria": "Kısa özgeçmiş",
+        "cvGeneralPlaceholder": "Kısa özgeçmiş / not",
+        "submitGeneral": "Başvuruyu Gönder",
+        "titleAria": "Unvan",
+        "titlePlaceholder": "Unvan seçin",
+        "titleOptions": [
+          "Prof. Dr.",
+          "Doç. Dr.",
+          "Uzm. Dr.",
+          "Op. Dr.",
+          "Dr."
+        ],
+        "specialtyAria": "Uzmanlık alanı",
+        "specialtyPlaceholder": "Uzmanlık alanı seçin",
+        "specialtyOptions": [
+          "Kardiyoloji",
+          "Kalp ve Damar Cerrahisi",
+          "Genel Cerrahi",
+          "Üroloji",
+          "Göz Hastalıkları",
+          "Onkoloji",
+          "Ortopedi ve Travmatoloji",
+          "Anestezi ve Reanimasyon",
+          "Diğer"
+        ],
+        "uploadLabel": "CV / belge yükleyin (PDF, DOC, DOCX — maks. 5MB)",
+        "cvPhysicianPlaceholder": "Kısa özgeçmiş, deneyim, yayınlar",
+        "submitPhysician": "Hekim Başvurusunu Gönder",
+        "cvUploadLabel": "CV yükleyin (PDF, DOC, DOCX — maks. 5MB)",
+        "cvChosen": "Seçilen dosya:",
+        "kvkkPre": "",
+        "kvkkLink": "KVKK Aydınlatma Metni",
+        "kvkkPost": "’ni okudum, kişisel verilerimin işe alım süreçlerinde işlenmesine onay veriyorum.",
+        "kvkkError": "KVKK onayı zorunludur",
+        "successTitle": "Başvurunuz alındı",
+        "successBody": "Talebiniz alındı, İK ekibimiz başvurunuzu değerlendirip en kısa sürede dönüş yapacaktır."
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Human Resources — Hisar Hospital",
+        "description": "Career opportunities, open positions and the application process at Hisar Hospital."
+      },
+      "pageTitle": "Human Resources",
+      "crumbCorporate": "Corporate",
+      "crumbCurrent": "Human Resources",
+      "cards": [
+        {
+          "title": "Our Culture",
+          "desc": "A human-focused, multidisciplinary work culture open to learning."
+        },
+        {
+          "title": "Development Opportunities",
+          "desc": "Continuous training, mentorship and international congress support."
+        },
+        {
+          "title": "Our Values",
+          "desc": "Patient safety, teamwork, honesty and transparency."
+        }
+      ],
+      "openTitle": "Open Positions",
+      "openDesc": "Find the role that suits you and apply.",
+      "groupLabels": {
+        "Tümü": "All",
+        "Sağlık": "Health",
+        "İdari": "Administrative",
+        "Teknik": "Technical",
+        "Staj": "Internship"
+      },
+      "details": "View Details",
+      "empty": "There are currently no open positions in this category.",
+      "faqEyebrow": "— FAQ",
+      "faqTitle": "Frequently Asked Questions",
+      "faq": [
+        [
+          "How is an application evaluated?",
+          "Applications are reviewed by our HR team; suitable profiles proceed to the interview and technical assessment stages."
+        ],
+        [
+          "Can I apply for an internship?",
+          "We accept interns in our health and administrative units. You can submit your application through the general form using the 'Internship' option."
+        ],
+        [
+          "How long is my information stored?",
+          "Your application information is processed within the framework of our KVKK Policy and destroyed at the end of the maximum retention period."
+        ]
+      ],
+      "app": {
+        "badge": "Application",
+        "title": "Join our team",
+        "desc": "If you couldn't find the position you're looking for, you can apply through the form below. We offer a separate tab for physician candidates.",
+        "note": "This form is only a design prototype; submission is not active.",
+        "tablistAria": "Application type",
+        "tabGeneral": "General Application",
+        "tabPhysician": "Physician Application",
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "positionAria": "Position",
+        "positionPlaceholder": "Position of interest",
+        "cvAria": "Short CV",
+        "cvGeneralPlaceholder": "Short CV / note",
+        "submitGeneral": "Submit Application",
+        "titleAria": "Title",
+        "titlePlaceholder": "Select title",
+        "titleOptions": [
+          "Prof. Dr.",
+          "Assoc. Prof. Dr.",
+          "Specialist Dr.",
+          "Surgeon (Op. Dr.)",
+          "Dr."
+        ],
+        "specialtyAria": "Specialty",
+        "specialtyPlaceholder": "Select specialty",
+        "specialtyOptions": [
+          "Cardiology",
+          "Cardiovascular Surgery",
+          "General Surgery",
+          "Urology",
+          "Ophthalmology",
+          "Oncology",
+          "Orthopedics and Traumatology",
+          "Anesthesiology and Reanimation",
+          "Other"
+        ],
+        "uploadLabel": "Upload your CV / document (PDF, DOC, DOCX — max 5MB)",
+        "cvPhysicianPlaceholder": "Short CV, experience, publications",
+        "submitPhysician": "Submit Physician Application",
+        "cvUploadLabel": "Upload your CV (PDF, DOC, DOCX — max 5MB)",
+        "cvChosen": "Selected file:",
+        "kvkkPre": "I have read the ",
+        "kvkkLink": "KVKK Disclosure Statement",
+        "kvkkPost": " and consent to the processing of my personal data in recruitment processes.",
+        "kvkkError": "KVKK consent is required",
+        "successTitle": "Your application has been received",
+        "successBody": "Your request has been received; our HR team will review your application and get back to you shortly."
+      }
+    }
+  },
+  "kalite-calismalari": {
+    "tr": {
+      "head": {
+        "title": "Kalite Çalışmaları — Hisar Hospital",
+        "description": "JCI akreditasyonu, hasta güvenliği, güvenli cerrahi ve sürekli iyileştirme çalışmalarımız."
+      },
+      "pageTitle": "Kalite Çalışmaları",
+      "crumbCorporate": "Kurumsal",
+      "crumbCurrent": "Kalite Çalışmaları",
+      "approachEyebrow": "— Kalite Yaklaşımımız",
+      "approachTitle": "Ölçen, iyileştiren ve öğrenen bir hastane",
+      "approachBody": "Klinik sonuçlar, hasta deneyimi ve süreç göstergelerini bütüncül şekilde izleriz. Elde ettiğimiz veriler; ekip eğitimleri, süreç iyileştirme projeleri ve teknoloji yatırımlarımıza yön verir. Amacımız; uluslararası standartlarda ölçülebilir, güvenli ve sürdürülebilir sağlık hizmeti sunmaktır.",
+      "accreditationEyebrow": "Uluslararası Akreditasyon",
+      "accreditationTitle": "JCI Akreditasyonu",
+      "accreditationBody": "Joint Commission International tarafından uluslararası hasta güvenliği ve kalite standartları çerçevesinde değerlendirilmekte ve akredite edilmekteyiz. Bu süreç, tüm klinik ve destek birimlerimizin ortak sorumluluğu ile yürütülmektedir.",
+      "pillarsEyebrow": "— Ana Kalite Alanları",
+      "pillarsTitle": "Odaklandığımız dört alan",
+      "pillars": [
+        {
+          "title": "Hasta Güvenliği",
+          "desc": "Hasta kimliğinin doğrulanması, ilaç güvenliği ve düşme risklerinin yönetimi için standart süreçler."
+        },
+        {
+          "title": "Güvenli Cerrahi",
+          "desc": "WHO güvenli cerrahi kontrol listesi ve ekip iletişim protokolleri ile ameliyat güvenliği."
+        },
+        {
+          "title": "Enfeksiyon Kontrolü",
+          "desc": "Enfeksiyon kontrol komitesi tarafından yürütülen izlem, sürveyans ve önleme programları."
+        },
+        {
+          "title": "Sürekli İyileştirme",
+          "desc": "Klinik göstergeler, hasta memnuniyeti ve kök neden analizleri ile veriye dayalı iyileştirme."
+        }
+      ],
+      "certsEyebrow": "— Kalite Belgeleri",
+      "certsTitle": "Sertifikalarımız",
+      "certificates": [
+        "JCI Akreditasyon Sertifikası",
+        "ISO 9001 Kalite Yönetim Sistemi",
+        "ISO 27001 Bilgi Güvenliği Yönetimi"
+      ],
+      "certBadge": "Belge kütüphanesi",
+      "certNote": "Belge listesi periyodik olarak kurumsal doküman kütüphanesinden güncellenmektedir.",
+      "policiesEyebrow": "— İlgili Politikalar",
+      "policyInfo": "Bilgi Güvenliği Politikamız",
+      "policyKvkk": "KVKK Politikamız"
+    },
+    "en": {
+      "head": {
+        "title": "Quality Work — Hisar Hospital",
+        "description": "Our JCI accreditation, patient safety, safe surgery and continuous improvement work."
+      },
+      "pageTitle": "Quality Work",
+      "crumbCorporate": "Corporate",
+      "crumbCurrent": "Quality Work",
+      "approachEyebrow": "— Our Quality Approach",
+      "approachTitle": "A hospital that measures, improves and learns",
+      "approachBody": "We monitor clinical outcomes, patient experience and process indicators holistically. The data we obtain guides our team trainings, process improvement projects and technology investments. Our aim is to provide measurable, safe and sustainable healthcare at international standards.",
+      "accreditationEyebrow": "International Accreditation",
+      "accreditationTitle": "JCI Accreditation",
+      "accreditationBody": "We are evaluated and accredited by Joint Commission International within the framework of international patient safety and quality standards. This process is carried out with the shared responsibility of all our clinical and support units.",
+      "pillarsEyebrow": "— Main Quality Areas",
+      "pillarsTitle": "The four areas we focus on",
+      "pillars": [
+        {
+          "title": "Patient Safety",
+          "desc": "Standard processes for patient identity verification, medication safety and fall-risk management."
+        },
+        {
+          "title": "Safe Surgery",
+          "desc": "Surgical safety with the WHO safe surgery checklist and team communication protocols."
+        },
+        {
+          "title": "Infection Control",
+          "desc": "Monitoring, surveillance and prevention programs conducted by the infection control committee."
+        },
+        {
+          "title": "Continuous Improvement",
+          "desc": "Data-driven improvement through clinical indicators, patient satisfaction and root-cause analyses."
+        }
+      ],
+      "certsEyebrow": "— Quality Documents",
+      "certsTitle": "Our Certificates",
+      "certificates": [
+        "JCI Accreditation Certificate",
+        "ISO 9001 Quality Management System",
+        "ISO 27001 Information Security Management"
+      ],
+      "certBadge": "Document library",
+      "certNote": "The document list is periodically updated from the corporate document library.",
+      "policiesEyebrow": "— Related Policies",
+      "policyInfo": "Our Information Security Policy",
+      "policyKvkk": "Our KVKK Policy"
+    }
+  },
+  "kurumsal": {
+    "tr": {
+      "head": {
+        "title": "Kurumsal — Hisar Hospital Intercontinental",
+        "description": "Hisar Hospital Intercontinental'in vizyonu, misyonu, değerleri ve kalite politikası. Hayat boyu sağlık anlayışıyla referans bir sağlık kurumu."
+      },
+      "pageTitle": "Kurumsal",
+      "aboutBadge": "Hakkımızda",
+      "aboutTitle": "Hayat boyu sağlık anlayışıyla yanınızdayız",
+      "aboutP1": "Hisar Hospital Intercontinental olarak ilk önceliğimiz her zaman hastalarımızı sağlığına kavuşturmaktır. Hastalarımızı ve onların değerli ailelerini hastanemizin kapısından girdikleri ilk andan itibaren tedavi ve sonrasındaki süreçlerinde özenle dinliyor; konfor ve memnuniyetlerini arttırmak için elimizden gelen tüm çabayı gösteriyoruz.",
+      "aboutP2": "Modern teknolojiyi akademik kadromuz ve hasta odaklı hizmet anlayışımızla birleştirerek; uluslararası kalite standartlarında, kişiselleştirilmiş bir sağlık deneyimi sunuyoruz.",
+      "statLabels": [
+        "Yıllık tecrübe",
+        "Branş",
+        "Hastane",
+        "Akreditasyon"
+      ],
+      "valuesBadge": "Değerlerimiz",
+      "valuesTitle": "Her temasta hissettirdiğimiz dört temel ilke",
+      "valuesDesc": "Hisar Hospital deneyiminin temelinde, hastalarımıza ve topluma karşı sorumluluğumuzu tanımlayan değerler yer alır.",
+      "values": [
+        {
+          "title": "Hastalarımıza Değer Veriyoruz",
+          "body": "Sorumluluk, duyarlılık ve paylaşma bilinciyle; hastalarımızı ve ailelerini başvurdukları andan taburcu olana dek özenle dinler, yanlarında oluruz."
+        },
+        {
+          "title": "Güvenliğinizi Önemsiyoruz",
+          "body": "Hasta, refakatçi ve çalışan güvenliğini esas alırız. Önlenebilir hataları en aza indirmek için tüm riskleri sistematik biçimde gözden geçiririz."
+        },
+        {
+          "title": "Haklarınıza Sahip Çıkıyoruz",
+          "body": "Hasta hak ve sorumlulukları konusunda açık ve yeterli bilgi sunar; ayrım gözetmeksizin haklarınızı koruruz."
+        },
+        {
+          "title": "Topluma ve Çevreye Duyarlıyız",
+          "body": "Doğal kaynakları korur, atıklarımızı kontrol altında tutar, çevreye olan sorumluluğumuzu kurumsal bir kültür olarak yaşatırız."
+        }
+      ],
+      "qualityBadge": "Kalite Politikamız",
+      "qualityTitle": "Uluslararası standartlarda, sürekli gelişen hizmet",
+      "qualityDesc": "Kalite Yönetim Sistemi şartlarından ödün vermeden, ölçülebilir hedeflerle ilerleyen bir hizmet kültürünü esas alırız.",
+      "qualityCards": [
+        "Modern tıp",
+        "Çalışan",
+        "Eğitim",
+        "Performans",
+        "KYS",
+        "Gelişim"
+      ],
+      "quality": [
+        "Çağdaş tıbbın gerektirdiği modern teknoloji ile kaliteli sağlık hizmeti sunmak",
+        "Halk sağlığını koruyucu ve geliştirici çalışmalar yapmak",
+        "Çalışan memnuniyetini ve eğitimini sürekli artırmak",
+        "Optimum mali performansı sağlamak",
+        "Kalite Yönetim Sistemi şartlarından ödün vermemek, etkinliğini sürekli artırmak",
+        "Sürekli gelişimi sağlamak"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Corporate — Hisar Hospital Intercontinental",
+        "description": "The vision, mission, values and quality policy of Hisar Hospital Intercontinental. A reference healthcare institution with a lifelong health approach."
+      },
+      "pageTitle": "Corporate",
+      "aboutBadge": "About Us",
+      "aboutTitle": "By your side with a lifelong health approach",
+      "aboutP1": "As Hisar Hospital Intercontinental, our first priority is always to restore our patients to health. From the very first moment our patients and their valued families step through our doors, we listen to them carefully throughout treatment and the processes that follow; we make every effort to increase their comfort and satisfaction.",
+      "aboutP2": "By combining modern technology with our academic team and patient-focused service approach, we offer a personalized healthcare experience at international quality standards.",
+      "statLabels": [
+        "Years of experience",
+        "Specialties",
+        "Hospitals",
+        "Accreditation"
+      ],
+      "valuesBadge": "Our Values",
+      "valuesTitle": "Four core principles we convey at every touchpoint",
+      "valuesDesc": "At the heart of the Hisar Hospital experience lie the values that define our responsibility to our patients and to society.",
+      "values": [
+        {
+          "title": "We Value Our Patients",
+          "body": "With a sense of responsibility, sensitivity and sharing, we listen carefully to our patients and their families from the moment they apply until discharge, and we stand by them."
+        },
+        {
+          "title": "We Care About Your Safety",
+          "body": "We prioritize the safety of patients, companions and staff. We systematically review all risks to minimize preventable errors."
+        },
+        {
+          "title": "We Uphold Your Rights",
+          "body": "We provide clear and adequate information about patient rights and responsibilities; we protect your rights without discrimination."
+        },
+        {
+          "title": "We Care for Society and the Environment",
+          "body": "We protect natural resources, keep our waste under control, and sustain our responsibility to the environment as a corporate culture."
+        }
+      ],
+      "qualityBadge": "Our Quality Policy",
+      "qualityTitle": "Continuously improving service at international standards",
+      "qualityDesc": "We embrace a service culture that advances with measurable goals, without compromising on Quality Management System requirements.",
+      "qualityCards": [
+        "Modern medicine",
+        "Staff",
+        "Training",
+        "Performance",
+        "QMS",
+        "Improvement"
+      ],
+      "quality": [
+        "To provide quality healthcare with the modern technology required by contemporary medicine",
+        "To carry out work that protects and improves public health",
+        "To continuously increase employee satisfaction and training",
+        "To achieve optimum financial performance",
+        "To never compromise on Quality Management System requirements and continuously improve its effectiveness",
+        "To ensure continuous improvement"
+      ]
+    }
+  },
+  "kvkk-politikamiz": {
+    "tr": {
+      "head": {
+        "title": "KVKK Politikamız — Hisar Hospital",
+        "description": "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında Hisar Hospital kişisel veri işleme politikası."
+      },
+      "header": "KVKK Politikamız",
+      "crumbCorporate": "Kurumsal",
+      "crumbSelf": "KVKK Politikamız",
+      "sections": [
+        {
+          "title": "Politikanın Amacı",
+          "body": [
+            "Bu politika, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında Hisar Hospital tarafından yürütülen kişisel veri işleme faaliyetlerine ilişkin esasları belirler.",
+            "Amaç; hasta, ziyaretçi, çalışan ve iş ortaklarının kişisel verilerinin hukuka uygun şekilde işlenmesini sağlamaktır."
+          ]
+        },
+        {
+          "title": "Kapsam",
+          "body": [
+            "Politika; sağlık hizmetlerinin sunulması sürecinde toplanan tüm kişisel veriler ile web sitesi, iletişim merkezi ve dijital hizmetler aracılığıyla elde edilen verileri kapsar."
+          ]
+        },
+        {
+          "title": "Kişisel Veri İşleme İlkeleri",
+          "body": [
+            "Hukuka ve dürüstlük kurallarına uygunluk.",
+            "Doğru ve gerektiğinde güncel olma.",
+            "Belirli, açık ve meşru amaçlarla işleme.",
+            "İşlendikleri amaçla bağlantılı, sınırlı ve ölçülü olma.",
+            "İlgili mevzuatta öngörülen süre kadar muhafaza etme."
+          ]
+        },
+        {
+          "title": "Veri Kategorileri",
+          "body": [
+            "Kimlik ve iletişim bilgileri.",
+            "Sağlık ve tıbbi kayıt bilgileri (özel nitelikli).",
+            "Finansal ve ödeme bilgileri.",
+            "Randevu, ziyaret ve işlem kayıtları.",
+            "Web sitesi ve dijital hizmet kullanım verileri."
+          ]
+        },
+        {
+          "title": "Veri Sahiplerinin Hakları",
+          "body": [
+            "Kişisel verilerinin işlenip işlenmediğini öğrenme.",
+            "İşleme faaliyetine ilişkin bilgi talep etme.",
+            "Verilerin düzeltilmesini ya da silinmesini isteme.",
+            "İşlemenin sınırlandırılmasını talep etme.",
+            "Zararın giderilmesini talep etme."
+          ]
+        },
+        {
+          "title": "Başvuru Yöntemleri",
+          "body": [
+            "Yazılı başvuru: kurumsal adresimize elden veya noter kanalıyla.",
+            "E-posta: kvkk@hisarhospital.com üzerinden kimlik doğrulanabilir şekilde.",
+            "Başvurular, KVKK'nın öngördüğü süreler içinde sonuçlandırılır."
+          ]
+        },
+        {
+          "title": "İletişim Bilgisi",
+          "body": [
+            "Veri sorumlusu: Hisar Hospital",
+            "E-posta: kvkk@hisarhospital.com",
+            "Telefon: 444 5 888"
+          ]
+        },
+        {
+          "title": "İlgili Dokümanlar",
+          "body": [
+            "Bilgi Güvenliği Politikamız",
+            "Aydınlatma Metinleri",
+            "Çerez Politikası"
+          ]
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Personal Data Protection (KVKK) Policy — Hisar Hospital",
+        "description": "Hisar Hospital's personal data processing policy under Law No. 6698 on the Protection of Personal Data (KVKK)."
+      },
+      "header": "Personal Data Protection Policy",
+      "crumbCorporate": "Corporate",
+      "crumbSelf": "Personal Data Protection Policy",
+      "sections": [
+        {
+          "title": "Purpose of the Policy",
+          "body": [
+            "This policy sets out the principles for the personal data processing activities carried out by Hisar Hospital under Law No. 6698 on the Protection of Personal Data (KVKK).",
+            "Its purpose is to ensure that the personal data of patients, visitors, employees and business partners is processed in accordance with the law."
+          ]
+        },
+        {
+          "title": "Scope",
+          "body": [
+            "The policy covers all personal data collected during the delivery of healthcare services, as well as data obtained through the website, contact center and digital services."
+          ]
+        },
+        {
+          "title": "Principles of Personal Data Processing",
+          "body": [
+            "Compliance with the law and the rules of good faith.",
+            "Being accurate and, where necessary, kept up to date.",
+            "Processing for specific, explicit and legitimate purposes.",
+            "Being relevant to, limited to and proportionate with the purpose of processing.",
+            "Retention only for the period stipulated by the relevant legislation."
+          ]
+        },
+        {
+          "title": "Data Categories",
+          "body": [
+            "Identity and contact information.",
+            "Health and medical record information (special category).",
+            "Financial and payment information.",
+            "Appointment, visit and transaction records.",
+            "Website and digital service usage data."
+          ]
+        },
+        {
+          "title": "Rights of Data Subjects",
+          "body": [
+            "Learning whether their personal data is being processed.",
+            "Requesting information about the processing activity.",
+            "Requesting that the data be corrected or deleted.",
+            "Requesting that the processing be restricted.",
+            "Requesting compensation for any damage incurred."
+          ]
+        },
+        {
+          "title": "Application Methods",
+          "body": [
+            "Written application: in person to our corporate address or via a notary.",
+            "Email: via kvkk@hisarhospital.com in a way that allows identity verification.",
+            "Applications are concluded within the periods stipulated by the KVKK."
+          ]
+        },
+        {
+          "title": "Contact Information",
+          "body": [
+            "Data controller: Hisar Hospital",
+            "Email: kvkk@hisarhospital.com",
+            "Phone: 444 5 888"
+          ]
+        },
+        {
+          "title": "Related Documents",
+          "body": [
+            "Our Information Security Policy",
+            "Disclosure Statements",
+            "Cookie Policy"
+          ]
+        }
+      ]
+    }
+  },
+  "mesafeli-satis-sozlesmesi": {
+    "tr": {
+      "head": {
+        "title": "Mesafeli Satış Sözleşmesi — Hisar Hospital",
+        "description": "Hisar Hospital web sitesi üzerinden yapılan elektronik satın alımlar için mesafeli satış sözleşmesi."
+      },
+      "header": "Mesafeli Satış Sözleşmesi",
+      "crumbCorporate": "Kurumsal",
+      "crumbSelf": "Mesafeli Satış Sözleşmesi",
+      "sections": [
+        {
+          "title": "Taraflar",
+          "body": [
+            "Bu Mesafeli Satış Sözleşmesi; Hisar Hospital (\"Satıcı\") ile web sitesi üzerinden hizmet/paket satın alan gerçek veya tüzel kişi (\"Alıcı\") arasında elektronik ortamda kurulur.",
+            "Sözleşme, siparişin tamamlanmasıyla birlikte tarafları bağlayıcı hale gelir."
+          ]
+        },
+        {
+          "title": "Sözleşmenin Konusu",
+          "body": [
+            "Sözleşmenin konusu; Alıcı'nın Satıcı'ya ait web sitesinden elektronik ortamda seçtiği sağlık paketi, check-up hizmeti veya dijital hizmete ilişkin nitelik, satış bedeli ve ödeme şeklinin belirlenmesidir."
+          ]
+        },
+        {
+          "title": "Hizmet Bilgileri",
+          "body": [
+            "Satın alınan hizmetin adı, kapsamı ve geçerlilik süresi ilgili paket detay sayfasında yer alır.",
+            "Vergiler dahil toplam bedel, sipariş özetinde ve elektronik faturada belirtilir."
+          ]
+        },
+        {
+          "title": "İfa ve Teslim",
+          "body": [
+            "Dijital hizmetler; ödeme onayının ardından e-posta ile iletilen randevu bilgileri üzerinden ifa edilir.",
+            "Fiziksel bir teslimat söz konusu değildir."
+          ]
+        },
+        {
+          "title": "Cayma Hakkı",
+          "body": [
+            "Alıcı, tüketici mevzuatı kapsamında 14 gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkını kullanabilir.",
+            "Ancak; ifasına başlanmış sağlık hizmetleri ve kişiye özel hazırlanan paketlerde cayma hakkı mevzuat gereği sınırlanabilir."
+          ]
+        },
+        {
+          "title": "Uyuşmazlıkların Çözümü",
+          "body": [
+            "Sözleşmeden doğan uyuşmazlıklarda Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri yetkilidir.",
+            "Parasal sınırlar her yıl Bakanlıkça güncellenir."
+          ]
+        },
+        {
+          "title": "İletişim",
+          "body": [
+            "Satıcı: Hisar Hospital",
+            "E-posta: info@hisarhospital.com",
+            "Telefon: 444 5 888"
+          ]
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Distance Sales Agreement — Hisar Hospital",
+        "description": "Distance sales agreement for electronic purchases made through the Hisar Hospital website."
+      },
+      "header": "Distance Sales Agreement",
+      "crumbCorporate": "Corporate",
+      "crumbSelf": "Distance Sales Agreement",
+      "sections": [
+        {
+          "title": "Parties",
+          "body": [
+            "This Distance Sales Agreement is concluded electronically between Hisar Hospital (the \"Seller\") and the natural or legal person purchasing a service/package through the website (the \"Buyer\").",
+            "The agreement becomes binding on the parties upon completion of the order."
+          ]
+        },
+        {
+          "title": "Subject of the Agreement",
+          "body": [
+            "The subject of the agreement is the determination of the qualities, sale price and payment method of the health package, check-up service or digital service that the Buyer selects electronically from the Seller's website."
+          ]
+        },
+        {
+          "title": "Service Information",
+          "body": [
+            "The name, scope and validity period of the purchased service are provided on the relevant package detail page.",
+            "The total amount, including taxes, is stated in the order summary and on the electronic invoice."
+          ]
+        },
+        {
+          "title": "Performance and Delivery",
+          "body": [
+            "Digital services are performed on the basis of the appointment details sent by email following payment confirmation.",
+            "No physical delivery is involved."
+          ]
+        },
+        {
+          "title": "Right of Withdrawal",
+          "body": [
+            "Under consumer legislation, the Buyer may exercise the right of withdrawal within 14 days without giving any reason and without paying any penalty.",
+            "However, the right of withdrawal may be restricted by legislation for healthcare services that have already commenced and for personalized packages."
+          ]
+        },
+        {
+          "title": "Resolution of Disputes",
+          "body": [
+            "For disputes arising from the agreement, the Consumer Arbitration Committees and Consumer Courts have jurisdiction.",
+            "The monetary thresholds are updated each year by the Ministry."
+          ]
+        },
+        {
+          "title": "Contact",
+          "body": [
+            "Seller: Hisar Hospital",
+            "Email: info@hisarhospital.com",
+            "Phone: 444 5 888"
+          ]
+        }
+      ]
+    }
+  },
+  "mobil-uygulama": {
+    "tr": {
+      "head": {
+        "title": "Hisar Mobile — Hisar Hospital",
+        "description": "Hisar Hospital mobil uygulaması ile randevu alın, sonuçlarınıza ulaşın, doktor bulun ve sağlık süreçlerinizi takip edin.",
+        "ogDescription": "Hisar Hospital mobil uygulaması ile sağlık cebinizde."
+      },
+      "pageTitle": "Hisar Mobile",
+      "intro": "Sağlık cebinizde: randevu alın, laboratuvar ve görüntüleme sonuçlarınıza anında ulaşın, uzman hekimleri keşfedin ve sağlık süreçlerinizi tek dokunuşla yönetin.",
+      "appStoreFrom": "App Store'dan",
+      "googlePlayFrom": "Google Play'den",
+      "download": "İndirin",
+      "featuresTitle": "Uygulama ile Neler Yapabilirsiniz?",
+      "features": [
+        {
+          "title": "Randevu Yönetimi",
+          "desc": "Hızlı randevu alın, hatırlatıcıları görün ve planınızı takip edin."
+        },
+        {
+          "title": "E-Sonuç",
+          "desc": "Laboratuvar ve görüntüleme sonuçlarınıza anında güvenli erişim."
+        },
+        {
+          "title": "Doktor Bul",
+          "desc": "Uzman hekimleri inceleyin, uzaktan görüşme talep edin."
+        },
+        {
+          "title": "Bildirimler",
+          "desc": "Randevu, sonuç ve sağlık ipuçlarından anında haberdar olun."
+        },
+        {
+          "title": "Güvenli Giriş",
+          "desc": "Kişisel verileriniz hastane altyapısıyla aynı güvenlik standartlarıyla korunur."
+        }
+      ],
+      "bottomNote": "Uygulama mağazası linkleri hazırlandığında yukarıdaki butonlar otomatik olarak yönlendirecektir. Şimdiden Hisar Mobile deneyimini sabırsızlıkla bekliyoruz."
+    },
+    "en": {
+      "head": {
+        "title": "Hisar Mobile — Hisar Hospital",
+        "description": "With the Hisar Hospital mobile app, book appointments, access your results, find a doctor and track your health journey.",
+        "ogDescription": "Your health in your pocket with the Hisar Hospital mobile app."
+      },
+      "pageTitle": "Hisar Mobile",
+      "intro": "Your health in your pocket: book appointments, instantly access your laboratory and imaging results, discover expert physicians and manage your health processes with a single tap.",
+      "appStoreFrom": "From the App Store",
+      "googlePlayFrom": "From Google Play",
+      "download": "Download",
+      "featuresTitle": "What Can You Do with the App?",
+      "features": [
+        {
+          "title": "Appointment Management",
+          "desc": "Book quickly, see reminders and track your schedule."
+        },
+        {
+          "title": "E-Results",
+          "desc": "Instant, secure access to your laboratory and imaging results."
+        },
+        {
+          "title": "Find a Doctor",
+          "desc": "Browse expert physicians and request a remote consultation."
+        },
+        {
+          "title": "Notifications",
+          "desc": "Get instant updates on appointments, results and health tips."
+        },
+        {
+          "title": "Secure Login",
+          "desc": "Your personal data is protected with the same security standards as the hospital infrastructure."
+        }
+      ],
+      "bottomNote": "When the app store links are ready, the buttons above will redirect automatically. We can’t wait for you to experience Hisar Mobile."
+    }
+  },
+  "moral-takimi": {
+    "tr": {
+      "head": {
+        "title": "Moral Takımı — Bütünleşik Onkoloji",
+        "description": "Hisar Hospital Moral Takımı: onkoloji hastalarımıza destek olmak için hastanemizi ziyaret eden sanatçılar, sporcular ve tanınmış isimler."
+      },
+      "crumbOnko": "Bütünleşik Onkoloji",
+      "crumbCurrent": "Moral Takımı",
+      "heroEyebrow": "Bütünleşik Onkoloji",
+      "heroTitleTop": "Hisar Hospital",
+      "heroTitleBottom": "Moral Takımı",
+      "heroDesc": "Onkoloji hastalarımıza destek olmak için hastanemizi ziyaret eden, moral ve motivasyon veren sanatçılar, sporcular ve tanınmış isimlerden oluşan gönüllü moral takımımız.",
+      "membersTitle": "Ziyaretimize gelen isimler",
+      "visitsTitle": "Ziyaretlerden kareler",
+      "visitsDesc": "Her karta 2-3 fotoğrafı görmek için kaydırın.",
+      "prevImg": "Önceki görsel",
+      "nextImg": "Sonraki görsel"
+    },
+    "en": {
+      "head": {
+        "title": "Morale Team — Integrated Oncology",
+        "description": "Hisar Hospital Morale Team: the artists, athletes and well-known figures who visit our hospital to support our oncology patients."
+      },
+      "crumbOnko": "Integrated Oncology",
+      "crumbCurrent": "Morale Team",
+      "heroEyebrow": "Integrated Oncology",
+      "heroTitleTop": "Hisar Hospital",
+      "heroTitleBottom": "Morale Team",
+      "heroDesc": "Our volunteer morale team, made up of artists, athletes and well-known figures who visit our hospital to give support and motivation to our oncology patients.",
+      "membersTitle": "The names who came to visit us",
+      "visitsTitle": "Moments from the visits",
+      "visitsDesc": "Swipe to see 2-3 photos on each card.",
+      "prevImg": "Previous image",
+      "nextImg": "Next image"
+    }
+  },
+  "online-hizmetler": {
+    "tr": {
+      "head": {
+        "title": "Online Hizmetler — Hisar Hospital",
+        "description": "Hisar Online, Online Doktor, Doktora Sorun, anket, geri arama ve geri bildirim — dijital sağlık hizmetlerimiz."
+      },
+      "pageTitle": "Online Hizmetler",
+      "pageSubtitle": "Sağlık deneyiminizi dijital olarak kolaylaştıran araçlarımız.",
+      "goToService": "Hizmete git",
+      "services": {
+        "hisar-online": {
+          "title": "Hisar Online",
+          "desc": "Online doktor görüşmeleri, sonuç takibi ve dijital sağlık servisleri."
+        },
+        "online-doktor": {
+          "title": "Online Doktor",
+          "desc": "Uzman hekimlerimizle uzaktan görüntülü konsültasyon."
+        },
+        "doktora-sorun": {
+          "title": "Doktora Sorun",
+          "desc": "Sağlığınızla ilgili sorularınızı uzmanlarımıza iletin."
+        },
+        "anketimize-katilin": {
+          "title": "Anketimize Katılın",
+          "desc": "Hizmet kalitemizi birlikte geliştirelim; deneyiminizi paylaşın."
+        },
+        "sizi-arayalim": {
+          "title": "Sizi Arayalım",
+          "desc": "Numaranızı bırakın, iletişim merkezimiz en kısa sürede sizi arasın."
+        },
+        "sizi-dinliyoruz": {
+          "title": "Sizi Dinliyoruz",
+          "desc": "Görüş, öneri ve geri bildirimlerinizi bizimle paylaşın."
+        },
+        "e-sonuc": {
+          "title": "E-Sonuç",
+          "desc": "Laboratuvar ve tetkik sonuçlarınıza online güvenli erişim."
+        }
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Online Services — Hisar Hospital",
+        "description": "Hisar Online, Online Doctor, Ask a Doctor, survey, call-back and feedback — our digital health services."
+      },
+      "pageTitle": "Online Services",
+      "pageSubtitle": "Our tools that make your health experience easier, digitally.",
+      "goToService": "Go to service",
+      "services": {
+        "hisar-online": {
+          "title": "Hisar Online",
+          "desc": "Online doctor consultations, result tracking and digital health services."
+        },
+        "online-doktor": {
+          "title": "Online Doctor",
+          "desc": "Remote video consultation with our expert physicians."
+        },
+        "doktora-sorun": {
+          "title": "Ask a Doctor",
+          "desc": "Send your health questions to our specialists."
+        },
+        "anketimize-katilin": {
+          "title": "Take Our Survey",
+          "desc": "Let’s improve our service quality together; share your experience."
+        },
+        "sizi-arayalim": {
+          "title": "We’ll Call You",
+          "desc": "Leave your number and our contact centre will call you shortly."
+        },
+        "sizi-dinliyoruz": {
+          "title": "We’re Listening",
+          "desc": "Share your opinions, suggestions and feedback with us."
+        },
+        "e-sonuc": {
+          "title": "E-Results",
+          "desc": "Secure online access to your laboratory and test results."
+        }
+      }
+    }
+  },
+  "paketler": {
+    "tr": {
+      "head": {
+        "title": "Paketler & Check-Up — Hisar Hospital",
+        "description": "Hisar Hospital paketleri ve check-up seçenekleri: genel, kadın, erkek ve doğum paketleri.",
+        "ogDescription": "Sağlığınızı proaktif olarak değerlendiren check-up ve paket seçenekleri."
+      },
+      "home": "Anasayfa",
+      "crumb": "Paketler & Check-Up",
+      "pageTitle": "Paketler & Check-Up",
+      "pageSubtitle": "Sağlığınızı proaktif olarak takip edebilmeniz için hazırlanmış kapsamlı paketler.",
+      "badge": "Paket",
+      "explore": "İncele"
+    },
+    "en": {
+      "head": {
+        "title": "Packages & Check-Up — Hisar Hospital",
+        "description": "Hisar Hospital packages and check-up options: general, women’s, men’s and birth packages.",
+        "ogDescription": "Check-up and package options that proactively assess your health."
+      },
+      "home": "Home",
+      "crumb": "Packages & Check-Up",
+      "pageTitle": "Packages & Check-Up",
+      "pageSubtitle": "Comprehensive packages designed so you can track your health proactively.",
+      "badge": "Package",
+      "explore": "Explore"
+    }
+  },
+  "saglikli-hayat-rehberi": {
+    "tr": {
+      "head": {
+        "title": "Sağlıklı Hayat Rehberi — Hisar Hospital",
+        "description": "Uzman hekimlerimizden hastalıklar, tedaviler, modern yöntemler ve sağlıklı yaşam üzerine güvenilir içerikler."
+      },
+      "suggestions": [
+        "Beslenme",
+        "Kalp sağlığı",
+        "Retina Dekolmanı",
+        "Gebelik",
+        "Uyku"
+      ],
+      "title": "Sağlıklı Hayat Rehberi",
+      "subtitle": "Uzman hekimlerimizden hastalıklar, tedaviler ve modern yöntemler hakkında güvenilir bilgi.",
+      "searchAria": "Rehber içeriği ara",
+      "clear": "Temizle",
+      "allCategories": "Tüm Kategoriler",
+      "sortAria": "Sıralama",
+      "newest": "En Yeni",
+      "popular": "En Popüler",
+      "empty": "Aramanıza uygun içerik bulunamadı.",
+      "readMore": "Devamını oku"
+    },
+    "en": {
+      "head": {
+        "title": "Healthy Living Guide — Hisar Hospital",
+        "description": "Reliable content from our expert physicians on diseases, treatments, modern methods and healthy living."
+      },
+      "suggestions": [
+        "Nutrition",
+        "Heart health",
+        "Retinal Detachment",
+        "Pregnancy",
+        "Sleep"
+      ],
+      "title": "Healthy Living Guide",
+      "subtitle": "Reliable information from our expert physicians on diseases, treatments and modern methods.",
+      "searchAria": "Search guide content",
+      "clear": "Clear",
+      "allCategories": "All Categories",
+      "sortAria": "Sort",
+      "newest": "Newest",
+      "popular": "Most Popular",
+      "empty": "No content matches your search.",
+      "readMore": "Read more"
+    }
+  },
+  "sizi-arayalim": {
+    "tr": {
+      "head": {
+        "title": "Sizi Arayalım — Hisar Hospital",
+        "description": "İletişim bilgilerinizi bırakın, Hisar Hospital iletişim merkezi en kısa sürede sizi arasın.",
+        "ogTitle": "Sizi Arayalım — Hisar Hospital",
+        "ogDescription": "Çağrı merkezimiz randevu, bilgi ve yönlendirme talepleriniz için sizi arasın."
+      },
+      "header": "Sizi Arayalım",
+      "times": [
+        "09:00 – 12:00",
+        "12:00 – 15:00",
+        "15:00 – 18:00",
+        "Fark etmez"
+      ],
+      "topics": [
+        "Randevu talebi",
+        "Bölüm / doktor bilgisi",
+        "Anlaşmalı kurum & sigorta",
+        "Tetkik / sonuç bilgisi",
+        "Diğer"
+      ],
+      "labels": {
+        "fullName": "Ad Soyad",
+        "phone": "Telefon",
+        "phonePlaceholder": "0(5xx) xxx xx xx",
+        "topic": "Konu",
+        "preferredTime": "Tercih edilen arama saati",
+        "note": "Not (opsiyonel)",
+        "notePlaceholder": "Eklemek istediğiniz kısa bir not…",
+        "selectPlaceholder": "Seçiniz…",
+        "submit": "Beni Arayın"
+      },
+      "kvkk": {
+        "pre": "",
+        "link": "KVKK Aydınlatma Metni",
+        "post": "’ni okudum ve kişisel verilerimin işlenmesini onaylıyorum."
+      },
+      "errors": {
+        "fullName": "Ad Soyad en az 2 karakter olmalı",
+        "phone": "Telefon numaranızı kontrol edin",
+        "topic": "Lütfen bir konu seçin",
+        "preferredTime": "Lütfen tercih ettiğiniz saat aralığını seçin",
+        "kvkk": "KVKK onayı zorunludur"
+      },
+      "success": {
+        "title": "Çağrı talebiniz alındı",
+        "body": "Talebiniz alındı, en kısa sürede belirttiğiniz zaman aralığında sizi arayacağız.",
+        "backLabel": "Online Hizmetler’e dön"
+      },
+      "tiles": [
+        {
+          "title": "Hızlı dönüş",
+          "body": "Talebiniz alındıktan sonra iletişim merkezimiz çalışma saatleri içinde en kısa sürede sizi arar."
+        },
+        {
+          "title": "Gizlilik",
+          "body": "Paylaştığınız bilgiler yalnızca sizinle iletişim kurmak amacıyla kullanılır, üçüncü kişilerle paylaşılmaz."
+        },
+        {
+          "title": "Hemen iletişim",
+          "body": "Acil durumlar için iletişim merkezimizi doğrudan arayabilirsiniz: 444 5 888"
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "We'll Call You — Hisar Hospital",
+        "description": "Leave your contact details and let the Hisar Hospital contact center call you as soon as possible.",
+        "ogTitle": "We'll Call You — Hisar Hospital",
+        "ogDescription": "Let our contact center call you for your appointment, information and guidance requests."
+      },
+      "header": "We'll Call You",
+      "times": [
+        "09:00 – 12:00",
+        "12:00 – 15:00",
+        "15:00 – 18:00",
+        "No preference"
+      ],
+      "topics": [
+        "Appointment request",
+        "Department / doctor information",
+        "Contracted institution & insurance",
+        "Test / result information",
+        "Other"
+      ],
+      "labels": {
+        "fullName": "Full Name",
+        "phone": "Phone",
+        "phonePlaceholder": "0(5xx) xxx xx xx",
+        "topic": "Subject",
+        "preferredTime": "Preferred call time",
+        "note": "Note (optional)",
+        "notePlaceholder": "A short note you would like to add…",
+        "selectPlaceholder": "Select…",
+        "submit": "Call Me"
+      },
+      "kvkk": {
+        "pre": "I have read the ",
+        "link": "KVKK Disclosure Statement",
+        "post": " and consent to the processing of my personal data."
+      },
+      "errors": {
+        "fullName": "Full name must be at least 2 characters",
+        "phone": "Please check your phone number",
+        "topic": "Please select a subject",
+        "preferredTime": "Please select your preferred time range",
+        "kvkk": "KVKK consent is required"
+      },
+      "success": {
+        "title": "Your call-back request has been received",
+        "body": "Your request has been received; we will call you back within your preferred time range as soon as possible.",
+        "backLabel": "Back to Online Services"
+      },
+      "tiles": [
+        {
+          "title": "Quick response",
+          "body": "Once your request is received, our contact center will call you as soon as possible during working hours."
+        },
+        {
+          "title": "Privacy",
+          "body": "The information you share is used only to contact you and is not shared with third parties."
+        },
+        {
+          "title": "Immediate contact",
+          "body": "For emergencies, you can call our contact center directly: 444 5 888"
+        }
+      ]
+    }
+  },
+  "sizi-dinliyoruz": {
+    "tr": {
+      "head": {
+        "title": "Sizi Dinliyoruz — Hisar Hospital",
+        "description": "Görüş, öneri, teşekkür ve şikayetlerinizi Hisar Hospital ile paylaşın. Geri bildirimleriniz bizim için değerli.",
+        "ogTitle": "Sizi Dinliyoruz — Hisar Hospital",
+        "ogDescription": "Hisar Hospital deneyiminizi paylaşın; hizmet kalitemizi birlikte geliştirelim."
+      },
+      "header": "Sizi Dinliyoruz",
+      "types": [
+        "Teşekkür",
+        "Öneri",
+        "Şikayet",
+        "Görüş / Geri bildirim"
+      ],
+      "departments": [
+        "Bilmiyorum / Genel",
+        "Poliklinik",
+        "Acil Servis",
+        "Yatış / Servis",
+        "Ameliyathane",
+        "Laboratuvar / Görüntüleme",
+        "İletişim Merkezi",
+        "Hasta Karşılama / Resepsiyon",
+        "Diğer"
+      ],
+      "labels": {
+        "fullName": "Ad Soyad",
+        "email": "E-posta",
+        "phone": "Telefon (opsiyonel)",
+        "type": "Geri bildirim türü",
+        "department": "İlgili birim",
+        "message": "Mesajınız",
+        "messagePlaceholder": "Deneyiminizi mümkün olduğunca detaylı paylaşın…",
+        "selectPlaceholder": "Seçiniz…",
+        "submit": "Gönder"
+      },
+      "kvkk": {
+        "pre": "",
+        "link": "KVKK Aydınlatma Metni",
+        "post": "’ni okudum ve kişisel verilerimin işlenmesini onaylıyorum."
+      },
+      "errors": {
+        "fullName": "Ad Soyad en az 2 karakter olmalı",
+        "email": "Geçerli bir e-posta giriniz",
+        "phone": "Telefon numaranızı kontrol edin",
+        "type": "Lütfen geri bildirim türünü seçin",
+        "department": "Lütfen ilgili birimi seçin",
+        "message": "Mesajınız en az 10 karakter olmalı",
+        "kvkk": "KVKK onayı zorunludur"
+      },
+      "success": {
+        "title": "Geri bildiriminiz alındı",
+        "body": "Talebiniz alındı, geri bildiriminiz için teşekkür ederiz; en kısa sürede ilgili birimimiz değerlendirecektir.",
+        "backLabel": "Ana sayfaya dön"
+      },
+      "tiles": [
+        {
+          "title": "Her görüş değerli",
+          "body": "Hasta deneyiminizi geliştirebilmemiz için olumlu olumsuz tüm geri bildirimlerinizi önemsiyoruz."
+        },
+        {
+          "title": "Teşekkürleriniz ekibimize iletilir",
+          "body": "Memnun kaldığınız personel ve birimleri belirtirseniz mesajınız ilgili ekiple paylaşılır."
+        },
+        {
+          "title": "Gizlilik",
+          "body": "Bilgileriniz yalnızca süreç yönetimi için kullanılır; üçüncü kişilerle paylaşılmaz."
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "We're Listening — Hisar Hospital",
+        "description": "Share your opinions, suggestions, thanks and complaints with Hisar Hospital. Your feedback is valuable to us.",
+        "ogTitle": "We're Listening — Hisar Hospital",
+        "ogDescription": "Share your Hisar Hospital experience; let's improve our service quality together."
+      },
+      "header": "We're Listening",
+      "types": [
+        "Thanks",
+        "Suggestion",
+        "Complaint",
+        "Opinion / Feedback"
+      ],
+      "departments": [
+        "I'm not sure / General",
+        "Outpatient Clinic",
+        "Emergency",
+        "Inpatient / Ward",
+        "Operating Room",
+        "Laboratory / Imaging",
+        "Contact Center",
+        "Patient Reception / Front Desk",
+        "Other"
+      ],
+      "labels": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "phone": "Phone (optional)",
+        "type": "Feedback type",
+        "department": "Relevant unit",
+        "message": "Your Message",
+        "messagePlaceholder": "Share your experience in as much detail as possible…",
+        "selectPlaceholder": "Select…",
+        "submit": "Send"
+      },
+      "kvkk": {
+        "pre": "I have read the ",
+        "link": "KVKK Disclosure Statement",
+        "post": " and consent to the processing of my personal data."
+      },
+      "errors": {
+        "fullName": "Full name must be at least 2 characters",
+        "email": "Please enter a valid email",
+        "phone": "Please check your phone number",
+        "type": "Please select the feedback type",
+        "department": "Please select the relevant unit",
+        "message": "Your message must be at least 10 characters",
+        "kvkk": "KVKK consent is required"
+      },
+      "success": {
+        "title": "Your feedback has been received",
+        "body": "Your request has been received; thank you for your feedback — the relevant team will review it shortly.",
+        "backLabel": "Back to home"
+      },
+      "tiles": [
+        {
+          "title": "Every opinion matters",
+          "body": "We value all your feedback, positive or negative, so that we can improve your patient experience."
+        },
+        {
+          "title": "Your thanks are passed on to our team",
+          "body": "If you mention the staff and units you were pleased with, your message is shared with the relevant team."
+        },
+        {
+          "title": "Privacy",
+          "body": "Your information is used only for process management; it is not shared with third parties."
+        }
+      ]
+    }
+  },
+  "tedavi-yontemleri": {
+    "tr": {
+      "head": {
+        "title": "Tedavi Yöntemleri — Hisar Hospital",
+        "description": "Hisar Hospital'da uygulanan modern tedavi yöntemleri."
+      },
+      "title": "Tedavi Yöntemleri",
+      "searchPlaceholder": "Tedavi ara",
+      "searchAria": "Tedavi yöntemi ara",
+      "deptPlaceholder": "Bölüm",
+      "diseasePlaceholder": "Hastalık",
+      "hospitalPlaceholder": "Hastane",
+      "suggestions": [
+        "Açık kalp ameliyatı",
+        "Katarakt",
+        "Diz protezi",
+        "Robotik cerrahi",
+        "Bariatrik"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Treatment Methods — Hisar Hospital",
+        "description": "Modern treatment methods offered at Hisar Hospital."
+      },
+      "title": "Treatment Methods",
+      "searchPlaceholder": "Search a treatment",
+      "searchAria": "Search a treatment method",
+      "deptPlaceholder": "Department",
+      "diseasePlaceholder": "Disease",
+      "hospitalPlaceholder": "Hospital",
+      "suggestions": [
+        "Open-heart surgery",
+        "Cataract",
+        "Knee replacement",
+        "Robotic surgery",
+        "Bariatric"
+      ]
+    }
+  },
+  "teknolojilerimiz": {
+    "tr": {
+      "head": {
+        "title": "Teknolojilerimiz — Hisar Hospital",
+        "description": "Hisar Hospital'da kullanılan ileri medikal teknolojiler, cihazlar ve tanı-tedavi sistemleri.",
+        "ogTitle": "Teknolojilerimiz — Hisar Hospital",
+        "ogDescription": "Da Vinci, MR-LINAC, 3T MR, PET-CT ve daha fazlası."
+      },
+      "breadcrumb": "Teknolojilerimiz",
+      "title": "Teknolojilerimiz",
+      "subtitle": "Tanıdan tedaviye; hasta güvenliği ve etkinliği yüksek klinik teknolojiler.",
+      "searchPlaceholder": "Teknoloji veya cihaz ara",
+      "searchAria": "Teknoloji veya cihaz ara",
+      "clear": "Temizle",
+      "allDepartments": "Tüm Bölümler",
+      "allHospitals": "Tüm Hastaneler",
+      "filter": "Filtre",
+      "countLabel": "teknoloji",
+      "empty": "Aramanıza uygun teknoloji bulunamadı.",
+      "cardCta": "Teknolojiyi İncele",
+      "loadMore": "Daha Fazla Göster",
+      "suggestions": [
+        "Da Vinci",
+        "MR-LINAC",
+        "3T MR",
+        "PET-CT",
+        "SMILE Pro"
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Our Technologies — Hisar Hospital",
+        "description": "Advanced medical technologies, devices and diagnostic-treatment systems used at Hisar Hospital.",
+        "ogTitle": "Our Technologies — Hisar Hospital",
+        "ogDescription": "Da Vinci, MR-LINAC, 3T MR, PET-CT and more."
+      },
+      "breadcrumb": "Our Technologies",
+      "title": "Our Technologies",
+      "subtitle": "From diagnosis to treatment; clinical technologies with high patient safety and efficacy.",
+      "searchPlaceholder": "Search a technology or device",
+      "searchAria": "Search a technology or device",
+      "clear": "Clear",
+      "allDepartments": "All Departments",
+      "allHospitals": "All Hospitals",
+      "filter": "Filter",
+      "countLabel": "technologies",
+      "empty": "No technology matched your search.",
+      "cardCta": "Explore Technology",
+      "loadMore": "Show More",
+      "suggestions": [
+        "Da Vinci",
+        "MR-LINAC",
+        "3T MR",
+        "PET-CT",
+        "SMILE Pro"
+      ]
+    }
+  },
+  "videolar": {
+    "tr": {
+      "head": {
+        "title": "Videolar — Hisar Hospital",
+        "description": "Uzman hekimlerimizden tedavi, rehabilitasyon ve sağlıklı yaşam üzerine bilgilendirici videolar."
+      },
+      "suggestions": [
+        "Da Vinci",
+        "Katarakt",
+        "Diz protezi",
+        "Obezite",
+        "Gebelik"
+      ],
+      "pageTitle": "Videolar",
+      "pageSubtitle": "Uzman hekimlerimizden bilgilendirici videolar.",
+      "crumbHasta": "Hasta Rehberi",
+      "crumbSelf": "Videolar",
+      "searchAria": "Video ara",
+      "deptAria": "Bölüm",
+      "catAria": "Kategori",
+      "allDepts": "Tüm bölümler",
+      "allCats": "Tüm kategoriler",
+      "featured": "ÖNE ÇIKAN",
+      "close": "Kapat",
+      "playerPreview": "Video oynatıcı önizlemesi (prototip)"
+    },
+    "en": {
+      "head": {
+        "title": "Videos — Hisar Hospital",
+        "description": "Informative videos from our expert physicians on treatment, rehabilitation and healthy living."
+      },
+      "suggestions": [
+        "Da Vinci",
+        "Cataract",
+        "Knee replacement",
+        "Obesity",
+        "Pregnancy"
+      ],
+      "pageTitle": "Videos",
+      "pageSubtitle": "Informative videos from our expert physicians.",
+      "crumbHasta": "Patient Guide",
+      "crumbSelf": "Videos",
+      "searchAria": "Search video",
+      "deptAria": "Department",
+      "catAria": "Category",
+      "allDepts": "All departments",
+      "allCats": "All categories",
+      "featured": "FEATURED",
+      "close": "Close",
+      "playerPreview": "Video player preview (prototype)"
+    }
+  },
+  "vizyon-misyon": {
+    "tr": {
+      "head": {
+        "title": "Vizyonumuz ve Misyonumuz — Hisar Hospital",
+        "description": "Hisar Hospital'ın vizyonu, misyonu ve her temasta hissettirdiği temel ilkeler."
+      },
+      "pageTitle": "Vizyonumuz ve Misyonumuz",
+      "crumbCorporate": "Kurumsal",
+      "crumbCurrent": "Vizyonumuz ve Misyonumuz",
+      "visionLabel": "Vizyonumuz",
+      "visionText": "İnsan hayatına sonsuz saygı duyarak; dünya standartlarında modern, kapsamlı ve güvenilir hizmet veren referans sağlık kurumu olmak.",
+      "missionLabel": "Misyonumuz",
+      "missionText": "Modern teknolojiyi kaliteli ve etkin bir hizmet anlayışıyla birleştirerek insanları sağlıklı yaşama kavuşturmak.",
+      "missionSub": "Her tedavi yolculuğunda bilim, şefkat ve teknolojiyi aynı masada buluşturuyoruz.",
+      "principlesEyebrow": "— Temel ilkelerimiz",
+      "principlesTitle": "Her temasta hissettirdiğimiz ilkeler",
+      "principles": [
+        {
+          "title": "İnsan odaklı",
+          "desc": "Her tedavi yolculuğunda hastanın deneyimini merkeze alıyoruz."
+        },
+        {
+          "title": "Güvenli hizmet",
+          "desc": "JCI standartlarında, ölçülebilir sonuçlarla ilerliyoruz."
+        },
+        {
+          "title": "Ekip çalışması",
+          "desc": "Multidisipliner ekiplerle bütüncül bakım sunuyoruz."
+        },
+        {
+          "title": "Sürekli gelişim",
+          "desc": "Bilim ve teknolojiyi güncel tutan bir öğrenme kültürü."
+        }
+      ],
+      "ctaTitle": "Değerlerimiz ve Kalite Politikamız",
+      "ctaDesc": "Kurumsal sayfamızdan detayları inceleyebilirsiniz.",
+      "ctaLink": "Kurumsal"
+    },
+    "en": {
+      "head": {
+        "title": "Vision & Mission — Hisar Hospital",
+        "description": "Hisar Hospital's vision, mission and the core principles it conveys at every touchpoint."
+      },
+      "pageTitle": "Vision & Mission",
+      "crumbCorporate": "Corporate",
+      "crumbCurrent": "Vision & Mission",
+      "visionLabel": "Our Vision",
+      "visionText": "To be a reference healthcare institution that, with infinite respect for human life, provides modern, comprehensive and reliable service at world standards.",
+      "missionLabel": "Our Mission",
+      "missionText": "To restore people to healthy living by combining modern technology with a quality and effective service approach.",
+      "missionSub": "On every treatment journey, we bring science, compassion and technology to the same table.",
+      "principlesEyebrow": "— Our core principles",
+      "principlesTitle": "The principles we convey at every touchpoint",
+      "principles": [
+        {
+          "title": "Human-focused",
+          "desc": "We place the patient's experience at the center of every treatment journey."
+        },
+        {
+          "title": "Safe service",
+          "desc": "We advance with measurable results at JCI standards."
+        },
+        {
+          "title": "Teamwork",
+          "desc": "We provide holistic care with multidisciplinary teams."
+        },
+        {
+          "title": "Continuous improvement",
+          "desc": "A learning culture that keeps science and technology up to date."
+        }
+      ],
+      "ctaTitle": "Our Values and Quality Policy",
+      "ctaDesc": "You can review the details on our Corporate page.",
+      "ctaLink": "Corporate"
+    }
+  },
+  "web-ve-tibbi-yayin-kurulu": {
+    "tr": {
+      "head": {
+        "title": "Web ve Tıbbi Yayın Kurulu — Hisar Hospital",
+        "description": "Hisar Hospital dijital kanallarında yayımlanan sağlık içeriklerinin denetiminden sorumlu Web ve Tıbbi Yayın Kurulu."
+      },
+      "pageTitle": "Web ve Tıbbi Yayın Kurulu",
+      "pageSubtitle": "Dijital sağlık içeriklerimizin bilimsel doğruluk ve hasta dostu anlatımını denetleyen kurul.",
+      "crumbCorporate": "Kurumsal",
+      "crumbCurrent": "Web ve Tıbbi Yayın Kurulu",
+      "sections": [
+        {
+          "id": "amac",
+          "title": "Kurulun Amacı",
+          "body": [
+            "Web ve Tıbbi Yayın Kurulu; Hisar Hospital web sitesi ve dijital kanallarında yayımlanan sağlık içeriklerinin bilimsel doğruluğunu, güncelliğini ve hasta dostu anlatımını denetler.",
+            "Amaç; ziyaretçilere güvenilir, kanıta dayalı ve anlaşılır sağlık bilgisi sunmaktır."
+          ]
+        },
+        {
+          "id": "uyeler",
+          "title": "Üyeler ve Yapı",
+          "body": [
+            "Kurul; klinik disiplinlerden temsilcilerin yanı sıra kalite, hasta hakları, kurumsal iletişim ve dijital yayın uzmanlarından oluşur.",
+            "İçerikler ilgili uzmanlık alanındaki hekimin gözden geçirmesinden sonra yayına alınır."
+          ]
+        },
+        {
+          "id": "tibbi-kurul",
+          "title": "Tıbbi İçerik Yayın Kurulu",
+          "body": [
+            "Doç. Dr. Ramazan GÖZÜKÜÇÜK — Mesul Müdür – Enfeksiyon Hastalıkları"
+          ]
+        },
+        {
+          "id": "web-kurul",
+          "title": "Web Yönetim Kurulu",
+          "body": [
+            "N. Elçin SEVİM — Kurumsal İletişim ve Pazarlama Direktörü",
+            "Faik SİPAHİOĞLU — Dijital Pazarlama Yöneticisi",
+            "Enes AKSU — Web Tasarım ve Yayın Sorumlusu"
+          ]
+        },
+        {
+          "id": "surec",
+          "title": "Yayın Süreci",
+          "body": [
+            "İçerik önerisi: Editör ekibi, güncel klinik gündem ve ziyaretçi ihtiyaçlarına göre içerik önerisi oluşturur.",
+            "Uzman değerlendirmesi: İlgili hekim/hekimler içeriği kanıta dayalı biçimde inceler.",
+            "Dil ve erişilebilirlik: Metin, hasta anlayabileceği bir dile uyarlanır.",
+            "Yayın ve arşiv: Onaylı içerik yayına alınır ve düzenli olarak güncellik açısından gözden geçirilir."
+          ]
+        },
+        {
+          "id": "prensipler",
+          "title": "Yayın İlkeleri",
+          "body": [
+            "Kanıta dayalı tıp ve güncel klinik kılavuzlara uyum.",
+            "Reklam içeriği ile bilimsel içeriğin ayrıştırılması.",
+            "Hasta mahremiyeti ve KVKK'ya tam uyum.",
+            "Yanıltıcı, abartılı veya vaatte bulunan ifadelerden kaçınma."
+          ]
+        },
+        {
+          "id": "geribildirim",
+          "title": "Geri Bildirim",
+          "body": [
+            "Sağlık içerikleriyle ilgili görüş ve düzeltme talepleri için iletisim@hisarhospital.com adresini kullanabilirsiniz.",
+            "Tüm geri bildirimler Kurul tarafından değerlendirilir."
+          ]
+        },
+        {
+          "id": "iletisim",
+          "title": "İletişim",
+          "body": [
+            "Tel: +90 216 524 13 00 ( 61 50 – 60 94 )"
+          ]
+        },
+        {
+          "id": "guncelleme",
+          "title": "Son Güncelleme Tarihi",
+          "body": [
+            "23.07.2026"
+          ]
+        }
+      ]
+    },
+    "en": {
+      "head": {
+        "title": "Web & Medical Publication Board — Hisar Hospital",
+        "description": "The Web and Medical Publication Board responsible for overseeing the health content published on Hisar Hospital digital channels."
+      },
+      "pageTitle": "Web & Medical Publication Board",
+      "pageSubtitle": "The board overseeing the scientific accuracy and patient-friendly presentation of our digital health content.",
+      "crumbCorporate": "Corporate",
+      "crumbCurrent": "Web & Medical Publication Board",
+      "sections": [
+        {
+          "id": "amac",
+          "title": "Purpose of the Board",
+          "body": [
+            "The Web and Medical Publication Board oversees the scientific accuracy, currency and patient-friendly presentation of the health content published on the Hisar Hospital website and digital channels.",
+            "The aim is to provide visitors with reliable, evidence-based and understandable health information."
+          ]
+        },
+        {
+          "id": "uyeler",
+          "title": "Members and Structure",
+          "body": [
+            "The board consists of representatives from clinical disciplines as well as experts in quality, patient rights, corporate communications and digital publishing.",
+            "Content is published after review by the physician in the relevant field of expertise."
+          ]
+        },
+        {
+          "id": "tibbi-kurul",
+          "title": "Medical Content Publication Board",
+          "body": [
+            "Assoc. Prof. Dr. Ramazan GÖZÜKÜÇÜK — Responsible Manager – Infectious Diseases"
+          ]
+        },
+        {
+          "id": "web-kurul",
+          "title": "Web Management Board",
+          "body": [
+            "N. Elçin SEVİM — Corporate Communications and Marketing Director",
+            "Faik SİPAHİOĞLU — Digital Marketing Manager",
+            "Enes AKSU — Web Design and Publishing Officer"
+          ]
+        },
+        {
+          "id": "surec",
+          "title": "Publication Process",
+          "body": [
+            "Content proposal: The editorial team creates content proposals based on the current clinical agenda and visitor needs.",
+            "Expert review: The relevant physician(s) review the content in an evidence-based manner.",
+            "Language and accessibility: The text is adapted into language a patient can understand.",
+            "Publication and archive: Approved content is published and regularly reviewed for currency."
+          ]
+        },
+        {
+          "id": "prensipler",
+          "title": "Publication Principles",
+          "body": [
+            "Adherence to evidence-based medicine and current clinical guidelines.",
+            "Separation of advertising content from scientific content.",
+            "Full compliance with patient privacy and KVKK.",
+            "Avoiding misleading, exaggerated or promissory statements."
+          ]
+        },
+        {
+          "id": "geribildirim",
+          "title": "Feedback",
+          "body": [
+            "For opinions and correction requests regarding health content, you can use the address iletisim@hisarhospital.com.",
+            "All feedback is evaluated by the Board."
+          ]
+        },
+        {
+          "id": "iletisim",
+          "title": "Contact",
+          "body": [
+            "Tel: +90 216 524 13 00 ( 61 50 – 60 94 )"
+          ]
+        },
+        {
+          "id": "guncelleme",
+          "title": "Last Update Date",
+          "body": [
+            "23.07.2026"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { z } from 'zod';
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
 const COPY = {
@@ -145,7 +146,7 @@ function buildSchema(
 export default function SiziArayalim() {
     const locale = useLocale();
     const lp = useLocalizedPath();
-    const c = COPY[locale];
+    const c = usePageCopy('sizi-arayalim', COPY[locale]);
     const [submitted, setSubmitted] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const { post, transform, processing } = useForm({});

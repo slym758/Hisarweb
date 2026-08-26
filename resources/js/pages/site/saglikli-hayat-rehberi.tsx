@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, ChevronDown, Search, X } from 'lucide-react';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { normalizeTr, useBlogPosts } from '@/lib/site-data';
 
 const COPY = {
@@ -50,7 +51,7 @@ const COPY = {
 
 export default function SaglikliHayatRehberi() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('saglikli-hayat-rehberi', COPY[locale]);
     const lp = useLocalizedPath();
     const blogPosts = useBlogPosts();
     const [q, setQ] = useState('');

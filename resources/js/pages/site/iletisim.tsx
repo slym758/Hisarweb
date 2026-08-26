@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings, waHref } from '@/lib/settings';
 
 /* ───────────────── Data (locale-independent) ───────────────── */
@@ -230,7 +231,7 @@ type FormCopy = (typeof COPY)['tr']['form'] | (typeof COPY)['en']['form'];
 
 export default function Iletisim() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('iletisim', COPY[locale]);
     const settings = useSettings();
 
     const campusesText = c.campuses as Record<CampusSlug, { name: string; area: string; address?: string; hours?: string }>;

@@ -5,6 +5,7 @@ import { Briefcase, GraduationCap, Heart, MapPin, Users, Clock, ArrowRight, Uplo
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 type GroupKey = 'Sağlık' | 'İdari' | 'Teknik' | 'Staj';
 const GROUP_KEYS: GroupKey[] = ['Sağlık', 'İdari', 'Teknik', 'Staj'];
@@ -227,7 +228,7 @@ const COPY = {
 
 export default function Page() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('insan-kaynaklari', COPY[locale]);
     const [group, setGroup] = useState<'Tümü' | GroupKey>('Tümü');
     const filtered = group === 'Tümü' ? JOBS : JOBS.filter((j) => j.group === group);
 
@@ -341,7 +342,7 @@ Page.layout = siteLayout;
 function ApplicationTabs() {
     const locale = useLocale();
     const lp = useLocalizedPath();
-    const c = COPY[locale].app;
+    const c = usePageCopy('insan-kaynaklari', COPY[locale]).app;
     const [tab, setTab] = useState<'genel' | 'hekim'>('genel');
     const [submitted, setSubmitted] = useState(false);
     const [kvkkErr, setKvkkErr] = useState<string | null>(null);

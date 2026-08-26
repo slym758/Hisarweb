@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, ChevronRight, Home, Package } from 'lucide-re
 
 import { siteLayout, PageHeader } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { usePackages } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -37,7 +38,7 @@ const COPY = {
 
 export default function Packages() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('paketler', COPY[locale]);
     const lp = useLocalizedPath();
     const packages = usePackages();
 

@@ -4,6 +4,7 @@ import { FileText } from 'lucide-react';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 /* Stable anchor ids for the mapped privacy-term sections. */
 const PRIVACY_IDS = ['amac', 'kullanim', 'gizlilik', 'cerezler', 'haklar', 'sorumluluk', 'guncelleme'] as const;
@@ -229,7 +230,7 @@ const COPY = {
 export default function BilgiGuvenligiPolitikamiz() {
     const locale = useLocale();
     const lp = useLocalizedPath();
-    const c = COPY[locale];
+    const c = usePageCopy('bilgi-guvenligi-politikamiz', COPY[locale]);
     const terms = PRIVACY_IDS.map((id, i) => ({ id, ...c.terms[i] }));
 
     return (

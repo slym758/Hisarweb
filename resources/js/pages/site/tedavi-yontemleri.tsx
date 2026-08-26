@@ -4,6 +4,7 @@ import { ChevronRight, Search } from 'lucide-react';
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useTreatments, useDepartments, useHospitals } from '@/lib/site-data';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
 
@@ -39,7 +40,7 @@ const COPY = {
 
 export default function TreatmentsPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('tedavi-yontemleri', COPY[locale]);
     const lp = useLocalizedPath();
     const treatments = useTreatments();
     const departments = useDepartments();

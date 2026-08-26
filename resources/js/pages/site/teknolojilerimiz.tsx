@@ -5,6 +5,7 @@ import { Search, X, ArrowRight, Cpu, Filter, ChevronDown } from 'lucide-react';
 import { siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useDepartments, useTechnologies, normalizeTr } from '@/lib/site-data';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
 
@@ -64,7 +65,7 @@ const hospitalNames: Record<string, string> = {
 
 export default function TekPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('teknolojilerimiz', COPY[locale]);
     const lp = useLocalizedPath();
     const departments = useDepartments();
     const technologies = useTechnologies();

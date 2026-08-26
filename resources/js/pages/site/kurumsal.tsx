@@ -15,7 +15,7 @@ import {
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
-import { useContent } from '@/lib/page-content';
+import { useContent, usePageCopy } from '@/lib/page-content';
 
 const VALUE_ICONS = [HeartPulse, ShieldCheck, Scale, Leaf];
 const STAT_VALUES = ['20+', '50+', '3', 'JCI'];
@@ -126,7 +126,7 @@ const COPY = {
 
 export default function KurumsalPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('kurumsal', COPY[locale]);
     const pc = useContent('kurumsal');
 
     return (

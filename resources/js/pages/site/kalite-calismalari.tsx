@@ -4,7 +4,7 @@ import { Award, CheckCircle2, ShieldCheck, HeartPulse, Stethoscope, TrendingUp }
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
-import { useContent } from '@/lib/page-content';
+import { useContent, usePageCopy } from '@/lib/page-content';
 
 const PILLAR_ICONS = [ShieldCheck, Stethoscope, HeartPulse, TrendingUp];
 
@@ -110,7 +110,7 @@ const COPY = {
 } as const;
 
 export default function Page() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('kalite-calismalari', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const pc = useContent('kalite-calismalari');
 

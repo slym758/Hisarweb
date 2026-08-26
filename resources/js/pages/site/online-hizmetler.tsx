@@ -3,6 +3,7 @@ import { ArrowUpRight, MonitorPlay, Stethoscope, MessageCircleQuestion, Clipboar
 
 import { siteLayout, PageHeader } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 const HISAR_ONLINE_URL = 'https://online.hisarhospital.com/#/';
 
@@ -67,7 +68,7 @@ const COPY = {
 
 export default function OnlineServices() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('online-hizmetler', COPY[locale]);
     const lp = useLocalizedPath();
     const services = SERVICE_META.map((m) => ({ ...m, ...c.services[m.id as keyof typeof c.services] }));
 

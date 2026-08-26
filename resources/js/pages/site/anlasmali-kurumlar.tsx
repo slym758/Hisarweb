@@ -16,6 +16,7 @@ import {
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath, type Locale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 import { normalizeTr } from '@/lib/site-data';
 
@@ -224,7 +225,7 @@ const COPY = {
 
 export default function ContractedInstitutions() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('anlasmali-kurumlar', COPY[locale]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const [q, setQ] = useState('');
@@ -569,7 +570,7 @@ function CategoryChip({
 
 function EmptyState({ query, onReset }: { query: string; onReset: () => void }) {
     const locale: Locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('anlasmali-kurumlar', COPY[locale]);
     const lp = useLocalizedPath();
     return (
         <div className="rounded-2xl border border-dashed border-border bg-card p-8 lg:p-12 text-center">

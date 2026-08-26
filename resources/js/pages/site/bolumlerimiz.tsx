@@ -4,6 +4,7 @@ import { ArrowRight, Search, Stethoscope, X } from 'lucide-react';
 
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useDepartments } from '@/lib/site-data';
 import { cn } from '@/lib/utils';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
@@ -53,7 +54,7 @@ function normalizeTr(s: string) {
 
 export default function BolumlerPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('bolumlerimiz', COPY[locale]);
     const lp = useLocalizedPath();
     const departments = useDepartments();
     const [q, setQ] = useState('');

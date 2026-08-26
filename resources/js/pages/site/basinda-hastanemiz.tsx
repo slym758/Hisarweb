@@ -6,6 +6,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { usePress } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -68,7 +69,7 @@ function formatDate(iso: string, locale: 'tr' | 'en'): string {
 
 export default function PressPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('basinda-hastanemiz', COPY[locale]);
     const lp = useLocalizedPath();
     const items = usePress();
 

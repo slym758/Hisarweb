@@ -4,6 +4,7 @@ import { CalendarDays, Search, Stethoscope, X, MapPin } from 'lucide-react';
 
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 import { useDoctors, type Doctor } from '@/lib/site-data';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
@@ -74,7 +75,7 @@ const hospitalLabel: Record<string, string> = {
 
 export default function DoctorsPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('doktorlarimiz', COPY[locale]);
     const lp = useLocalizedPath();
     const doctors = useDoctors();
     const [q, setQ] = useState('');
@@ -199,7 +200,7 @@ function PlaceholderPortrait({ size = 'md' }: { size?: 'sm' | 'md' }) {
 
 /* Mobile — kompakt yatay */
 function DoctorCardMobile({ doc }: { doc: Doctor }) {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('doktorlarimiz', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const { prefix, name } = splitName(doc.name);
@@ -245,7 +246,7 @@ function DoctorCardMobile({ doc }: { doc: Doctor }) {
 
 /* Desktop — dikey */
 function DoctorCard({ doc }: { doc: Doctor }) {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('doktorlarimiz', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const { prefix, name } = splitName(doc.name);

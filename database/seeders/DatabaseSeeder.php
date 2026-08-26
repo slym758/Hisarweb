@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SliderSeeder::class);
         $this->call(FormDefinitionSeeder::class);
         $this->call(PageSeeder::class);
+        $this->call(PageCopySeeder::class);
         $this->call(CampaignSeeder::class);
         $this->call(PopupSeeder::class);
         $this->call(RelationSeeder::class);

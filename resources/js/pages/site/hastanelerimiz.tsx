@@ -4,6 +4,7 @@ import { ArrowRight, MapPin, Navigation, CalendarDays, Building2, Phone } from '
 import { siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 import { useHospitals } from '@/lib/site-data';
 
@@ -82,7 +83,7 @@ const MAPS_QUERY: Record<string, string> = {
 
 export default function HastanelerimizPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('hastanelerimiz', COPY[locale]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const items = useHospitals();

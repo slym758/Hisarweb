@@ -4,7 +4,7 @@ import { Compass, Target, Quote, ArrowRight, ShieldCheck, HeartPulse, Users, Spa
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
-import { useContent } from '@/lib/page-content';
+import { useContent, usePageCopy } from '@/lib/page-content';
 
 const PRINCIPLE_ICONS = [HeartPulse, ShieldCheck, Users, Sparkles];
 
@@ -66,7 +66,7 @@ const COPY = {
 } as const;
 
 export default function Page() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('vizyon-misyon', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const pc = useContent('vizyon-misyon');
 

@@ -6,6 +6,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useDepartments, useVideos, type Video } from '@/lib/site-data';
 
 /** Video enriched with its resolved (localized) department name. */
@@ -56,7 +57,7 @@ const COPY = {
 
 export default function Videolar() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('videolar', COPY[locale]);
     const rawVideos = useVideos();
     const departmentsList = useDepartments();
 

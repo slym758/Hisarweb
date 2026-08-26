@@ -4,6 +4,7 @@ import { Baby, Calendar, HeartHandshake, MessageCircle, Sparkles, Users, Chevron
 import { siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 const COPY = {
     tr: {
@@ -131,7 +132,7 @@ const COPY = {
 } as const;
 
 export default function Page() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('gebe-okulu', COPY[useLocale()]);
 
     return (
         <>

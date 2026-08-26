@@ -4,6 +4,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { PageSectionNavigation } from '@/components/site/PageSectionNavigation';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 /* Stable anchor ids — locale-independent (used by scroll-spy + section nav). */
 const SECTION_IDS = ['taraflar', 'konu', 'urun', 'teslim', 'cayma', 'uyusmazlik', 'iletisim'] as const;
@@ -126,7 +127,7 @@ const COPY = {
 
 export default function MesafeliSatisSozlesmesi() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('mesafeli-satis-sozlesmesi', COPY[locale]);
     const sections = SECTION_IDS.map((id, i) => ({ id, ...c.sections[i] }));
 
     return (

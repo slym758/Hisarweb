@@ -3,6 +3,7 @@ import { Smartphone, Download, CalendarCheck, FileText, Stethoscope, Bell, Shiel
 
 import { siteLayout, PageHeader } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 const APP_STORE_URL = '#';
 const GOOGLE_PLAY_URL = '#';
@@ -58,7 +59,7 @@ const COPY = {
 
 export default function MobileApp() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('mobil-uygulama', COPY[locale]);
     const features = c.features.map((f, i) => ({ ...f, icon: FEATURE_ICONS[i] }));
 
     return (

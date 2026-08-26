@@ -9,6 +9,7 @@ import { OnkolojiSubNav } from '@/components/site/OnkolojiSubNav';
 import { useAnimatedPlaceholder } from '@/hooks/useAnimatedPlaceholder';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 import { useDoctors } from '@/lib/site-data';
 
@@ -60,7 +61,7 @@ const COPY = {
 
 export default function ButunlesikOnkolojiMedikalKadro() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('butunlesik-onkoloji-medikal-kadro', COPY[locale]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const allDoctors = useDoctors();

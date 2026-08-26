@@ -5,6 +5,7 @@ import { Search, X, ArrowRight, HeartPulse, Filter, ChevronDown } from 'lucide-r
 import { siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useDepartments, useDiseases, normalizeTr } from '@/lib/site-data';
 import { useAnimatedPlaceholder } from '@/hooks/use-animated-placeholder';
 
@@ -62,7 +63,7 @@ const ALPHABET = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split('');
 
 export default function HastaliklarPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('hastaliklar', COPY[locale]);
     const lp = useLocalizedPath();
     const departments = useDepartments();
     const diseases = useDiseases();

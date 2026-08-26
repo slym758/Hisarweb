@@ -7,6 +7,7 @@ import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { OnkolojiSubNav } from '@/components/site/OnkolojiSubNav';
 import { BizeUlasin } from '@/components/site/BizeUlasin';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 /* ──────────────────── TEMPORARY IMAGERY (Unsplash placeholders) ──────────────────── */
 /* TODO: real asset — swap every Unsplash URL below for the optimized moral-takimi portraits. */
@@ -89,7 +90,7 @@ const COPY = {
 } as const;
 
 function VisitCarousel({ item }: { item: { name: string; images: string[] } }) {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('moral-takimi', COPY[useLocale()]);
     const ref = useRef<HTMLDivElement>(null);
     const scroll = (dir: -1 | 1) => {
         const el = ref.current;
@@ -134,7 +135,7 @@ function VisitCarousel({ item }: { item: { name: string; images: string[] } }) {
 }
 
 export default function Page() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('moral-takimi', COPY[useLocale()]);
 
     return (
         <>

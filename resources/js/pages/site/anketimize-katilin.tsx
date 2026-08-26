@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 /* Stable question ids — locale-independent (labels live in COPY). */
 const QUESTION_IDS = ['appointment', 'doctor', 'nursing', 'facility', 'wait', 'overall'] as const;
@@ -124,7 +125,7 @@ const COPY = {
 export default function AnketimizeKatilin() {
     const locale = useLocale();
     const lp = useLocalizedPath();
-    const c = COPY[locale];
+    const c = usePageCopy('anketimize-katilin', COPY[locale]);
 
     const [ratings, setRatings] = useState<Record<string, number>>({});
     const [visitType, setVisitType] = useState<string>('');

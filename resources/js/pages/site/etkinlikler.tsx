@@ -4,6 +4,7 @@ import { ArrowRight, CalendarDays, MapPin } from 'lucide-react';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useEvents } from '@/lib/site-data';
 
 /* ──────────────────── BILINGUAL COPY (every visible string TR + EN) ──────────────────── */
@@ -44,7 +45,7 @@ function formatDate(iso: string, locale: 'tr' | 'en'): string {
 
 export default function EventsPage() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('etkinlikler', COPY[locale]);
     const lp = useLocalizedPath();
     const events = useEvents();
 

@@ -4,6 +4,7 @@ import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { PageSectionNavigation } from '@/components/site/PageSectionNavigation';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 const COPY = {
     tr: {
@@ -172,7 +173,7 @@ const COPY = {
 
 export default function Page() {
     const locale = useLocale();
-    const c = COPY[locale];
+    const c = usePageCopy('web-ve-tibbi-yayin-kurulu', COPY[locale]);
 
     return (
         <>

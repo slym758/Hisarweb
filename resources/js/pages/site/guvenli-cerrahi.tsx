@@ -4,6 +4,7 @@ import { ClipboardCheck, ShieldCheck, Users, Sparkles, Activity, HeartPulse } fr
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 
 const PILLAR_ICONS = [ClipboardCheck, Users, ShieldCheck, Activity];
 
@@ -63,7 +64,7 @@ const COPY = {
 } as const;
 
 export default function GuvenliCerrahi() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('guvenli-cerrahi', COPY[useLocale()]);
     const pillars = c.pillars.map((p, i) => ({ ...p, icon: PILLAR_ICONS[i] }));
     return (
         <>
