@@ -9,6 +9,7 @@ use App\Models\Doctor;
 use App\Models\EventItem;
 use App\Models\FaqCategory;
 use App\Models\HealthPackage;
+use App\Models\HomeCenter;
 use App\Models\Hospital;
 use App\Models\PressItem;
 use App\Models\QualityCertificate;
@@ -169,6 +170,15 @@ class CatalogService
                     'slug' => $f->slug,
                     'title' => $L($f, 'title'),
                     'items' => $L($f, 'items') ?? [],
+                ])->all(),
+
+            'homeCenters' => HomeCenter::published()->ordered()->get()
+                ->map(fn (HomeCenter $m) => [
+                    'name' => $L($m, 'name'),
+                    'desc' => $L($m, 'desc') ?? '',
+                    'accent' => $L($m, 'accent') ?? '',
+                    'href' => $m->link ?: '/tedavi-yontemleri',
+                    'image' => Media::url($m->image_path, $m->image_url) ?? '',
                 ])->all(),
 
             'qualityCertificates' => QualityCertificate::published()->ordered()->get()

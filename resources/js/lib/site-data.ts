@@ -349,6 +349,10 @@ export function useSymptomMap(): SymptomMap[] { const l = useLocale(); const c =
 export type QualityCert = { key: string; title: string; note?: string; alt: string; img?: string };
 export function useQualityCertificates(): QualityCert[] | undefined { return useCatalog<QualityCert>('qualityCertificates'); }
 
+/** Homepage "Özel Merkezler" cards from the DB catalog (locale-resolved), or undefined off-site. */
+export type HomeCenter = { name: string; desc: string; accent: string; href: string; image: string };
+export function useHomeCenters(): HomeCenter[] | undefined { return useCatalog<HomeCenter>('homeCenters'); }
+
 /** Resolve a department slug to its localized name (relation helper). */
 function deptName(slug: string, l: Locale): string {
     return DEPARTMENTS_SRC.find((d) => d.slug === slug)?.name[l] ?? slug;

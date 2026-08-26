@@ -14,7 +14,7 @@ import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
 import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
-import { normalizeTr, useBlogPosts, useDepartments, useHospitals, useSymptomMap } from '@/lib/site-data';
+import { normalizeTr, useBlogPosts, useDepartments, useHomeCenters, useHospitals, useSymptomMap } from '@/lib/site-data';
 
 /* ──────────────────── TEMPORARY IMAGERY (Unsplash placeholders) ──────────────────── */
 /* TODO: real asset — swap every Unsplash URL below for optimized production assets. */
@@ -1123,7 +1123,12 @@ function OzelMerkezler() {
         { image: ph('1579684385127-1ef15d508118'), href: '/tedavi-yontemleri' },
         { image: ph('1582719508461-905c673771fd'), href: '/tedavi-yontemleri' },
     ];
-    const merkezler = media.map((m, i) => ({ ...m, ...c.merkezler.items[i] }));
+    // Editor-managed centers (DB) win; fall back to the bundled media + copy items.
+    const dbCenters = useHomeCenters();
+    const merkezler =
+        dbCenters && dbCenters.length
+            ? dbCenters
+            : media.map((m, i) => ({ ...m, ...c.merkezler.items[i] }));
 
     return (
         <section className="bg-background py-14 lg:py-20">
