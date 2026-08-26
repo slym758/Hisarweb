@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Site\CampaignController;
 use App\Http\Controllers\Site\SiteContentController;
 use App\Support\LocaleService;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,9 @@ $sitePages = function () {
     Route::get('/paketler/{slug}', [SiteContentController::class, 'package']);
     Route::inertia('/anlasmali-kurumlar', 'site/anlasmali-kurumlar');
     Route::inertia('/mobil-uygulama', 'site/mobil-uygulama');
+
+    // Campaigns — editor-created, time-boxed landing pages (medical-tourism / ad traffic)
+    Route::get('/kampanya/{slug}', [CampaignController::class, 'show']);
 
     // Service / forms (prototype)
     Route::inertia('/online-hizmetler', 'site/online-hizmetler');

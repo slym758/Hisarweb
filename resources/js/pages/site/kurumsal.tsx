@@ -15,6 +15,7 @@ import {
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { useContent } from '@/lib/page-content';
 
 const VALUE_ICONS = [HeartPulse, ShieldCheck, Scale, Leaf];
 const STAT_VALUES = ['20+', '50+', '3', 'JCI'];
@@ -126,6 +127,7 @@ const COPY = {
 export default function KurumsalPage() {
     const locale = useLocale();
     const c = COPY[locale];
+    const pc = useContent('kurumsal');
 
     return (
         <>
@@ -143,13 +145,13 @@ export default function KurumsalPage() {
                 <div className="container-x grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
                     <div>
                         <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
-                            <Sparkles className="h-3.5 w-3.5" /> {c.aboutBadge}
+                            <Sparkles className="h-3.5 w-3.5" /> {pc('about', 'badge', c.aboutBadge)}
                         </span>
                         <h2 className="mt-4 text-3xl lg:text-4xl font-black tracking-tight text-primary text-balance">
-                            {c.aboutTitle}
+                            {pc('about', 'title', c.aboutTitle)}
                         </h2>
-                        <p className="mt-5 text-muted-foreground leading-relaxed">{c.aboutP1}</p>
-                        <p className="mt-4 text-muted-foreground leading-relaxed">{c.aboutP2}</p>
+                        <p className="mt-5 text-muted-foreground leading-relaxed">{pc('about', 'p1', c.aboutP1)}</p>
+                        <p className="mt-4 text-muted-foreground leading-relaxed">{pc('about', 'p2', c.aboutP2)}</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 sm:gap-4">

@@ -4,6 +4,7 @@ import { Compass, Target, Quote, ArrowRight, ShieldCheck, HeartPulse, Users, Spa
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useContent } from '@/lib/page-content';
 
 const PRINCIPLE_ICONS = [HeartPulse, ShieldCheck, Users, Sparkles];
 
@@ -67,6 +68,7 @@ const COPY = {
 export default function Page() {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const pc = useContent('vizyon-misyon');
 
     return (
         <>
@@ -87,18 +89,18 @@ export default function Page() {
                     <article className="relative overflow-hidden rounded-3xl bg-gradient-primary text-primary-foreground p-7 lg:p-10 shadow-brand">
                         <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-brand-cyan/15 blur-3xl" aria-hidden />
                         <Compass className="h-10 w-10 text-brand-cyan" aria-hidden />
-                        <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-cyan">{c.visionLabel}</p>
+                        <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-cyan">{pc('vision', 'label', c.visionLabel)}</p>
                         <Quote className="mt-3 h-5 w-5 text-primary-foreground/40" aria-hidden />
                         <p className="mt-2 text-xl lg:text-2xl font-semibold leading-snug tracking-tight text-balance">
-                            {c.visionText}
+                            {pc('vision', 'text', c.visionText)}
                         </p>
                     </article>
 
                     <article className="relative overflow-hidden rounded-3xl bg-card border border-border/70 p-7 lg:p-10">
                         <Target className="h-10 w-10 text-brand-orange" aria-hidden />
-                        <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-orange">{c.missionLabel}</p>
+                        <p className="mt-5 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-orange">{pc('mission', 'label', c.missionLabel)}</p>
                         <p className="mt-3 text-xl lg:text-2xl font-semibold leading-snug tracking-tight text-primary text-balance">
-                            {c.missionText}
+                            {pc('mission', 'text', c.missionText)}
                         </p>
                         <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{c.missionSub}</p>
                     </article>

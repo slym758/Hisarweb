@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Support\CatalogService;
 use App\Support\LocaleService;
 use App\Support\MenuService;
+use App\Support\PageContentService;
 use App\Support\SettingsService;
 use App\Support\SliderService;
 use Illuminate\Foundation\Inspiring;
@@ -72,6 +73,10 @@ class HandleInertiaRequests extends Middleware
             // Admin-managed home hero slider, resolved to the active locale. Null when no
             // active slides exist, so the frontend falls back to its in-memory hero. Lazy.
             'homeHero' => fn () => SliderService::forPlacement('home_hero', app()->getLocale()),
+            // Admin-editable page copy, keyed { [slug]: { [section]: { [key]: value } } },
+            // resolved to the active locale. Empty for pages the editor hasn't touched, so
+            // the frontend `useContent()` hook falls back to each page's inline COPY. Lazy.
+            'pageContent' => fn () => PageContentService::all(app()->getLocale()),
         ]);
     }
 
