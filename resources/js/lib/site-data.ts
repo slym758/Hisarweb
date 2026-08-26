@@ -329,6 +329,8 @@ export function getHospitals(l: Locale): Hospital[] { return HOSPITALS_SRC.map((
 export function getBlogPosts(l: Locale): BlogPost[] { return BLOG_SRC.map((b) => resolveBlog(b, l)); }
 /** Blog posts linked to a department slug via their `category` (relation helper for detail pages). */
 export function getBlogPostsForDept(deptSlug: string, l: Locale): BlogPost[] {
+    const cat = useCatalog<BlogPost>('blogPosts');
+    if (cat) return cat.filter((b) => b.category === deptSlug);
     return BLOG_SRC.filter((b) => b.category === deptSlug).map((b) => resolveBlog(b, l));
 }
 export function getSymptomMap(l: Locale): SymptomMap[] { return SYMPTOMS_SRC.map((s) => resolveSymptom(s, l)); }
@@ -974,6 +976,10 @@ export function getDoctorById(id: string, l: Locale): Doctor | undefined {
 }
 /** Doctors linked to a department slug (relation helper for detail pages). */
 export function getDoctorsForDept(deptSlug: string, l: Locale): Doctor[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.doctors)) return rel.doctors as unknown as Doctor[];
+    const cat = useCatalog<Doctor>('doctors');
+    if (cat) return cat.filter((d) => d.departmentSlug === deptSlug);
     return DOCTORS_SRC.filter((d) => d.departmentSlug === deptSlug).map((d) => resolveDoctor(d, l));
 }
 /** Published hospitals where a department has doctors, with the doctor count (relation helper). */
@@ -999,6 +1005,8 @@ export function getHospitalBySlug(slug: string, l: Locale): Hospital | undefined
 }
 /** All doctors practising at a hospital (relation helper for the hospital detail page). */
 export function getDoctorsForHospital(hospitalSlug: string, l: Locale): Doctor[] {
+    const cat = useCatalog<Doctor>('doctors');
+    if (cat) return cat.filter((d) => d.hospitalSlug === hospitalSlug);
     return DOCTORS_SRC.filter((d) => d.hospitalSlug === hospitalSlug).map((d) => resolveDoctor(d, l));
 }
 /**
@@ -1471,6 +1479,8 @@ export function getTreatmentBySlug(slug: string, l: Locale): Treatment | undefin
 export function getTreatmentsForDept(deptSlug: string, l: Locale): Treatment[] {
     const rel = readRelatedProp();
     if (rel && Array.isArray(rel.treatments)) return rel.treatments as unknown as Treatment[];
+    const cat = useCatalog<Treatment>('treatments');
+    if (cat) return cat.filter((t) => t.deptSlug === deptSlug);
     return TREATMENTS_SRC.filter((t) => t.deptSlug === deptSlug).map((t) => resolveTreatment(t, l));
 }
 /**
@@ -1802,6 +1812,8 @@ export function getDiseaseBySlug(slug: string, l: Locale): Disease | undefined {
 export function getDiseasesForDept(deptSlug: string, l: Locale): Disease[] {
     const rel = readRelatedProp();
     if (rel && Array.isArray(rel.diseases)) return rel.diseases as unknown as Disease[];
+    const cat = useCatalog<Disease>('diseases');
+    if (cat) return cat.filter((d) => d.deptSlug === deptSlug);
     return DISEASES_SRC.filter((d) => d.deptSlug === deptSlug).map((d) => resolveDisease(d, l));
 }
 
@@ -1937,6 +1949,8 @@ export function getTechnologyBySlug(slug: string, l: Locale): Technology | undef
 export function getTechnologiesForDept(deptSlug: string, l: Locale): Technology[] {
     const rel = readRelatedProp();
     if (rel && Array.isArray(rel.technologies)) return rel.technologies as unknown as Technology[];
+    const cat = useCatalog<Technology>('technologies');
+    if (cat) return cat.filter((t) => t.deptSlugs.includes(deptSlug));
     return TECHNOLOGIES_SRC.filter((t) => t.deptSlugs.includes(deptSlug)).map((t) => resolveTechnology(t, l));
 }
 
@@ -2134,6 +2148,8 @@ export function getVideos(l: Locale): Video[] { return VIDEOS_SRC.map((v) => res
 export function getVideosForDept(deptSlug: string, l: Locale): Video[] {
     const rel = readRelatedProp();
     if (rel && Array.isArray(rel.videos)) return rel.videos as unknown as Video[];
+    const cat = useCatalog<Video>('videos');
+    if (cat) return cat.filter((v) => v.deptSlug === deptSlug);
     return VIDEOS_SRC.filter((v) => v.deptSlug === deptSlug).map((v) => resolveVideo(v, l));
 }
 export function useVideos(): Video[] { const l = useLocale(); const c = useCatalog<Video>('videos'); return c ?? getVideos(l); }
