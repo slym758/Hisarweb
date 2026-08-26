@@ -10,6 +10,7 @@ use App\Models\EventItem;
 use App\Models\HealthPackage;
 use App\Models\Hospital;
 use App\Models\MoralTeamMember;
+use App\Models\OncologyGalleryItem;
 use App\Models\PressItem;
 use App\Models\Technology;
 use App\Models\Treatment;
@@ -134,6 +135,26 @@ class SiteContentController extends Controller
         $e = EventItem::where('slug', $slug)->published()->firstOrFail();
 
         return Inertia::render('site/etkinlik-detay', ['slug' => $slug, 'record' => SiteSerializer::event($e)]);
+    }
+
+    /**
+     * Integrated Oncology overview ("Genel Bakış") — the page's copy tree + the editor-managed
+     * "Merkez Turu" gallery (uploadable images with translatable captions). Falls back to the
+     * page's bundled gallery when the prop is empty.
+     */
+    public function oncologyOverview(): Response
+    {
+        $gallery = OncologyGalleryItem::published()->ordered()->get()
+            ->map(fn (OncologyGalleryItem $g) => [
+                'image' => Media::url($g->image_path, $g->image_url) ?? '',
+                'title' => $g->loc('title') ?? '',
+                'desc' => $g->loc('desc') ?? '',
+            ])->all();
+
+        return Inertia::render('site/butunlesik-onkoloji', [
+            'pageCopy' => (object) PageContentService::copyFor('butunlesik-onkoloji', app()->getLocale()),
+            'gallery' => $gallery,
+        ]);
     }
 
     /**

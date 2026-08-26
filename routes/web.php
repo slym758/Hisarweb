@@ -68,7 +68,7 @@ $sitePages = function () {
     // Hospitals + oncology
     site_page('/hastanelerimiz', 'site/hastanelerimiz');
     Route::get('/hastane/{slug}', [SiteContentController::class, 'hospital']);
-    site_page('/butunlesik-onkoloji', 'site/butunlesik-onkoloji');
+    Route::get('/butunlesik-onkoloji', [SiteContentController::class, 'oncologyOverview']);
     site_page('/butunlesik-onkoloji/medikal-kadro', 'site/butunlesik-onkoloji-medikal-kadro');
 
     // Guide / content

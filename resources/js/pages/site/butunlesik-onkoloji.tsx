@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import {
     Activity, ArrowRight, HeartPulse, Microscope, Sparkles, Stethoscope, Users, Award, ShieldCheck, Users2, Brain, Apple, Scan, Dna, Syringe, Radiation, FlaskConical, CalendarCheck,
 } from 'lucide-react';
@@ -210,7 +210,12 @@ export default function ButunlesikOnkoloji() {
 
     const units = c.units;
     const highlights = c.highlights.map((h, i) => ({ ...h, icon: HIGHLIGHT_ICONS[i] }));
-    const gallery = c.gallery.items.map((g, i) => ({ ...g, src: GALLERY_IMAGES[i] }));
+    // "Merkez Turu" gallery: editor-managed items (DB) via the `gallery` prop; fall back to
+    // the bundled captions (copy) + placeholder images when empty.
+    const galleryProp = (usePage().props as { gallery?: { image: string; title: string; desc: string }[] }).gallery;
+    const gallery = galleryProp && galleryProp.length
+        ? galleryProp.map((g) => ({ src: g.image, title: g.title, desc: g.desc }))
+        : c.gallery.items.map((g, i) => ({ ...g, src: GALLERY_IMAGES[i] }));
     const members = c.council.members.map((label, i) => ({ label, icon: MEMBER_ICONS[i], wide: i === 0 }));
     const numbers = [
         { k: '20+', v: c.numbers.years },

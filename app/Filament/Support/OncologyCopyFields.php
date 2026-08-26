@@ -49,6 +49,8 @@ class OncologyCopyFields
                     ->collapsed()->collapsible(),
                 TextInput::make("copy.$locale.numbersTitle")->label('Rakamlar başlığı'),
                 TextInput::make("copy.$locale.quickTitle")->label('Hızlı erişim başlığı'),
+                TextInput::make("copy.$locale.gallery.eyebrow")->label('Merkez turu — üst etiket'),
+                TextInput::make("copy.$locale.gallery.title")->label('Merkez turu — başlık'),
             ]),
 
             self::forSlug('butunlesik-onkoloji-medikal-kadro', 'Sayfa metinleri — Medikal Kadro', fn (string $locale, bool $isDefault) => [
