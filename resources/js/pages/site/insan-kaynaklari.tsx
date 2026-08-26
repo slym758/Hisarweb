@@ -1,10 +1,10 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
-import { Briefcase, GraduationCap, Heart, MapPin, Users, Clock, ArrowRight, Upload, Stethoscope, ChevronDown } from 'lucide-react';
+import { Briefcase, GraduationCap, Heart, MapPin, Users, Clock, ArrowRight, Upload, Stethoscope, ChevronDown, CheckCircle2 } from 'lucide-react';
 
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
-import { useLocale } from '@/lib/i18n';
+import { useLocale, useLocalizedPath } from '@/lib/i18n';
 
 type GroupKey = 'Sağlık' | 'İdari' | 'Teknik' | 'Staj';
 const GROUP_KEYS: GroupKey[] = ['Sağlık', 'İdari', 'Teknik', 'Staj'];
@@ -131,9 +131,17 @@ const COPY = {
                 'Anestezi ve Reanimasyon',
                 'Diğer',
             ],
-            uploadLabel: 'Diploma / uzmanlık belgesi yükleyin (PDF, JPG)',
+            uploadLabel: 'CV / belge yükleyin (PDF, DOC, DOCX — maks. 5MB)',
             cvPhysicianPlaceholder: 'Kısa özgeçmiş, deneyim, yayınlar',
             submitPhysician: 'Hekim Başvurusunu Gönder',
+            cvUploadLabel: 'CV yükleyin (PDF, DOC, DOCX — maks. 5MB)',
+            cvChosen: 'Seçilen dosya:',
+            kvkkPre: '',
+            kvkkLink: 'KVKK Aydınlatma Metni',
+            kvkkPost: '’ni okudum, kişisel verilerimin işe alım süreçlerinde işlenmesine onay veriyorum.',
+            kvkkError: 'KVKK onayı zorunludur',
+            successTitle: 'Başvurunuz alındı',
+            successBody: 'Talebiniz alındı, İK ekibimiz başvurunuzu değerlendirip en kısa sürede dönüş yapacaktır.',
         },
     },
     en: {
@@ -202,9 +210,17 @@ const COPY = {
                 'Anesthesiology and Reanimation',
                 'Other',
             ],
-            uploadLabel: 'Upload diploma / specialty certificate (PDF, JPG)',
+            uploadLabel: 'Upload your CV / document (PDF, DOC, DOCX — max 5MB)',
             cvPhysicianPlaceholder: 'Short CV, experience, publications',
             submitPhysician: 'Submit Physician Application',
+            cvUploadLabel: 'Upload your CV (PDF, DOC, DOCX — max 5MB)',
+            cvChosen: 'Selected file:',
+            kvkkPre: 'I have read the ',
+            kvkkLink: 'KVKK Disclosure Statement',
+            kvkkPost: ' and consent to the processing of my personal data in recruitment processes.',
+            kvkkError: 'KVKK consent is required',
+            successTitle: 'Your application has been received',
+            successBody: 'Your request has been received; our HR team will review your application and get back to you shortly.',
         },
     },
 } as const;
@@ -323,9 +339,88 @@ export default function Page() {
 Page.layout = siteLayout;
 
 function ApplicationTabs() {
-    const c = COPY[useLocale()].app;
+    const locale = useLocale();
+    const lp = useLocalizedPath();
+    const c = COPY[locale].app;
     const [tab, setTab] = useState<'genel' | 'hekim'>('genel');
+    const [submitted, setSubmitted] = useState(false);
+    const [kvkkErr, setKvkkErr] = useState<string | null>(null);
+    const { data, setData, post, processing, errors, transform } = useForm<{
+        name: string;
+        email: string;
+        phone: string;
+        position: string;
+        title: string;
+        specialty: string;
+        message: string;
+        cv: File | null;
+        kvkk: boolean;
+        website: string;
+    }>({
+        name: '',
+        email: '',
+        phone: '',
+        position: '',
+        title: '',
+        specialty: '',
+        message: '',
+        cv: null,
+        kvkk: false,
+        website: '',
+    });
     const commonInput = 'h-11 rounded-xl border border-border/70 bg-background px-3 text-sm';
+
+    function submit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (!data.kvkk) {
+            setKvkkErr(c.kvkkError);
+            return;
+        }
+        setKvkkErr(null);
+        transform((d) => ({ ...d, applicationType: tab, locale }));
+        post('/form/insan-kaynaklari', {
+            forceFormData: true,
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => setSubmitted(true),
+        });
+    }
+
+    // Honeypot — real users never fill this; bots do. Kept off-screen.
+    const honeypot = (
+        <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={data.website}
+            onChange={(e) => setData('website', e.target.value)}
+            style={{ position: 'absolute', left: '-9999px', top: 0, height: 0, width: 0, opacity: 0 }}
+        />
+    );
+
+    const kvkkField = (
+        <>
+            <label className="sm:col-span-2 flex items-start gap-2 text-[12.5px] text-muted-foreground">
+                <input
+                    type="checkbox"
+                    checked={data.kvkk}
+                    onChange={(e) => setData('kvkk', e.target.checked)}
+                    className="accent-primary mt-0.5 h-4 w-4"
+                />
+                <span>
+                    {c.kvkkPre}
+                    <Link href={lp('/kvkk-politikamiz')} className="text-primary font-semibold hover:underline">
+                        {c.kvkkLink}
+                    </Link>
+                    {c.kvkkPost}
+                </span>
+            </label>
+            {(kvkkErr || errors.kvkk) && <p className="sm:col-span-2 text-destructive text-xs">{kvkkErr ?? errors.kvkk}</p>}
+        </>
+    );
+
     return (
         <div className="rounded-3xl border border-border/70 bg-gradient-card p-6 lg:p-10">
             <div className="grid lg:grid-cols-2 gap-6">
@@ -335,80 +430,115 @@ function ApplicationTabs() {
                     </div>
                     <h3 className="mt-3 text-2xl font-black text-primary">{c.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
-                    <p className="mt-4 text-[11px] text-muted-foreground">{c.note}</p>
                 </div>
                 <div>
-                    <div role="tablist" aria-label={c.tablistAria} className="inline-flex rounded-full border border-border/70 bg-background p-1">
-                        <button
-                            role="tab"
-                            aria-selected={tab === 'genel'}
-                            onClick={() => setTab('genel')}
-                            className={`h-9 rounded-full px-4 text-xs font-bold transition ${tab === 'genel' ? 'bg-primary text-primary-foreground' : 'text-primary hover:bg-primary-soft/60'}`}
-                        >
-                            <Briefcase className="inline h-3.5 w-3.5 -mt-0.5 mr-1" /> {c.tabGeneral}
-                        </button>
-                        <button
-                            role="tab"
-                            aria-selected={tab === 'hekim'}
-                            onClick={() => setTab('hekim')}
-                            className={`h-9 rounded-full px-4 text-xs font-bold transition ${tab === 'hekim' ? 'bg-primary text-primary-foreground' : 'text-primary hover:bg-primary-soft/60'}`}
-                        >
-                            <Stethoscope className="inline h-3.5 w-3.5 -mt-0.5 mr-1" /> {c.tabPhysician}
-                        </button>
-                    </div>
-
-                    {tab === 'genel' ? (
-                        <form className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onSubmit={(e) => e.preventDefault()}>
-                            <input aria-label={c.name} placeholder={c.name} className={commonInput} />
-                            <input aria-label={c.email} type="email" placeholder={c.email} className={commonInput} />
-                            <input aria-label={c.phone} placeholder={c.phone} className={commonInput} />
-                            <input aria-label={c.positionAria} placeholder={c.positionPlaceholder} className={commonInput} />
-                            <textarea
-                                aria-label={c.cvAria}
-                                placeholder={c.cvGeneralPlaceholder}
-                                className="sm:col-span-2 rounded-xl border border-border/70 bg-background px-3 py-2 text-sm min-h-[110px]"
-                            />
-                            <button
-                                disabled
-                                className="sm:col-span-2 h-11 rounded-full bg-gradient-orange text-brand-orange-foreground text-sm font-bold opacity-70 cursor-not-allowed"
-                            >
-                                {c.submitGeneral}
-                            </button>
-                        </form>
+                    {submitted ? (
+                        <div className="rounded-2xl border border-success/30 bg-success/10 p-6 text-center">
+                            <span className="bg-success/20 text-success inline-flex h-12 w-12 items-center justify-center rounded-full">
+                                <CheckCircle2 className="h-6 w-6" />
+                            </span>
+                            <h4 className="text-primary mt-3 text-lg font-black">{c.successTitle}</h4>
+                            <p className="text-muted-foreground mx-auto mt-1 max-w-md text-[13px]">{c.successBody}</p>
+                        </div>
                     ) : (
-                        <form className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onSubmit={(e) => e.preventDefault()}>
-                            <input aria-label={c.name} placeholder={c.name} className={commonInput} />
-                            <input aria-label={c.email} type="email" placeholder={c.email} className={commonInput} />
-                            <input aria-label={c.phone} placeholder={c.phone} className={commonInput} />
-                            <select aria-label={c.titleAria} className={commonInput}>
-                                <option value="">{c.titlePlaceholder}</option>
-                                {c.titleOptions.map((o) => (
-                                    <option key={o}>{o}</option>
-                                ))}
-                            </select>
-                            <select aria-label={c.specialtyAria} className="sm:col-span-2 h-11 rounded-xl border border-border/70 bg-background px-3 text-sm">
-                                <option value="">{c.specialtyPlaceholder}</option>
-                                {c.specialtyOptions.map((o) => (
-                                    <option key={o}>{o}</option>
-                                ))}
-                            </select>
-                            <label className="sm:col-span-2 rounded-xl border border-dashed border-primary/30 bg-background/60 px-3 py-3 text-sm text-muted-foreground flex items-center gap-2 cursor-not-allowed">
-                                <Upload className="h-4 w-4 text-primary" />
-                                <span>{c.uploadLabel}</span>
-                                <input type="file" className="hidden" disabled />
-                            </label>
-                            <textarea
-                                aria-label={c.cvAria}
-                                placeholder={c.cvPhysicianPlaceholder}
-                                className="sm:col-span-2 rounded-xl border border-border/70 bg-background px-3 py-2 text-sm min-h-[110px]"
-                            />
-                            <button
-                                disabled
-                                className="sm:col-span-2 h-11 rounded-full bg-gradient-orange text-brand-orange-foreground text-sm font-bold opacity-70 cursor-not-allowed"
-                            >
-                                {c.submitPhysician}
-                            </button>
-                        </form>
+                        <>
+                            <div role="tablist" aria-label={c.tablistAria} className="inline-flex rounded-full border border-border/70 bg-background p-1">
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={tab === 'genel'}
+                                    onClick={() => setTab('genel')}
+                                    className={`h-9 rounded-full px-4 text-xs font-bold transition ${tab === 'genel' ? 'bg-primary text-primary-foreground' : 'text-primary hover:bg-primary-soft/60'}`}
+                                >
+                                    <Briefcase className="inline h-3.5 w-3.5 -mt-0.5 mr-1" /> {c.tabGeneral}
+                                </button>
+                                <button
+                                    type="button"
+                                    role="tab"
+                                    aria-selected={tab === 'hekim'}
+                                    onClick={() => setTab('hekim')}
+                                    className={`h-9 rounded-full px-4 text-xs font-bold transition ${tab === 'hekim' ? 'bg-primary text-primary-foreground' : 'text-primary hover:bg-primary-soft/60'}`}
+                                >
+                                    <Stethoscope className="inline h-3.5 w-3.5 -mt-0.5 mr-1" /> {c.tabPhysician}
+                                </button>
+                            </div>
+
+                            {tab === 'genel' ? (
+                                <form className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onSubmit={submit}>
+                                    {honeypot}
+                                    <input aria-label={c.name} placeholder={c.name} value={data.name} onChange={(e) => setData('name', e.target.value)} className={commonInput} />
+                                    <input aria-label={c.email} type="email" placeholder={c.email} value={data.email} onChange={(e) => setData('email', e.target.value)} className={commonInput} />
+                                    <input aria-label={c.phone} placeholder={c.phone} value={data.phone} onChange={(e) => setData('phone', e.target.value)} className={commonInput} />
+                                    <input aria-label={c.positionAria} placeholder={c.positionPlaceholder} value={data.position} onChange={(e) => setData('position', e.target.value)} className={commonInput} />
+                                    <label className="sm:col-span-2 rounded-xl border border-dashed border-primary/30 bg-background/60 px-3 py-3 text-sm text-muted-foreground flex items-center gap-2 cursor-pointer">
+                                        <Upload className="h-4 w-4 text-primary" />
+                                        <span>{data.cv ? `${c.cvChosen} ${data.cv.name}` : c.cvUploadLabel}</span>
+                                        <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setData('cv', e.target.files?.[0] ?? null)} />
+                                    </label>
+                                    {errors.cv && <p className="sm:col-span-2 text-destructive text-xs">{errors.cv}</p>}
+                                    <textarea
+                                        aria-label={c.cvAria}
+                                        placeholder={c.cvGeneralPlaceholder}
+                                        value={data.message}
+                                        onChange={(e) => setData('message', e.target.value)}
+                                        className="sm:col-span-2 rounded-xl border border-border/70 bg-background px-3 py-2 text-sm min-h-[110px]"
+                                    />
+                                    {kvkkField}
+                                    <button
+                                        type="submit"
+                                        disabled={processing}
+                                        className="sm:col-span-2 h-11 rounded-full bg-gradient-orange text-brand-orange-foreground text-sm font-bold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                                    >
+                                        {c.submitGeneral}
+                                    </button>
+                                </form>
+                            ) : (
+                                <form className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3" onSubmit={submit}>
+                                    {honeypot}
+                                    <input aria-label={c.name} placeholder={c.name} value={data.name} onChange={(e) => setData('name', e.target.value)} className={commonInput} />
+                                    <input aria-label={c.email} type="email" placeholder={c.email} value={data.email} onChange={(e) => setData('email', e.target.value)} className={commonInput} />
+                                    <input aria-label={c.phone} placeholder={c.phone} value={data.phone} onChange={(e) => setData('phone', e.target.value)} className={commonInput} />
+                                    <select aria-label={c.titleAria} value={data.title} onChange={(e) => setData('title', e.target.value)} className={commonInput}>
+                                        <option value="">{c.titlePlaceholder}</option>
+                                        {c.titleOptions.map((o) => (
+                                            <option key={o}>{o}</option>
+                                        ))}
+                                    </select>
+                                    <select
+                                        aria-label={c.specialtyAria}
+                                        value={data.specialty}
+                                        onChange={(e) => setData('specialty', e.target.value)}
+                                        className="sm:col-span-2 h-11 rounded-xl border border-border/70 bg-background px-3 text-sm"
+                                    >
+                                        <option value="">{c.specialtyPlaceholder}</option>
+                                        {c.specialtyOptions.map((o) => (
+                                            <option key={o}>{o}</option>
+                                        ))}
+                                    </select>
+                                    <label className="sm:col-span-2 rounded-xl border border-dashed border-primary/30 bg-background/60 px-3 py-3 text-sm text-muted-foreground flex items-center gap-2 cursor-pointer">
+                                        <Upload className="h-4 w-4 text-primary" />
+                                        <span>{data.cv ? `${c.cvChosen} ${data.cv.name}` : c.uploadLabel}</span>
+                                        <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setData('cv', e.target.files?.[0] ?? null)} />
+                                    </label>
+                                    {errors.cv && <p className="sm:col-span-2 text-destructive text-xs">{errors.cv}</p>}
+                                    <textarea
+                                        aria-label={c.cvAria}
+                                        placeholder={c.cvPhysicianPlaceholder}
+                                        value={data.message}
+                                        onChange={(e) => setData('message', e.target.value)}
+                                        className="sm:col-span-2 rounded-xl border border-border/70 bg-background px-3 py-2 text-sm min-h-[110px]"
+                                    />
+                                    {kvkkField}
+                                    <button
+                                        type="submit"
+                                        disabled={processing}
+                                        className="sm:col-span-2 h-11 rounded-full bg-gradient-orange text-brand-orange-foreground text-sm font-bold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                                    >
+                                        {c.submitPhysician}
+                                    </button>
+                                </form>
+                            )}
+                        </>
                     )}
                 </div>
             </div>

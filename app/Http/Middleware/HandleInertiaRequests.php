@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Support\CatalogService;
 use App\Support\LocaleService;
+use App\Support\MenuService;
 use App\Support\SettingsService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
@@ -59,6 +60,14 @@ class HandleInertiaRequests extends Middleware
             // Site settings singleton (phone, WhatsApp, appointment CTA, socials),
             // translatable values reduced to the active locale. Lazy like `catalog`.
             'settings' => fn () => SettingsService::resolved(app()->getLocale()),
+            // Admin-managed navigation, resolved to the active locale. `header` matches the
+            // frontend NavItem[] shape; the in-memory nav stays as a fallback when empty.
+            'menus' => fn () => [
+                'header' => MenuService::tree('header', app()->getLocale()),
+                'footer' => MenuService::tree('footer', app()->getLocale()),
+                'rail' => MenuService::tree('rail', app()->getLocale()),
+                'bottom_nav' => MenuService::tree('bottom_nav', app()->getLocale()),
+            ],
         ]);
     }
 

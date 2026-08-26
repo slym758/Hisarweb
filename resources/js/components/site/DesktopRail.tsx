@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
   CalendarDays, ClipboardList, Phone,
 } from "lucide-react";
@@ -6,9 +6,18 @@ import { useEffect, useState } from "react";
 import { useLocalizedPath } from "@/lib/i18n";
 import { useSettings } from "@/lib/settings";
 
+/** Lucide icons the admin-managed rail can reference by name (falls back to Phone). */
+const RAIL_ICONS: Record<string, typeof Phone> = { CalendarDays, ClipboardList, Phone };
+
+/** A resolved rail item shared from the backend (`menus.rail`). */
+type RailMenuItem = { label: string; to?: string; href?: string; icon?: string };
+
 export function DesktopRail() {
   const [visible, setVisible] = useState(false);
   const settings = useSettings();
+  // Admin-managed rail; fall back to the hardcoded items when empty.
+  const menuRail = (usePage().props as { menus?: { rail?: RailMenuItem[] } }).menus?.rail;
+  const dbRail = Array.isArray(menuRail) && menuRail.length > 0 ? menuRail : null;
 
   // Rail sadece hero/banner geçildikten sonra görünür; footer'a yaklaşınca gizlenir.
   useEffect(() => {
@@ -36,9 +45,23 @@ export function DesktopRail() {
       }`}
     >
 
-      <RailItem to={settings.appointment_url} label={settings.appointment_label} icon={CalendarDays} primary />
-      <RailItem to="/online-hizmetler" label="E-Sonuç" icon={ClipboardList} />
-      <RailItem to="/iletisim" label="İletişim" icon={Phone} />
+      {dbRail ? (
+        dbRail.map((item, i) => (
+          <RailItem
+            key={`${item.label}-${i}`}
+            to={item.to ?? item.href ?? "#"}
+            label={item.label}
+            icon={(item.icon && RAIL_ICONS[item.icon]) || Phone}
+            primary={i === 0}
+          />
+        ))
+      ) : (
+        <>
+          <RailItem to={settings.appointment_url} label={settings.appointment_label} icon={CalendarDays} primary />
+          <RailItem to="/online-hizmetler" label="E-Sonuç" icon={ClipboardList} />
+          <RailItem to="/iletisim" label="İletişim" icon={Phone} />
+        </>
+      )}
     </aside>
   );
 }

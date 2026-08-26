@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { CheckCircle2, Ear, Heart, MessageSquare, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 import { z } from 'zod';
@@ -53,10 +53,9 @@ const COPY = {
             message: 'Mesajınız en az 10 karakter olmalı',
             kvkk: 'KVKK onayı zorunludur',
         },
-        prototypeNote: 'Bu form bir prototiptir; gönderim aktif değildir.',
         success: {
-            title: 'Form doğrulandı (demo)',
-            body: 'Bu bir prototiptir; geri bildirim gönderimi aktif değildir ve hiçbir bilgi iletilmemiştir.',
+            title: 'Geri bildiriminiz alındı',
+            body: 'Talebiniz alındı, geri bildiriminiz için teşekkür ederiz; en kısa sürede ilgili birimimiz değerlendirecektir.',
             backLabel: 'Ana sayfaya dön',
         },
         tiles: [
@@ -119,10 +118,9 @@ const COPY = {
             message: 'Your message must be at least 10 characters',
             kvkk: 'KVKK consent is required',
         },
-        prototypeNote: 'This form is a prototype; submission is not active.',
         success: {
-            title: 'Form validated (demo)',
-            body: 'This is a prototype; feedback submission is not active and no information has been sent.',
+            title: 'Your feedback has been received',
+            body: 'Your request has been received; thank you for your feedback — the relevant team will review it shortly.',
             backLabel: 'Back to home',
         },
         tiles: [
@@ -169,6 +167,7 @@ export default function SiziDinliyoruz() {
     const c = COPY[locale];
     const [submitted, setSubmitted] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const { post, transform, processing } = useForm({});
 
     function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -190,7 +189,12 @@ export default function SiziDinliyoruz() {
             return;
         }
         setErrors({});
-        setSubmitted(true);
+        transform(() => ({ ...data, website: String(fd.get('website') ?? ''), locale }));
+        post('/form/sizi-dinliyoruz', {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => setSubmitted(true),
+        });
     }
 
     const tileIcons = [Ear, Heart, ShieldCheck];
@@ -227,6 +231,15 @@ export default function SiziDinliyoruz() {
                             </div>
                         ) : (
                             <form onSubmit={onSubmit} className="space-y-5" noValidate>
+                                {/* Honeypot — real users never fill this; bots do. Kept off-screen. */}
+                                <input
+                                    type="text"
+                                    name="website"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    style={{ position: 'absolute', left: '-9999px', top: 0, height: 0, width: 0, opacity: 0 }}
+                                />
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <Field label={c.labels.fullName} name="fullName" required error={errors.fullName} />
                                     <Field label={c.labels.email} name="email" type="email" required error={errors.email} />
@@ -272,10 +285,10 @@ export default function SiziDinliyoruz() {
                                     </span>
                                 </label>
                                 {errors.kvkk && <p className="text-destructive text-xs">{errors.kvkk}</p>}
-                                <p className="text-muted-foreground text-xs">{c.prototypeNote}</p>
                                 <button
                                     type="submit"
-                                    className="bg-gradient-orange text-brand-orange-foreground shadow-orange inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 sm:w-auto"
+                                    disabled={processing}
+                                    className="bg-gradient-orange text-brand-orange-foreground shadow-orange inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                                 >
                                     <MessageSquare className="h-4 w-4" /> {c.labels.submit}
                                 </button>

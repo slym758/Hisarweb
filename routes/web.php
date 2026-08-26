@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormSubmissionController;
 use App\Http\Controllers\Site\SiteContentController;
 use App\Support\LocaleService;
 use Illuminate\Support\Facades\Route;
@@ -91,6 +92,13 @@ foreach (LocaleService::prefixed() as $locale) {
         $sitePages();
     });
 }
+
+// Public form submissions (contact, appointment, ask-a-doctor, …). Locale-agnostic, so
+// it lives outside the localized groups; the active locale is carried in the payload.
+// Throttled + honeypot-guarded (see FormSubmissionController) for spam protection.
+Route::post('/form/{key}', [FormSubmissionController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('form.submit');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', fn () => Inertia::render('dashboard'))->name('dashboard');

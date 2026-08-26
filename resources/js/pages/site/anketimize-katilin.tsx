@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { CheckCircle2, ClipboardList, Star } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
@@ -49,10 +49,9 @@ const COPY = {
             recommend: 'Lütfen tavsiye puanınızı verin (0–10).',
             kvkk: 'KVKK onayı zorunludur.',
         },
-        prototypeNote: 'Bu form bir prototiptir; gönderim aktif değildir.',
         success: {
-            title: 'Form doğrulandı (demo)',
-            body: 'Bu bir prototiptir; anket gönderimi aktif değildir ve hiçbir bilgi iletilmemiştir.',
+            title: 'Anketiniz alındı',
+            body: 'Talebiniz alındı, değerlendirmeniz için teşekkür ederiz; görüşleriniz hizmet kalitemizi geliştirmemize yardımcı olacak.',
             backLabel: 'Ana sayfaya dön',
         },
         aside: {
@@ -102,10 +101,9 @@ const COPY = {
             recommend: 'Please provide your recommendation score (0–10).',
             kvkk: 'KVKK consent is required.',
         },
-        prototypeNote: 'This form is a prototype; submission is not active.',
         success: {
-            title: 'Form validated (demo)',
-            body: 'This is a prototype; survey submission is not active and no information has been sent.',
+            title: 'Your survey has been received',
+            body: 'Your submission has been received; thank you for your evaluation — your feedback helps us improve our quality of service.',
             backLabel: 'Back to home',
         },
         aside: {
@@ -137,6 +135,7 @@ export default function AnketimizeKatilin() {
     const [kvkk, setKvkk] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const { post, transform, processing } = useForm({});
 
     const questions = QUESTION_IDS.map((id, i) => ({ id, label: c.questions[i] }));
 
@@ -162,7 +161,13 @@ export default function AnketimizeKatilin() {
             return;
         }
         setError(null);
-        setSubmitted(true);
+        const website = String(new FormData(e.currentTarget).get('website') ?? '');
+        transform(() => ({ name, email, comment, visitType, recommend, ratings, kvkk, website, locale }));
+        post('/form/anketimize-katilin', {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => setSubmitted(true),
+        });
     }
 
     return (
@@ -197,6 +202,15 @@ export default function AnketimizeKatilin() {
                             </div>
                         ) : (
                             <form onSubmit={onSubmit} className="space-y-6" noValidate>
+                                {/* Honeypot — real users never fill this; bots do. Kept off-screen. */}
+                                <input
+                                    type="text"
+                                    name="website"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    style={{ position: 'absolute', left: '-9999px', top: 0, height: 0, width: 0, opacity: 0 }}
+                                />
                                 {/* Progress */}
                                 <div>
                                     <div className="text-muted-foreground mb-1.5 flex items-center justify-between text-[12px]">
@@ -326,11 +340,10 @@ export default function AnketimizeKatilin() {
 
                                 {error && <p className="text-destructive text-xs">{error}</p>}
 
-                                <p className="text-muted-foreground text-xs">{c.prototypeNote}</p>
-
                                 <button
                                     type="submit"
-                                    className="bg-gradient-orange text-brand-orange-foreground shadow-orange inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 sm:w-auto"
+                                    disabled={processing}
+                                    className="bg-gradient-orange text-brand-orange-foreground shadow-orange inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
                                 >
                                     <ClipboardList className="h-4 w-4" /> {c.labels.submit}
                                 </button>

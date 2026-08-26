@@ -5,6 +5,7 @@
  * resolved to the active locale, so rendering code stays unchanged. Paths are
  * locale-agnostic (root/TR) — prefix them for EN with `localizedPath()`.
  */
+import { usePage } from '@inertiajs/react';
 import { useLocale, type Locale } from '@/lib/i18n';
 
 /* ── Public (resolved) nav shape — labels are plain strings ── */
@@ -189,9 +190,22 @@ export function getNav(locale: Locale): NavItem[] {
     });
 }
 
-/** Hook variant of {@link getNav} bound to the active locale. */
+/**
+ * The primary nav for the current request. Prefers the admin-managed nav shared from the
+ * backend (`menus.header`, already resolved to the active locale and matching NavItem[]);
+ * falls back to the in-memory {@link NAV_SOURCE} when that prop is missing or empty, so
+ * the header always renders.
+ */
 export function useNav(): NavItem[] {
-    return getNav(useLocale());
+    const props = usePage().props as { menus?: { header?: unknown } };
+    const locale = useLocale();
+    const dbHeader = props.menus?.header;
+
+    if (Array.isArray(dbHeader) && dbHeader.length > 0) {
+        return dbHeader as NavItem[];
+    }
+
+    return getNav(locale);
 }
 
 /** True when `pathname` (locale prefix already stripped) belongs to a nav group. */

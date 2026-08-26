@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import {
   ClipboardList, CalendarDays, Stethoscope, ShieldCheck, MessageSquareText, ClipboardPen,
 } from "lucide-react";
@@ -38,6 +38,8 @@ const COPY = {
   },
 } as const;
 
+type BottomMenuItem = { label: string; to?: string; href?: string; icon?: string };
+
 export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const path = useCurrentPath();
   const locale = useLocale();
@@ -48,6 +50,13 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const currentLang = lang ?? locale;
   const t = COPY[currentLang];
   const isEn = currentLang === "en";
+  // Admin-managed side items (TR); the center CTA and EN layout stay fixed. Falls back to
+  // the hardcoded links when no menu is set.
+  const bottomNav = (usePage().props as { menus?: { bottom_nav?: BottomMenuItem[] } }).menus?.bottom_nav;
+  const leftItem = Array.isArray(bottomNav) && bottomNav.length > 0 ? bottomNav[0] : undefined;
+  const rightItem = Array.isArray(bottomNav) && bottomNav.length >= 2 ? bottomNav[bottomNav.length - 1] : undefined;
+  const leftTo = leftItem?.to ?? "/online-hizmetler";
+  const rightTo = rightItem?.to ?? "/iletisim";
 
   // Wizard ve doktor profil sayfaları kendi alt CTA yapılarını kullansın
   if (path.startsWith("/randevu-al") || path.startsWith("/doktor/")) return null;
@@ -65,10 +74,10 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
           />
         ) : (
           <NavItem
-            to="/online-hizmetler"
-            label={t.left}
+            to={leftTo}
+            label={leftItem?.label ?? t.left}
             icon={ClipboardList}
-            active={isActive("/online-hizmetler")}
+            active={isActive(leftTo)}
           />
         )}
 
@@ -112,10 +121,10 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
           />
         ) : (
           <NavItem
-            to="/iletisim"
-            label={t.whatsapp}
+            to={rightTo}
+            label={rightItem?.label ?? t.whatsapp}
             icon={MessageSquareText}
-            active={isActive("/iletisim")}
+            active={isActive(rightTo)}
           />
         )}
 

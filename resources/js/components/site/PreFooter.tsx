@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { z } from "zod";
 import {
   ArrowUpRight,
@@ -160,7 +160,8 @@ const INITIAL: FormState = {
 };
 
 export function PreFooter() {
-  const c = COPY[useLocale()];
+  const locale = useLocale();
+  const c = COPY[locale];
   const lp = useLocalizedPath();
 
   const schema = z.object({
@@ -180,13 +181,14 @@ export function PreFooter() {
   const [form, setForm] = useState<FormState>(INITIAL);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const { post, transform } = useForm({});
 
   const setField = <K extends keyof FormState>(k: K, v: FormState[K]) => {
     setForm((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }));
   };
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
@@ -198,10 +200,19 @@ export function PreFooter() {
       setErrors(errs);
       return;
     }
-    setStatus("loading");
-    await new Promise((r) => setTimeout(r, 900));
-    setStatus("success");
-    setForm(INITIAL);
+    setErrors({});
+    const website = String(new FormData(e.currentTarget).get("website") ?? "");
+    transform(() => ({ ...form, website, locale }));
+    post("/form/iletisim", {
+      preserveScroll: true,
+      preserveState: true,
+      onStart: () => setStatus("loading"),
+      onSuccess: () => {
+        setStatus("success");
+        setForm(INITIAL);
+      },
+      onError: () => setStatus("idle"),
+    });
   }
 
   const quickLinks = QUICK_LINK_PATHS.map((to, i) => ({ to, label: c.quickLinks[i] }));
@@ -284,11 +295,6 @@ export function PreFooter() {
                 </div>
               </div>
 
-              {/* Prototype note — submission is intentionally not wired to a backend */}
-              <p className="mt-4 rounded-xl bg-primary-soft/50 ring-1 ring-primary/10 px-3.5 py-2.5 text-xs font-medium text-primary">
-                {c.prototypeNote}
-              </p>
-
               {status === "success" ? (
                 <div className="mt-8 rounded-2xl bg-primary-soft/60 ring-1 ring-primary/15 p-6 flex items-start gap-4">
                   <div className="grid h-10 w-10 place-items-center rounded-full bg-white text-primary shrink-0">
@@ -310,6 +316,15 @@ export function PreFooter() {
                 </div>
               ) : (
                 <form onSubmit={onSubmit} noValidate className="mt-6 grid gap-4">
+                  {/* Honeypot — real users never fill this; bots do. Kept off-screen. */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-9999px", top: 0, height: 0, width: 0, opacity: 0 }}
+                  />
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field label={c.labels.name} error={errors.name}>
                       <input
@@ -375,9 +390,9 @@ export function PreFooter() {
                     />
                     <span className="text-xs text-muted-foreground leading-relaxed">
                       {c.kvkkBefore}{" "}
-                      <a href="#" className="text-primary font-semibold hover:text-brand-orange transition underline underline-offset-2">
+                      <Link href={lp("/kvkk-politikamiz")} className="text-primary font-semibold hover:text-brand-orange transition underline underline-offset-2">
                         {c.kvkkLink}
-                      </a>{" "}
+                      </Link>{" "}
                       {c.kvkkAfter}
                     </span>
                   </label>

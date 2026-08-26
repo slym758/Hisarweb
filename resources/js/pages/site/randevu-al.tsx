@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
@@ -257,12 +257,12 @@ const COPY = {
             footerBefore: 'Göndererek ',
             footerLink: 'KVKK Aydınlatma Metnini',
             footerAfter: ' okuduğunuzu kabul edersiniz.',
-            prototype: 'Bu bir tasarım prototipidir; randevu gönderimi aktif değildir ve gerçek bir randevu oluşturulmaz.',
+            prototype: 'Talebinizi ilettikten sonra ekibimiz randevunuzu teyit etmek için sizinle iletişime geçecektir.',
         },
         success: {
-            title: 'Randevunuz Oluşturuldu',
+            title: 'Randevu Talebiniz Alındı',
             received: 'Randevu talebiniz alındı.',
-            prototype: 'Bu bir prototiptir; gerçek bir randevu oluşturulmamıştır.',
+            prototype: 'Talebiniz alındı; ekibimiz en kısa sürede teyit için sizinle iletişime geçecektir.',
             appointmentNo: 'Randevu No',
             calendar: 'Takvim',
             download: 'İndir',
@@ -396,12 +396,12 @@ const COPY = {
             footerBefore: 'By submitting, you accept that you have read the ',
             footerLink: 'KVKK Privacy Notice',
             footerAfter: '.',
-            prototype: 'This is a design prototype; appointment submission is not active and no real appointment is created.',
+            prototype: 'After you submit your request, our team will contact you to confirm your appointment.',
         },
         success: {
-            title: 'Your Appointment Has Been Created',
+            title: 'Your Appointment Request Has Been Received',
             received: 'Your appointment request has been received.',
-            prototype: 'This is a prototype; no real appointment has been created.',
+            prototype: 'Your request has been received; our team will contact you shortly to confirm.',
             appointmentNo: 'Appointment No',
             calendar: 'Calendar',
             download: 'Download',
@@ -438,6 +438,7 @@ export default function AppointmentWizard() {
     const [confirmed, setConfirmed] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
     const [prefillNotice, setPrefillNotice] = useState<string | null>(null);
+    const [hp, setHp] = useState(''); // honeypot
     const [state, setState] = useState<FormState>({
         doctor: null, date: null, slotId: null, time: null,
         phone: '', otp: '', otpVerified: false,
@@ -509,12 +510,36 @@ export default function AppointmentWizard() {
     const submit = () => {
         if (submitting || confirmed) return;
         setSubmitting(true);
-        // Prototype: simulated round-trip. No backend — no real appointment is created.
-        window.setTimeout(() => {
-            const code = 'HH' + Math.floor(100000 + Math.random() * 900000);
-            setConfirmed(code);
-            setSubmitting(false);
-        }, 650);
+        const doctor = state.doctor;
+        // Lead capture: the collected wizard data is submitted; our team confirms the slot.
+        router.post(
+            '/form/randevu-al',
+            {
+                name: `${state.firstName} ${state.lastName}`.trim(),
+                firstName: state.firstName,
+                lastName: state.lastName,
+                email: state.email,
+                phone: state.phone,
+                doctor: doctor ? doctor.name : '',
+                doctorId: doctor ? doctor.id : '',
+                preferredDate: state.date ?? '',
+                preferredTime: state.time ?? '',
+                tc: state.tc,
+                isInternational: state.isInternational,
+                passport: state.passport,
+                nationality: state.nationality,
+                note: state.note,
+                kvkk: state.kvkk,
+                website: hp,
+                locale,
+            },
+            {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => setConfirmed('HH' + Math.floor(100000 + Math.random() * 900000)),
+                onFinish: () => setSubmitting(false),
+            },
+        );
     };
 
     if (confirmed) return <SuccessScreen state={state} code={confirmed} />;
@@ -558,6 +583,18 @@ export default function AppointmentWizard() {
                 <link rel="alternate" hrefLang="en" href="https://app.hisarweb.test/en/randevu-al" />
                 <link rel="alternate" hrefLang="x-default" href="https://app.hisarweb.test/randevu-al" />
             </Head>
+
+            {/* Honeypot — real users never fill this; bots do. Kept off-screen. */}
+            <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+                style={{ position: 'absolute', left: '-9999px', top: 0, height: 0, width: 0, opacity: 0 }}
+            />
 
             {/* Hero — compact on mobile */}
             <section className="relative overflow-hidden border-b border-border/60 bg-gradient-to-b from-primary-soft/40 via-surface to-background">

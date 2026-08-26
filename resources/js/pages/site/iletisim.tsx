@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import { AlertCircle, ArrowRight, CheckCircle2, Clock, Headphones, Info, Mail, MapPin, MessageSquare, Navigation, Phone, Send } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { z } from 'zod';
@@ -94,8 +94,8 @@ const COPY = {
             eyebrow: 'Mesaj Formu',
             title: 'Bize mesaj bırakın',
             desc: 'Formu doldurun, ekibimiz iş günü içinde size dönüş yapsın. Acil durumlar için lütfen İletişim Merkezini arayın.',
-            sentTitle: 'Form doğrulandı (demo)',
-            sentBodyPre: 'Bu bir prototiptir; mesaj gönderimi aktif değildir ve hiçbir bilgi iletilmemiştir. Acil durumlar için İletişim Merkezi (',
+            sentTitle: 'Mesajınız alındı',
+            sentBodyPre: 'Talebiniz alındı, en kısa sürede iş günü içinde size dönüş yapacağız. Acil durumlar için İletişim Merkezi (',
             sentBodyPost: ') 7/24 hizmetinizdedir.',
             labels: {
                 name: 'Ad Soyad',
@@ -177,9 +177,9 @@ const COPY = {
             eyebrow: 'Message Form',
             title: 'Leave us a message',
             desc: 'Fill out the form and our team will get back to you within a business day. For emergencies, please call the Contact Center.',
-            sentTitle: 'Form validated (demo)',
+            sentTitle: 'Your message has been received',
             sentBodyPre:
-                'This is a prototype; message submission is not active and no information has been sent. For emergencies, the Contact Center (',
+                'Your request has been received; we will get back to you within a business day. For emergencies, the Contact Center (',
             sentBodyPost: ') is available 24/7.',
             labels: {
                 name: 'Full Name',
@@ -510,6 +510,8 @@ function buildFormSchema(err: FormCopy['errors']) {
 }
 
 function ContactForm({ copy }: { copy: FormCopy }) {
+    const locale = useLocale();
+    const CALL_CENTER = useSettings().phone_display;
     const [values, setValues] = useState({
         name: '',
         phone: '',
@@ -520,10 +522,11 @@ function ContactForm({ copy }: { copy: FormCopy }) {
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [sent, setSent] = useState(false);
+    const { post, transform, processing } = useForm({});
 
     const set = <K extends keyof typeof values>(k: K, v: (typeof values)[K]) => setValues((s) => ({ ...s, [k]: v }));
 
-    const submit = (e: React.FormEvent) => {
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const parsed = buildFormSchema(copy.errors).safeParse(values);
         if (!parsed.success) {
@@ -535,7 +538,13 @@ function ContactForm({ copy }: { copy: FormCopy }) {
             return;
         }
         setErrors({});
-        setSent(true);
+        const website = String(new FormData(e.currentTarget).get('website') ?? '');
+        transform(() => ({ ...values, website, locale }));
+        post('/form/iletisim', {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => setSent(true),
+        });
     };
 
     return (
@@ -565,6 +574,15 @@ function ContactForm({ copy }: { copy: FormCopy }) {
                 </div>
             ) : (
                 <form onSubmit={submit} className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {/* Honeypot — real users never fill this; bots do. Kept off-screen. */}
+                    <input
+                        type="text"
+                        name="website"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{ position: 'absolute', left: '-9999px', top: 0, height: 0, width: 0, opacity: 0 }}
+                    />
                     <Field label={copy.labels.name} error={errors.name}>
                         <input value={values.name} onChange={(e) => set('name', e.target.value)} className={inputCls(!!errors.name)} />
                     </Field>
@@ -618,14 +636,14 @@ function ContactForm({ copy }: { copy: FormCopy }) {
                             )}
                         </span>
                     </label>
-                    <p className="text-muted-foreground text-xs sm:col-span-2">{copy.prototypeNote}</p>
                     <div className="flex flex-wrap items-center justify-between gap-3 pt-1 sm:col-span-2">
                         <span className="text-muted-foreground inline-flex items-center gap-1.5 text-[11.5px]">
                             <Info className="h-3.5 w-3.5" /> {copy.labels.info}
                         </span>
                         <button
                             type="submit"
-                            className="bg-gradient-orange text-brand-orange-foreground shadow-orange hover:shadow-elevated inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition hover:-translate-y-0.5"
+                            disabled={processing}
+                            className="bg-gradient-orange text-brand-orange-foreground shadow-orange hover:shadow-elevated inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             <Send className="h-4 w-4" /> {copy.labels.submit}
                         </button>

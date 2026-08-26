@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
   Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube,
   ArrowRight, Navigation, Smartphone,
@@ -6,10 +6,17 @@ import {
 import { useLocalizedPath, useTranslations } from "@/lib/i18n";
 import { useSettings } from "@/lib/settings";
 
+/** A resolved footer link column shared from the backend (`menus.footer`). */
+type FooterMenuLink = { label: string; to?: string; href?: string; badge?: string };
+type FooterMenuCol = { title: string; links: FooterMenuLink[] };
+
 export function SiteFooter() {
   const lp = useLocalizedPath();
   const { t } = useTranslations();
   const settings = useSettings();
+  // Admin-managed footer link columns; fall back to the hardcoded columns when empty.
+  const menuFooter = (usePage().props as { menus?: { footer?: FooterMenuCol[] } }).menus?.footer;
+  const dbFooter = Array.isArray(menuFooter) && menuFooter.length > 0 ? menuFooter : null;
   const socials = [
     { Icon: Facebook, href: settings.facebook_url },
     { Icon: Instagram, href: settings.instagram_url },
@@ -57,31 +64,47 @@ export function SiteFooter() {
 
           </div>
 
-          <FooterCol title={t('footer.col_corporate')}>
-            <FooterLink to="/kurumsal">{t('footer.links.about_us')}</FooterLink>
-            <FooterLink to="/kurumsal">{t('footer.links.quality_docs')}</FooterLink>
-            <FooterLink to="/kurumsal">{t('footer.links.jci')}</FooterLink>
-            <FooterLink to="/saglikli-hayat-rehberi">{t('footer.links.patient_rights')}</FooterLink>
-            <FooterLink to="/kurumsal">{t('footer.links.career')}</FooterLink>
-            <FooterLink to="/anlasmali-kurumlar">{t('footer.links.contracted')}</FooterLink>
-          </FooterCol>
+          {dbFooter ? (
+            dbFooter.map((col) => (
+              <FooterCol key={col.title} title={col.title}>
+                {col.links.map((link, i) =>
+                  link.href ? (
+                    <FooterLink key={`${link.label}-${i}`} to={link.href} external>{link.label}</FooterLink>
+                  ) : (
+                    <FooterLink key={`${link.label}-${i}`} to={link.to ?? "#"}>{link.label}</FooterLink>
+                  ),
+                )}
+              </FooterCol>
+            ))
+          ) : (
+            <>
+              <FooterCol title={t('footer.col_corporate')}>
+                <FooterLink to="/kurumsal">{t('footer.links.about_us')}</FooterLink>
+                <FooterLink to="/kurumsal">{t('footer.links.quality_docs')}</FooterLink>
+                <FooterLink to="/kurumsal">{t('footer.links.jci')}</FooterLink>
+                <FooterLink to="/saglikli-hayat-rehberi">{t('footer.links.patient_rights')}</FooterLink>
+                <FooterLink to="/kurumsal">{t('footer.links.career')}</FooterLink>
+                <FooterLink to="/anlasmali-kurumlar">{t('footer.links.contracted')}</FooterLink>
+              </FooterCol>
 
-          <FooterCol title={t('footer.col_health_services')}>
-            <FooterLink to="/doktorlarimiz">{t('footer.links.doctors')}</FooterLink>
-            <FooterLink to="/bolumlerimiz">{t('footer.links.departments')}</FooterLink>
-            <FooterLink to="/tedavi-yontemleri">{t('footer.links.treatments')}</FooterLink>
-            <FooterLink to="/saglikli-hayat-rehberi">{t('footer.links.healthy_life')}</FooterLink>
-            <FooterLink to="/bolumlerimiz">{t('footer.links.oncology_center')}</FooterLink>
-            <FooterLink to="/iletisim">{t('footer.links.intl_patients')}</FooterLink>
-          </FooterCol>
+              <FooterCol title={t('footer.col_health_services')}>
+                <FooterLink to="/doktorlarimiz">{t('footer.links.doctors')}</FooterLink>
+                <FooterLink to="/bolumlerimiz">{t('footer.links.departments')}</FooterLink>
+                <FooterLink to="/tedavi-yontemleri">{t('footer.links.treatments')}</FooterLink>
+                <FooterLink to="/saglikli-hayat-rehberi">{t('footer.links.healthy_life')}</FooterLink>
+                <FooterLink to="/bolumlerimiz">{t('footer.links.oncology_center')}</FooterLink>
+                <FooterLink to="/iletisim">{t('footer.links.intl_patients')}</FooterLink>
+              </FooterCol>
 
-          <FooterCol title={t('footer.col_online')}>
-            <FooterLink to="/randevu-al">{t('footer.links.appointment')}</FooterLink>
-            <FooterLink to="/doktorlarimiz">{t('footer.links.find_doctor')}</FooterLink>
-            <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.eresults')}</FooterLink>
-            <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.hisar_online')}</FooterLink>
-            <FooterLink to="/anlasmali-kurumlar">{t('footer.links.query_contracted')}</FooterLink>
-          </FooterCol>
+              <FooterCol title={t('footer.col_online')}>
+                <FooterLink to="/randevu-al">{t('footer.links.appointment')}</FooterLink>
+                <FooterLink to="/doktorlarimiz">{t('footer.links.find_doctor')}</FooterLink>
+                <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.eresults')}</FooterLink>
+                <FooterLink to="https://online.hisarhospital.com/#/" external>{t('footer.links.hisar_online')}</FooterLink>
+                <FooterLink to="/anlasmali-kurumlar">{t('footer.links.query_contracted')}</FooterLink>
+              </FooterCol>
+            </>
+          )}
 
           <div>
             <h4 className="text-sm font-bold uppercase tracking-wider text-brand-cyan mb-4">{t('footer.col_contact')}</h4>
