@@ -16,6 +16,38 @@ etmedikçe hiçbir veri-kaybı işlemi yapılmaz.
   girildikten sonra ASLA yeniden çalıştırılmaz**.
 - Bir şey silinecekse önce dur, kullanıcıya sor, açık onay al.
 
+## CMS / Admin — DB-destekli (GÜNCEL durum)
+İçerik artık DB'de + `/admin` (Filament) panelinden yönetiliyor (dummy dönemi bitti).
+`resources/js/lib/site-data.ts` artık bir **adapter**: dış API'si (`useX`/`getXBySlug`/dept-scoped
+getter'lar) korunur ama içi Inertia props'undan beslenir — `catalog` (CatalogService, liste/arama/
+related) + detay sayfalarında `record` (Site controller'ları); DB boşsa in-memory'ye düşer (seam).
+- **Çok dil DİNAMİK:** `languages` tablosu (admin ekler; `is_rtl`, `fallback_code`), 12 dil seed
+  (tr,en,fr,ru,kk,ar-RTL,ro,ka,de,sq,mk,bg). Rota kök=tr + `/en /de /ar…` (LocaleService'ten
+  dinamik). Frontend: `useActiveLocale()` (gerçek locale — chrome/routing/switcher/RTL) vs
+  `useLocale()` (içerik locale, tr/en'e clamp + fallback). Çeviri: spatie translatable JSON,
+  fallback zinciri (ar→en→tr, `SerializesLocale::loc()`).
+- **Admin:** filament-astart (Users/Roller/Organizasyon — AAuth org-rol; aauth `^21`) + **14 içerik
+  resource'u** + Ayarlar/Menüler/Slider/Popup/Kampanya/Sayfalar/Form-Tanımları/Form-Gönderileri.
+  Çeviri düzenleme: `App\Filament\Support\LocaleTabs` (dil sekmeleri, `attr.$locale`) +
+  `App\Filament\Concerns\TranslatesRecord` (Edit'te tüm dilleri yükler/kaydeder — dil kaybı yok).
+  Görsel yükleme: additive `*_path` kolon + `App\Support\Media::url(path,url)` + native `FileUpload`
+  + `storage:link` (yüklenen path öncelikli, seed'li `*_url` fallback).
+- **Servisler (önbellekli; ilgili model save'inde otomatik flush; HandleInertiaRequests'te lazy
+  paylaşılır):** `LocaleService`, `CatalogService` (`catalog`), `SettingsService` (`settings`),
+  `MenuService` (`menus`), `SliderService` (`homeHero`), `PageContentService` (`pageContent`),
+  `PopupService` (`popups`). Frontend hook'ları: `useSettings`/`waHref`, `useContent(slug)`,
+  `useNav` (menus→NAV_SOURCE fallback), `iconFor`.
+- **Formlar:** gerçek backend — `form_definitions`/`form_submissions`, `POST /form/{key}`
+  (KVKK zorunlu+kayıtlı, honeypot, `throttle:6,1`, sunucu doğrulama, queue bildirim). 7 form + 
+  PreFooter/BizeUlasin canlı. **Arama:** `GET /api/search` (Postgres unaccent+pg_trgm, gruplu,
+  locale, typo-tolerant); HeaderShared debounce fetch.
+- **Sayfa metinleri:** `pages` (SEO) + `page_contents`; `useContent(slug)` inline COPY'ye fallback.
+  3 örnek sayfa DB'ye taşındı; kalan ~44 sayfa mekanik olarak taşınacak (fallback güvenli).
+- Faz kayıtları: `openspec/changes/2026-08-2x-*` (cms-foundation, core-content, settings-menus-
+  sliders, forms, search, page-content, campaigns, popups).
+- **Faz 9 (gerçek randevu/slot): BLOKE** — hastane HIS'i **Pusula Yazılım** entegrasyon (API)
+  vermiyor; randevu şimdilik **lead-capture** (form_submission).
+
 ## Stack
 PHP 8.4 · Laravel 12 · Inertia 2 · React 19 + TypeScript · Vite 6 · Tailwind 4 (CSS-first
 `@theme`) · shadcn/ui · PostgreSQL 15 · Warden (Docker).
