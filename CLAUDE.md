@@ -4,6 +4,18 @@ Hisar Hastanesi grubunun halka açık kurumsal/tanıtım web sitesi. Lovable ile
 UI (`Hisar Hastanesi/` — gitignored referans) **görsel olarak birebir** korunarak temiz
 bir Inertia yapısına taşınıyor. Kapsamlı kurallar: `openspec/config.yaml`.
 
+## ⛔ VERİTABANI GÜVENLİĞİ — MUTLAK KURAL (asla ihlal etme)
+Veritabanı **ASLA silinmez / sıfırlanmaz / tazelenmez**. Kullanıcı **açıkça** talep
+etmedikçe hiçbir veri-kaybı işlemi yapılmaz.
+- **YASAK komutlar:** `migrate:fresh`, `migrate:refresh`, `migrate:reset`, `db:wipe`,
+  `schema:dump --prune`, ve tabloları `DROP`/`TRUNCATE` eden her destructive işlem.
+- Şema değişikliği **her zaman YENİ, additive migration** ile yapılır (kolon ekle/değiştir);
+  var olan migration'ı düzenleyip fresh ile uygulamak YASAK. İleri gidiş: yeni migration + `migrate`.
+- Seeder'lar idempotent olmalı (`updateOrCreate`), gerçek/editör verisini silmemeli.
+  `SiteCatalogSeeder` yalnız **ilk kurulum** içindir ve içeriği temizler → **gerçek içerik
+  girildikten sonra ASLA yeniden çalıştırılmaz**.
+- Bir şey silinecekse önce dur, kullanıcıya sor, açık onay al.
+
 ## Stack
 PHP 8.4 · Laravel 12 · Inertia 2 · React 19 + TypeScript · Vite 6 · Tailwind 4 (CSS-first
 `@theme`) · shadcn/ui · PostgreSQL 15 · Warden (Docker).

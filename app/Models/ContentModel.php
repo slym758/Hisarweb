@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Concerns\HasPublishing;
 use App\Models\Concerns\SerializesLocale;
+use App\Support\CatalogService;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -34,5 +35,12 @@ abstract class ContentModel extends Model implements Sortable
         return [
             'published_at' => 'datetime',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        // Any content edit invalidates the cached light catalog shared to the frontend.
+        static::saved(fn () => CatalogService::flush());
+        static::deleted(fn () => CatalogService::flush());
     }
 }

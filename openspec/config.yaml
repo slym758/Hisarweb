@@ -41,6 +41,14 @@ context: |
   Inertia idiomatik yapı (aşağıdaki kurallar). Detaylı doktrin ileride CLAUDE.md'ye
   taşınabilir; şu an kaynak-of-truth bu config'tir.
 
+  # 0) VERİTABANI GÜVENLİĞİ — MUTLAK KURAL (asla ihlal edilmez)
+  Veritabanı ASLA silinmez/sıfırlanmaz/tazelenmez. Kullanıcı AÇIKÇA istemedikçe hiçbir
+  veri-kaybı işlemi yapılmaz. YASAK: migrate:fresh / migrate:refresh / migrate:reset /
+  db:wipe ve tabloları DROP/TRUNCATE eden destructive işlemler. Şema değişikliği HER ZAMAN
+  yeni additive migration ile (var olanı düzenleyip fresh YASAK). Seeder'lar idempotent,
+  gerçek/editör verisini silmez; SiteCatalogSeeder yalnız ilk kurulum içindir, sonra yeniden
+  çalıştırılmaz. Silme gerekiyorsa önce dur ve proje sahibine sor.
+
   # 1) TASARIM SADAKATİ — DEĞİŞTİRİLEMEZ (projenin birincil hedefi)
   Taşınan her sayfa/bileşen, `Hisar Hastanesi/` kaynağıyla GÖRSEL OLARAK BİREBİR
   aynı olmalıdır: aynı marka token'ları — primary lacivert oklch(0.28 0.16 268),

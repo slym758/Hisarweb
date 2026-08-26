@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Support\CatalogService;
 use App\Support\LocaleService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
@@ -51,6 +52,9 @@ class HandleInertiaRequests extends Middleware
             'locales' => LocaleService::all(),
             'dir' => LocaleService::dir(app()->getLocale()),
             'translations' => $this->translations(),
+            // Light content catalog (lists/search/related), DB-backed + locale-resolved.
+            // Lazily evaluated so it's only built for Inertia site responses that use it.
+            'catalog' => fn () => CatalogService::forLocale(app()->getLocale()),
         ]);
     }
 

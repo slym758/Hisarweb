@@ -21,10 +21,26 @@
 
 ## 4. Frontend'i DB'ye bağla (checkpoint 4)
 
-- [ ] 4.1 `app/Http/Controllers/Site/*` + `app/Http/Resources/Site/*` (nested detail yeniden kurulur, locale sunucuda çözülür).
-- [ ] 4.2 `routes/web.php` Inertia::render closure'ları → controller'lar; `firstOrFail()` gerçek 404 + `errors/404` sayfası.
-- [ ] 4.3 `site-data.ts` iç gövde → `usePage().props` (dış API sabit); `iconFor()`; `searchIndex` global paylaşım (HeaderShared).
-- [ ] 4.4 Doğrulama: seed sonrası TR + `/en` birebir aynı; bilinmeyen slug 404.
+Yaklaşım (plandan pragmatik sapma): 47 controller yerine **global hafif katalog** (liste/
+index/arama/related) + detay sayfaları için ayrı controller. In-memory fallback ile kademeli,
+kırılmasız.
+
+- [x] 4.1 `App\Support\CatalogService` — locale-çözümlü hafif katalog (13 entity liste şekli),
+  locale başına önbellekli, içerik değişince flush (ContentModel::booted). `loc()` fallback
+  zincirli (de→en→tr).
+- [x] 4.2 `HandleInertiaRequests` `catalog` prop'unu paylaşır (aktif locale).
+- [x] 4.3 `site-data.ts` adapter: 13 `useX()` hook → `catalog ?? in-memory`; `iconFor()` (ad→
+  lucide). Dış API sabit, 47 sayfa dokunulmadı.
+- [x] 4.4 Doğrulama: CatalogService sayıları + tr/en/de-fallback; CANLI kanıt (DB'de ad değişince
+  ana sayfada göründü, geri alınca kayboldu); build temiz.
+- [x] 4.5 `SiteContentController` + `SiteSerializer` — 10 detay rotası (doktor/bölüm/hastalık/tedavi/
+  tedavi-yöntemi/teknoloji/hastane/etkinlik/paket/basın) DB'den tam kayıt (detail/cv/rooms/gallery,
+  locale-çözümlü) + `firstOrFail` gerçek 404. `getXBySlug/getDoctorById` slug/id-guard'lı `record`
+  prop okur (in-memory fallback korunur). rehber-detay blog body katalogdan. Doğrulandı: detay 200 +
+  CANLI DB-driven kanıt (doktor unvanı DB'de değişince /doktor/d1'de göründü), bilinmeyen slug 404
+  (tr/en/ar).
+- [ ] 4.6 (kalan, düşük öncelik) `errors/404` markalı Inertia sayfası (durum kodu zaten 404) +
+  `searchIndex` global paylaşımı (HeaderShared şimdilik in-memory; Faz 8 aramada DB'ye taşınacak).
 
 ## 5. İlk Filament içerik resource'ları (checkpoint 5)
 

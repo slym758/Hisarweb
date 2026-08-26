@@ -13,7 +13,42 @@ import {
     Microscope, Scan, Slice, Ribbon, Syringe,
 } from 'lucide-react';
 
+import { usePage } from '@inertiajs/react';
+
 import { useLocale, type Locale } from '@/lib/i18n';
+
+/**
+ * DB seam: the `useX()` hooks below read the server-provided light catalog
+ * (App\Support\CatalogService, shared as the `catalog` Inertia prop, resolved to the
+ * active locale) when present, and fall back to the bundled in-memory data otherwise.
+ * The public API (types + function signatures) is unchanged, so pages don't change.
+ * Detail records (getXBySlug/getDoctorById) still use the in-memory data until each
+ * detail route gets its controller.
+ */
+const ICONS: Record<string, LucideIcon> = {
+    HeartPulse, Baby, Brain, Bone, Eye, Ear, Stethoscope, Activity,
+    Microscope, Scan, Slice, Ribbon, Syringe,
+};
+
+/** Resolve a lucide icon component from its name (the DB stores the name string). */
+export function iconFor(name: string | null | undefined): LucideIcon {
+    return (name && ICONS[name]) || Stethoscope;
+}
+
+/** A light catalog list shared by the backend, or undefined when off-site (fallback). */
+function useCatalog<T>(key: string): T[] | undefined {
+    const catalog = (usePage().props as { catalog?: Record<string, unknown> }).catalog;
+    return catalog ? (catalog[key] as T[]) : undefined;
+}
+
+/**
+ * The full detail record a detail-page controller passes as the `record` prop (or
+ * undefined off such a page). Read inside getXBySlug/getDoctorById during render; callers
+ * guard on slug/id so a page's primary record isn't returned for a secondary lookup.
+ */
+function readRecordProp(): any {
+    return (usePage().props as { record?: unknown }).record;
+}
 
 type Loc = { tr: string; en: string };
 const L = (tr: string, en: string): Loc => ({ tr, en });
@@ -288,10 +323,14 @@ export function getBlogPostsForDept(deptSlug: string, l: Locale): BlogPost[] {
 export function getSymptomMap(l: Locale): SymptomMap[] { return SYMPTOMS_SRC.map((s) => resolveSymptom(s, l)); }
 
 /** Locale-resolved hooks — use these inside components for bilingual content. */
-export function useDepartments(): Department[] { return getDepartments(useLocale()); }
-export function useHospitals(): Hospital[] { return getHospitals(useLocale()); }
-export function useBlogPosts(): BlogPost[] { return getBlogPosts(useLocale()); }
-export function useSymptomMap(): SymptomMap[] { return getSymptomMap(useLocale()); }
+export function useDepartments(): Department[] {
+    const l = useLocale();
+    const c = useCatalog<Department>('departments');
+    return c ? c.map((d) => ({ ...d, icon: iconFor((d as unknown as { icon?: string }).icon) })) : getDepartments(l);
+}
+export function useHospitals(): Hospital[] { const l = useLocale(); const c = useCatalog<Hospital>('hospitals'); return c ?? getHospitals(l); }
+export function useBlogPosts(): BlogPost[] { const l = useLocale(); const c = useCatalog<BlogPost>('blogPosts'); return c ?? getBlogPosts(l); }
+export function useSymptomMap(): SymptomMap[] { const l = useLocale(); const c = useCatalog<SymptomMap>('symptomMap'); return c ?? getSymptomMap(l); }
 
 /** Resolve a department slug to its localized name (relation helper). */
 function deptName(slug: string, l: Locale): string {
@@ -332,6 +371,7 @@ function resolveDepartmentDetail(d: DepartmentDetailSrc, l: Locale): DepartmentD
 }
 /** Long-form detail for a department slug, or undefined when the department has no authored detail. */
 export function getDepartmentDetail(slug: string, l: Locale): DepartmentDetail | undefined {
+    const __r = readRecordProp(); if (__r !== undefined) return (__r ?? undefined) as DepartmentDetail | undefined;
     const d = DEPARTMENT_DETAILS_SRC[slug];
     return d ? resolveDepartmentDetail(d, l) : undefined;
 }
@@ -915,8 +955,9 @@ function resolveDoctor(d: DoctorSrc, l: Locale): Doctor {
     };
 }
 export function getDoctors(l: Locale): Doctor[] { return DOCTORS_SRC.map((d) => resolveDoctor(d, l)); }
-export function useDoctors(): Doctor[] { return getDoctors(useLocale()); }
+export function useDoctors(): Doctor[] { const l = useLocale(); const c = useCatalog<Doctor>('doctors'); return c ?? getDoctors(l); }
 export function getDoctorById(id: string, l: Locale): Doctor | undefined {
+    const __r = readRecordProp(); if (__r && __r.id === id) return __r as Doctor;
     const d = DOCTORS_SRC.find((x) => x.id === id);
     return d ? resolveDoctor(d, l) : undefined;
 }
@@ -937,6 +978,7 @@ export function getHospitalsForDept(deptSlug: string, l: Locale): { hospital: Ho
 }
 /** Resolve a single hospital by slug (relation helper for detail pages). */
 export function getHospitalBySlug(slug: string, l: Locale): Hospital | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as Hospital;
     const h = HOSPITALS_SRC.find((x) => x.slug === slug);
     return h ? resolveHospital(h, l) : undefined;
 }
@@ -1089,6 +1131,7 @@ function resolveHospitalDetail(d: HospitalDetailSrc, l: Locale): HospitalDetail 
 }
 /** Long-form detail for a hospital slug, or undefined when the hospital has no authored detail. */
 export function getHospitalDetail(slug: string, l: Locale): HospitalDetail | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r.detail as HospitalDetail;
     const d = HOSPITAL_DETAILS_SRC[slug];
     return d ? resolveHospitalDetail(d, l) : undefined;
 }
@@ -1392,8 +1435,9 @@ function resolveTreatment(t: TreatmentSrc, l: Locale): Treatment {
     };
 }
 export function getTreatments(l: Locale): Treatment[] { return TREATMENTS_SRC.map((t) => resolveTreatment(t, l)); }
-export function useTreatments(): Treatment[] { return getTreatments(useLocale()); }
+export function useTreatments(): Treatment[] { const l = useLocale(); const c = useCatalog<Treatment>('treatments'); return c ?? getTreatments(l); }
 export function getTreatmentBySlug(slug: string, l: Locale): Treatment | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as Treatment;
     const t = TREATMENTS_SRC.find((x) => x.slug === slug);
     return t ? resolveTreatment(t, l) : undefined;
 }
@@ -1708,8 +1752,9 @@ function resolveDisease(d: DiseaseSrc, l: Locale): Disease {
     };
 }
 export function getDiseases(l: Locale): Disease[] { return DISEASES_SRC.map((d) => resolveDisease(d, l)); }
-export function useDiseases(): Disease[] { return getDiseases(useLocale()); }
+export function useDiseases(): Disease[] { const l = useLocale(); const c = useCatalog<Disease>('diseases'); return c ?? getDiseases(l); }
 export function getDiseaseBySlug(slug: string, l: Locale): Disease | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as Disease;
     const d = DISEASES_SRC.find((x) => x.slug === slug);
     return d ? resolveDisease(d, l) : undefined;
 }
@@ -1840,8 +1885,9 @@ function resolveTechnology(t: TechnologySrc, l: Locale): Technology {
     };
 }
 export function getTechnologies(l: Locale): Technology[] { return TECHNOLOGIES_SRC.map((t) => resolveTechnology(t, l)); }
-export function useTechnologies(): Technology[] { return getTechnologies(useLocale()); }
+export function useTechnologies(): Technology[] { const l = useLocale(); const c = useCatalog<Technology>('technologies'); return c ?? getTechnologies(l); }
 export function getTechnologyBySlug(slug: string, l: Locale): Technology | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as Technology;
     const t = TECHNOLOGIES_SRC.find((x) => x.slug === slug);
     return t ? resolveTechnology(t, l) : undefined;
 }
@@ -1886,8 +1932,9 @@ function resolveEvent(e: EventSrc, l: Locale): EventItem {
     return { slug: e.slug, title: e.title[l], excerpt: e.excerpt[l], body: e.body[l], date: e.date, place: e.place[l], cover: e.cover };
 }
 export function getEvents(l: Locale): EventItem[] { return EVENTS_SRC.map((e) => resolveEvent(e, l)); }
-export function useEvents(): EventItem[] { return getEvents(useLocale()); }
+export function useEvents(): EventItem[] { const l = useLocale(); const c = useCatalog<EventItem>('events'); return c ?? getEvents(l); }
 export function getEventBySlug(slug: string, l: Locale): EventItem | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as EventItem;
     const e = EVENTS_SRC.find((x) => x.slug === slug);
     return e ? resolveEvent(e, l) : undefined;
 }
@@ -1924,8 +1971,9 @@ function resolvePackage(p: PackageSrc, l: Locale): HealthPackage {
     return { slug: p.slug, name: p.name[l], summary: p.summary[l], scope: p.scope.map((s) => s[l]), cover: p.cover };
 }
 export function getPackages(l: Locale): HealthPackage[] { return PACKAGES_SRC.map((p) => resolvePackage(p, l)); }
-export function usePackages(): HealthPackage[] { return getPackages(useLocale()); }
+export function usePackages(): HealthPackage[] { const l = useLocale(); const c = useCatalog<HealthPackage>('packages'); return c ?? getPackages(l); }
 export function getPackageBySlug(slug: string, l: Locale): HealthPackage | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as HealthPackage;
     const p = PACKAGES_SRC.find((x) => x.slug === slug);
     return p ? resolvePackage(p, l) : undefined;
 }
@@ -1968,8 +2016,9 @@ function resolvePress(p: PressSrc, l: Locale): PressItem {
     return { slug: p.slug, title: p.title[l], excerpt: p.excerpt[l], source: p.source[l], date: p.date, cover: p.cover };
 }
 export function getPress(l: Locale): PressItem[] { return PRESS_SRC.map((p) => resolvePress(p, l)); }
-export function usePress(): PressItem[] { return getPress(useLocale()); }
+export function usePress(): PressItem[] { const l = useLocale(); const c = useCatalog<PressItem>('press'); return c ?? getPress(l); }
 export function getPressBySlug(slug: string, l: Locale): PressItem | undefined {
+    const __r = readRecordProp(); if (__r && __r.slug === slug) return __r as PressItem;
     const p = PRESS_SRC.find((x) => x.slug === slug);
     return p ? resolvePress(p, l) : undefined;
 }
@@ -2017,7 +2066,7 @@ function resolveFaq(c: FaqSrc, l: Locale): FaqCategory {
     return { slug: c.slug, title: c.title[l], items: c.items.map((i) => ({ q: i.q[l], a: i.a[l] })) };
 }
 export function getFaq(l: Locale): FaqCategory[] { return FAQ_SRC.map((c) => resolveFaq(c, l)); }
-export function useFaq(): FaqCategory[] { return getFaq(useLocale()); }
+export function useFaq(): FaqCategory[] { const l = useLocale(); const c = useCatalog<FaqCategory>('faq'); return c ?? getFaq(l); }
 
 /* ── Videos ── */
 type VideoSrc = { id: string; title: Loc; youtubeId: string; deptSlug?: string; category: Loc; duration: string };
@@ -2041,7 +2090,7 @@ export function getVideos(l: Locale): Video[] { return VIDEOS_SRC.map((v) => res
 export function getVideosForDept(deptSlug: string, l: Locale): Video[] {
     return VIDEOS_SRC.filter((v) => v.deptSlug === deptSlug).map((v) => resolveVideo(v, l));
 }
-export function useVideos(): Video[] { return getVideos(useLocale()); }
+export function useVideos(): Video[] { const l = useLocale(); const c = useCatalog<Video>('videos'); return c ?? getVideos(l); }
 
 /* ── Backward-compat (Turkish-resolved) consts for existing consumers (e.g. header search) ── */
 export const departments: Department[] = getDepartments('tr');

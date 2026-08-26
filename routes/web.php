@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Site\SiteContentController;
 use App\Support\LocaleService;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,9 +12,10 @@ use Inertia\Inertia;
 | static segment does not match reliably in Laravel. The SetLocale middleware resolves
 | the active locale from the first URL segment. All internal links are locale-aware
 | via `lp()` on the frontend, so route names are not needed here (except `home`, which
-| the starter auth layouts reference). Dynamic detail routes pass the slug/id to the
-| Inertia page, which resolves it against the content-data layer and renders a
-| not-found state for unknown slugs (a true 404 status arrives with the DB migration).
+| the starter auth layouts reference). Detail routes go through SiteContentController,
+| which loads the record from the DB (locale-resolved) and passes it as the `record`
+| prop; an unknown slug/id yields a real 404 (firstOrFail). Locale groups are generated
+| from the admin-managed `languages` table (see the loop at the bottom).
 */
 $sitePages = function () {
     // Corporate
@@ -25,26 +27,26 @@ $sitePages = function () {
     Route::inertia('/gebe-okulu', 'site/gebe-okulu');
     Route::inertia('/moral-takimi', 'site/moral-takimi');
     Route::inertia('/basinda-hastanemiz', 'site/basinda-hastanemiz');
-    Route::get('/basinda-hastanemiz/{slug}', fn () => Inertia::render('site/basin-detay', ['slug' => request()->route('slug')]));
+    Route::get('/basinda-hastanemiz/{slug}', [SiteContentController::class, 'press']);
     Route::inertia('/etkinlikler', 'site/etkinlikler');
-    Route::get('/etkinlikler/{slug}', fn () => Inertia::render('site/etkinlik-detay', ['slug' => request()->route('slug')]));
+    Route::get('/etkinlikler/{slug}', [SiteContentController::class, 'event']);
 
     // Medical index + detail
     Route::inertia('/bolumlerimiz', 'site/bolumlerimiz');
-    Route::get('/bolum/{slug}', fn () => Inertia::render('site/bolum-detay', ['slug' => request()->route('slug')]));
+    Route::get('/bolum/{slug}', [SiteContentController::class, 'department']);
     Route::inertia('/doktorlarimiz', 'site/doktorlarimiz');
-    Route::get('/doktor/{id}', fn () => Inertia::render('site/doktor-detay', ['id' => request()->route('id')]));
+    Route::get('/doktor/{id}', [SiteContentController::class, 'doctor']);
     Route::inertia('/hastaliklar', 'site/hastaliklar');
-    Route::get('/hastalik/{slug}', fn () => Inertia::render('site/hastalik-detay', ['slug' => request()->route('slug')]));
+    Route::get('/hastalik/{slug}', [SiteContentController::class, 'disease']);
     Route::inertia('/tedavi-yontemleri', 'site/tedavi-yontemleri');
-    Route::get('/tedavi-yontemleri/{slug}', fn () => Inertia::render('site/tedavi-yontemi-detay', ['slug' => request()->route('slug')]));
-    Route::get('/tedavi/{slug}', fn () => Inertia::render('site/tedavi-detay', ['slug' => request()->route('slug')]));
+    Route::get('/tedavi-yontemleri/{slug}', [SiteContentController::class, 'treatmentMethod']);
+    Route::get('/tedavi/{slug}', [SiteContentController::class, 'treatment']);
     Route::inertia('/teknolojilerimiz', 'site/teknolojilerimiz');
-    Route::get('/teknoloji/{slug}', fn () => Inertia::render('site/teknoloji-detay', ['slug' => request()->route('slug')]));
+    Route::get('/teknoloji/{slug}', [SiteContentController::class, 'technology']);
 
     // Hospitals + oncology
     Route::inertia('/hastanelerimiz', 'site/hastanelerimiz');
-    Route::get('/hastane/{slug}', fn () => Inertia::render('site/hastane-detay', ['slug' => request()->route('slug')]));
+    Route::get('/hastane/{slug}', [SiteContentController::class, 'hospital']);
     Route::inertia('/butunlesik-onkoloji', 'site/butunlesik-onkoloji');
     Route::inertia('/butunlesik-onkoloji/medikal-kadro', 'site/butunlesik-onkoloji-medikal-kadro');
 
@@ -55,7 +57,7 @@ $sitePages = function () {
     Route::inertia('/bilgi-rehberi', 'site/bilgi-rehberi');
     Route::inertia('/guvenli-cerrahi', 'site/guvenli-cerrahi');
     Route::inertia('/paketler', 'site/paketler');
-    Route::get('/paketler/{slug}', fn () => Inertia::render('site/paket-detay', ['slug' => request()->route('slug')]));
+    Route::get('/paketler/{slug}', [SiteContentController::class, 'package']);
     Route::inertia('/anlasmali-kurumlar', 'site/anlasmali-kurumlar');
     Route::inertia('/mobil-uygulama', 'site/mobil-uygulama');
 
