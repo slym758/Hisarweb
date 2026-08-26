@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Filament\Support\HomeCopyFields;
 use App\Filament\Support\LocaleTabs;
 use App\Filament\Support\OncologyCopyFields;
 use App\Models\Page;
@@ -111,6 +112,9 @@ class PageForm
             // Bespoke, editor-friendly text sections for the Integrated Oncology pages
             // (visible only on their own page; write to the page's `copy` tree).
             ...OncologyCopyFields::sections(),
+
+            // Homepage text sections (visible only on the home page).
+            ...HomeCopyFields::sections(),
         ]);
     }
 

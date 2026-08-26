@@ -102,7 +102,9 @@ $sitePages = function () {
 
 // Default locale (Turkish) at the root, no prefix. `home` is named for the starter
 // auth layouts.
-Route::get('/', fn () => Inertia::render('site/home'))->name('home');
+Route::get('/', fn () => Inertia::render('site/home', [
+    'pageCopy' => (object) PageContentService::copyFor('home', app()->getLocale()),
+]))->name('home');
 Route::group([], $sitePages);
 
 // One prefixed group per additional active locale (/en, /de, /ar…), resolved from the
@@ -110,7 +112,9 @@ Route::group([], $sitePages);
 // at cache time — run `php artisan route:clear` after adding/removing a language.
 foreach (LocaleService::prefixed() as $locale) {
     Route::prefix($locale)->group(function () use ($sitePages, $locale) {
-        Route::get('/', fn () => Inertia::render('site/home'))->name("home.$locale");
+        Route::get('/', fn () => Inertia::render('site/home', [
+            'pageCopy' => (object) PageContentService::copyFor('home', app()->getLocale()),
+        ]))->name("home.$locale");
         $sitePages();
     });
 }

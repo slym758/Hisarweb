@@ -12,6 +12,7 @@ import { PreFooter } from '@/components/site/PreFooter';
 import { QualityCertificates } from '@/components/site/QualityCertificates';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { usePageCopy } from '@/lib/page-content';
 import { useSettings } from '@/lib/settings';
 import { normalizeTr, useBlogPosts, useDepartments, useHospitals, useSymptomMap } from '@/lib/site-data';
 
@@ -170,7 +171,12 @@ const COPY = {
             eyebrow: 'Güvenin sayılarla ifadesi',
             title: 'Sağlıkta deneyim, kalite ve güven.',
             desc: 'Uzman kadromuz, ileri teknoloji altyapımız ve uluslararası kalite standartlarımızla sağlık yolculuğunuzda yanınızdayız.',
-            labels: ['Uzman hekim', 'Hasta deneyimi', 'Yıllık deneyim', 'Hastane'],
+            stats: [
+                { target: 300, suffix: '+', label: 'Uzman hekim' },
+                { target: 1, suffix: 'M+', label: 'Hasta deneyimi' },
+                { target: 20, suffix: '+', label: 'Yıllık deneyim' },
+                { target: 3, suffix: '', label: 'Hastane' },
+            ],
         },
         blog: {
             eyebrow: 'Rehber',
@@ -310,7 +316,12 @@ const COPY = {
             eyebrow: 'Trust, expressed in numbers',
             title: 'Experience, quality and trust in healthcare.',
             desc: "With our expert team, advanced technology and international quality standards, we're with you on your health journey.",
-            labels: ['Expert physicians', 'Patient experiences', 'Years of experience', 'Hospitals'],
+            stats: [
+                { target: 300, suffix: '+', label: 'Expert physicians' },
+                { target: 1, suffix: 'M+', label: 'Patient experiences' },
+                { target: 20, suffix: '+', label: 'Years of experience' },
+                { target: 3, suffix: '', label: 'Hospitals' },
+            ],
         },
         blog: {
             eyebrow: 'Guide',
@@ -324,7 +335,7 @@ const COPY = {
 
 /* ───────────────────────── PAGE ───────────────────────── */
 export default function Home() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     return (
         <>
             <Head title={c.head.title}>
@@ -359,7 +370,7 @@ Home.layout = siteLayout;
 
 /* ───────────────────────── HERO ───────────────────────── */
 function Hero() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const [active, setActive] = useState(0);
@@ -570,7 +581,7 @@ function Hero() {
 const ANNOUNCEMENT_HREFS = ['/mobil-uygulama', '#', '#', '#'] as const;
 
 function AnnouncementStrip() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const [i, setI] = useState(0);
     const announcements = c.announce.items.map((a, idx) => ({ ...a, href: ANNOUNCEMENT_HREFS[idx] }));
@@ -614,7 +625,7 @@ function AnnouncementStrip() {
 
 /* ───────────────── HIZLI İŞLEMLER ───────────────── */
 function QuickShortcuts() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const meta = [
         { to: 'https://online.hisarhospital.com/#/', external: true, icon: ClipboardList },
@@ -716,7 +727,7 @@ function QuickShortcuts() {
 
 /* ───────────────────── BÖLÜMLER ───────────────────── */
 function Departments() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const departments = useDepartments();
     return (
@@ -810,7 +821,7 @@ function Departments() {
 }
 
 function SymptomFinder() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const symptomMap = useSymptomMap();
     const [q, setQ] = useState('');
@@ -896,7 +907,7 @@ function SymptomFinder() {
 
 /* ───────────────────── ONKOLOJİ ───────────────────── */
 function OnkolojiSpotlight() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const settings = useSettings();
     const [videoPlaying, setVideoPlaying] = useState(false);
@@ -1104,7 +1115,7 @@ function OnkolojiSpotlight() {
 
 /* ───────────────── ÖZEL MERKEZLER ───────────────── */
 function OzelMerkezler() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const media = [
         { image: ph('1551190822-a9333d879b1f'), href: '/tedavi-yontemleri' },
@@ -1168,7 +1179,7 @@ function OzelMerkezler() {
 
 /* ───────────────────── HASTANELER ───────────────────── */
 function Hospitals() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const hospitals = useHospitals();
     return (
@@ -1300,13 +1311,8 @@ function CountUp({ target, suffix, start, duration = 1800 }: { target: number; s
 }
 
 function TrustBand() {
-    const c = COPY[useLocale()];
-    const stats = [
-        { target: 300, suffix: '+', label: c.trust.labels[0] },
-        { target: 1, suffix: 'M+', label: c.trust.labels[1] },
-        { target: 20, suffix: '+', label: c.trust.labels[2] },
-        { target: 3, suffix: '', label: c.trust.labels[3] },
-    ];
+    const c = usePageCopy('home', COPY[useLocale()]);
+    const stats = c.trust.stats;
     const ref = useRef<HTMLDivElement | null>(null);
     const [started, setStarted] = useState(false);
 
@@ -1352,7 +1358,7 @@ function TrustBand() {
                                 {stats.map((s) => (
                                     <div key={s.label} className="px-4 py-5 sm:py-4 first:border-l-0 first:pl-0 sm:first:pl-4">
                                         <p className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold tracking-tight text-primary tabular-nums">
-                                            <CountUp target={s.target} suffix={s.suffix} start={started} />
+                                            <CountUp target={Number(s.target) || 0} suffix={s.suffix} start={started} />
                                         </p>
                                         <p className="mt-1.5 text-[12px] sm:text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
                                             {s.label}
@@ -1375,7 +1381,7 @@ function TrustBand() {
 
 /* ───────────────────── BLOG ───────────────────── */
 function BlogTeaser() {
-    const c = COPY[useLocale()];
+    const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
     const blogPosts = useBlogPosts();
     return (

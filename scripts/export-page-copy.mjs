@@ -33,6 +33,7 @@ const SLUGS = [
     'guvenli-cerrahi',
     'hastaliklar',
     'hastanelerimiz',
+    'home',
     'iletisim',
     'insan-kaynaklari',
     'kalite-calismalari',

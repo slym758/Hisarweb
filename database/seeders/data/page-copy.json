@@ -1967,6 +1967,498 @@
       }
     }
   },
+  "home": {
+    "tr": {
+      "head": {
+        "title": "Hisar Hospital — Hayat Boyu Sağlık",
+        "description": "JCI akreditasyonlu sağlık hizmeti, uzman hekim kadrosu ve ileri teknoloji altyapısıyla; tanı, tedavi ve takip süreçlerinizde yanınızdayız."
+      },
+      "hero": {
+        "slide": "Slayt",
+        "appointment": "Randevu Al",
+        "findDoctor": "Doktor Bul",
+        "intlPatients": "International Patients",
+        "slides": [
+          {
+            "eyebrow": "Hisar Intercontinental",
+            "title": "Hayat boyu sağlığınız için yanınızdayız",
+            "mobileTitle": "Hayat boyu sağlığınız için",
+            "desc": "Uzman hekim kadromuz ve ileri teknoloji altyapımızla, sağlığınız için yanınızdayız.",
+            "mobileDesc": "Uzman hekim kadromuz ve ileri teknolojiyle yanınızdayız."
+          },
+          {
+            "eyebrow": "Robotik Cerrahi",
+            "title": "Robotik cerrahi ile hizmetinizdeyiz",
+            "mobileTitle": "Robotik cerrahi ile hizmetinizdeyiz",
+            "desc": "Milimetrik hassasiyet, daha küçük kesi ve hızlı iyileşme; cerrahide yeni nesil bir dönem.",
+            "mobileDesc": "Milimetrik hassasiyet, küçük kesi, hızlı iyileşme."
+          },
+          {
+            "eyebrow": "İleri Göz Tedavileri Kliniği",
+            "title": "Göz sağlığında ileri teknoloji ve uzman yaklaşım",
+            "mobileTitle": "Göz sağlığında uzman yaklaşım",
+            "desc": "Lazer, retina ve katarakt tedavilerinde uzman değerlendirme ve takip.",
+            "mobileDesc": "Lazer, retina ve katarakt tedavilerinde uzman değerlendirme ve takip."
+          }
+        ]
+      },
+      "announce": {
+        "prev": "Önceki",
+        "next": "Sonraki",
+        "items": [
+          {
+            "title": "Mobil Uygulamamız Çıktı",
+            "sub": "Randevu, sonuç ve doktor; App Store & Google Play'de.",
+            "cta": "İndir"
+          },
+          {
+            "title": "Gebelik Eğitim Semineri",
+            "sub": "12 Ekim'de Hisar Hospital'de.",
+            "cta": "Detaylar"
+          },
+          {
+            "title": "Yenilenen Göz Sağlığı Merkezi",
+            "sub": "Hizmetinizde — randevu alın.",
+            "cta": "Detaylar"
+          },
+          {
+            "title": "Çocuk Sağlığı Check-up",
+            "sub": "Okul dönemi özel paketler.",
+            "cta": "Detaylar"
+          }
+        ]
+      },
+      "quick": {
+        "eyebrow": "Hızlı Erişim",
+        "title": "Size nasıl yardımcı olabiliriz?",
+        "subtitle": "Randevu, doktor ve e-sonuç işlemlerine hızlıca ulaşın.",
+        "items": [
+          {
+            "label": "E-Sonuç",
+            "desc": "Laboratuvar ve görüntüleme sonuçlarınıza güvenli şekilde ulaşın.",
+            "mobileDesc": "Sonuçlara ulaş",
+            "cta": "Sonuçlara Git"
+          },
+          {
+            "label": "Anlaşmalı Kurumlar",
+            "desc": "Anlaşmalı kurum ve sigorta bilgilerine ulaşın.",
+            "mobileDesc": "Kurumları gör",
+            "cta": "Kurumları İncele"
+          },
+          {
+            "label": "Doktor Ara",
+            "desc": "Uzman hekimleri branş, isim veya ilgi alanına göre inceleyin.",
+            "mobileDesc": "Hekimleri incele",
+            "cta": "Doktorları Gör"
+          },
+          {
+            "label": "Hisar Online",
+            "desc": "Tüm online işlemlerinizi güvenli şekilde gerçekleştirin.",
+            "mobileDesc": "Online işlemler",
+            "cta": "Giriş Yap"
+          }
+        ]
+      },
+      "departments": {
+        "eyebrow": "Bölümlerimiz",
+        "titleLead": "Hayatın her döneminde",
+        "titleAccent": "yanınızdayız",
+        "desc": "50'den fazla branşta uzman hekim kadromuz ve multidisipliner yaklaşımımızla; tanı, tedavi ve takip süreçlerinde yanınızdayız.",
+        "featured": "Öne çıkan bölümler",
+        "seeAll": "Tümünü gör",
+        "seeAllDepartments": "Tüm Bölümleri Gör"
+      },
+      "symptom": {
+        "title": "Hangi bölüme gitmeliyim?",
+        "subtitle": "Şikayetinizi yazın, sizi doğru bölüme yönlendirelim.",
+        "placeholder": "Şikayetinizi yazın",
+        "findDept": "Bölümü Bul",
+        "example": "Örnek",
+        "suggestions": [
+          "Baş ağrısı",
+          "Çarpıntı",
+          "Safra kesesi",
+          "Çocuk ateşi"
+        ]
+      },
+      "onko": {
+        "badge": "BÜTÜNLEŞİK ONKOLOJİ",
+        "titleLead": "Kanser tedavisinde",
+        "titleAccent": "bütünleşik",
+        "titleTail": "bir yaklaşım",
+        "desc": "Hisar Hospital Bütünleşik Onkoloji Merkezi'nde tanı, tedavi ve takip süreçleriniz tek merkezde ve tümör konseyi ile değerlendirilerek yapılır.",
+        "imgAlt": "Hisar Hospital Bütünleşik Onkoloji Merkezi",
+        "iframeTitle": "Hisar Hospital Bütünleşik Onkoloji Merkezi",
+        "videoBadge": "Tanıtım Videosu",
+        "playAria": "Bütünleşik Onkoloji Merkezi tanıtım videosunu oynat",
+        "closeAria": "Videoyu kapat",
+        "cardComprehensive": "Comprehensive",
+        "cardCancerCenter": "Cancer Center",
+        "cardJci": "JCI Akreditasyonlu",
+        "cardJciDesc": "Uluslararası Kalite Standartı",
+        "appointment": "Randevu Al",
+        "exploreCenter": "Merkezi İncele",
+        "features": [
+          {
+            "title": "Multidisipliner Yaklaşım",
+            "desc": "Tanı ve tedavi süreçleri ilgili branşların ortak değerlendirmesiyle planlanır."
+          },
+          {
+            "title": "İleri Teknoloji",
+            "desc": "Tanı, görüntüleme ve tedavi süreçlerinde ileri teknoloji altyapısı kullanılır."
+          },
+          {
+            "title": "Tüm Tedaviler Tek Merkezde",
+            "desc": "Tanıdan tedaviye ve takibe kadar tüm süreçler tek bir merkezde sunulur."
+          }
+        ],
+        "checklist": [
+          {
+            "label": "Multidisipliner tümör konseyi",
+            "hide": false
+          },
+          {
+            "label": "İleri görüntüleme ve tanı altyapısı",
+            "hide": true
+          },
+          {
+            "label": "Robotik cerrahi olanakları",
+            "hide": false
+          },
+          {
+            "label": "Hassas radyoterapi teknolojileri",
+            "hide": false
+          },
+          {
+            "label": "Moleküler tanı ve patoloji desteği",
+            "hide": true
+          },
+          {
+            "label": "İkinci görüş ve kişiye özel tedavi planı",
+            "hide": false
+          }
+        ]
+      },
+      "merkezler": {
+        "eyebrow": "Özel Merkezler",
+        "title": "Özel Hizmetler ve Merkezler",
+        "subtitle": "Alanında uzman akademik kadromuz ve ileri teknoloji altyapımızla; özel ilgi alanlarımızda sağlığınız için yanınızdayız.",
+        "items": [
+          {
+            "name": "Robotik Kalp Cerrahisi",
+            "desc": "Da Vinci robotik sistemi ile milimetrik hassasiyet, küçük kesi ve hızlı iyileşme.",
+            "accent": "Robotik Cerrahi"
+          },
+          {
+            "name": "Prostat Sağlığı Kliniği",
+            "desc": "Akademik kadro ve ileri teknolojik donanımla prostat sağlığına bütünsel yaklaşım.",
+            "accent": "Üroloji"
+          },
+          {
+            "name": "İleri Göz Tedavileri Kliniği",
+            "desc": "Modern tedavi yöntemleri ve uzman kadromuzla sağlıklı, net bir görüş için.",
+            "accent": "Göz Sağlığı"
+          },
+          {
+            "name": "Baş ve Boyun Kanser Cerrahisi",
+            "desc": "Multidisipliner yaklaşım ve güncel tedavi yöntemleriyle kişiye özel çözümler.",
+            "accent": "Onkolojik Cerrahi"
+          }
+        ]
+      },
+      "hospitals": {
+        "eyebrow": "Hastanelerimiz",
+        "title": "Hisar Hospital şehrin iki yakasında yanınızda",
+        "subtitle": "Aynı hasta odaklı yaklaşım, aynı yüksek hizmet standartları; şimdi farklı noktalarda yanınızda.",
+        "comingSoonBadge": "Çok Yakında",
+        "comingSoonBody": "Açılış için hazırlık süreci devam ediyor. Yeni kampüsümüz hakkındaki gelişmeleri yakında paylaşacağız.",
+        "openBody": "JCI akreditasyonlu sağlık hizmeti, ileri teknoloji altyapısı ve uzman hekim kadrosu ile hizmetinizdeyiz.",
+        "openingSoon": "Yakında Açılıyor",
+        "getInfo": "Bilgi Al",
+        "directions": "Yol Tarifi",
+        "moreInfo": "Detaylı Bilgi"
+      },
+      "trust": {
+        "eyebrow": "Güvenin sayılarla ifadesi",
+        "title": "Sağlıkta deneyim, kalite ve güven.",
+        "desc": "Uzman kadromuz, ileri teknoloji altyapımız ve uluslararası kalite standartlarımızla sağlık yolculuğunuzda yanınızdayız.",
+        "stats": [
+          {
+            "target": 300,
+            "suffix": "+",
+            "label": "Uzman hekim"
+          },
+          {
+            "target": 1,
+            "suffix": "M+",
+            "label": "Hasta deneyimi"
+          },
+          {
+            "target": 20,
+            "suffix": "+",
+            "label": "Yıllık deneyim"
+          },
+          {
+            "target": 3,
+            "suffix": "",
+            "label": "Hastane"
+          }
+        ]
+      },
+      "blog": {
+        "eyebrow": "Rehber",
+        "title": "Sağlıklı Hayat Rehberi'nden öne çıkanlar",
+        "allArticles": "Tüm İçerikler",
+        "readMore": "Devamı",
+        "swipe": "Kaydırın →"
+      }
+    },
+    "en": {
+      "head": {
+        "title": "Hisar Hospital — Lifelong Health",
+        "description": "JCI-accredited healthcare with expert physicians and advanced technology — by your side through diagnosis, treatment and follow-up."
+      },
+      "hero": {
+        "slide": "Slide",
+        "appointment": "Book Appointment",
+        "findDoctor": "Find a Doctor",
+        "intlPatients": "International Patients",
+        "slides": [
+          {
+            "eyebrow": "Hisar Intercontinental",
+            "title": "By your side for lifelong health",
+            "mobileTitle": "For your lifelong health",
+            "desc": "With our expert physicians and advanced technology, we are here for your health.",
+            "mobileDesc": "Expert physicians and advanced technology, by your side."
+          },
+          {
+            "eyebrow": "Robotic Surgery",
+            "title": "At your service with robotic surgery",
+            "mobileTitle": "At your service with robotic surgery",
+            "desc": "Millimetric precision, smaller incisions and faster recovery — a new era in surgery.",
+            "mobileDesc": "Millimetric precision, small incisions, fast recovery."
+          },
+          {
+            "eyebrow": "Advanced Eye Treatments Clinic",
+            "title": "Advanced technology and expert care in eye health",
+            "mobileTitle": "Expert care in eye health",
+            "desc": "Expert evaluation and follow-up in laser, retina and cataract treatments.",
+            "mobileDesc": "Expert evaluation and follow-up in laser, retina and cataract treatments."
+          }
+        ]
+      },
+      "announce": {
+        "prev": "Previous",
+        "next": "Next",
+        "items": [
+          {
+            "title": "Our Mobile App Is Here",
+            "sub": "Appointments, results and doctors — on the App Store & Google Play.",
+            "cta": "Download"
+          },
+          {
+            "title": "Pregnancy Education Seminar",
+            "sub": "On October 12 at Hisar Hospital.",
+            "cta": "Details"
+          },
+          {
+            "title": "Renewed Eye Health Center",
+            "sub": "Now open — book your appointment.",
+            "cta": "Details"
+          },
+          {
+            "title": "Pediatric Check-up",
+            "sub": "Special back-to-school packages.",
+            "cta": "Details"
+          }
+        ]
+      },
+      "quick": {
+        "eyebrow": "Quick Access",
+        "title": "How can we help you?",
+        "subtitle": "Quickly reach appointments, doctors and e-results.",
+        "items": [
+          {
+            "label": "E-Results",
+            "desc": "Securely access your laboratory and imaging results.",
+            "mobileDesc": "View results",
+            "cta": "Go to Results"
+          },
+          {
+            "label": "Contracted Institutions",
+            "desc": "Access contracted institution and insurance information.",
+            "mobileDesc": "View institutions",
+            "cta": "View Institutions"
+          },
+          {
+            "label": "Find a Doctor",
+            "desc": "Browse expert physicians by specialty, name or area of interest.",
+            "mobileDesc": "Browse doctors",
+            "cta": "View Doctors"
+          },
+          {
+            "label": "Hisar Online",
+            "desc": "Carry out all your online transactions securely.",
+            "mobileDesc": "Online services",
+            "cta": "Sign In"
+          }
+        ]
+      },
+      "departments": {
+        "eyebrow": "Our Departments",
+        "titleLead": "In every stage of life",
+        "titleAccent": "we're by your side",
+        "desc": "With expert physicians across more than 50 specialties and our multidisciplinary approach, we support you through diagnosis, treatment and follow-up.",
+        "featured": "Featured departments",
+        "seeAll": "See all",
+        "seeAllDepartments": "See All Departments"
+      },
+      "symptom": {
+        "title": "Which department should I visit?",
+        "subtitle": "Describe your symptom and we'll guide you to the right department.",
+        "placeholder": "Describe your symptom",
+        "findDept": "Find Department",
+        "example": "Example",
+        "suggestions": [
+          "Headache",
+          "Palpitations",
+          "Gallbladder",
+          "Child fever"
+        ]
+      },
+      "onko": {
+        "badge": "INTEGRATED ONCOLOGY",
+        "titleLead": "An",
+        "titleAccent": "integrated",
+        "titleTail": "approach to cancer treatment",
+        "desc": "At the Hisar Hospital Integrated Oncology Center, your diagnosis, treatment and follow-up are carried out in a single center and evaluated by a tumor board.",
+        "imgAlt": "Hisar Hospital Integrated Oncology Center",
+        "iframeTitle": "Hisar Hospital Integrated Oncology Center",
+        "videoBadge": "Intro Video",
+        "playAria": "Play the Integrated Oncology Center intro video",
+        "closeAria": "Close video",
+        "cardComprehensive": "Comprehensive",
+        "cardCancerCenter": "Cancer Center",
+        "cardJci": "JCI Accredited",
+        "cardJciDesc": "International Quality Standard",
+        "appointment": "Book Appointment",
+        "exploreCenter": "Explore the Center",
+        "features": [
+          {
+            "title": "Multidisciplinary Approach",
+            "desc": "Diagnosis and treatment are planned through the joint evaluation of the relevant specialties."
+          },
+          {
+            "title": "Advanced Technology",
+            "desc": "Advanced technology is used across diagnosis, imaging and treatment."
+          },
+          {
+            "title": "All Treatments in One Center",
+            "desc": "From diagnosis to treatment and follow-up, every step is offered in a single center."
+          }
+        ],
+        "checklist": [
+          {
+            "label": "Multidisciplinary tumor board",
+            "hide": false
+          },
+          {
+            "label": "Advanced imaging and diagnostic infrastructure",
+            "hide": true
+          },
+          {
+            "label": "Robotic surgery capabilities",
+            "hide": false
+          },
+          {
+            "label": "Precision radiotherapy technologies",
+            "hide": false
+          },
+          {
+            "label": "Molecular diagnostics and pathology support",
+            "hide": true
+          },
+          {
+            "label": "Second opinion and personalized treatment plan",
+            "hide": false
+          }
+        ]
+      },
+      "merkezler": {
+        "eyebrow": "Special Centers",
+        "title": "Special Services and Centers",
+        "subtitle": "With our expert academic staff and advanced technology, we are by your side in our special areas of focus.",
+        "items": [
+          {
+            "name": "Robotic Heart Surgery",
+            "desc": "Millimetric precision, small incisions and fast recovery with the Da Vinci robotic system.",
+            "accent": "Robotic Surgery"
+          },
+          {
+            "name": "Prostate Health Clinic",
+            "desc": "A holistic approach to prostate health with academic staff and advanced technology.",
+            "accent": "Urology"
+          },
+          {
+            "name": "Advanced Eye Treatments Clinic",
+            "desc": "For healthy, clear vision with modern treatment methods and our expert team.",
+            "accent": "Eye Health"
+          },
+          {
+            "name": "Head and Neck Cancer Surgery",
+            "desc": "Personalized solutions with a multidisciplinary approach and current treatment methods.",
+            "accent": "Oncologic Surgery"
+          }
+        ]
+      },
+      "hospitals": {
+        "eyebrow": "Our Hospitals",
+        "title": "Hisar Hospital, by your side on both sides of the city",
+        "subtitle": "The same patient-focused approach and high service standards — now at more locations near you.",
+        "comingSoonBadge": "Coming Soon",
+        "comingSoonBody": "Preparations for the opening are ongoing. We'll share updates about our new campus soon.",
+        "openBody": "At your service with JCI-accredited healthcare, advanced technology and expert physicians.",
+        "openingSoon": "Opening Soon",
+        "getInfo": "Get Info",
+        "directions": "Directions",
+        "moreInfo": "More Info"
+      },
+      "trust": {
+        "eyebrow": "Trust, expressed in numbers",
+        "title": "Experience, quality and trust in healthcare.",
+        "desc": "With our expert team, advanced technology and international quality standards, we're with you on your health journey.",
+        "stats": [
+          {
+            "target": 300,
+            "suffix": "+",
+            "label": "Expert physicians"
+          },
+          {
+            "target": 1,
+            "suffix": "M+",
+            "label": "Patient experiences"
+          },
+          {
+            "target": 20,
+            "suffix": "+",
+            "label": "Years of experience"
+          },
+          {
+            "target": 3,
+            "suffix": "",
+            "label": "Hospitals"
+          }
+        ]
+      },
+      "blog": {
+        "eyebrow": "Guide",
+        "title": "Highlights from the Healthy Living Guide",
+        "allArticles": "All Articles",
+        "readMore": "Read More",
+        "swipe": "Swipe →"
+      }
+    }
+  },
   "iletisim": {
     "tr": {
       "head": {
