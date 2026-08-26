@@ -988,6 +988,17 @@ export function getHospitalsForDept(deptSlug: string, l: Locale): { hospital: Ho
     if (rel && Array.isArray(rel.hospitals)) {
         return rel.hospitals as unknown as { hospital: Hospital; count: number }[];
     }
+    const catH = useCatalog<Hospital>('hospitals');
+    const catD = useCatalog<Doctor>('doctors');
+    if (catH && catD) {
+        const counts = new Map<string, number>();
+        for (const d of catD) {
+            if (d.departmentSlug === deptSlug) counts.set(d.hospitalSlug, (counts.get(d.hospitalSlug) ?? 0) + 1);
+        }
+        return catH
+            .filter((h) => !h.comingSoon && counts.has(h.slug))
+            .map((h) => ({ hospital: h, count: counts.get(h.slug)! }));
+    }
     const counts = new Map<string, number>();
     for (const d of DOCTORS_SRC) {
         if (d.departmentSlug === deptSlug) counts.set(d.hospitalSlug, (counts.get(d.hospitalSlug) ?? 0) + 1);
