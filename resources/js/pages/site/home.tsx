@@ -1388,7 +1388,10 @@ function TrustBand() {
 function BlogTeaser() {
     const c = usePageCopy('home', COPY[useLocale()]);
     const lp = useLocalizedPath();
-    const blogPosts = useBlogPosts();
+    const allBlogPosts = useBlogPosts();
+    // Editor-flagged posts (Anasayfada öne çıkar) win; otherwise the latest 4.
+    const featuredBlog = allBlogPosts.filter((p) => p.homeFeatured);
+    const blogPosts = featuredBlog.length ? featuredBlog : allBlogPosts;
     return (
         <section className="bg-surface py-14 lg:py-20">
             <div className="container-x">

@@ -133,6 +133,7 @@ class CatalogService
                     'cover' => Media::url($b->cover_path, $b->cover_url) ?? '',
                     'date' => $b->published_at?->toDateString() ?? '',
                     'body' => $L($b, 'body') ?: null,
+                    'homeFeatured' => (bool) $b->home_featured,
                 ])->all(),
 
             'events' => EventItem::published()->ordered()->get()

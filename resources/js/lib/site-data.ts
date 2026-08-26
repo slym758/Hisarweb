@@ -84,7 +84,7 @@ export type HospitalDetail = {
     /** Google Maps search query string for the "Yol Tarifi" / embed. */
     mapQuery: string;
 };
-export type BlogPost = { slug: string; title: string; excerpt: string; category: string; cover: string; date: string; /** Optional full-article body — bilingual paragraphs. Present only on fully-authored posts. */ body?: string[] };
+export type BlogPost = { slug: string; title: string; excerpt: string; category: string; cover: string; date: string; /** Optional full-article body — bilingual paragraphs. Present only on fully-authored posts. */ body?: string[]; /** Flagged to appear in the homepage "Rehber" highlights. */ homeFeatured?: boolean };
 export type Doctor = {
     id: string;
     name: string;

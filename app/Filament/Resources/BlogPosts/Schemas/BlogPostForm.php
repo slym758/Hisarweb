@@ -9,6 +9,7 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -42,6 +43,9 @@ class BlogPostForm
                             ->options(['draft' => 'Taslak', 'published' => 'Yayında'])
                             ->default('published')
                             ->required(),
+                        Toggle::make('home_featured')
+                            ->label('Anasayfada öne çıkar')
+                            ->helperText('İşaretlenen yazılar anasayfa "Rehber" bölümünde gösterilir (en fazla 4).'),
                     ])
                     ->columns(2),
 
