@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { ArrowRight, Search, Stethoscope, X } from 'lucide-react';
 
 import { siteLayout } from '@/layouts/site-layout';
+import { DeptIcon } from '@/components/site/DeptIcon';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
 import { usePageCopy } from '@/lib/page-content';
 import { useDepartments } from '@/lib/site-data';
@@ -147,7 +148,7 @@ export default function BolumlerPage() {
                                             'relative flex h-[64px] w-[64px] lg:h-[72px] lg:w-[72px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300',
                                             'group-hover:scale-105'
                                         )}>
-                                            <d.icon className="h-full w-full" strokeWidth={1.25} />
+                                            <DeptIcon dept={d} className="h-full w-full" strokeWidth={1.25} />
                                         </span>
 
 

@@ -26,8 +26,14 @@ class DepartmentForm
                             ->required()
                             ->unique(ignoreRecord: true),
                         TextInput::make('icon')
-                            ->label('İkon')
-                            ->helperText('Lucide ikon adı, örn. HeartPulse'),
+                            ->label('İkon adı (Lucide)')
+                            ->helperText('Örn. HeartPulse. Aşağıdan görsel yüklersen o kullanılır.'),
+                        FileUpload::make('icon_path')
+                            ->label('İkon görseli (yüklersen ad yerine bu kullanılır)')
+                            ->image()
+                            ->disk('public')
+                            ->directory('dept-icons')
+                            ->acceptedFileTypes(['image/svg+xml', 'image/png', 'image/webp', 'image/jpeg']),
                         TextInput::make('cover_url')
                             ->label('Kapak görseli (URL)')
                             ->url(),

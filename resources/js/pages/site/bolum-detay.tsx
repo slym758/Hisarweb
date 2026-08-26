@@ -7,6 +7,7 @@ import { BizeUlasin } from '@/components/site/BizeUlasin';
 import { DetailLeadConversion } from '@/components/site/DetailLeadConversion';
 import { PageSectionNavigation, type PageSection } from '@/components/site/PageSectionNavigation';
 import { siteLayout } from '@/layouts/site-layout';
+import { DeptIcon } from '@/components/site/DeptIcon';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
 import { useSettings } from '@/lib/settings';
 import {
@@ -153,7 +154,6 @@ export default function BolumDetay() {
     const deptVideos = getVideosForDept(dept.slug, locale);
     const deptBlog = getBlogPostsForDept(dept.slug, locale);
     const deptHospitals = getHospitalsForDept(dept.slug, locale);
-    const Icon = dept.icon;
 
     const hasAbout = !!detail?.about?.length;
     const hasTech = !!detail?.technologies?.length;
@@ -206,7 +206,7 @@ export default function BolumDetay() {
                     <div className="min-w-0">
                         <div className="flex items-center gap-3 lg:gap-4">
                             <span className="flex h-14 w-14 lg:h-16 lg:w-16 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border/40 shadow-sm">
-                                <Icon className="h-full w-full" strokeWidth={1.5} />
+                                <DeptIcon dept={dept} className="h-full w-full" strokeWidth={1.5} />
                             </span>
                             <h1 className="text-2xl lg:text-[2.4rem] font-black tracking-tight text-primary leading-[1.1]">
                                 {dept.name}

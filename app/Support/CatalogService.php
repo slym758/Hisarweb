@@ -55,6 +55,7 @@ class CatalogService
                 'name' => $L($d, 'name'),
                 'blurb' => $L($d, 'blurb') ?? '',
                 'icon' => $d->icon,           // lucide name string → iconFor() on the client
+                'iconImage' => Media::url($d->icon_path), // uploaded custom icon (wins over lucide)
                 'pinned' => (bool) $d->pinned,
             ])->all(),
 
