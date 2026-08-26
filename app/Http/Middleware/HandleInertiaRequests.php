@@ -6,6 +6,7 @@ use App\Support\CatalogService;
 use App\Support\LocaleService;
 use App\Support\MenuService;
 use App\Support\PageContentService;
+use App\Support\PopupService;
 use App\Support\SettingsService;
 use App\Support\SliderService;
 use Illuminate\Foundation\Inspiring;
@@ -77,7 +78,30 @@ class HandleInertiaRequests extends Middleware
             // resolved to the active locale. Empty for pages the editor hasn't touched, so
             // the frontend `useContent()` hook falls back to each page's inline COPY. Lazy.
             'pageContent' => fn () => PageContentService::all(app()->getLocale()),
+            // Admin-managed pop-ups/promos visible on the current (locale-stripped) path,
+            // resolved to the active locale, priority desc. Empty for routes with no matching
+            // popup (or before the table exists), so the frontend MobileAppPromo falls back to
+            // its hardcoded behaviour. Lazy like the props above.
+            'popups' => fn () => PopupService::forPath($this->localeStrippedPath($request), app()->getLocale()),
         ]);
+    }
+
+    /**
+     * The request path with any leading locale prefix (/en, /de, /ar…) removed, so it can be
+     * matched against the locale-agnostic route globs stored on popups. Root stays '/'.
+     */
+    protected function localeStrippedPath(Request $request): string
+    {
+        $path = '/'.ltrim($request->path(), '/');
+
+        $prefixes = LocaleService::prefixed();
+
+        if ($prefixes !== []) {
+            $group = implode('|', array_map(fn (string $c) => preg_quote($c, '#'), $prefixes));
+            $path = (string) preg_replace('#^/('.$group.')(?=/|$)#', '', $path);
+        }
+
+        return $path === '' ? '/' : $path;
     }
 
     /**
