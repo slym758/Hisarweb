@@ -345,6 +345,10 @@ export function useHospitals(): Hospital[] { const l = useLocale(); const c = us
 export function useBlogPosts(): BlogPost[] { const l = useLocale(); const c = useCatalog<BlogPost>('blogPosts'); return c ?? getBlogPosts(l); }
 export function useSymptomMap(): SymptomMap[] { const l = useLocale(); const c = useCatalog<SymptomMap>('symptomMap'); return c ?? getSymptomMap(l); }
 
+/** Quality certificates from the DB catalog (locale-resolved), or undefined off-site. */
+export type QualityCert = { key: string; title: string; note?: string; alt: string; img?: string };
+export function useQualityCertificates(): QualityCert[] | undefined { return useCatalog<QualityCert>('qualityCertificates'); }
+
 /** Resolve a department slug to its localized name (relation helper). */
 function deptName(slug: string, l: Locale): string {
     return DEPARTMENTS_SRC.find((d) => d.slug === slug)?.name[l] ?? slug;

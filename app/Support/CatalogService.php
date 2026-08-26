@@ -11,6 +11,7 @@ use App\Models\FaqCategory;
 use App\Models\HealthPackage;
 use App\Models\Hospital;
 use App\Models\PressItem;
+use App\Models\QualityCertificate;
 use App\Models\SymptomMap;
 use App\Models\Technology;
 use App\Models\Treatment;
@@ -168,6 +169,15 @@ class CatalogService
                     'slug' => $f->slug,
                     'title' => $L($f, 'title'),
                     'items' => $L($f, 'items') ?? [],
+                ])->all(),
+
+            'qualityCertificates' => QualityCertificate::published()->ordered()->get()
+                ->map(fn (QualityCertificate $q) => [
+                    'key' => $q->slug,
+                    'title' => $L($q, 'name'),
+                    'note' => $L($q, 'issuer') ?? '',
+                    'alt' => $L($q, 'name'),
+                    'img' => Media::url($q->logo_path ?? $q->cover_path, $q->logo_url ?? $q->cover_url),
                 ])->all(),
 
             'symptomMap' => SymptomMap::ordered()->with('department:id,slug')->get()

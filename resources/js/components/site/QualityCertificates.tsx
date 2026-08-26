@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { ShieldCheck } from "lucide-react";
 import { useLocale, useLocalizedPath } from "@/lib/i18n";
+import { useQualityCertificates } from "@/lib/site-data";
 
 // TODO: real asset
 const jciImg =
@@ -111,7 +112,15 @@ export function QualityCertificates({ lang }: { lang?: "tr" | "en" }) {
   const active = lang ?? locale;
   const lp = useLocalizedPath();
   const en = active === "en";
-  const items = en ? ITEMS_EN : ITEMS_TR;
+  // DB catalog (resolved to the active content locale) wins; fall back to the bundled list.
+  // Only use the DB list when displaying the active locale (no cross-locale `lang` override).
+  const dbItems = useQualityCertificates();
+  const items =
+    (lang ?? locale) === locale && dbItems && dbItems.length > 0
+      ? dbItems
+      : en
+        ? ITEMS_EN
+        : ITEMS_TR;
   const heading = en ? "Certificates & accreditations" : "Belgelerimiz ve akreditasyonlarımız";
 
   return (
