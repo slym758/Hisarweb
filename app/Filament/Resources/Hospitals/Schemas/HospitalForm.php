@@ -32,6 +32,15 @@ class HospitalForm
                             ->label('Harita sorgusu'),
                         Toggle::make('coming_soon')
                             ->label('Yakında'),
+                        Select::make('departments')
+                            ->label('Bu hastanede bulunan bölümler')
+                            ->helperText('Boş bırakılırsa bölümler (ve tedaviler) doktor atamalarından otomatik çıkarılır.')
+                            ->relationship(name: 'departments', titleAttribute: 'slug')
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->loc('name'))
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->columnSpanFull(),
                         FileUpload::make('cover_path')
                             ->label('Kapak görseli')
                             ->image()

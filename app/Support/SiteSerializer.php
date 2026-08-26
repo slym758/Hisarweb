@@ -57,6 +57,18 @@ class SiteSerializer
         ];
     }
 
+    public static function departmentLight(Department $d): array
+    {
+        return [
+            'slug' => $d->slug,
+            'name' => $d->loc('name'),
+            'blurb' => $d->loc('blurb') ?? '',
+            'icon' => $d->icon,                       // lucide name string → iconFor() on the client
+            'iconImage' => Media::url($d->icon_path),  // uploaded custom icon (wins over lucide)
+            'pinned' => (bool) $d->pinned,
+        ];
+    }
+
     public static function videoLight(Video $v): array
     {
         return [

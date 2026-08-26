@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { AppointmentCTA } from '@/components/site/AppointmentCTA';
 import { BizeUlasin } from '@/components/site/BizeUlasin';
+import { DeptIcon } from '@/components/site/DeptIcon';
 import { siteLayout } from '@/layouts/site-layout';
 import { useCurrentPath, useLocale, useLocalizedPath } from '@/lib/i18n';
 import { useSettings } from '@/lib/settings';
@@ -296,7 +297,7 @@ export default function HastaneDetay() {
                                         className="group rounded-xl border border-border bg-card p-3 hover:border-primary/30 hover:shadow-card transition"
                                     >
                                         <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-primary-soft text-primary">
-                                            <d.icon className="h-4 w-4" strokeWidth={1.5} />
+                                            <DeptIcon dept={d} className="h-4 w-4" strokeWidth={1.5} />
                                         </span>
                                         <p className="mt-2 text-[12.5px] font-semibold text-primary leading-tight">{d.name}</p>
                                     </Link>

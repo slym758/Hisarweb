@@ -88,9 +88,18 @@ class SiteContentController extends Controller
     {
         $h = Hospital::where('slug', $slug)->with('rooms')->firstOrFail();
 
-        // "Tedavi Yöntemleri": manual editorial picks (related_items) override, otherwise
-        // auto by the hospital's departments (via its doctors). No irrelevant padding.
+        // A hospital's departments: the explicit editorial links, else derived from its doctors.
+        $deptModels = $h->departments()->exists()
+            ? $h->departments()->published()->get()
+            : Department::published()
+                ->whereIn('id', $h->doctors()->whereNotNull('department_id')->distinct()->pluck('department_id'))
+                ->ordered()->get();
+
+        // "Bölümler" + "Tedavi Yöntemleri": manual editorial picks (related_items) override,
+        // otherwise auto by the hospital's departments. No irrelevant padding.
         $related = [
+            'departments' => $deptModels
+                ->map(fn (Department $d) => SiteSerializer::departmentLight($d))->values()->all(),
             'treatments' => $h->relatedItems(Treatment::class, 'related', 6)
                 ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
         ];

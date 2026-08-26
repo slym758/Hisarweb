@@ -997,8 +997,19 @@ export function getHospitalBySlug(slug: string, l: Locale): Hospital | undefined
 export function getDoctorsForHospital(hospitalSlug: string, l: Locale): Doctor[] {
     return DOCTORS_SRC.filter((d) => d.hospitalSlug === hospitalSlug).map((d) => resolveDoctor(d, l));
 }
-/** Distinct departments represented at a hospital (via its doctors), in canonical department order. */
+/**
+ * Departments shown on a hospital detail page. Prefers the explicit editorial list passed as
+ * the `related.departments` prop (Hospital↔Department link, with doctor-derived fallback resolved
+ * server-side); otherwise derives them from the hospital's doctors, in canonical department order.
+ */
 export function getDepartmentsForHospital(hospitalSlug: string, l: Locale): Department[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.departments)) {
+        return (rel.departments as Array<Record<string, unknown>>).map((d) => ({
+            ...(d as unknown as Department),
+            icon: iconFor((d as { icon?: string }).icon),
+        }));
+    }
     const slugs = new Set(DOCTORS_SRC.filter((d) => d.hospitalSlug === hospitalSlug).map((d) => d.departmentSlug));
     return DEPARTMENTS_SRC.filter((d) => slugs.has(d.slug)).map((d) => resolveDept(d, l));
 }
