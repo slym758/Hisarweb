@@ -4,9 +4,11 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocalizedPath } from "@/lib/i18n";
+import { useSettings } from "@/lib/settings";
 
 export function DesktopRail() {
   const [visible, setVisible] = useState(false);
+  const settings = useSettings();
 
   // Rail sadece hero/banner geçildikten sonra görünür; footer'a yaklaşınca gizlenir.
   useEffect(() => {
@@ -34,7 +36,7 @@ export function DesktopRail() {
       }`}
     >
 
-      <RailItem to="/randevu-al" label="Randevu Al" icon={CalendarDays} primary />
+      <RailItem to={settings.appointment_url} label={settings.appointment_label} icon={CalendarDays} primary />
       <RailItem to="/online-hizmetler" label="E-Sonuç" icon={ClipboardList} />
       <RailItem to="/iletisim" label="İletişim" icon={Phone} />
     </aside>

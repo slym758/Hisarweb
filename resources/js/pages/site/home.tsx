@@ -12,6 +12,7 @@ import { PreFooter } from '@/components/site/PreFooter';
 import { QualityCertificates } from '@/components/site/QualityCertificates';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
+import { useSettings } from '@/lib/settings';
 import { normalizeTr, useBlogPosts, useDepartments, useHospitals, useSymptomMap } from '@/lib/site-data';
 
 /* ──────────────────── TEMPORARY IMAGERY (Unsplash placeholders) ──────────────────── */
@@ -351,6 +352,7 @@ Home.layout = siteLayout;
 function Hero() {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const [active, setActive] = useState(0);
     const total = HERO_SLIDE_MEDIA.length;
     const slides = HERO_SLIDE_MEDIA.map((m, i) => ({ ...m, ...c.hero.slides[i] }));
@@ -437,7 +439,7 @@ function Hero() {
 
                             {/* CTAs — completely static, never affected by slide changes */}
                             <div className="mt-3 space-y-1.5">
-                                <AppointmentCTA href={lp('/randevu-al')} className="w-full">
+                                <AppointmentCTA href={lp(settings.appointment_url)} className="w-full">
                                     {c.hero.appointment} <CalendarDays className="h-4 w-4" />
                                 </AppointmentCTA>
                                 <button
@@ -488,7 +490,7 @@ function Hero() {
 
                             {/* CTA paneli — slide değişiminden tamamen bağımsız, hep aynı yerde */}
                             <div className="mt-6 inline-flex items-center gap-3 p-2 rounded-2xl bg-primary/35 backdrop-blur-md ring-1 ring-white/15 shadow-[0_18px_45px_-22px_rgba(8,18,46,0.7)]">
-                                <AppointmentCTA href={lp('/randevu-al')}>
+                                <AppointmentCTA href={lp(settings.appointment_url)}>
                                     {c.hero.appointment}
                                     <CalendarDays className="h-4 w-4" />
                                 </AppointmentCTA>
@@ -867,6 +869,7 @@ function SymptomFinder() {
 function OnkolojiSpotlight() {
     const c = COPY[useLocale()];
     const lp = useLocalizedPath();
+    const settings = useSettings();
     const [videoPlaying, setVideoPlaying] = useState(false);
     const [isDesktop, setIsDesktop] = useState(false);
     const youtubeId = 'EMGGDcEurkg';
@@ -990,7 +993,7 @@ function OnkolojiSpotlight() {
                         </ul>
 
                         <div className="mt-8 flex items-center gap-3">
-                            <AppointmentCTA href={lp('/randevu-al')}>
+                            <AppointmentCTA href={lp(settings.appointment_url)}>
                                 {c.onko.appointment} <CalendarDays className="h-4 w-4" />
                             </AppointmentCTA>
                             <Link

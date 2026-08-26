@@ -4,10 +4,18 @@ import {
   ArrowRight, Navigation, Smartphone,
 } from "lucide-react";
 import { useLocalizedPath, useTranslations } from "@/lib/i18n";
+import { useSettings } from "@/lib/settings";
 
 export function SiteFooter() {
   const lp = useLocalizedPath();
   const { t } = useTranslations();
+  const settings = useSettings();
+  const socials = [
+    { Icon: Facebook, href: settings.facebook_url },
+    { Icon: Instagram, href: settings.instagram_url },
+    { Icon: Linkedin, href: settings.linkedin_url },
+    { Icon: Youtube, href: settings.youtube_url },
+  ];
   return (
     <>
       <footer className="bg-primary text-primary-foreground">
@@ -20,10 +28,10 @@ export function SiteFooter() {
               {t('footer.tagline')}
             </p>
             <div className="flex gap-2 pt-2 justify-center sm:justify-start">
-              {[Facebook, Instagram, Linkedin, Youtube].map((Icon, i) => (
+              {socials.map(({ Icon, href }, i) => (
                 <a
                   key={i}
-                  href="#"
+                  href={href || "#"}
                   aria-label={t('footer.social')}
                   className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"
                 >
@@ -80,7 +88,7 @@ export function SiteFooter() {
             <ul className="space-y-3 text-sm text-primary-foreground/85">
               <li className="flex gap-3 justify-center sm:justify-start">
                 <Phone className="h-4 w-4 mt-0.5 shrink-0 text-brand-cyan" />
-                <a href="tel:4445888" className="hover:text-white">444 5 888</a>
+                <a href={settings.phone_href} className="hover:text-white">{settings.phone_display}</a>
               </li>
               <li className="flex gap-3 justify-center sm:justify-start">
                 <Mail className="h-4 w-4 mt-0.5 shrink-0 text-brand-cyan" />

@@ -5,6 +5,7 @@ import {
 import type { ComponentType } from "react";
 import { openDetailLead, useDetailLead } from "@/lib/detail-lead-store";
 import { useCurrentPath, useLocale, useLocalizedPath } from "@/lib/i18n";
+import { useSettings, waHref } from "@/lib/settings";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -41,6 +42,7 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const path = useCurrentPath();
   const locale = useLocale();
   const lp = useLocalizedPath();
+  const settings = useSettings();
   const detail = useDetailLead();
   const isActive = (to: string) => path.startsWith(to);
   const currentLang = lang ?? locale;
@@ -73,7 +75,7 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
         {/* Center: primary action (TR: appointment — EN: free second opinion) */}
         <div className="relative flex flex-col items-center justify-center">
           <Link
-            href={isEn ? "/en#second-opinion" : lp("/randevu-al")}
+            href={isEn ? "/en#second-opinion" : lp(settings.appointment_url)}
             aria-label={t.centerAria}
             className="absolute -top-7 flex h-[60px] w-[60px] items-center justify-center rounded-full bg-card border border-border shadow-elevated"
           >
@@ -102,7 +104,7 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
           />
         ) : isEn ? (
           <NavItem
-            href={t.whatsappHref}
+            href={waHref(settings.whatsapp_number, settings.whatsapp_message)}
             label={t.whatsapp}
             icon={WhatsAppIcon}
             active={false}

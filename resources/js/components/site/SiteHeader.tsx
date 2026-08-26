@@ -12,6 +12,7 @@ import { MobileCompactHeader, useCompactMobileHeader } from "./MobileCompactHead
 import { DESKTOP_STICKY_NAV_H, EN_COPY, MobileDrawer, SearchOverlay, TR_COPY, useHeaderChrome } from "./HeaderShared";
 import { isNavActive, useNav, type NavGroup, type NavLeaf } from "@/lib/navigation";
 import { useCurrentPath, useLocalizedPath, useTranslations } from "@/lib/i18n";
+import { useSettings } from "@/lib/settings";
 
 /* ─────────────────────────────  HEADER  ────────────────────────────── */
 
@@ -25,7 +26,15 @@ export function SiteHeader() {
   const path = useCurrentPath();
   const NAV = useNav();
   const { t, locale } = useTranslations();
-  const copy = locale === "en" ? EN_COPY : TR_COPY;
+  const settings = useSettings();
+  const baseCopy = locale === "en" ? EN_COPY : TR_COPY;
+  // TR call-center phone + appointment CTA come from the admin-managed settings; the EN
+  // header keeps its distinct direct line and "free second opinion" CTA untouched.
+  const copy = locale === "en" ? baseCopy : {
+    ...baseCopy,
+    cta: { label: settings.appointment_label, to: settings.appointment_url },
+    phone: { label: settings.phone_display, href: settings.phone_href },
+  };
   const lp = useLocalizedPath();
 
   useEffect(() => { setMobileOpen(false); setOpenKey(null); }, [path]);
@@ -67,18 +76,18 @@ export function SiteHeader() {
       {/* Top utility bar — never sticky; scrolls away with the document */}
       <div className="hidden xl:block bg-primary text-primary-foreground/90 text-[12.5px]">
         <div className="container-x flex h-9 items-center justify-between gap-4">
-          <a href="tel:4445888" className="inline-flex items-center gap-1.5 font-bold tracking-wide hover:text-white transition">
+          <a href={settings.phone_href} className="inline-flex items-center gap-1.5 font-bold tracking-wide hover:text-white transition">
             <Phone className="h-3.5 w-3.5" aria-hidden />
-            444 5 888
+            {settings.phone_display}
           </a>
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-3">
               {[
-                { Icon: Facebook, href: "https://facebook.com/hisarhospital", label: "Facebook" },
-                { Icon: X, href: "https://x.com/hisarhospital", label: "X" },
-                { Icon: Youtube, href: "https://youtube.com/@hisarhospital", label: "YouTube" },
-                { Icon: Instagram, href: "https://instagram.com/hisarhospital", label: "Instagram" },
-                { Icon: Linkedin, href: "https://linkedin.com/company/hisar-hospital", label: "LinkedIn" },
+                { Icon: Facebook, href: settings.facebook_url || "https://facebook.com/hisarhospital", label: "Facebook" },
+                { Icon: X, href: settings.x_url || "https://x.com/hisarhospital", label: "X" },
+                { Icon: Youtube, href: settings.youtube_url || "https://youtube.com/@hisarhospital", label: "YouTube" },
+                { Icon: Instagram, href: settings.instagram_url || "https://instagram.com/hisarhospital", label: "Instagram" },
+                { Icon: Linkedin, href: settings.linkedin_url || "https://linkedin.com/company/hisar-hospital", label: "LinkedIn" },
               ].map(({ Icon, href, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="opacity-80 hover:opacity-100 hover:text-white transition">
                   <Icon className="h-3.5 w-3.5" aria-hidden />

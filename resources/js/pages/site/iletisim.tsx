@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { siteLayout } from '@/layouts/site-layout';
 import { useLocale } from '@/lib/i18n';
+import { useSettings, waHref } from '@/lib/settings';
 
 /* ───────────────── Data (locale-independent) ───────────────── */
 
@@ -48,8 +49,6 @@ const CAMPUS_META: {
         query: 'İstanbul Avrupa Yakası',
     },
 ];
-
-const CALL_CENTER = '444 5 888';
 
 const mapsEmbed = (q: string) => `https://www.google.com/maps?q=${encodeURIComponent(q)}&output=embed`;
 const mapsDirections = (q: string) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`;
@@ -232,6 +231,7 @@ type FormCopy = (typeof COPY)['tr']['form'] | (typeof COPY)['en']['form'];
 export default function Iletisim() {
     const locale = useLocale();
     const c = COPY[locale];
+    const settings = useSettings();
 
     const campusesText = c.campuses as Record<CampusSlug, { name: string; area: string; address?: string; hours?: string }>;
     const CAMPUSES: Campus[] = CAMPUS_META.map((m) => ({ ...m, ...campusesText[m.slug] }));
@@ -240,10 +240,10 @@ export default function Iletisim() {
     const active = useMemo(() => CAMPUSES.find((x) => x.slug === activeSlug)!, [CAMPUSES, activeSlug]);
 
     const channelMeta = [
-        { icon: Headphones, value: CALL_CENTER, href: `tel:${CALL_CENTER.replace(/\s/g, '')}` },
+        { icon: Headphones, value: settings.phone_display, href: settings.phone_href },
         { icon: Phone, value: '0216 524 13 00', href: 'tel:02165241300' },
         { icon: Mail, value: 'info@hisarhospital.com', href: 'mailto:info@hisarhospital.com' },
-        { icon: MessageSquare, value: '0530 000 00 00', href: 'https://wa.me/905300000000' },
+        { icon: MessageSquare, value: '0530 000 00 00', href: waHref(settings.whatsapp_number, settings.whatsapp_message) },
     ];
     const channels = channelMeta.map((m, i) => ({ ...m, ...c.channels[i] }));
 
