@@ -46,7 +46,7 @@ $sitePages = function () {
     site_page('/web-ve-tibbi-yayin-kurulu', 'site/web-ve-tibbi-yayin-kurulu');
     site_page('/insan-kaynaklari', 'site/insan-kaynaklari');
     site_page('/gebe-okulu', 'site/gebe-okulu');
-    site_page('/moral-takimi', 'site/moral-takimi');
+    Route::get('/moral-takimi', [SiteContentController::class, 'moralTeam']);
     site_page('/basinda-hastanemiz', 'site/basinda-hastanemiz');
     Route::get('/basinda-hastanemiz/{slug}', [SiteContentController::class, 'press']);
     site_page('/etkinlikler', 'site/etkinlikler');

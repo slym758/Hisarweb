@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -134,8 +134,19 @@ function VisitCarousel({ item }: { item: { name: string; images: string[] } }) {
     );
 }
 
+type MemberProp = { name: string; role: string; photo: string; gallery: string[] };
+
 export default function Page() {
     const c = usePageCopy('moral-takimi', COPY[useLocale()]);
+
+    // Editor-managed members (DB) via the `members` prop; fall back to the bundled list.
+    const membersProp = (usePage().props as { members?: MemberProp[] }).members;
+    const members = membersProp && membersProp.length
+        ? membersProp.map((m) => ({ name: m.name, img: m.photo }))
+        : MEMBERS.map((m) => ({ name: m.name, img: m.img }));
+    const visits = membersProp && membersProp.length
+        ? membersProp.filter((m) => m.gallery.length > 0).map((m) => ({ name: m.name, images: m.gallery }))
+        : VISITS;
 
     return (
         <>
@@ -199,7 +210,7 @@ export default function Page() {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-                        {MEMBERS.map((m) => (
+                        {members.map((m) => (
                             <div key={m.name} className="group">
                                 {/* TODO: real asset */}
                                 <img src={m.img} alt={m.name} loading="lazy" className="w-full h-auto" />
@@ -218,7 +229,7 @@ export default function Page() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {VISITS.map((v) => (
+                        {visits.map((v) => (
                             <VisitCarousel key={v.name} item={v} />
                         ))}
                     </div>

@@ -9,10 +9,13 @@ use App\Models\Doctor;
 use App\Models\EventItem;
 use App\Models\HealthPackage;
 use App\Models\Hospital;
+use App\Models\MoralTeamMember;
 use App\Models\PressItem;
 use App\Models\Technology;
 use App\Models\Treatment;
 use App\Models\Video;
+use App\Support\Media;
+use App\Support\PageContentService;
 use App\Support\SiteSerializer;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -131,6 +134,28 @@ class SiteContentController extends Controller
         $e = EventItem::where('slug', $slug)->published()->firstOrFail();
 
         return Inertia::render('site/etkinlik-detay', ['slug' => $slug, 'record' => SiteSerializer::event($e)]);
+    }
+
+    /**
+     * Integrated Oncology "Moral Takımı" — editor-managed members (DB) + the page's copy tree.
+     * Members carry a resolved role, a portrait, and a visit-photo gallery; the page falls back
+     * to its bundled list when this prop is empty (off-site / not yet seeded).
+     */
+    public function moralTeam(): Response
+    {
+        $members = MoralTeamMember::published()->ordered()->get()
+            ->map(fn (MoralTeamMember $m) => [
+                'name' => $m->name,
+                'role' => $m->loc('role') ?? '',
+                'photo' => Media::url($m->photo_path, $m->photo_url) ?? '',
+                'gallery' => collect($m->gallery ?? [])
+                    ->map(fn ($g) => Media::url($g))->filter()->values()->all(),
+            ])->all();
+
+        return Inertia::render('site/moral-takimi', [
+            'pageCopy' => (object) PageContentService::copyFor('moral-takimi', app()->getLocale()),
+            'members' => $members,
+        ]);
     }
 
     public function package(string $slug): Response
