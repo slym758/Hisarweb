@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Doctors\Schemas;
 
 use App\Filament\Support\LocaleTabs;
+use App\Filament\Support\RelatedContent;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -108,6 +109,8 @@ class DoctorForm
                         ->collapsed()
                         ->collapsible(),
                 ]),
+
+                RelatedContent::section(['treatments', 'diseases', 'technologies', 'videos']),
             ]);
     }
 }

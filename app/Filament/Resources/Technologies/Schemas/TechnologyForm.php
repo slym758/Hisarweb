@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Technologies\Schemas;
 
 use App\Filament\Support\LocaleTabs;
+use App\Filament\Support\RelatedContent;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -78,6 +79,8 @@ class TechnologyForm
                         ->collapsed()
                         ->collapsible(),
                 ]),
+
+                RelatedContent::section(['diseases', 'treatments']),
             ]);
     }
 }

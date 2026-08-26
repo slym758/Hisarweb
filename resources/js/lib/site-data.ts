@@ -50,6 +50,17 @@ function readRecordProp(): any {
     return (usePage().props as { record?: unknown }).record;
 }
 
+/**
+ * The per-page related-content slices a detail controller may pass (Faz 2 AUTO/MANUAL
+ * system). Keyed by type (treatments/diseases/technologies/videos) and already resolved
+ * to the active locale + editor overrides. When present, the dept-scoped getters return
+ * the matching slice instead of the in-memory dept fallback. Undefined on pages that don't
+ * pass it, so those keep working from the bundled data.
+ */
+function readRelatedProp(): Record<string, unknown[]> | undefined {
+    return (usePage().props as { related?: Record<string, unknown[]> }).related;
+}
+
 type Loc = { tr: string; en: string };
 const L = (tr: string, en: string): Loc => ({ tr, en });
 /** Same value in both locales (proper nouns, names, place names that don't translate). */
@@ -1443,6 +1454,8 @@ export function getTreatmentBySlug(slug: string, l: Locale): Treatment | undefin
 }
 /** Treatments linked to a department slug (relation helper for detail pages). */
 export function getTreatmentsForDept(deptSlug: string, l: Locale): Treatment[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.treatments)) return rel.treatments as unknown as Treatment[];
     return TREATMENTS_SRC.filter((t) => t.deptSlug === deptSlug).map((t) => resolveTreatment(t, l));
 }
 
@@ -1760,6 +1773,8 @@ export function getDiseaseBySlug(slug: string, l: Locale): Disease | undefined {
 }
 /** Diseases linked to a department slug (relation helper for detail pages). */
 export function getDiseasesForDept(deptSlug: string, l: Locale): Disease[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.diseases)) return rel.diseases as unknown as Disease[];
     return DISEASES_SRC.filter((d) => d.deptSlug === deptSlug).map((d) => resolveDisease(d, l));
 }
 
@@ -1893,6 +1908,8 @@ export function getTechnologyBySlug(slug: string, l: Locale): Technology | undef
 }
 /** Technologies linked to a department slug (relation helper for detail pages). */
 export function getTechnologiesForDept(deptSlug: string, l: Locale): Technology[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.technologies)) return rel.technologies as unknown as Technology[];
     return TECHNOLOGIES_SRC.filter((t) => t.deptSlugs.includes(deptSlug)).map((t) => resolveTechnology(t, l));
 }
 
@@ -2088,6 +2105,8 @@ function resolveVideo(v: VideoSrc, l: Locale): Video {
 export function getVideos(l: Locale): Video[] { return VIDEOS_SRC.map((v) => resolveVideo(v, l)); }
 /** Videos linked to a department slug (relation helper for detail pages). */
 export function getVideosForDept(deptSlug: string, l: Locale): Video[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.videos)) return rel.videos as unknown as Video[];
     return VIDEOS_SRC.filter((v) => v.deptSlug === deptSlug).map((v) => resolveVideo(v, l));
 }
 export function useVideos(): Video[] { const l = useLocale(); const c = useCatalog<Video>('videos'); return c ?? getVideos(l); }

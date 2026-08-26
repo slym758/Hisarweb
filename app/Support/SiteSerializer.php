@@ -11,6 +11,7 @@ use App\Models\Hospital;
 use App\Models\PressItem;
 use App\Models\Technology;
 use App\Models\Treatment;
+use App\Models\Video;
 
 /**
  * Serializes a full content record (with its nested detail/cv, locale-resolved via loc())
@@ -19,6 +20,55 @@ use App\Models\Treatment;
  */
 class SiteSerializer
 {
+    /* ── "Light" card shapes (no heavy detail) for related-content sections. Mirror the
+       CatalogService list shapes so the frontend related cards render identically. ── */
+
+    public static function treatmentLight(Treatment $x): array
+    {
+        return [
+            'slug' => $x->slug,
+            'name' => $x->loc('name'),
+            'summary' => $x->loc('summary') ?? '',
+            'department' => $x->department?->loc('name') ?? '',
+            'deptSlug' => $x->department?->slug ?? '',
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
+        ];
+    }
+
+    public static function diseaseLight(Disease $x): array
+    {
+        return [
+            'slug' => $x->slug,
+            'name' => $x->loc('name'),
+            'summary' => $x->loc('summary') ?? '',
+            'deptSlug' => $x->department?->slug ?? '',
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
+        ];
+    }
+
+    public static function technologyLight(Technology $x): array
+    {
+        return [
+            'slug' => $x->slug,
+            'name' => $x->loc('name'),
+            'desc' => $x->loc('description') ?? '',
+            'deptSlugs' => $x->dept_slugs ?? [],
+            'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
+        ];
+    }
+
+    public static function videoLight(Video $v): array
+    {
+        return [
+            'id' => $v->code,
+            'title' => $v->loc('title'),
+            'youtubeId' => $v->youtube_id,
+            'deptSlug' => $v->department?->slug,
+            'category' => $v->loc('category') ?? '',
+            'duration' => $v->duration ?? '',
+        ];
+    }
+
     public static function doctor(Doctor $d): array
     {
         return [

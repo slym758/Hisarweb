@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Department extends ContentModel
@@ -48,5 +49,12 @@ class Department extends ContentModel
     public function symptomMaps(): HasMany
     {
         return $this->hasMany(SymptomMap::class);
+    }
+
+    public function technologies(): BelongsToMany
+    {
+        return $this->belongsToMany(Technology::class)
+            ->withPivot('position')
+            ->orderByPivot('position');
     }
 }

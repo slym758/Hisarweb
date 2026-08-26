@@ -12,6 +12,7 @@ use App\Models\Hospital;
 use App\Models\PressItem;
 use App\Models\Technology;
 use App\Models\Treatment;
+use App\Models\Video;
 use App\Support\SiteSerializer;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -27,7 +28,25 @@ class SiteContentController extends Controller
     {
         $d = Doctor::where('code', $id)->published()->with(['department', 'hospital'])->firstOrFail();
 
-        return Inertia::render('site/doktor-detay', ['id' => $id, 'record' => SiteSerializer::doctor($d)]);
+        // Related content: manual editorial picks (related_items) override, otherwise auto
+        // by the doctor's department. Serialized to the light card shapes the frontend uses;
+        // the dept-scoped getters return these slices when the `related` prop is present.
+        $related = [
+            'treatments' => $d->relatedItems(Treatment::class)
+                ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
+            'diseases' => $d->relatedItems(Disease::class)
+                ->map(fn (Disease $x) => SiteSerializer::diseaseLight($x))->values()->all(),
+            'technologies' => $d->relatedItems(Technology::class)
+                ->map(fn (Technology $x) => SiteSerializer::technologyLight($x))->values()->all(),
+            'videos' => $d->relatedItems(Video::class)
+                ->map(fn (Video $v) => SiteSerializer::videoLight($v))->values()->all(),
+        ];
+
+        return Inertia::render('site/doktor-detay', [
+            'id' => $id,
+            'record' => SiteSerializer::doctor($d),
+            'related' => $related,
+        ]);
     }
 
     public function department(string $slug): Response

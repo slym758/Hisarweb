@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasRelatedContent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Doctor extends ContentModel
 {
+    use HasRelatedContent;
+
     public array $translatable = ['title', 'bio', 'subspecialties', 'languages', 'cv'];
 
     /** Public route key stays `code` (d1…) so existing /doktor/{id} URLs are unchanged. */
