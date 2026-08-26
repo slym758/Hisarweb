@@ -24,10 +24,6 @@ class PagesTable
                     ->label('Slug')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('contents_count')
-                    ->label('Blok')
-                    ->counts('contents')
-                    ->badge(),
                 IconColumn::make('is_active')
                     ->label('Aktif')
                     ->boolean(),

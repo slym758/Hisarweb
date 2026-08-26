@@ -4,7 +4,7 @@ import { Award, CheckCircle2, ShieldCheck, HeartPulse, Stethoscope, TrendingUp }
 import { PageHeader, siteLayout } from '@/layouts/site-layout';
 import { Breadcrumb } from '@/components/site/Breadcrumb';
 import { useLocale, useLocalizedPath } from '@/lib/i18n';
-import { useContent, usePageCopy } from '@/lib/page-content';
+import { usePageCopy } from '@/lib/page-content';
 
 const PILLAR_ICONS = [ShieldCheck, Stethoscope, HeartPulse, TrendingUp];
 
@@ -112,7 +112,6 @@ const COPY = {
 export default function Page() {
     const c = usePageCopy('kalite-calismalari', COPY[useLocale()]);
     const lp = useLocalizedPath();
-    const pc = useContent('kalite-calismalari');
 
     return (
         <>
@@ -129,11 +128,11 @@ export default function Page() {
             </div>
 
             <article className="container-x py-10 lg:py-14 max-w-3xl">
-                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-orange">{pc('approach', 'eyebrow', c.approachEyebrow)}</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-orange">{c.approachEyebrow}</p>
                 <h2 className="mt-2 text-2xl lg:text-3xl font-black tracking-tight text-primary text-balance">
-                    {pc('approach', 'title', c.approachTitle)}
+                    {c.approachTitle}
                 </h2>
-                <p className="mt-4 text-[15px] leading-[1.85] text-foreground/85">{pc('approach', 'body', c.approachBody)}</p>
+                <p className="mt-4 text-[15px] leading-[1.85] text-foreground/85">{c.approachBody}</p>
             </article>
 
             <div className="border-t border-border/60" />
