@@ -68,6 +68,7 @@ class HandleInertiaRequests extends Middleware
             'menus' => fn () => [
                 'header' => MenuService::tree('header', app()->getLocale()),
                 'footer' => MenuService::tree('footer', app()->getLocale()),
+                'footer_legal' => MenuService::tree('footer_legal', app()->getLocale()),
                 'rail' => MenuService::tree('rail', app()->getLocale()),
                 'bottom_nav' => MenuService::tree('bottom_nav', app()->getLocale()),
             ],

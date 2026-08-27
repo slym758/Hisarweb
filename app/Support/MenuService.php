@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Schema;
 class MenuService
 {
     /** The menu locations this service manages. */
-    public const LOCATIONS = ['header', 'footer', 'rail', 'bottom_nav'];
+    public const LOCATIONS = ['header', 'footer', 'footer_legal', 'rail', 'bottom_nav'];
 
     /** @return array<int,mixed> */
     public static function tree(string $location, string $locale): array

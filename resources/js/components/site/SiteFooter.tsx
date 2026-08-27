@@ -15,8 +15,14 @@ export function SiteFooter() {
   const { t } = useTranslations();
   const settings = useSettings();
   // Admin-managed footer link columns; fall back to the hardcoded columns when empty.
-  const menuFooter = (usePage().props as { menus?: { footer?: FooterMenuCol[] } }).menus?.footer;
+  const props = usePage().props as {
+    menus?: { footer?: FooterMenuCol[]; footer_legal?: FooterMenuLink[] };
+  };
+  const menuFooter = props.menus?.footer;
   const dbFooter = Array.isArray(menuFooter) && menuFooter.length > 0 ? menuFooter : null;
+  // Admin-managed legal links (footer bottom bar); fall back to the hardcoded set when empty.
+  const menuLegal = props.menus?.footer_legal;
+  const dbLegal = Array.isArray(menuLegal) && menuLegal.length > 0 ? menuLegal : null;
   const socials = [
     { Icon: Facebook, href: settings.facebook_url },
     { Icon: Instagram, href: settings.instagram_url },
@@ -154,10 +160,22 @@ export function SiteFooter() {
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-5 text-xs text-primary-foreground/60">
               <span>© {new Date().getFullYear()} {t('footer.copyright')}</span>
               <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">
-                <Link href={lp("/kvkk-politikamiz")} className="hover:text-white">{t('footer.legal.kvkk')}</Link>
-                <Link href={lp("/cerez-politikasi")} className="hover:text-white">{t('footer.legal.cookie')}</Link>
-                <Link href={lp("/mesafeli-satis-sozlesmesi")} className="hover:text-white">{t('footer.legal.distance_sales')}</Link>
-                <Link href={lp("/web-ve-tibbi-yayin-kurulu")} className="hover:text-white">{t('footer.legal.publication_board')}</Link>
+                {dbLegal ? (
+                  dbLegal.map((l, i) =>
+                    l.href ? (
+                      <a key={i} href={l.href} className="hover:text-white">{l.label}</a>
+                    ) : (
+                      <Link key={i} href={lp(l.to ?? "#")} className="hover:text-white">{l.label}</Link>
+                    ),
+                  )
+                ) : (
+                  <>
+                    <Link href={lp("/kvkk-politikamiz")} className="hover:text-white">{t('footer.legal.kvkk')}</Link>
+                    <Link href={lp("/cerez-politikasi")} className="hover:text-white">{t('footer.legal.cookie')}</Link>
+                    <Link href={lp("/mesafeli-satis-sozlesmesi")} className="hover:text-white">{t('footer.legal.distance_sales')}</Link>
+                    <Link href={lp("/web-ve-tibbi-yayin-kurulu")} className="hover:text-white">{t('footer.legal.publication_board')}</Link>
+                  </>
+                )}
               </div>
             </div>
 
