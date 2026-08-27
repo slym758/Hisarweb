@@ -6,6 +6,7 @@ use App\Filament\Support\LocaleTabs;
 use App\Models\SiteSetting;
 use App\Support\SettingsService;
 use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -42,6 +43,7 @@ class ManageSiteSettings extends Page
 
     /** All scalar (single-value) setting keys. */
     protected const SCALAR_KEYS = [
+        'logo_path', 'logo_url',
         'phone_display', 'phone_href', 'whatsapp_number', 'appointment_url',
         'instagram_url', 'facebook_url', 'x_url', 'youtube_url', 'linkedin_url',
     ];
@@ -71,6 +73,21 @@ class ManageSiteSettings extends Page
     {
         return $schema
             ->components([
+                Section::make('Logo')
+                    ->icon('heroicon-o-photo')
+                    ->columns(2)
+                    ->schema([
+                        FileUpload::make('logo_path')
+                            ->label('Logo (yükle)')
+                            ->image()
+                            ->disk('public')
+                            ->directory('site')
+                            ->helperText('Header ve footer için kullanılır. Yüklenen logo, URL alanına göre önceliklidir.'),
+                        TextInput::make('logo_url')
+                            ->label('veya Logo URL')
+                            ->helperText('Yükleme yoksa bu adres, o da yoksa varsayılan amblem kullanılır.'),
+                    ]),
+
                 Section::make('İletişim')
                     ->icon('heroicon-o-phone')
                     ->columns(2)

@@ -65,6 +65,10 @@ class SettingsService
                 : $value;
         }
 
+        // Computed logo URL: uploaded logo wins over a URL, falling back to the bundled emblem.
+        $resolved['logo'] = Media::url($resolved['logo_path'] ?? null, $resolved['logo_url'] ?? null)
+            ?: '/assets/hisar-emblem.png';
+
         return $resolved;
     }
 

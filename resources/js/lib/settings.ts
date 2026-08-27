@@ -1,6 +1,7 @@
 import { usePage } from '@inertiajs/react';
 
 export interface SiteSettings {
+  logo: string;
   phone_display: string;
   phone_href: string;
   whatsapp_number: string;
@@ -16,6 +17,7 @@ export interface SiteSettings {
 }
 
 const DEFAULTS: SiteSettings = {
+  logo: '/assets/hisar-emblem.png',
   phone_display: '444 5 888',
   phone_href: 'tel:4445888',
   whatsapp_number: '904445888',
