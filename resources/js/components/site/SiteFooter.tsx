@@ -29,10 +29,14 @@ export function SiteFooter() {
         <div className="container-x py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5 text-center sm:text-left">
           <div className="space-y-4 sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start">
             <Link href={lp("/")} aria-label="Hisar Hospital" className="inline-block">
-              <img src="/assets/hisar-emblem.png" alt="Hisar Hospital" className="h-14 w-auto brightness-0 invert" loading="lazy" />
+              {settings.logo_footer ? (
+                <img src={settings.logo_footer} alt="Hisar Hospital" className="h-14 w-auto" loading="lazy" />
+              ) : (
+                <img src="/assets/hisar-emblem.png" alt="Hisar Hospital" className="h-14 w-auto brightness-0 invert" loading="lazy" />
+              )}
             </Link>
             <p className="text-sm text-primary-foreground/75 max-w-xs leading-relaxed">
-              {t('footer.tagline')}
+              {settings.footer_tagline || t('footer.tagline')}
             </p>
             <div className="flex gap-2 pt-2 justify-center sm:justify-start">
               {socials.map(({ Icon, href }, i) => (
@@ -115,15 +119,15 @@ export function SiteFooter() {
               </li>
               <li className="flex gap-3 justify-center sm:justify-start">
                 <Mail className="h-4 w-4 mt-0.5 shrink-0 text-brand-cyan" />
-                <a href="mailto:info@hisarhospital.com" className="hover:text-white">info@hisarhospital.com</a>
+                <a href={`mailto:${settings.email}`} className="hover:text-white">{settings.email}</a>
               </li>
               <li className="flex gap-3 justify-center sm:justify-start">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-brand-cyan" />
-                <span>Yanyanevler Mah. Site Yolu Cd. No:7<br />Ümraniye / İstanbul</span>
+                <span className="whitespace-pre-line">{settings.address}</span>
               </li>
               <li>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Hisar+Hospital+Intercontinental"
+                  href={settings.map_url}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-1.5 rounded-full bg-white/10 hover:bg-white/20 px-3.5 py-1.5 text-xs font-semibold transition"

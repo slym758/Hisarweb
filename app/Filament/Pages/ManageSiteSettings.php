@@ -7,6 +7,7 @@ use App\Models\SiteSetting;
 use App\Support\SettingsService;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -43,8 +44,9 @@ class ManageSiteSettings extends Page
 
     /** All scalar (single-value) setting keys. */
     protected const SCALAR_KEYS = [
-        'logo_path', 'logo_url',
+        'logo_path', 'logo_url', 'logo_footer_path', 'logo_footer_url',
         'phone_display', 'phone_href', 'whatsapp_number', 'appointment_url',
+        'email', 'address', 'map_url',
         'instagram_url', 'facebook_url', 'x_url', 'youtube_url', 'linkedin_url',
     ];
 
@@ -82,10 +84,18 @@ class ManageSiteSettings extends Page
                             ->image()
                             ->disk('public')
                             ->directory('site')
-                            ->helperText('Header ve footer için kullanılır. Yüklenen logo, URL alanına göre önceliklidir.'),
+                            ->helperText('Header için kullanılır. Yüklenen logo, URL alanına göre önceliklidir.'),
                         TextInput::make('logo_url')
                             ->label('veya Logo URL')
                             ->helperText('Yükleme yoksa bu adres, o da yoksa varsayılan amblem kullanılır.'),
+                        FileUpload::make('logo_footer_path')
+                            ->label('Footer logosu (açık/beyaz)')
+                            ->image()
+                            ->disk('public')
+                            ->directory('site')
+                            ->helperText('Koyu footer zemini için açık renkli logo. Boşsa varsayılan (beyaza çevrilmiş amblem) kullanılır.'),
+                        TextInput::make('logo_footer_url')
+                            ->label('veya Footer logo URL'),
                     ]),
 
                 Section::make('İletişim')
@@ -105,6 +115,19 @@ class ManageSiteSettings extends Page
                         TextInput::make('appointment_url')
                             ->label('Randevu bağlantısı')
                             ->placeholder('/randevu-al'),
+                        TextInput::make('email')
+                            ->label('E-posta')
+                            ->email()
+                            ->placeholder('info@hisarhospital.com'),
+                        TextInput::make('map_url')
+                            ->label('Harita / yol tarifi bağlantısı')
+                            ->url()
+                            ->placeholder('https://www.google.com/maps/dir/...'),
+                        Textarea::make('address')
+                            ->label('Adres')
+                            ->rows(2)
+                            ->columnSpanFull()
+                            ->placeholder("Yanyanevler Mah. Site Yolu Cd. No:7\nÜmraniye / İstanbul"),
                     ]),
 
                 Section::make('Metinler')

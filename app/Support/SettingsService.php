@@ -69,6 +69,11 @@ class SettingsService
         $resolved['logo'] = Media::url($resolved['logo_path'] ?? null, $resolved['logo_url'] ?? null)
             ?: '/assets/hisar-emblem.png';
 
+        // Footer logo (light/white variant for the dark footer). Empty → the frontend uses the
+        // inverted default emblem, so the current look is preserved until one is uploaded.
+        $resolved['logo_footer'] = Media::url($resolved['logo_footer_path'] ?? null, $resolved['logo_footer_url'] ?? null)
+            ?: '';
+
         return $resolved;
     }
 
