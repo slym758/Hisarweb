@@ -26,8 +26,6 @@ class HospitalForm
                             ->label('Slug (URL)')
                             ->required()
                             ->unique(ignoreRecord: true),
-                        TextInput::make('phone')
-                            ->label('Telefon'),
                         TextInput::make('map_query')
                             ->label('Harita sorgusu'),
                         Toggle::make('coming_soon')
@@ -62,6 +60,8 @@ class HospitalForm
                         ->required($isDefault),
                     TextInput::make("area.$locale")
                         ->label('Bölge/Semt'),
+                    TextInput::make("phone.$locale")
+                        ->label('Telefon'),
                     Textarea::make("address.$locale")
                         ->label('Adres')
                         ->rows(2),

@@ -11,7 +11,7 @@ class Hospital extends ContentModel
     use HasRelatedContent;
 
     public array $translatable = [
-        'name', 'area', 'address', 'about', 'features', 'technologies', 'gallery',
+        'name', 'area', 'phone', 'address', 'about', 'features', 'technologies', 'gallery',
         'transport', 'emergency', 'working_hours',
     ];
 

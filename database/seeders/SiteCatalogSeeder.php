@@ -107,7 +107,7 @@ class SiteCatalogSeeder extends Seeder
                 'slug' => $r['slug'],
                 'name' => $this->pair($tr[$i], $en[$i], 'name'),
                 'area' => $this->pair($tr[$i], $en[$i], 'area'),
-                'phone' => $r['phone'] ?? null,
+                'phone' => $this->pair($tr[$i], $en[$i], 'phone'),
                 'address' => $this->pair($tr[$i], $en[$i], 'address'),
                 'coming_soon' => $r['comingSoon'] ?? false,
                 'cover_url' => $r['cover'] ?? null,

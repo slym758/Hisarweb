@@ -65,7 +65,7 @@ class CatalogService
                 'slug' => $h->slug,
                 'name' => $L($h, 'name'),
                 'area' => $L($h, 'area') ?? '',
-                'phone' => $h->phone ?? '',
+                'phone' => $L($h, 'phone') ?? '',
                 'address' => $L($h, 'address') ?? '',
                 'cover' => Media::url($h->cover_path, $h->cover_url) ?? '',
                 'comingSoon' => (bool) $h->coming_soon,
