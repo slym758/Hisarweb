@@ -22,7 +22,10 @@ use Filament\Schemas\Schema;
 class SliderForm
 {
     /** Translatable slide attributes stored as spatie {tr,en,…} JSON maps. */
-    private const TRANSLATABLE = ['eyebrow', 'title', 'mobile_title', 'desc', 'mobile_desc'];
+    private const TRANSLATABLE = [
+        'eyebrow', 'title', 'mobile_title', 'desc', 'mobile_desc',
+        'image_path', 'image_url', 'mobile_image_path', 'mobile_image_url',
+    ];
 
     public static function configure(Schema $schema): Schema
     {
@@ -63,26 +66,26 @@ class SliderForm
                         ->label('Aktif')
                         ->default(true),
 
-                    Section::make('Görsel')
-                        ->columns(2)
+                    Section::make('Görsel (dile göre)')
+                        ->description('Her dil için ayrı banner yükleyebilirsiniz. Boş bırakılan dil, varsayılan dilin görselini kullanır.')
                         ->schema([
-                            FileUpload::make('image_path')
-                                ->label('Görsel (masaüstü)')
-                                ->image()
-                                ->disk('public')
-                                ->directory('slides'),
-                            TextInput::make('image_url')
-                                ->label('Görsel URL (masaüstü)')
-                                ->url()
-                                ->helperText('Yükleme yoksa bu adres kullanılır.'),
-                            FileUpload::make('mobile_image_path')
-                                ->label('Görsel (mobil)')
-                                ->image()
-                                ->disk('public')
-                                ->directory('slides'),
-                            TextInput::make('mobile_image_url')
-                                ->label('Görsel URL (mobil)')
-                                ->url(),
+                            LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                                FileUpload::make("image_path.$locale")
+                                    ->label('Görsel (masaüstü)')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('slides'),
+                                TextInput::make("image_url.$locale")
+                                    ->label('Görsel URL (masaüstü)')
+                                    ->helperText('Yükleme yoksa bu adres kullanılır.'),
+                                FileUpload::make("mobile_image_path.$locale")
+                                    ->label('Görsel (mobil)')
+                                    ->image()
+                                    ->disk('public')
+                                    ->directory('slides'),
+                                TextInput::make("mobile_image_url.$locale")
+                                    ->label('Görsel URL (mobil)'),
+                            ]),
                             TextInput::make('position')
                                 ->label('Konum (masaüstü)')
                                 ->placeholder('50% 50%')

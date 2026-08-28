@@ -57,8 +57,8 @@ class SliderService
             ->orderBy('sort_order')
             ->get()
             ->map(fn (Slide $slide) => [
-                'image' => Media::url($slide->image_path, $slide->image_url),
-                'mobileImage' => Media::url($slide->mobile_image_path, $slide->mobile_image_url),
+                'image' => Media::url($slide->loc('image_path', $locale), $slide->loc('image_url', $locale)),
+                'mobileImage' => Media::url($slide->loc('mobile_image_path', $locale), $slide->loc('mobile_image_url', $locale)),
                 'position' => $slide->position,
                 'mobilePosition' => $slide->mobile_position,
                 'href' => $slide->link,

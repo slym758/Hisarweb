@@ -26,7 +26,10 @@ class Slide extends Model implements Sortable
 
     protected $guarded = [];
 
-    public array $translatable = ['eyebrow', 'title', 'mobile_title', 'desc', 'mobile_desc'];
+    public array $translatable = [
+        'eyebrow', 'title', 'mobile_title', 'desc', 'mobile_desc',
+        'image_path', 'image_url', 'mobile_image_path', 'mobile_image_url',
+    ];
 
     // Ordering is driven explicitly (Filament repeater / seeder), scoped per slider.
     public array $sortable = [
