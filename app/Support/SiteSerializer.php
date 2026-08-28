@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\BlogPost;
 use App\Models\Department;
 use App\Models\Disease;
 use App\Models\Doctor;
@@ -108,6 +109,32 @@ class SiteSerializer
             'icon' => $d->icon,                       // lucide name string → iconFor() on the client
             'iconImage' => Media::url($d->icon_path),  // uploaded custom icon (wins over lucide)
             'pinned' => (bool) $d->pinned,
+        ];
+    }
+
+    public static function doctorLight(Doctor $d): array
+    {
+        return [
+            'id' => $d->code,
+            'name' => $d->name,
+            'title' => $d->loc('title') ?? '',
+            'department' => $d->department?->loc('name') ?? '',
+            'departmentSlug' => $d->department?->localizedSlug() ?? '',
+            'hospitalSlug' => $d->hospital?->localizedSlug() ?? '',
+            'photo' => Media::url($d->photo_path, $d->photo_url),
+            'subspecialties' => $d->loc('subspecialties') ?? [],
+        ];
+    }
+
+    public static function blogLight(BlogPost $b): array
+    {
+        return [
+            'slug' => $b->localizedSlug(),
+            'title' => $b->loc('title'),
+            'excerpt' => $b->loc('excerpt') ?? '',
+            'category' => $b->department?->localizedSlug() ?? '',
+            'cover' => Media::url($b->cover_path, $b->cover_url) ?? '',
+            'date' => $b->published_at?->toDateString() ?? '',
         ];
     }
 

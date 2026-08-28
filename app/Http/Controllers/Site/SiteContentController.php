@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
 use App\Models\Department;
 use App\Models\Disease;
 use App\Models\Doctor;
@@ -44,6 +45,10 @@ class SiteContentController extends Controller
                 ->map(fn (Technology $x) => SiteSerializer::technologyLight($x))->values()->all(),
             'videos' => $d->relatedItems(Video::class)
                 ->map(fn (Video $v) => SiteSerializer::videoLight($v))->values()->all(),
+            'blogPosts' => $d->relatedItems(BlogPost::class)
+                ->map(fn (BlogPost $b) => SiteSerializer::blogLight($b))->values()->all(),
+            'press' => $d->relatedItems(PressItem::class)
+                ->map(fn (PressItem $p) => SiteSerializer::press($p))->values()->all(),
         ];
 
         return Inertia::render('site/doktor-detay', [
@@ -71,7 +76,22 @@ class SiteContentController extends Controller
         return Inertia::render('site/bolum-detay', [
             'slug' => $slug,
             'record' => SiteSerializer::departmentDetail($d),
-            'related' => ['hospitals' => $hospitals],
+            'related' => [
+                'hospitals' => $hospitals,
+                // Manual editorial picks (related_items) override, else auto by this department.
+                'doctors' => $d->relatedItems(Doctor::class)
+                    ->map(fn (Doctor $x) => SiteSerializer::doctorLight($x))->values()->all(),
+                'treatments' => $d->relatedItems(Treatment::class)
+                    ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
+                'diseases' => $d->relatedItems(Disease::class)
+                    ->map(fn (Disease $x) => SiteSerializer::diseaseLight($x))->values()->all(),
+                'technologies' => $d->relatedItems(Technology::class)
+                    ->map(fn (Technology $t) => SiteSerializer::technologyLight($t))->values()->all(),
+                'videos' => $d->relatedItems(Video::class)
+                    ->map(fn (Video $v) => SiteSerializer::videoLight($v))->values()->all(),
+                'blogPosts' => $d->relatedItems(BlogPost::class)
+                    ->map(fn (BlogPost $b) => SiteSerializer::blogLight($b))->values()->all(),
+            ],
         ]);
     }
 
@@ -79,28 +99,62 @@ class SiteContentController extends Controller
     {
         $x = Disease::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
-        return Inertia::render('site/hastalik-detay', ['slug' => $slug, 'record' => SiteSerializer::disease($x)]);
+        return Inertia::render('site/hastalik-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::disease($x),
+            'related' => [
+                'doctors' => $x->relatedItems(Doctor::class)
+                    ->map(fn (Doctor $d) => SiteSerializer::doctorLight($d))->values()->all(),
+                'treatments' => $x->relatedItems(Treatment::class)
+                    ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
+                'technologies' => $x->relatedItems(Technology::class)
+                    ->map(fn (Technology $t) => SiteSerializer::technologyLight($t))->values()->all(),
+                'blogPosts' => $x->relatedItems(BlogPost::class)
+                    ->map(fn (BlogPost $b) => SiteSerializer::blogLight($b))->values()->all(),
+            ],
+        ]);
     }
 
     public function treatment(string $slug): Response
     {
         $x = Treatment::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
-        return Inertia::render('site/tedavi-detay', ['slug' => $slug, 'record' => SiteSerializer::treatment($x)]);
+        return Inertia::render('site/tedavi-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::treatment($x),
+            'related' => $this->treatmentRelated($x),
+        ]);
     }
 
     public function treatmentMethod(string $slug): Response
     {
         $x = Treatment::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
-        return Inertia::render('site/tedavi-yontemi-detay', ['slug' => $slug, 'record' => SiteSerializer::treatment($x)]);
+        return Inertia::render('site/tedavi-yontemi-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::treatment($x),
+            'related' => $this->treatmentRelated($x),
+        ]);
     }
 
     public function technology(string $slug): Response
     {
         $x = Technology::whereLocalizedSlug($slug)->published()->firstOrFail();
 
-        return Inertia::render('site/teknoloji-detay', ['slug' => $slug, 'record' => SiteSerializer::technology($x)]);
+        return Inertia::render('site/teknoloji-detay', [
+            'slug' => $slug,
+            'record' => SiteSerializer::technology($x),
+            'related' => [
+                'doctors' => $x->relatedItems(Doctor::class)
+                    ->map(fn (Doctor $d) => SiteSerializer::doctorLight($d))->values()->all(),
+                'diseases' => $x->relatedItems(Disease::class)
+                    ->map(fn (Disease $d) => SiteSerializer::diseaseLight($d))->values()->all(),
+                'treatments' => $x->relatedItems(Treatment::class)
+                    ->map(fn (Treatment $t) => SiteSerializer::treatmentLight($t))->values()->all(),
+                'blogPosts' => $x->relatedItems(BlogPost::class)
+                    ->map(fn (BlogPost $b) => SiteSerializer::blogLight($b))->values()->all(),
+            ],
+        ]);
     }
 
     public function hospital(string $slug): Response
@@ -128,6 +182,21 @@ class SiteContentController extends Controller
             'record' => SiteSerializer::hospital($h),
             'related' => $related,
         ]);
+    }
+
+    /** Manual (else auto-by-department) related content for a treatment detail page. */
+    private function treatmentRelated(Treatment $x): array
+    {
+        return [
+            'doctors' => $x->relatedItems(Doctor::class)
+                ->map(fn (Doctor $d) => SiteSerializer::doctorLight($d))->values()->all(),
+            'diseases' => $x->relatedItems(Disease::class)
+                ->map(fn (Disease $d) => SiteSerializer::diseaseLight($d))->values()->all(),
+            'technologies' => $x->relatedItems(Technology::class)
+                ->map(fn (Technology $t) => SiteSerializer::technologyLight($t))->values()->all(),
+            'blogPosts' => $x->relatedItems(BlogPost::class)
+                ->map(fn (BlogPost $b) => SiteSerializer::blogLight($b))->values()->all(),
+        ];
     }
 
     public function event(string $slug): Response

@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import {
     Activity,
     ArrowRight,
@@ -29,6 +29,7 @@ const COPY = {
         technologies: 'Kullanılan Teknolojiler',
         videos: 'Videolar',
         articles: 'Sağlıklı Hayat Rehberi Yazıları',
+        press: 'Basında',
     },
     en: {
         related: 'Related content',
@@ -37,8 +38,11 @@ const COPY = {
         technologies: 'Technologies used',
         videos: 'Videos',
         articles: 'Healthy Life articles',
+        press: 'In the press',
     },
 } as const;
+
+type PressCard = { slug: string; title: string; excerpt: string; source: string; date: string; cover: string };
 
 type Group = {
     key: string;
@@ -63,6 +67,8 @@ export function RelatedDoctorContent({ doctor }: { doctor: Doctor }) {
     const technologies = getTechnologiesForDept(deptSlug, locale).slice(0, 4);
     const videos = getVideosForDept(deptSlug, locale).slice(0, 4);
     const articles = getBlogPostsForDept(deptSlug, locale).slice(0, 4);
+    // Press has no dept-scoped auto — only the doctor's manual picks (related.press).
+    const press = ((usePage().props as { related?: { press?: PressCard[] } }).related?.press ?? []).slice(0, 4);
 
     const groups: Group[] = [];
 
@@ -195,6 +201,33 @@ export function RelatedDoctorContent({ doctor }: { doctor: Doctor }) {
                                     <span className="mt-1 block text-[12px] leading-snug text-muted-foreground line-clamp-2">
                                         {p.excerpt}
                                     </span>
+                                </span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            ),
+        });
+    }
+
+    if (press.length > 0) {
+        groups.push({
+            key: 'press',
+            title: c.press,
+            count: press.length,
+            body: (
+                <ul className="grid gap-3 sm:grid-cols-2">
+                    {press.map((p) => (
+                        <li key={p.slug}>
+                            <Link
+                                href={lp('/basinda-hastanemiz/' + p.slug)}
+                                className="group flex h-full gap-3 rounded-2xl border border-border/70 bg-card p-3 transition hover:border-primary/30"
+                            >
+                                <img src={p.cover} alt="" loading="lazy" decoding="async" className="h-16 w-20 shrink-0 rounded-xl object-cover" />
+                                <span className="min-w-0">
+                                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{p.source}</span>
+                                    <span className="mt-1 block text-[13.5px] font-semibold leading-snug text-primary line-clamp-2">{p.title}</span>
+                                    <span className="mt-1 block text-[12px] leading-snug text-muted-foreground line-clamp-2">{p.excerpt}</span>
                                 </span>
                             </Link>
                         </li>

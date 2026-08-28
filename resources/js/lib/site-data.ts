@@ -329,6 +329,8 @@ export function getHospitals(l: Locale): Hospital[] { return HOSPITALS_SRC.map((
 export function getBlogPosts(l: Locale): BlogPost[] { return BLOG_SRC.map((b) => resolveBlog(b, l)); }
 /** Blog posts linked to a department slug via their `category` (relation helper for detail pages). */
 export function getBlogPostsForDept(deptSlug: string, l: Locale): BlogPost[] {
+    const rel = readRelatedProp();
+    if (rel && Array.isArray(rel.blogPosts)) return rel.blogPosts as unknown as BlogPost[];
     const cat = useCatalog<BlogPost>('blogPosts');
     if (cat) return cat.filter((b) => b.category === deptSlug);
     return BLOG_SRC.filter((b) => b.category === deptSlug).map((b) => resolveBlog(b, l));
