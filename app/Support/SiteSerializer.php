@@ -116,7 +116,7 @@ class SiteSerializer
     {
         return [
             'id' => $d->code,
-            'name' => $d->name,
+            'name' => $d->loc('name'),
             'title' => $d->loc('title') ?? '',
             'department' => $d->department?->loc('name') ?? '',
             'departmentSlug' => $d->department?->localizedSlug() ?? '',
@@ -155,7 +155,7 @@ class SiteSerializer
     {
         return [
             'id' => $d->code,
-            'name' => $d->name,
+            'name' => $d->loc('name'),
             'title' => $d->loc('title') ?? '',
             'bio' => $d->loc('bio') ?? '',
             'department' => $d->department?->loc('name') ?? '',
@@ -167,6 +167,8 @@ class SiteSerializer
             'email' => $d->email,
             'languages' => $d->loc('languages') ?? [],
             'cv' => $d->loc('cv') ?: null,
+            'appointmentUrl' => $d->appointment_url ?: null,
+            'appointmentNote' => $d->loc('appointment_note') ?: null,
         ];
     }
 

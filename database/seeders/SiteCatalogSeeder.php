@@ -144,7 +144,7 @@ class SiteCatalogSeeder extends Seeder
         foreach ($tr as $i => $r) {
             Doctor::create([
                 'code' => $r['id'],
-                'name' => $r['name'],
+                'name' => $this->pair($tr[$i], $en[$i], 'name'),
                 'title' => $this->pair($tr[$i], $en[$i], 'title'),
                 'bio' => $this->pair($tr[$i], $en[$i], 'bio'),
                 'subspecialties' => $this->pair($tr[$i], $en[$i], 'subspecialties'),

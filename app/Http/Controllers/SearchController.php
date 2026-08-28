@@ -127,14 +127,14 @@ class SearchController extends Controller
         $rows = $this->run(
             Doctor::query()->published()->with('department'),
             array_merge(
-                ['name'], // proper noun — plain (same across locales)
+                $this->tcols('name', $locale, $default),   // name is now translatable
                 $this->tcols('title', $locale, $default),
             ),
             $q,
         );
 
         return $rows->map(fn (Doctor $d) => [
-            'label' => $d->name,
+            'label' => $d->loc('name', $locale),
             'to' => '/doktor/'.$d->code,
             'meta' => $d->department?->loc('name', $locale) ?: $d->loc('title', $locale),
         ])->all();

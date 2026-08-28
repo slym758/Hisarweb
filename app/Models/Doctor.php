@@ -10,7 +10,7 @@ class Doctor extends ContentModel
 {
     use HasRelatedContent;
 
-    public array $translatable = ['title', 'bio', 'subspecialties', 'languages', 'cv'];
+    public array $translatable = ['name', 'title', 'bio', 'subspecialties', 'languages', 'cv', 'appointment_note'];
 
     /** Public route key stays `code` (d1…) so existing /doktor/{id} URLs are unchanged. */
     public function getRouteKeyName(): string

@@ -25,12 +25,12 @@ class DoctorForm
                             ->label('Kod')
                             ->required()
                             ->unique(ignoreRecord: true),
-                        TextInput::make('name')
-                            ->label('Ad Soyad')
-                            ->required(),
                         TextInput::make('email')
                             ->label('E-posta')
                             ->email(),
+                        TextInput::make('appointment_url')
+                            ->label('Randevu bağlantısı (doktora özel)')
+                            ->helperText('Boşsa genel randevu bağlantısı kullanılır.'),
                         Select::make('department_id')
                             ->label('Bölüm')
                             ->relationship('department', 'slug')
@@ -69,6 +69,11 @@ class DoctorForm
                     ->columns(2),
 
                 LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                    TextInput::make("name.$locale")
+                        ->label('Ad Soyad')
+                        ->required($isDefault),
+                    TextInput::make("appointment_note.$locale")
+                        ->label('Randevu notu (opsiyonel)'),
                     TextInput::make("title.$locale")
                         ->label('Unvan')
                         ->required($isDefault),

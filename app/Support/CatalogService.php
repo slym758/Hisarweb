@@ -76,7 +76,7 @@ class CatalogService
             'doctors' => Doctor::published()->ordered()->with(['department:id,slug', 'hospital:id,slug', 'hospitals:id,slug,slug_i18n'])->get()
                 ->map(fn (Doctor $d) => [
                     'id' => $d->code,
-                    'name' => $d->name,
+                    'name' => $L($d, 'name'),
                     'title' => $L($d, 'title') ?? '',
                     'bio' => $L($d, 'bio') ?? '',
                     'department' => $deptNames[$d->department?->slug] ?? '',

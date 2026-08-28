@@ -105,6 +105,9 @@ export type Doctor = {
     email?: string;
     /** Spoken languages, resolved to the active locale. */
     languages?: string[];
+    /** Doctor-specific appointment link + note (fall back to the global CTA when absent). */
+    appointmentUrl?: string | null;
+    appointmentNote?: string | null;
     /** Optional full CV — rendered on the doctor detail page when present. */
     cv?: DoctorCv;
 };

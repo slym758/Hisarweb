@@ -111,6 +111,8 @@ export default function DoktorDetay() {
         .map((s) => hospitals.find((h) => h.slug === s))
         .filter((h): h is Hospital => Boolean(h));
     const hospital = doctorHospitals[0];
+    // Doctor-specific appointment link overrides the global CTA when present.
+    const appointmentHref = doc.appointmentUrl || settings.appointment_url;
     const { prefix, name } = splitName(doc.name);
     const interests = doc.subspecialties;
     const deptSlug = doc.departmentSlug;
@@ -244,7 +246,7 @@ export default function DoktorDetay() {
                                     )}
 
                                     <div className="mt-5 flex flex-wrap gap-2">
-                                        <AppointmentCTA href={settings.appointment_url} className="min-h-11">
+                                        <AppointmentCTA href={appointmentHref} className="min-h-11">
                                             <CalendarDays className="h-4 w-4" /> {c.appointment}
                                         </AppointmentCTA>
                                     </div>
@@ -254,7 +256,7 @@ export default function DoktorDetay() {
                             {/* Mobile CTA */}
                             <div className="md:hidden mt-4 flex items-stretch gap-2">
                                 <AppointmentCTA
-                                    href={settings.appointment_url}
+                                    href={appointmentHref}
                                     className="flex-1 h-[46px] active:brightness-95"
                                 >
                                     <CalendarDays className="h-4 w-4" /> {c.appointment}
@@ -410,7 +412,7 @@ export default function DoktorDetay() {
                         </p>
                     </div>
                     <a
-                        href={settings.appointment_url}
+                        href={appointmentHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-brand-orange px-4 h-11 text-sm font-bold text-brand-orange-foreground active:brightness-95 transition"
