@@ -178,6 +178,10 @@ class MenuService
             $leaf['note'] = $badge;
         }
 
+        if (! empty($item->page_types)) {
+            $leaf['pageTypes'] = $item->page_types;
+        }
+
         return $leaf;
     }
 

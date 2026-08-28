@@ -38,7 +38,7 @@ const COPY = {
   },
 } as const;
 
-type BottomMenuItem = { label: string; to?: string; href?: string; icon?: string };
+type BottomMenuItem = { label: string; to?: string; href?: string; icon?: string; pageTypes?: string[] };
 
 export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const path = useCurrentPath();
@@ -52,7 +52,13 @@ export function MobileBottomNav({ lang }: { lang?: "tr" | "en" }) {
   const isEn = currentLang === "en";
   // Admin-managed side items (TR); the center CTA and EN layout stay fixed. Falls back to
   // the hardcoded links when no menu is set.
-  const bottomNav = (usePage().props as { menus?: { bottom_nav?: BottomMenuItem[] } }).menus?.bottom_nav;
+  // Current page type (for admin page-type targeting): home / detail / other.
+  const component = usePage().component;
+  const pageType = component === "site/home" ? "home" : component.endsWith("-detay") ? "detail" : "other";
+  const rawBottomNav = (usePage().props as { menus?: { bottom_nav?: BottomMenuItem[] } }).menus?.bottom_nav;
+  const bottomNav = Array.isArray(rawBottomNav)
+    ? rawBottomNav.filter((it) => !it.pageTypes || it.pageTypes.length === 0 || it.pageTypes.includes(pageType))
+    : rawBottomNav;
   const leftItem = Array.isArray(bottomNav) && bottomNav.length > 0 ? bottomNav[0] : undefined;
   const rightItem = Array.isArray(bottomNav) && bottomNav.length >= 2 ? bottomNav[bottomNav.length - 1] : undefined;
   const leftTo = leftItem?.to ?? "/online-hizmetler";

@@ -110,6 +110,15 @@ class MenuForm
                 ->label('Aktiflik yolları (matches)')
                 ->placeholder('/kurumsal')
                 ->helperText('Bu öğenin aktif sayılacağı yollar (üst düzey gruplar için).'),
+            Select::make('page_types')
+                ->label('Sayfa türleri (mobil alt menü)')
+                ->helperText('Yalnızca mobil alt menüde etkili. Boş = tüm sayfalarda. Seçilirse sadece bu sayfa türlerinde görünür.')
+                ->options([
+                    'home' => 'Anasayfa',
+                    'detail' => 'Detay sayfaları',
+                    'other' => 'Diğer sayfalar',
+                ])
+                ->multiple(),
             Toggle::make('is_active')
                 ->label('Aktif')
                 ->default(true),

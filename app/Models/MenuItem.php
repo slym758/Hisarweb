@@ -29,6 +29,7 @@ class MenuItem extends Model
     {
         return [
             'matches' => 'array',
+            'page_types' => 'array',
             'column_group' => 'bool',
             'is_active' => 'bool',
         ];
