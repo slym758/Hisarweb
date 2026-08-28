@@ -8,6 +8,7 @@ use App\Models\Technology;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Centralizes the "related by same department" logic that used to live in the frontend
@@ -44,8 +45,13 @@ class AutoRelatedResolver
                     $q->orWhereJsonContains('dept_slugs', $slug);
                 }
             });
-        } else {
+        } elseif (Schema::hasColumn((new $targetClass)->getTable(), 'department_id')) {
             $query->whereIn('department_id', $deptIds);
+        } else {
+            // Target isn't department-scoped (e.g. press, hospitals) — auto has nothing to offer;
+            // these are manual-only.
+            /** @var Collection<int, Model> */
+            return new Collection;
         }
 
         // Exclude the source itself when source and target are the same type.
@@ -63,6 +69,11 @@ class AutoRelatedResolver
      */
     protected static function departmentIdsFor(Model $model): array
     {
+        // A Department is its own department (auto content = content in this department).
+        if ($model instanceof Department) {
+            return [(int) $model->getKey()];
+        }
+
         if ($model instanceof Technology) {
             $ids = $model->departments()->pluck('departments.id')->all();
 

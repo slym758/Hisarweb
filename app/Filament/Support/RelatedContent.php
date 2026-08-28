@@ -2,9 +2,12 @@
 
 namespace App\Filament\Support;
 
+use App\Models\BlogPost;
 use App\Models\Concerns\HasRelatedContent;
 use App\Models\Disease;
 use App\Models\Doctor;
+use App\Models\Hospital;
+use App\Models\PressItem;
 use App\Models\Technology;
 use App\Models\Treatment;
 use App\Models\Video;
@@ -32,6 +35,9 @@ class RelatedContent
         'technologies' => ['relatedTechnologies', Technology::class, 'name', 'Teknolojiler'],
         'videos' => ['relatedVideos', Video::class, 'title', 'Videolar'],
         'doctors' => ['relatedDoctors', Doctor::class, 'name', 'Doktorlar'],
+        'blogPosts' => ['relatedBlogPosts', BlogPost::class, 'title', 'Sağlık Rehberi'],
+        'press' => ['relatedPress', PressItem::class, 'title', 'Basın'],
+        'hospitals' => ['relatedHospitals', Hospital::class, 'name', 'Hastaneler'],
     ];
 
     /** @var array<class-string, array<int|string, string>> */

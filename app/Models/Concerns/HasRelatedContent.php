@@ -2,8 +2,11 @@
 
 namespace App\Models\Concerns;
 
+use App\Models\BlogPost;
 use App\Models\Disease;
 use App\Models\Doctor;
+use App\Models\Hospital;
+use App\Models\PressItem;
 use App\Models\RelatedItem;
 use App\Models\Technology;
 use App\Models\Treatment;
@@ -90,5 +93,20 @@ trait HasRelatedContent
     public function relatedDoctors(): MorphMany
     {
         return $this->relatedMorph(Doctor::class);
+    }
+
+    public function relatedBlogPosts(): MorphMany
+    {
+        return $this->relatedMorph(BlogPost::class);
+    }
+
+    public function relatedPress(): MorphMany
+    {
+        return $this->relatedMorph(PressItem::class);
+    }
+
+    public function relatedHospitals(): MorphMany
+    {
+        return $this->relatedMorph(Hospital::class);
     }
 }

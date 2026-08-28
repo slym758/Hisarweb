@@ -110,7 +110,7 @@ class DoctorForm
                         ->collapsible(),
                 ]),
 
-                RelatedContent::section(['treatments', 'diseases', 'technologies', 'videos']),
+                RelatedContent::section(['treatments', 'diseases', 'technologies', 'videos', 'blogPosts', 'press']),
             ]);
     }
 }

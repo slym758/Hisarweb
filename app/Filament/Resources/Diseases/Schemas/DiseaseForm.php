@@ -131,7 +131,7 @@ class DiseaseForm
                         ->collapsible(),
                 ]),
 
-                RelatedContent::section(['treatments', 'technologies']),
+                RelatedContent::section(['treatments', 'technologies', 'doctors', 'blogPosts']),
             ]);
     }
 }

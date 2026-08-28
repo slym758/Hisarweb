@@ -110,7 +110,7 @@ class TreatmentForm
                         ->collapsible(),
                 ]),
 
-                RelatedContent::section(['diseases', 'technologies']),
+                RelatedContent::section(['diseases', 'technologies', 'doctors', 'blogPosts']),
             ]);
     }
 }

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasRelatedContent;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Department extends ContentModel
 {
+    use HasRelatedContent;
+
     public array $translatable = ['name', 'blurb', 'about', 'technologies'];
 
     public function getRouteKeyName(): string

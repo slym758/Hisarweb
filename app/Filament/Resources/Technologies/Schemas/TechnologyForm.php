@@ -83,7 +83,7 @@ class TechnologyForm
                         ->collapsible(),
                 ]),
 
-                RelatedContent::section(['diseases', 'treatments']),
+                RelatedContent::section(['diseases', 'treatments', 'doctors', 'blogPosts']),
             ]);
     }
 }

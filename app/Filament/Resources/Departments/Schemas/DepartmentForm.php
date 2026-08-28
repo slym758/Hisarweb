@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Departments\Schemas;
 
 use App\Filament\Support\LocaleTabs;
+use App\Filament\Support\RelatedContent;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -81,6 +82,9 @@ class DepartmentForm
                         ->collapsed()
                         ->collapsible(),
                 ]),
+
+                // Manuel içerik ilişkileri: boş bırakılırsa bölüme göre otomatik gelir.
+                RelatedContent::section(['doctors', 'diseases', 'treatments', 'technologies', 'videos', 'blogPosts']),
             ]);
     }
 }
