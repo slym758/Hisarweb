@@ -38,11 +38,21 @@ class DoctorForm
                             ->preload()
                             ->required(),
                         Select::make('hospital_id')
-                            ->label('Hastane')
+                            ->label('Birincil hastane')
                             ->relationship('hospital', 'slug')
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->loc('name'))
                             ->searchable()
                             ->preload()
                             ->required(),
+                        Select::make('hospitals')
+                            ->label('Çalıştığı hastaneler (çoklu)')
+                            ->helperText('Doktor birden fazla hastanede çalışıyorsa hepsini seçin. Boşsa birincil hastane kullanılır.')
+                            ->relationship(name: 'hospitals', titleAttribute: 'slug')
+                            ->getOptionLabelFromRecordUsing(fn ($record) => $record->loc('name'))
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->columnSpanFull(),
                         FileUpload::make('photo_path')
                             ->label('Fotoğraf')
                             ->image()

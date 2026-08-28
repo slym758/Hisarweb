@@ -107,7 +107,10 @@ export default function DoktorDetay() {
         );
     }
 
-    const hospital = hospitals.find((h) => h.slug === doc.hospitalSlug);
+    const doctorHospitals = (doc.hospitalSlugs?.length ? doc.hospitalSlugs : [doc.hospitalSlug])
+        .map((s) => hospitals.find((h) => h.slug === s))
+        .filter((h): h is Hospital => Boolean(h));
+    const hospital = doctorHospitals[0];
     const { prefix, name } = splitName(doc.name);
     const interests = doc.subspecialties;
     const deptSlug = doc.departmentSlug;
@@ -276,14 +279,17 @@ export default function DoktorDetay() {
                                 </Card>
 
                                 {/* Mobile-only: hospital + contact (moved from hero) */}
-                                <div className="lg:hidden">
-                                    <HospitalCard
-                                        hospital={hospital}
-                                        title={c.hospitalTitle}
-                                        directions={c.directions}
-                                        email={doc.email}
-                                        languages={doc.languages}
-                                    />
+                                <div className="lg:hidden space-y-4">
+                                    {doctorHospitals.map((h, i) => (
+                                        <HospitalCard
+                                            key={h.slug}
+                                            hospital={h}
+                                            title={c.hospitalTitle}
+                                            directions={c.directions}
+                                            email={i === 0 ? doc.email : undefined}
+                                            languages={i === 0 ? doc.languages : undefined}
+                                        />
+                                    ))}
                                 </div>
 
                                 {/* Full CV — accordions rendered from doc.cv (only sub-sections with data) */}
@@ -360,18 +366,18 @@ export default function DoktorDetay() {
 
                         {/* RIGHT COLUMN — sticky sidebar (desktop only) */}
                         <aside className="hidden lg:block space-y-4 lg:sticky lg:top-36 self-start">
-                            {hospital && (
-                                <Card>
+                            {doctorHospitals.map((h) => (
+                                <Card key={h.slug}>
                                     <CardHeader icon={MapPin} title={c.hospitalTitle} />
                                     <div className="mt-3">
-                                        <p className="text-sm font-bold text-primary">{hospital.name}</p>
+                                        <p className="text-sm font-bold text-primary">{h.name}</p>
                                         <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
-                                            {hospital.address}
+                                            {h.address}
                                         </p>
                                     </div>
                                     <div className="mt-4 grid grid-cols-2 gap-2">
                                         <a
-                                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hospital.name)}`}
+                                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.name)}`}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="inline-flex items-center justify-center gap-1.5 rounded-full border border-primary/25 px-3 py-2 text-xs font-semibold text-primary hover:bg-primary/5 transition min-h-11"
@@ -380,7 +386,7 @@ export default function DoktorDetay() {
                                         </a>
                                     </div>
                                 </Card>
-                            )}
+                            ))}
                         </aside>
                     </div>
                 </div>

@@ -73,7 +73,7 @@ class CatalogService
                 'comingSoon' => (bool) $h->coming_soon,
             ])->all(),
 
-            'doctors' => Doctor::published()->ordered()->with(['department:id,slug', 'hospital:id,slug'])->get()
+            'doctors' => Doctor::published()->ordered()->with(['department:id,slug', 'hospital:id,slug', 'hospitals:id,slug,slug_i18n'])->get()
                 ->map(fn (Doctor $d) => [
                     'id' => $d->code,
                     'name' => $d->name,
@@ -82,6 +82,7 @@ class CatalogService
                     'department' => $deptNames[$d->department?->slug] ?? '',
                     'departmentSlug' => $d->department?->localizedSlug($locale) ?? '',
                     'hospitalSlug' => $d->hospital?->localizedSlug($locale) ?? '',
+                    'hospitalSlugs' => $d->hospitals->map(fn (Hospital $h) => $h->localizedSlug($locale))->values()->all(),
                     'photo' => Media::url($d->photo_path, $d->photo_url),
                     'subspecialties' => $L($d, 'subspecialties') ?? [],
                     'email' => $d->email,

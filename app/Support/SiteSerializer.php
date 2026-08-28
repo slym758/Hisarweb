@@ -121,6 +121,7 @@ class SiteSerializer
             'department' => $d->department?->loc('name') ?? '',
             'departmentSlug' => $d->department?->localizedSlug() ?? '',
             'hospitalSlug' => $d->hospital?->localizedSlug() ?? '',
+            'hospitalSlugs' => $d->hospitals->map(fn (Hospital $h) => $h->localizedSlug())->values()->all(),
             'photo' => Media::url($d->photo_path, $d->photo_url),
             'subspecialties' => $d->loc('subspecialties') ?? [],
         ];
@@ -160,6 +161,7 @@ class SiteSerializer
             'department' => $d->department?->loc('name') ?? '',
             'departmentSlug' => $d->department?->localizedSlug() ?? '',
             'hospitalSlug' => $d->hospital?->localizedSlug() ?? '',
+            'hospitalSlugs' => $d->hospitals->map(fn (Hospital $h) => $h->localizedSlug())->values()->all(),
             'photo' => Media::url($d->photo_path, $d->photo_url),
             'subspecialties' => $d->loc('subspecialties') ?? [],
             'email' => $d->email,

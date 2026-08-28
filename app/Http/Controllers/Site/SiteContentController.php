@@ -31,7 +31,7 @@ class SiteContentController extends Controller
 {
     public function doctor(string $id): Response
     {
-        $d = Doctor::where('code', $id)->published()->with(['department', 'hospital'])->firstOrFail();
+        $d = Doctor::where('code', $id)->published()->with(['department', 'hospital', 'hospitals'])->firstOrFail();
 
         // Related content: manual editorial picks (related_items) override, otherwise auto
         // by the doctor's department. Serialized to the light card shapes the frontend uses;

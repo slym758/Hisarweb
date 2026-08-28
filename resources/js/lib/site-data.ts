@@ -95,8 +95,10 @@ export type Doctor = {
     department: string;
     /** Relation to a Department.slug. */
     departmentSlug: string;
-    /** Relation to a Hospital.slug. */
+    /** Relation to a Hospital.slug (primary). */
     hospitalSlug: string;
+    /** All hospitals the doctor practises at (ordered), when multiple. */
+    hospitalSlugs?: string[];
     photo?: string;
     subspecialties: string[];
     /** Contact e-mail (shown in the hero when present). */
@@ -1026,8 +1028,10 @@ export function getHospitalBySlug(slug: string, l: Locale): Hospital | undefined
 }
 /** All doctors practising at a hospital (relation helper for the hospital detail page). */
 export function getDoctorsForHospital(hospitalSlug: string, l: Locale): Doctor[] {
+    const atHospital = (d: Doctor) =>
+        (d.hospitalSlugs && d.hospitalSlugs.length ? d.hospitalSlugs : [d.hospitalSlug]).includes(hospitalSlug);
     const cat = useCatalog<Doctor>('doctors');
-    if (cat) return cat.filter((d) => d.hospitalSlug === hospitalSlug);
+    if (cat) return cat.filter(atHospital);
     return DOCTORS_SRC.filter((d) => d.hospitalSlug === hospitalSlug).map((d) => resolveDoctor(d, l));
 }
 /**
