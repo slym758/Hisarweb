@@ -6,6 +6,7 @@ import { SiteFooter } from '@/components/site/SiteFooter';
 import { DesktopRail } from '@/components/site/DesktopRail';
 import { MobileAppPromo } from '@/components/site/MobileAppPromo';
 import { MobileBottomNav } from '@/components/site/MobileBottomNav';
+import { WhatsAppWidget } from '@/components/site/WhatsAppWidget';
 import { LangSwitcher } from '@/components/site/LangSwitcher';
 
 /**
@@ -46,6 +47,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <DesktopRail />
             <MobileAppPromo />
             <MobileBottomNav />
+            <WhatsAppWidget />
             <LangSwitcher />
         </div>
     );

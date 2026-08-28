@@ -4,11 +4,13 @@ namespace App\Filament\Pages;
 
 use App\Filament\Support\LocaleTabs;
 use App\Models\SiteSetting;
+use App\Support\LocaleService;
 use App\Support\SettingsService;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Schemas\Components\Section;
@@ -39,16 +41,22 @@ class ManageSiteSettings extends Page
     /** @var array<string,mixed> */
     public ?array $data = [];
 
-    /** Setting keys whose value is a translatable {tr,en,…} map. */
-    protected const TRANSLATABLE_KEYS = ['whatsapp_message', 'appointment_label', 'footer_tagline'];
+    /** Setting keys whose value is a translatable {tr,en,…} map (edited per-locale). */
+    protected const TRANSLATABLE_KEYS = [
+        'phone_display', 'phone_href', 'whatsapp_number',
+        'whatsapp_message', 'whatsapp_greeting', 'whatsapp_hours', 'whatsapp_location',
+        'appointment_label', 'footer_tagline',
+    ];
 
     /** All scalar (single-value) setting keys. */
     protected const SCALAR_KEYS = [
         'logo_path', 'logo_url', 'logo_footer_path', 'logo_footer_url',
-        'phone_display', 'phone_href', 'whatsapp_number', 'appointment_url',
-        'email', 'address', 'map_url',
+        'appointment_url', 'email', 'address', 'map_url',
         'instagram_url', 'facebook_url', 'x_url', 'youtube_url', 'linkedin_url',
     ];
+
+    /** Boolean (on/off) setting keys. */
+    protected const BOOL_KEYS = ['whatsapp_enabled'];
 
     public function getHeading(): string
     {
@@ -63,9 +71,17 @@ class ManageSiteSettings extends Page
             $data[$key] = (string) (SettingsService::get($key) ?? '');
         }
 
+        foreach (self::BOOL_KEYS as $key) {
+            $stored = SettingsService::get($key);
+            $data[$key] = $stored === null ? true : (bool) $stored;   // default on
+        }
+
         foreach (self::TRANSLATABLE_KEYS as $key) {
             $value = SettingsService::get($key);
-            $data[$key] = is_array($value) ? $value : [];
+            // Wrap a legacy plain-string value into the default locale so it isn't lost.
+            $data[$key] = is_array($value)
+                ? $value
+                : (is_string($value) && $value !== '' ? [LocaleService::default() => $value] : []);
         }
 
         $this->form->fill($data);
@@ -102,16 +118,14 @@ class ManageSiteSettings extends Page
                     ->icon('heroicon-o-phone')
                     ->columns(2)
                     ->schema([
-                        TextInput::make('phone_display')
-                            ->label('Telefon (görünen)')
-                            ->placeholder('444 5 888'),
-                        TextInput::make('phone_href')
-                            ->label('Telefon bağlantısı (tel:)')
-                            ->placeholder('tel:4445888'),
-                        TextInput::make('whatsapp_number')
-                            ->label('WhatsApp numarası (rakam)')
-                            ->helperText('wa.me için yalnızca rakamlar, ör. 904445888')
-                            ->placeholder('904445888'),
+                        LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                            TextInput::make("phone_display.$locale")
+                                ->label('Telefon (görünen)')
+                                ->placeholder('444 5 888'),
+                            TextInput::make("phone_href.$locale")
+                                ->label('Telefon bağlantısı (tel:)')
+                                ->placeholder('tel:4445888'),
+                        ])->columnSpanFull(),
                         TextInput::make('appointment_url')
                             ->label('Randevu bağlantısı')
                             ->placeholder('/randevu-al'),
@@ -135,12 +149,35 @@ class ManageSiteSettings extends Page
                     ->icon('heroicon-o-language')
                     ->schema([
                         LocaleTabs::make(fn (string $locale, bool $isDefault) => [
-                            TextInput::make("whatsapp_message.$locale")
-                                ->label('WhatsApp mesajı'),
                             TextInput::make("appointment_label.$locale")
                                 ->label('Randevu düğmesi metni'),
                             TextInput::make("footer_tagline.$locale")
                                 ->label('Alt bilgi sloganı'),
+                        ]),
+                    ]),
+
+                Section::make('WhatsApp')
+                    ->description('Sitede yüzen WhatsApp butonu (modül). Numara ve metinler dile göre.')
+                    ->icon('heroicon-o-chat-bubble-left-right')
+                    ->schema([
+                        Toggle::make('whatsapp_enabled')
+                            ->label('WhatsApp butonunu göster'),
+                        LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                            TextInput::make("whatsapp_number.$locale")
+                                ->label('WhatsApp numarası (rakam)')
+                                ->helperText('wa.me için yalnızca rakamlar, ör. 904445888')
+                                ->placeholder('904445888'),
+                            TextInput::make("whatsapp_greeting.$locale")
+                                ->label('Karşılama metni')
+                                ->placeholder('Merhaba! Size nasıl yardımcı olabiliriz?'),
+                            TextInput::make("whatsapp_message.$locale")
+                                ->label('Hazır mesaj (tıklayınca dolu gelir)'),
+                            TextInput::make("whatsapp_hours.$locale")
+                                ->label('Çalışma saatleri')
+                                ->placeholder('Hafta içi 09:00 - 18:00'),
+                            TextInput::make("whatsapp_location.$locale")
+                                ->label('Konum bilgisi')
+                                ->placeholder('Ümraniye / İstanbul'),
                         ]),
                     ]),
 
@@ -176,6 +213,13 @@ class ManageSiteSettings extends Page
             SiteSetting::updateOrCreate(
                 ['key' => $key],
                 ['value' => (string) ($state[$key] ?? '')],
+            );
+        }
+
+        foreach (self::BOOL_KEYS as $key) {
+            SiteSetting::updateOrCreate(
+                ['key' => $key],
+                ['value' => empty($state[$key]) ? '0' : '1'],
             );
         }
 

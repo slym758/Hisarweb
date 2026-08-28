@@ -7,6 +7,10 @@ export interface SiteSettings {
   phone_href: string;
   whatsapp_number: string;
   whatsapp_message: string;
+  whatsapp_enabled: string;
+  whatsapp_greeting: string;
+  whatsapp_hours: string;
+  whatsapp_location: string;
   appointment_url: string;
   appointment_label: string;
   email: string;
@@ -27,6 +31,10 @@ const DEFAULTS: SiteSettings = {
   phone_href: 'tel:4445888',
   whatsapp_number: '904445888',
   whatsapp_message: '',
+  whatsapp_enabled: '1',
+  whatsapp_greeting: '',
+  whatsapp_hours: '',
+  whatsapp_location: '',
   appointment_url: 'https://online.hisarhospital.com',
   appointment_label: 'Randevu Al',
   email: 'info@hisarhospital.com',
