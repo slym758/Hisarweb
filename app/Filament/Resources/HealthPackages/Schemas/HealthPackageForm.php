@@ -40,6 +40,9 @@ class HealthPackageForm
                     ->columns(2),
 
                 LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                    TextInput::make("slug_i18n.$locale")
+                        ->label('URL (bu dilde, opsiyonel)')
+                        ->helperText('Boş bırakılırsa varsayılan slug kullanılır.'),
                     TextInput::make("name.$locale")
                         ->label('Ad')
                         ->required($isDefault),

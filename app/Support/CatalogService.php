@@ -47,13 +47,15 @@ class CatalogService
 
         $departments = Department::published()->ordered()->get();
         $deptNames = [];
+        $deptLocalized = [];   // canonical dept slug → localized slug (for translating deptSlugs)
         foreach ($departments as $d) {
             $deptNames[$d->slug] = $L($d, 'name');
+            $deptLocalized[$d->slug] = $d->localizedSlug($locale);
         }
 
         return [
             'departments' => $departments->map(fn (Department $d) => [
-                'slug' => $d->slug,
+                'slug' => $d->localizedSlug($locale),
                 'name' => $L($d, 'name'),
                 'blurb' => $L($d, 'blurb') ?? '',
                 'icon' => $d->icon,           // lucide name string → iconFor() on the client
@@ -62,7 +64,7 @@ class CatalogService
             ])->all(),
 
             'hospitals' => Hospital::ordered()->get()->map(fn (Hospital $h) => [
-                'slug' => $h->slug,
+                'slug' => $h->localizedSlug($locale),
                 'name' => $L($h, 'name'),
                 'area' => $L($h, 'area') ?? '',
                 'phone' => $L($h, 'phone') ?? '',
@@ -78,8 +80,8 @@ class CatalogService
                     'title' => $L($d, 'title') ?? '',
                     'bio' => $L($d, 'bio') ?? '',
                     'department' => $deptNames[$d->department?->slug] ?? '',
-                    'departmentSlug' => $d->department?->slug ?? '',
-                    'hospitalSlug' => $d->hospital?->slug ?? '',
+                    'departmentSlug' => $d->department?->localizedSlug($locale) ?? '',
+                    'hospitalSlug' => $d->hospital?->localizedSlug($locale) ?? '',
                     'photo' => Media::url($d->photo_path, $d->photo_url),
                     'subspecialties' => $L($d, 'subspecialties') ?? [],
                     'email' => $d->email,
@@ -88,29 +90,29 @@ class CatalogService
 
             'diseases' => Disease::published()->ordered()->with('department:id,slug')->get()
                 ->map(fn (Disease $x) => [
-                    'slug' => $x->slug,
+                    'slug' => $x->localizedSlug($locale),
                     'name' => $L($x, 'name'),
                     'summary' => $L($x, 'summary') ?? '',
-                    'deptSlug' => $x->department?->slug ?? '',
+                    'deptSlug' => $x->department?->localizedSlug($locale) ?? '',
                     'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
             'treatments' => Treatment::published()->ordered()->with('department:id,slug')->get()
                 ->map(fn (Treatment $x) => [
-                    'slug' => $x->slug,
+                    'slug' => $x->localizedSlug($locale),
                     'name' => $L($x, 'name'),
                     'summary' => $L($x, 'summary') ?? '',
                     'department' => $deptNames[$x->department?->slug] ?? '',
-                    'deptSlug' => $x->department?->slug ?? '',
+                    'deptSlug' => $x->department?->localizedSlug($locale) ?? '',
                     'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
             'technologies' => Technology::published()->ordered()->get()
                 ->map(fn (Technology $x) => [
-                    'slug' => $x->slug,
+                    'slug' => $x->localizedSlug($locale),
                     'name' => $L($x, 'name'),
                     'desc' => $L($x, 'description') ?? '',
-                    'deptSlugs' => $x->dept_slugs ?? [],
+                    'deptSlugs' => array_map(fn ($s) => $deptLocalized[$s] ?? $s, $x->dept_slugs ?? []),
                     'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
                 ])->all(),
 
@@ -119,17 +121,17 @@ class CatalogService
                     'id' => $v->code,
                     'title' => $L($v, 'title'),
                     'youtubeId' => $v->youtube_id,
-                    'deptSlug' => $v->department?->slug,
+                    'deptSlug' => $v->department?->localizedSlug($locale),
                     'category' => $L($v, 'category') ?? '',
                     'duration' => $v->duration ?? '',
                 ])->all(),
 
             'blogPosts' => BlogPost::published()->ordered()->with('department:id,slug')->get()
                 ->map(fn (BlogPost $b) => [
-                    'slug' => $b->slug,
+                    'slug' => $b->localizedSlug($locale),
                     'title' => $L($b, 'title'),
                     'excerpt' => $L($b, 'excerpt') ?? '',
-                    'category' => $b->department?->slug ?? '',
+                    'category' => $b->department?->localizedSlug($locale) ?? '',
                     'cover' => Media::url($b->cover_path, $b->cover_url) ?? '',
                     'date' => $b->published_at?->toDateString() ?? '',
                     'body' => $L($b, 'body') ?: null,
@@ -138,7 +140,7 @@ class CatalogService
 
             'events' => EventItem::published()->ordered()->get()
                 ->map(fn (EventItem $e) => [
-                    'slug' => $e->slug,
+                    'slug' => $e->localizedSlug($locale),
                     'title' => $L($e, 'title'),
                     'excerpt' => $L($e, 'excerpt') ?? '',
                     'body' => $L($e, 'body') ?? '',
@@ -149,7 +151,7 @@ class CatalogService
 
             'packages' => HealthPackage::published()->ordered()->get()
                 ->map(fn (HealthPackage $p) => [
-                    'slug' => $p->slug,
+                    'slug' => $p->localizedSlug($locale),
                     'name' => $L($p, 'name'),
                     'summary' => $L($p, 'summary') ?? '',
                     'scope' => $L($p, 'scope') ?? [],
@@ -158,7 +160,7 @@ class CatalogService
 
             'press' => PressItem::published()->ordered()->get()
                 ->map(fn (PressItem $p) => [
-                    'slug' => $p->slug,
+                    'slug' => $p->localizedSlug($locale),
                     'title' => $L($p, 'title'),
                     'excerpt' => $L($p, 'excerpt') ?? '',
                     'source' => $p->source ?? '',
@@ -168,7 +170,7 @@ class CatalogService
 
             'faq' => FaqCategory::published()->ordered()->get()
                 ->map(fn (FaqCategory $f) => [
-                    'slug' => $f->slug,
+                    'slug' => $f->localizedSlug($locale),
                     'title' => $L($f, 'title'),
                     'items' => $L($f, 'items') ?? [],
                 ])->all(),
@@ -193,7 +195,7 @@ class CatalogService
 
             'symptomMap' => SymptomMap::ordered()->with('department:id,slug')->get()
                 ->map(fn (SymptomMap $s) => [
-                    'deptSlug' => $s->department?->slug ?? '',
+                    'deptSlug' => $s->department?->localizedSlug($locale) ?? '',
                     'label' => $L($s, 'label'),
                     'keywords' => $L($s, 'keywords') ?? [],
                 ])->all(),

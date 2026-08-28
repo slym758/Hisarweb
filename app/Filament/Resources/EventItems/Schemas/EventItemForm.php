@@ -42,6 +42,9 @@ class EventItemForm
                     ->columns(2),
 
                 LocaleTabs::make(fn (string $locale, bool $isDefault) => [
+                    TextInput::make("slug_i18n.$locale")
+                        ->label('URL (bu dilde, opsiyonel)')
+                        ->helperText('Boş bırakılırsa varsayılan slug kullanılır.'),
                     TextInput::make("title.$locale")
                         ->label('Başlık')
                         ->required($isDefault),

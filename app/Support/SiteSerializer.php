@@ -20,17 +20,46 @@ use App\Models\Video;
  */
 class SiteSerializer
 {
+    /** @var array<string, array<string, string>> locale → (canonical dept slug → localized slug) */
+    private static array $deptSlugCache = [];
+
+    /**
+     * Translate an array of canonical department slugs to their localized slugs for the active
+     * locale (so technology dept references match the localized department slugs). Cached.
+     *
+     * @param  array<int, string>  $slugs
+     * @return array<int, string>
+     */
+    private static function localizedDeptSlugs(array $slugs): array
+    {
+        if (empty($slugs)) {
+            return [];
+        }
+
+        $locale = app()->getLocale();
+        $map = self::$deptSlugCache[$locale] ?? [];
+
+        if (array_diff($slugs, array_keys($map))) {
+            foreach (Department::whereIn('slug', $slugs)->get() as $d) {
+                $map[$d->slug] = $d->localizedSlug($locale);
+            }
+            self::$deptSlugCache[$locale] = $map;
+        }
+
+        return array_map(fn ($s) => $map[$s] ?? $s, $slugs);
+    }
+
     /* ── "Light" card shapes (no heavy detail) for related-content sections. Mirror the
        CatalogService list shapes so the frontend related cards render identically. ── */
 
     public static function treatmentLight(Treatment $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'summary' => $x->loc('summary') ?? '',
             'department' => $x->department?->loc('name') ?? '',
-            'deptSlug' => $x->department?->slug ?? '',
+            'deptSlug' => $x->department?->localizedSlug() ?? '',
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
         ];
     }
@@ -38,10 +67,10 @@ class SiteSerializer
     public static function diseaseLight(Disease $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'summary' => $x->loc('summary') ?? '',
-            'deptSlug' => $x->department?->slug ?? '',
+            'deptSlug' => $x->department?->localizedSlug() ?? '',
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
         ];
     }
@@ -49,10 +78,10 @@ class SiteSerializer
     public static function technologyLight(Technology $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'desc' => $x->loc('description') ?? '',
-            'deptSlugs' => $x->dept_slugs ?? [],
+            'deptSlugs' => self::localizedDeptSlugs($x->dept_slugs ?? []),
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
         ];
     }
@@ -60,7 +89,7 @@ class SiteSerializer
     public static function hospitalLight(Hospital $h): array
     {
         return [
-            'slug' => $h->slug,
+            'slug' => $h->localizedSlug(),
             'name' => $h->loc('name'),
             'area' => $h->loc('area') ?? '',
             'phone' => $h->loc('phone') ?? '',
@@ -73,7 +102,7 @@ class SiteSerializer
     public static function departmentLight(Department $d): array
     {
         return [
-            'slug' => $d->slug,
+            'slug' => $d->localizedSlug(),
             'name' => $d->loc('name'),
             'blurb' => $d->loc('blurb') ?? '',
             'icon' => $d->icon,                       // lucide name string → iconFor() on the client
@@ -88,7 +117,7 @@ class SiteSerializer
             'id' => $v->code,
             'title' => $v->loc('title'),
             'youtubeId' => $v->youtube_id,
-            'deptSlug' => $v->department?->slug,
+            'deptSlug' => $v->department?->localizedSlug(),
             'category' => $v->loc('category') ?? '',
             'duration' => $v->duration ?? '',
         ];
@@ -102,8 +131,8 @@ class SiteSerializer
             'title' => $d->loc('title') ?? '',
             'bio' => $d->loc('bio') ?? '',
             'department' => $d->department?->loc('name') ?? '',
-            'departmentSlug' => $d->department?->slug ?? '',
-            'hospitalSlug' => $d->hospital?->slug ?? '',
+            'departmentSlug' => $d->department?->localizedSlug() ?? '',
+            'hospitalSlug' => $d->hospital?->localizedSlug() ?? '',
             'photo' => Media::url($d->photo_path, $d->photo_url),
             'subspecialties' => $d->loc('subspecialties') ?? [],
             'email' => $d->email,
@@ -115,10 +144,10 @@ class SiteSerializer
     public static function disease(Disease $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'summary' => $x->loc('summary') ?? '',
-            'deptSlug' => $x->department?->slug ?? '',
+            'deptSlug' => $x->department?->localizedSlug() ?? '',
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
@@ -127,11 +156,11 @@ class SiteSerializer
     public static function treatment(Treatment $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'summary' => $x->loc('summary') ?? '',
             'department' => $x->department?->loc('name') ?? '',
-            'deptSlug' => $x->department?->slug ?? '',
+            'deptSlug' => $x->department?->localizedSlug() ?? '',
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
@@ -140,10 +169,10 @@ class SiteSerializer
     public static function technology(Technology $x): array
     {
         return [
-            'slug' => $x->slug,
+            'slug' => $x->localizedSlug(),
             'name' => $x->loc('name'),
             'desc' => $x->loc('description') ?? '',
-            'deptSlugs' => $x->dept_slugs ?? [],
+            'deptSlugs' => self::localizedDeptSlugs($x->dept_slugs ?? []),
             'cover' => Media::url($x->cover_path, $x->cover_url) ?? '',
             'detail' => $x->loc('detail') ?: null,
         ];
@@ -165,7 +194,7 @@ class SiteSerializer
         }
 
         return [
-            'slug' => $h->slug,
+            'slug' => $h->localizedSlug(),
             'name' => $h->loc('name'),
             'area' => $h->loc('area') ?? '',
             'phone' => $h->loc('phone') ?? '',
@@ -219,7 +248,7 @@ class SiteSerializer
     public static function event(EventItem $e): array
     {
         return [
-            'slug' => $e->slug,
+            'slug' => $e->localizedSlug(),
             'title' => $e->loc('title'),
             'excerpt' => $e->loc('excerpt') ?? '',
             'body' => $e->loc('body') ?? '',
@@ -232,7 +261,7 @@ class SiteSerializer
     public static function package(HealthPackage $p): array
     {
         return [
-            'slug' => $p->slug,
+            'slug' => $p->localizedSlug(),
             'name' => $p->loc('name'),
             'summary' => $p->loc('summary') ?? '',
             'scope' => $p->loc('scope') ?? [],
@@ -243,7 +272,7 @@ class SiteSerializer
     public static function press(PressItem $p): array
     {
         return [
-            'slug' => $p->slug,
+            'slug' => $p->localizedSlug(),
             'title' => $p->loc('title'),
             'excerpt' => $p->loc('excerpt') ?? '',
             'source' => $p->source ?? '',

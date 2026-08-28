@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\HasPublishing;
 use App\Models\Concerns\SerializesLocale;
 use App\Support\CatalogService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -34,7 +35,31 @@ abstract class ContentModel extends Model implements Sortable
     {
         return [
             'published_at' => 'datetime',
+            'slug_i18n' => 'array',
         ];
+    }
+
+    /**
+     * The slug for a locale: the per-language override (slug_i18n[$locale]) when set, otherwise
+     * the canonical slug. Used for building localized URLs and serialized output.
+     */
+    public function localizedSlug(?string $locale = null): ?string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $map = $this->slug_i18n ?? [];
+
+        return (is_array($map) && ! empty($map[$locale])) ? $map[$locale] : ($this->slug ?? null);
+    }
+
+    /** Match a record by either its canonical slug or its localized slug for the given locale. */
+    public function scopeWhereLocalizedSlug(Builder $query, string $slug, ?string $locale = null): Builder
+    {
+        $locale = $locale ?: app()->getLocale();
+
+        return $query->where(function (Builder $w) use ($slug, $locale) {
+            $w->where('slug', $slug)
+                ->orWhereRaw('slug_i18n ->> ? = ?', [$locale, $slug]);
+        });
     }
 
     protected static function booted(): void

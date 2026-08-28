@@ -55,7 +55,7 @@ class SiteContentController extends Controller
 
     public function department(string $slug): Response
     {
-        $d = Department::where('slug', $slug)->firstOrFail();
+        $d = Department::whereLocalizedSlug($slug)->firstOrFail();
 
         // "Hangi Hastanelerimizde?": hospitals that explicitly offer this department (the
         // department_hospital pivot, backfilled from doctor assignments). count = doctors of
@@ -77,35 +77,35 @@ class SiteContentController extends Controller
 
     public function disease(string $slug): Response
     {
-        $x = Disease::where('slug', $slug)->published()->with('department')->firstOrFail();
+        $x = Disease::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
         return Inertia::render('site/hastalik-detay', ['slug' => $slug, 'record' => SiteSerializer::disease($x)]);
     }
 
     public function treatment(string $slug): Response
     {
-        $x = Treatment::where('slug', $slug)->published()->with('department')->firstOrFail();
+        $x = Treatment::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
         return Inertia::render('site/tedavi-detay', ['slug' => $slug, 'record' => SiteSerializer::treatment($x)]);
     }
 
     public function treatmentMethod(string $slug): Response
     {
-        $x = Treatment::where('slug', $slug)->published()->with('department')->firstOrFail();
+        $x = Treatment::whereLocalizedSlug($slug)->published()->with('department')->firstOrFail();
 
         return Inertia::render('site/tedavi-yontemi-detay', ['slug' => $slug, 'record' => SiteSerializer::treatment($x)]);
     }
 
     public function technology(string $slug): Response
     {
-        $x = Technology::where('slug', $slug)->published()->firstOrFail();
+        $x = Technology::whereLocalizedSlug($slug)->published()->firstOrFail();
 
         return Inertia::render('site/teknoloji-detay', ['slug' => $slug, 'record' => SiteSerializer::technology($x)]);
     }
 
     public function hospital(string $slug): Response
     {
-        $h = Hospital::where('slug', $slug)->with('rooms')->firstOrFail();
+        $h = Hospital::whereLocalizedSlug($slug)->with('rooms')->firstOrFail();
 
         // A hospital's departments: the explicit editorial links, else derived from its doctors.
         $deptModels = $h->departments()->exists()
@@ -132,7 +132,7 @@ class SiteContentController extends Controller
 
     public function event(string $slug): Response
     {
-        $e = EventItem::where('slug', $slug)->published()->firstOrFail();
+        $e = EventItem::whereLocalizedSlug($slug)->published()->firstOrFail();
 
         return Inertia::render('site/etkinlik-detay', ['slug' => $slug, 'record' => SiteSerializer::event($e)]);
     }
@@ -181,14 +181,14 @@ class SiteContentController extends Controller
 
     public function package(string $slug): Response
     {
-        $p = HealthPackage::where('slug', $slug)->published()->firstOrFail();
+        $p = HealthPackage::whereLocalizedSlug($slug)->published()->firstOrFail();
 
         return Inertia::render('site/paket-detay', ['slug' => $slug, 'record' => SiteSerializer::package($p)]);
     }
 
     public function press(string $slug): Response
     {
-        $p = PressItem::where('slug', $slug)->published()->firstOrFail();
+        $p = PressItem::whereLocalizedSlug($slug)->published()->firstOrFail();
 
         return Inertia::render('site/basin-detay', ['slug' => $slug, 'record' => SiteSerializer::press($p)]);
     }
